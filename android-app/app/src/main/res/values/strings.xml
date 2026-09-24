@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Quản Lý Thu Chi</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Trang chủ</string>
+    <string name="nav_transactions">Giao dịch</string>
+    <string name="nav_add">Thêm</string>
+    <string name="nav_budget">Ngân sách</string>
+    <string name="nav_profile">Tài khoản</string>
+
+    <!-- Auth -->
+    <string name="login_title">Đăng Nhập</string>
+    <string name="register_title">Đăng Ký</string>
+    <string name="login_welcome">Chào mừng trở lại!</string>
+    <string name="login_subtitle">Đăng nhập để quản lý tài chính của bạn</string>
+    <string name="register_subtitle">Tạo tài khoản mới để bắt đầu</string>
+
+    <!-- Hints -->
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Mật khẩu</string>
+    <string name="hint_confirm_password">Xác nhận mật khẩu</string>
+    <string name="hint_full_name">Họ và tên</string>
+    <string name="hint_amount">Số tiền</string>
+    <string name="hint_title">Tiêu đề</string>
+    <string name="hint_note">Ghi chú</string>
+    <string name="hint_search">Tìm kiếm giao dịch...</string>
+    <string name="hint_budget_name">Tên ngân sách</string>
+    <string name="hint_budget_limit">Hạn mức</string>
+    <string name="hint_account_name">Tên tài khoản</string>
+    <string name="hint_phone">Số điện thoại</string>
+
+    <!-- Buttons -->
+    <string name="btn_login">Đăng Nhập</string>
+    <string name="btn_register">Đăng Ký</string>
+    <string name="btn_google_login">Đăng nhập bằng Google</string>
+    <string name="btn_facebook_login">Đăng nhập bằng Facebook</string>
+    <string name="btn_save">Lưu</string>
+    <string name="btn_cancel">Hủy</string>
+    <string name="btn_delete">Xóa</string>
+    <string name="btn_edit">Sửa</string>
+    <string name="btn_logout">Đăng xuất</string>
+    <string name="btn_capture">Chụp ảnh</string>
+    <string name="btn_retry">Thử lại</string>
+    <string name="btn_confirm">Xác nhận</string>
+    <string name="btn_add_transaction">Thêm giao dịch</string>
+    <string name="btn_add_budget">Thêm ngân sách</string>
+    <string name="btn_add_account">Thêm tài khoản</string>
+
+    <!-- Titles -->
+    <string name="title_income">Thu nhập</string>
+    <string name="title_expense">Chi tiêu</string>
+    <string name="title_total">Tổng cộng</string>
+    <string name="title_recent_transactions">Giao dịch gần đây</string>
+    <string name="title_quick_actions">Thao tác nhanh</string>
+    <string name="title_all_transactions">Tất cả giao dịch</string>
+    <string name="title_add_transaction">Thêm giao dịch</string>
+    <string name="title_edit_transaction">Sửa giao dịch</string>
+    <string name="title_budgets">Ngân sách</string>
+    <string name="title_add_budget">Thêm ngân sách</string>
+    <string name="title_reports">Báo cáo</string>
+    <string name="title_profile">Tài khoản cá nhân</string>
+    <string name="title_accounts">Ví / Tài khoản</string>
+    <string name="title_settings">Cài đặt</string>
+    <string name="title_categories">Danh mục</string>
+    <string name="title_select_category">Chọn danh mục</string>
+    <string name="title_select_account">Chọn tài khoản</string>
+    <string name="title_select_date">Chọn ngày</string>
+    <string name="title_scan_bill">Quét hóa đơn</string>
+    <string name="title_scan_product">Nhận diện sản phẩm</string>
+    <string name="title_expense_by_category">Chi tiêu theo danh mục</string>
+    <string name="title_daily_report">Báo cáo hàng ngày</string>
+    <string name="title_monthly_summary">Tổng kết tháng</string>
+
+    <!-- Scan -->
+    <string name="scan_bill">Quét hóa đơn</string>
+    <string name="scan_product">Nhận diện sản phẩm</string>
+    <string name="scan_processing">Đang xử lý ảnh...</string>
+    <string name="scan_detected_amount">Số tiền phát hiện</string>
+    <string name="scan_confidence">Độ tin cậy</string>
+    <string name="scan_no_result">Không phát hiện được thông tin</string>
+
+    <!-- Messages -->
+    <string name="msg_loading">Đang tải...</string>
+    <string name="msg_error">Có lỗi xảy ra</string>
+    <string name="msg_success">Thành công</string>
+    <string name="msg_no_transactions">Chưa có giao dịch nào</string>
+    <string name="msg_no_budgets">Chưa có ngân sách nào</string>
+    <string name="msg_no_accounts">Chưa có tài khoản nào</string>
+    <string name="msg_login_success">Đăng nhập thành công</string>
+    <string name="msg_register_success">Đăng ký thành công</string>
+    <string name="msg_save_success">Lưu thành công</string>
+    <string name="msg_delete_success">Xóa thành công</string>
+    <string name="msg_confirm_delete">Bạn có chắc muốn xóa?</string>
+    <string name="msg_confirm_logout">Bạn có chắc muốn đăng xuất?</string>
+    <string name="msg_password_mismatch">Mật khẩu không khớp</string>
+    <string name="msg_fill_all_fields">Vui lòng điền đầy đủ thông tin</string>
+    <string name="msg_invalid_email">Email không hợp lệ</string>
+    <string name="msg_weak_password">Mật khẩu phải có ít nhất 6 ký tự</string>
+    <string name="msg_camera_permission">Cần quyền truy cập camera</string>
+    <string name="msg_network_error">Lỗi kết nối mạng</string>
+    <string name="msg_no_account_register">Chưa có tài khoản? Đăng ký ngay</string>
+    <string name="msg_have_account_login">Đã có tài khoản? Đăng nhập</string>
+
+    <!-- Format -->
+    <string name="currency_format">###,###,### ₫</string>
+    <string name="currency_vnd">₫</string>
+    <string name="amount_format">%s ₫</string>
+    <string name="percentage_format">%d%%</string>
+    <string name="budget_progress_format">%1$s / %2$s ₫</string>
+    <string name="remaining_format">Còn lại: %s ₫</string>
+
+    <!-- Transaction Types -->
+    <string name="type_income">Thu nhập</string>
+    <string name="type_expense">Chi tiêu</string>
+
+    <!-- Account Types -->
+    <string name="account_cash">Tiền mặt</string>
+    <string name="account_bank">Ngân hàng</string>
+    <string name="account_ewallet">Ví điện tử</string>
+    <string name="account_credit">Thẻ tín dụng</string>
+
+    <!-- Months -->
+    <string name="month_format">Tháng %1$d/%2$d</string>
+
+    <!-- Profile -->
+    <string name="profile_edit">Chỉnh sửa thông tin</string>
+    <string name="profile_app_version">Phiên bản ứng dụng</string>
+    <string name="profile_about">Giới thiệu</string>
+    <string name="profile_help">Trợ giúp</string>
+
+    <!-- Dialog -->
+    <string name="dialog_yes">Có</string>
+    <string name="dialog_no">Không</string>
+    <string name="dialog_ok">OK</string>
+
+    <!-- Content Description -->
+    <string name="cd_app_logo">Logo ứng dụng</string>
+    <string name="cd_category_icon">Biểu tượng danh mục</string>
+    <string name="cd_user_avatar">Ảnh đại diện</string>
+    <string name="cd_google_icon">Biểu tượng Google</string>
+
+    <string name="msg_coming_soon">Coming soon!</string>
+
+    <!-- Facebook Login (Replace with your actual values from Facebook Developer Console) -->
+    <string name="facebook_app_id">1000227555738150</string>
+    <string name="facebook_client_token">691a6cdc5d73f04cb0b507351be9b653</string>
+    <string name="fb_login_protocol_scheme">fb1000227555738150</string>
+
+    <!-- Budget Limit Warning -->
+    <string name="budget_warning_title">Vượt hạn mức chi tiêu</string>
+    <string name="budget_warning_label_limit">Hạn mức ngày</string>
+    <string name="budget_warning_label_spent">Đã chi</string>
+    <string name="budget_warning_label_over">Vượt</string>
+    <string name="budget_warning_label_percent">Tỉ lệ vượt</string>
+    <string name="budget_warning_tip">Gợi ý: Bạn đã vượt hạn mức theo ngày. Hãy điều chỉnh chi tiêu để kiểm soát tài chính tốt hơn nhé!</string>
+    <string name="budget_warning_btn_details">Xem chi tiết danh mục</string>
+    <string name="budget_warning_btn_close">Đóng</string>
+    <string name="budget_approaching_limit_warning">Bạn đã dùng %1$d%% hạn mức %2$s</string>
+    <string name="budget_fallback_display_name">ngân sách</string>
+
+    <!-- Home -->
+    <string name="home_day">Ngày</string>
+    <string name="home_month">Tháng</string>
+    <string name="home_expense">Chi</string>
+    <string name="home_income">Thu</string>
+    <string name="home_my_wallets">VÍ CỦA TÔI</string>
+    <string name="home_add_wallet">+ Thêm ví</string>
+    <string name="home_quick_add">Thêm nhanh</string>
+    <string name="home_weekday_monday">T2</string>
+    <string name="home_weekday_tuesday">T3</string>
+    <string name="home_weekday_wednesday">T4</string>
+    <string name="home_weekday_thursday">T5</string>
+    <string name="home_weekday_friday">T6</string>
+    <string name="home_weekday_saturday">T7</string>
+    <string name="home_weekday_sunday">CN</string>
+    <string name="home_selected_day_format">Đã chọn %1$s/%2$s ✓</string>
+    <string name="home_year_format">Năm %1$d</string>
+    <string name="home_month_title_format">tháng %1$d %2$d</string>
+    <string name="home_today_spent_format">Hôm nay đã tiêu %1$s</string>
+    <string name="home_today_no_expense">Hôm nay chưa chi tiêu</string>
+    <string name="home_day_spent_format">Ngày %1$d/%2$d đã tiêu %3$s</string>
+    <string name="home_day_no_expense_format">Ngày %1$d/%2$d chưa chi tiêu</string>
+    <string name="home_month_spent_format">Tháng %1$d đã tiêu %2$s</string>
+    <string name="home_month_no_expense_format">Tháng %1$d chưa chi tiêu</string>
+    <string name="home_budget_title_format">NGÂN SÁCH THÁNG %1$d/%2$d</string>
+    <string name="home_budget_limit_format">Hạn mức: %1$s</string>
+    <string name="home_budget_spent_format">Đã dùng: %1$s</string>
+    <string name="format_transaction_count">%1$d giao dịch</string>
+    <string name="format_fraction">%1$d/%2$d</string>
+    <string name="format_income_amount">Thu %1$s</string>
+    <string name="format_expense_amount">Chi %1$s</string>
+    <string name="format_positive_amount">+%1$s</string>
+    <string name="format_negative_amount">-%1$s</string>
+    <string name="format_time_category">%1$s  •  %2$s</string>
+    <string name="format_month_year_lowercase">tháng %1$s %2$d</string>
+    <string name="format_month_year">Tháng %1$d %2$d</string>
+    <string name="format_year">Năm %1$d</string>
+    <string name="format_percent_used">%1$d%% sử dụng</string>
+    <string name="format_active_recurring">Đang hoạt động (%1$d)</string>
+    <string name="format_recurring_month_day">%1$s%2$s</string>
+    <string name="format_every_day">Mỗi ngày %1$d</string>
+    <string name="format_annual_day">Ngày %1$d hằng năm</string>
+    <string name="format_profile_month_year">📅 thg %1$d %2$d</string>
+    <string name="format_photo_index">%1$d / %2$d</string>
+    <string name="label_other">Khác</string>
+    <string name="label_day">Ngày</string>
+    <string name="label_all_budgets">Tất cả ngân sách</string>
+    <string name="label_all_categories">Tất cả danh mục</string>
+    <string name="label_categories_in_year">Danh mục trong năm</string>
+    <string name="label_categories_in_month">Danh mục trong tháng</string>
+    <string name="label_update_budget">Cập nhật ngân sách</string>
+    <string name="label_update_monthly_budget">Cập nhật ngân sách tháng</string>
+    <string name="label_save_budget">Lưu ngân sách</string>
+    <string name="label_budget_month">Tháng</string>
+    <string name="label_daily_max">Tối đa/ngày</string>
+    <string name="label_add_expense_categories_first">Vui lòng thêm danh mục chi tiêu trước</string>
+    <string name="label_transaction_details">Chi tiết giao dịch</string>
+    <string name="label_update_transaction">Cập nhật giao dịch</string>
+    <string name="label_edit_recurring">Chỉnh sửa định kỳ</string>
+    <string name="label_day_interval">ngày</string>
+    <string name="label_week_interval">tuần</string>
+    <string name="label_month_interval">tháng</string>
+    <string name="label_comparison_expense_down" formatted="false">-12% so với T4</string>
+    <string name="label_comparison_income_up" formatted="false">+5% so với T4</string>
+    <string name="label_comparison_unchanged" formatted="false">0% so với T4</string>
+    <!-- Extracted UI text -->
+    <string name="ui_chao_mung_ban_tro_lai">Chào mừng bạn trở lại!</string>
+    <string name="ui_so_dien_thoai_email">Số điện thoại / Email</string>
+    <string name="ui_quen_mat_khau">Quên mật khẩu?</string>
+    <string name="ui_hoac_tiep_tuc_voi">Hoặc tiếp tục với</string>
+    <string name="ui_tao_tai_khoan_moi_de_tiep_tuc">Tạo tài khoản mới để tiếp tục</string>
+    <string name="ui_email_tuy_chon">Email (tùy chọn)</string>
+    <string name="ui_nhap_lai_mat_khau">Nhập lại mật khẩu</string>
+    <string name="ui_mat_khau_phai_co">Mật khẩu phải có:</string>
+    <string name="ui_it_nhat_8_ky_tu">✓  ít nhất 8 ký tự</string>
+    <string name="ui_bao_gom_chu_hoa_chu_thuong">✓  bao gồm chữ hoa, chữ thường</string>
+    <string name="ui_bao_gom_so_hoac_ky_tu_dac_biet">✓  bao gồm số hoặc ký tự đặc biệt</string>
+    <string name="ui_chon_tu_thu_vien">Chọn từ thư viện</string>
+    <string name="ui_quan_ly_tai_chinh_thong_minh_trong_tam_tay_ban">Quản lý tài chính thông minh trong tầm tay bạn</string>
+    <string name="ui_scan">Scan</string>
+    <string name="ui_thong_ke">Thống kê</string>
+    <string name="ui_them_giao_dich_moi">Thêm giao dịch mới</string>
+    <string name="ui_nhap_tay">Nhập tay</string>
+    <string name="ui_quet_san_pham">Quét sản phẩm</string>
+    <string name="ui_close">Close</string>
+    <string name="ui_thu_sau_ngay_3_thg_4_2026">Thứ Sáu, ngày 3 thg 4, 2026</string>
+    <string name="ui_2_2">2/2</string>
+    <string name="ui_thu_500_000d">Thu 500,000đ</string>
+    <string name="ui_chi_207_000d">Chi 207,000đ</string>
+    <string name="ui_them_anh_dinh_kem">Thêm ảnh đính kèm</string>
+    <string name="ui_ten_giao_dich_dinh_ky">Tên Giao dịch Định kỳ</string>
+    <string name="ui_tam_dung_dinh_ky">Tạm dừng định kỳ</string>
+    <string name="ui_chinh_sua_dinh_ky">Chỉnh sửa định kỳ</string>
+    <string name="ui_xoa_dinh_ky">Xóa định kỳ</string>
+    <string name="ui_them_danh_muc_moi">Thêm danh mục mới</string>
+    <string name="ui_ten_danh_muc">Tên danh mục</string>
+    <string name="ui_chon_mau_sac">Chọn màu sắc</string>
+    <string name="ui_luu_lai">Lưu lại</string>
+    <string name="ui_doi_mat_khau_moi">Đổi mật khẩu mới</string>
+    <string name="ui_mat_khau_hien_tai">Mật khẩu hiện tại</string>
+    <string name="ui_mat_khau_moi_toi_thieu_6_ky_tu">Mật khẩu mới (tối thiểu 6 ký tự)</string>
+    <string name="ui_xac_nhan_mat_khau_moi">Xác nhận mật khẩu mới</string>
+    <string name="ui_cap_nhat">Cập nhật</string>
+    <string name="ui_doi_ten_hien_thi">Đổi tên hiển thị</string>
+    <string name="ui_ten_hien_thi_moi">Tên hiển thị mới</string>
+    <string name="ui_symbol">!</string>
+    <string name="ui_an_uong_vuot_han_muc_theo_ngay">Ăn uống - Vượt hạn mức theo ngày</string>
+    <string name="ui_200_000d">200.000đ</string>
+    <string name="ui_250_000d">250.000đ</string>
+    <string name="ui_50_000d">50.000đ</string>
+    <string name="ui_125" formatted="false">125%</string>
+    <string name="ui_symbol_2">💡</string>
+    <string name="ui_chon_thoi_gian">Chọn thời gian</string>
+    <string name="ui_nam_truoc">Năm trước</string>
+    <string name="ui_nam_2026">Năm 2026</string>
+    <string name="ui_nam_sau">Năm sau</string>
+    <string name="ui_thang_1">Tháng 1</string>
+    <string name="ui_thang_2">Tháng 2</string>
+    <string name="ui_thang_3">Tháng 3</string>
+    <string name="ui_thang_4">Tháng 4</string>
+    <string name="ui_thang_5">Tháng 5</string>
+    <string name="ui_thang_6">Tháng 6</string>
+    <string name="ui_thang_7">Tháng 7</string>
+    <string name="ui_thang_8">Tháng 8</string>
+    <string name="ui_thang_9">Tháng 9</string>
+    <string name="ui_thang_10">Tháng 10</string>
+    <string name="ui_thang_11">Tháng 11</string>
+    <string name="ui_thang_12">Tháng 12</string>
+    <string name="ui_luc_18_38_ngay_3_thang_4_2026">lúc 18:38 ngày 3 tháng 4, 2026</string>
+    <string name="ui_an_uong">Ăn uống</string>
+    <string name="ui_wallet">Wallet</string>
+    <string name="ui_87_000d">- 87,000đ</string>
+    <string name="ui_an_banh_trang_nha">Ăn bánh tráng nhá</string>
+    <string name="ui_12_14">12 / 14</string>
+    <string name="ui_back">Back</string>
+    <string name="ui_edit">Edit</string>
+    <string name="ui_wallet_vnd">Wallet • VND</string>
+    <string name="ui_thang_nay">Tháng này</string>
+    <string name="ui_nam_nay">Năm nay</string>
+    <string name="ui_tat_ca">Tất cả</string>
+    <string name="ui_tong_so_du">Tổng số dư</string>
+    <string name="ui_271_000d">-271,000đ</string>
+    <string name="ui_4_giao_dich">4 giao dịch</string>
+    <string name="ui_0d">0đ</string>
+    <string name="ui_271_000d_2">271,000đ</string>
+    <string name="ui_so_du_ban_dau">Số dư ban đầu</string>
+    <string name="ui_them_ngan_sach_thang">Thêm ngân sách tháng</string>
+    <string name="ui_tong_ngan_sach_du_kien">Tổng ngân sách dự kiến</string>
+    <string name="ui_dat_lai">Đặt lại</string>
+    <string name="ui_thiet_lap_theo_danh_muc">Thiết lập theo danh mục</string>
+    <string name="ui_luu_ngan_sach">Lưu ngân sách</string>
+    <string name="ui_them_giao_dich_dinh_ky">Thêm giao dịch định kỳ</string>
+    <string name="ui_so_tien">Số tiền *</string>
+    <string name="ui_500_000">500.000</string>
+    <string name="ui_d">đ</string>
+    <string name="ui_tan_suat_lap">Tần suất lặp</string>
+    <string name="ui_tuan">Tuần</string>
+    <string name="ui_nam">Năm</string>
+    <string name="ui_lap_lai_moi">Lặp lại mỗi</string>
+    <string name="ui_1">1</string>
+    <string name="ui_thang">tháng</string>
+    <string name="ui_ngay_thuc_hien">Ngày thực hiện</string>
+    <string name="ui_moi_ngay_20">Mỗi ngày 20</string>
+    <string name="ui_ngay_bat_dau">Ngày bắt đầu</string>
+    <string name="ui_20_05_2026">20/05/2026</string>
+    <string name="ui_tu_dong_tao_giao_dich">Tự động tạo giao dịch</string>
+    <string name="ui_tu_dong_ghi_nhan_khi_den_ngay_thuc_hien">Tự động ghi nhận khi đến ngày thực hiện</string>
+    <string name="ui_ghi_chu_tuy_chon">Ghi chú (tùy chọn)</string>
+    <string name="ui_thanh_toan_hoa_don_tien_dien">Thanh toán hóa đơn tiền điện...</string>
+    <string name="ui_luu_giao_dich">Lưu giao dịch</string>
+    <string name="ui_tao_giao_dich">Tạo giao dịch</string>
+    <string name="ui_khoan_chi">Khoản chi</string>
+    <string name="ui_khoan_thu">Khoản thu</string>
+    <string name="ui_nhap_so_tien">Nhập số tiền</string>
+    <string name="ui_them_chi_tiet">Thêm chi tiết</string>
+    <string name="ui_ten_giao_dich_vi_du_ca_phe">Tên giao dịch (Ví dụ: Cà phê)</string>
+    <string name="ui_ngay_giao_dich">Ngày giao dịch</string>
+    <string name="ui_ghi_chu_tuy_chon_2">Ghi chú (Tùy chọn)</string>
+    <string name="ui_anh_dinh_kem_tuy_chon">Ảnh đính kèm (tùy chọn)</string>
+    <string name="ui_them_anh">+ Thêm ảnh</string>
+    <string name="ui_thumbnail">Thumbnail</string>
+    <string name="ui_remove_image">Remove image</string>
+    <string name="ui_chup_lai">Chụp lại</string>
+    <string name="ui_share">Share</string>
+    <string name="ui_ngan_sach_danh_muc">Ngân sách danh mục</string>
+    <string name="ui_tong_ngan_sach">Tổng ngân sách</string>
+    <string name="ui_con_lai">Còn lại</string>
+    <string name="ui_cap_nhat_den_hom_nay">Cập nhật đến hôm nay</string>
+    <string name="ui_chua_co_ngan_sach_cho_ky_nay_hay_them_ngan_sach">Chưa có ngân sách cho kỳ này. Hãy thêm ngân sách để theo dõi chi tiêu theo danh mục.</string>
+    <string name="ui_them_ngan_sach">+ Thêm ngân sách</string>
+    <string name="ui_quay_lai">Quay lại</string>
+    <string name="ui_chi_tiet_ngay">Chi tiết ngày</string>
+    <string name="ui_lich_thang">Lịch tháng</string>
+    <string name="ui_thu_ba_21_04_2026">Thứ Ba, 21/04/2026</string>
+    <string name="ui_236_000d">236.000đ</string>
+    <string name="ui_12_so_voi_t4" formatted="false">-12% so với T4</string>
+    <string name="ui_0_so_voi_t4" formatted="false">0% so với T4</string>
+    <string name="ui_giao_dich_trong_ngay">GIAO DỊCH TRONG NGÀY</string>
+    <string name="ui_chua_co_giao_dich">Chưa có giao dịch</string>
+    <string name="ui_hay_them_giao_dich_de_quan_lynthu_chi_hieu_qua_h">Hãy thêm giao dịch để quản lý\nthu chi hiệu quả hơn.</string>
+    <string name="ui_sangrich">Sangrich</string>
+    <string name="ui_email_example_com">email@example.com</string>
+    <string name="ui_thg_3_2026">📅 thg 3 2026</string>
+    <string name="ui_tong_quan">Tổng quan</string>
+    <string name="ui_0">0</string>
+    <string name="ui_tong_thu_nhap">Tổng thu nhập</string>
+    <string name="ui_tong_chi_tieu">Tổng chi tiêu</string>
+    <string name="ui_so_du">Số dư</string>
+    <string name="ui_doi_mat_khau">Đổi mật khẩu</string>
+    <string name="ui_capmoneynphien_ban_2_2_0">CapMoney\nPhiên bản 2.2.0</string>
+    <string name="ui_dinh_ky">Định kỳ</string>
+    <string name="ui_dang_hoat_dong_0">Đang hoạt động (0)</string>
+    <string name="ui_chua_co_giao_dich_dinh_ky">Chưa có giao dịch định kỳ</string>
+    <string name="ui_tao_cac_giao_dich_lap_lai_de_quan_ly_chi_tieu_de">Tạo các giao dịch lặp lại để quản lý chi tiêu dễ dàng hơn.</string>
+    <string name="ui_them_dinh_ky">+ Thêm định kỳ</string>
+    <string name="ui_tim_kiem">Tìm kiếm</string>
+    <string name="ui_bo_loc">Bộ lọc</string>
+    <string name="ui_tim_kiem_ghi_chu_danh_muc">Tìm kiếm ghi chú, danh mục...</string>
+    <string name="ui_thang_5_2026">Tháng 5 2026</string>
+    <string name="ui_1_890_000d">1.890.000đ</string>
+    <string name="ui_4_200_000d">4.200.000đ</string>
+    <string name="ui_them_giao_dich_de_quan_ly_tai_chinh_hieu_qua_hon">Thêm giao dịch để quản lý tài chính hiệu quả hơn</string>
+    <string name="ui_87_000d_2">-87,000đ</string>
+    <string name="ui_symbol_3">★</string>
+    <string name="ui_tien_dien">Tiền điện</string>
+    <string name="ui_hang_thang_20_05">Hàng tháng - 20/05</string>
+    <string name="ui_500_000d">-500.000đ</string>
+    <string name="ui_242_000d">242,000đ</string>
+    <string name="ui_69" formatted="false">69%</string>
+    <string name="ui_tieu_de_giao_dich">Tiêu đề giao dịch</string>
+    <string name="ui_0_2">0 ₫</string>
+    <string name="ui_dd_mm_yyyy">dd/MM/yyyy</string>
+    <string name="ui_21">21</string>
+    <string name="ui_thu_nam">Thứ Năm</string>
+    <string name="ui_thang_05_2026">tháng 05 2026</string>
+    <string name="vnd_suffix"> đ</string>
+</resources>

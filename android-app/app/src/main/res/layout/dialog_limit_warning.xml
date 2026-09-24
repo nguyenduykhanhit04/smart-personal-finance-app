@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/bg_bottom_sheet"
+    android:padding="24dp">
+
+    <!-- Header Drag Handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/divider"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Red Exclamation Warning Icon Circle -->
+    <FrameLayout
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:background="@drawable/bg_circle"
+        android:backgroundTint="#2D1212"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_symbol"
+            android:textColor="@color/expense_red"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+    <!-- Main Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/budget_warning_title"
+        android:textColor="@color/expense_red"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Category name & Exceeded level -->
+    <TextView
+        android:id="@+id/tvCategoryAlertName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ui_an_uong_vuot_han_muc_theo_ngay"
+        android:textColor="@color/text_primary"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp" />
+
+    <!-- Details Grid Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:strokeColor="@color/divider"
+        app:strokeWidth="1dp"
+        app:cardBackgroundColor="@color/background"
+        android:layout_marginBottom="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Row 1: Limit -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/budget_warning_label_limit"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvLimitVal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ui_200_000d"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+            <!-- Row 2: Spent -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/budget_warning_label_spent"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvSpentVal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ui_250_000d"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Row 3: Over -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/budget_warning_label_over"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvOverVal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ui_50_000d"
+                    android:textColor="@color/expense_red"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+            <!-- Row 4: Percent -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/budget_warning_label_percent"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvOverPercentVal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ui_125"
+                    android:textColor="@color/expense_red"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Suggestion Card Box -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="#2A1C1C"
+        android:layout_marginBottom="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ui_symbol_2"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="@string/budget_warning_tip"
+                android:textColor="#FCA5A5"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Actions -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnViewDetails"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_button_rounded"
+        android:backgroundTint="@color/primary"
+        android:text="@string/budget_warning_btn_details"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/btnDismiss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/budget_warning_btn_close"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:padding="8dp"
+        android:clickable="true"
+        android:focusable="true" />
+
+</LinearLayout>

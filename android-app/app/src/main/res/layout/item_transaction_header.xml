@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:paddingHorizontal="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="10dp">
+
+    <!-- Date Components Container (Left) -->
+    <LinearLayout
+        android:id="@+id/layoutDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- Big prominent Day number -->
+        <TextView
+            android:id="@+id/tvHeaderDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_21"
+            android:textColor="@color/text_primary"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:includeFontPadding="false" />
+
+        <!-- Vertical Weekday & Month/Year stack -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvHeaderDayOfWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ui_thu_nam"
+                android:textColor="#F1F5F9"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:includeFontPadding="false" />
+
+            <TextView
+                android:id="@+id/tvHeaderMonthYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@string/ui_thang_05_2026"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:includeFontPadding="false" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Net Day Amount (Right) -->
+    <TextView
+        android:id="@+id/tvHeaderNetAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:text="@string/ui_0_2"
+        android:textColor="@color/text_secondary"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <!-- Thin divider at bottom of header -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/layoutDate"
+        android:layout_marginTop="10dp"
+        android:background="@color/divider" />
+
+</RelativeLayout>

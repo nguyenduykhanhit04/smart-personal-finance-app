@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_bottom_sheet"
+    android:padding="24dp">
+
+    <!-- Header Drag Handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/divider"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ui_chon_thoi_gian"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp" />
+
+    <!-- Year Selector Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:id="@+id/btnPrevYear"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_arrow_back"
+            android:padding="10dp"
+            app:tint="@color/text_primary"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/ui_nam_truoc" />
+
+        <TextView
+            android:id="@+id/tvYear"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_nam_2026"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:gravity="center" />
+
+        <ImageView
+            android:id="@+id/btnNextYear"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_arrow_back"
+            android:rotation="180"
+            android:padding="10dp"
+            app:tint="@color/text_primary"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/ui_nam_sau" />
+    </LinearLayout>
+
+    <!-- Months Grid (3x4 Grid) -->
+    <GridLayout
+        android:id="@+id/gridLayoutMonths"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="4"
+        android:layout_marginBottom="12dp">
+
+        <TextView
+            android:id="@+id/btnMonth1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="6dp"
+            android:paddingVertical="14dp"
+            android:text="@string/ui_thang_1"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/bg_rounded_card"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/btnMonth2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="6dp"
+            android:paddingVertical="14dp"
+            android:text="@string/ui_thang_2"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/bg_rounded_card"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/btnMonth3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="6dp"
+            android:paddingVertical="14dp"
+            android:text="@string/ui_thang_3"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/bg_rounded_card"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/btnMonth4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="6dp"
+            android:paddingVertical="14dp"
+            android:text="@string/ui_thang_4"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/bg_rounded_card"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/btnMonth5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="6dp"
+            android:paddingVertical="14dp"
+            android:text="@string/ui_thang_5"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/bg_rounded_card"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/btnMonth6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="6dp"
+            android:paddingVertical="14dp"
+            android:text="@string/ui_thang_6"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/bg_rounded_card"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/btnMonth7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="6dp"
+            android:paddingVertical="14dp"
+            android:text="@string/ui_thang_7"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/bg_rounded_card"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/btnMonth8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="6dp"
+            android:paddingVertical="14dp"
+            android:text="@string/ui_thang_8"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/bg_rounded_card"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/btnMonth9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="6dp"
+            android:paddingVertical="14dp"
+            android:text="@string/ui_thang_9"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/bg_rounded_card"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/btnMonth10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="6dp"
+            android:paddingVertical="14dp"
+            android:text="@string/ui_thang_10"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/bg_rounded_card"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/btnMonth11"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="6dp"
+            android:paddingVertical="14dp"
+            android:text="@string/ui_thang_11"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/bg_rounded_card"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/btnMonth12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="6dp"
+            android:paddingVertical="14dp"
+            android:text="@string/ui_thang_12"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/bg_rounded_card"
+            android:clickable="true"
+            android:focusable="true" />
+    </GridLayout>
+
+</LinearLayout>

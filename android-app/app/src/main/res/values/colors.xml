@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Colors (Sangrich Royal Blue) -->
+    <color name="primary">#3B82F6</color>
+    <color name="primary_dark">#06080C</color>
+    <color name="primary_light">#93C5FD</color>
+    <color name="primary_variant">#2563EB</color>
+
+    <!-- Accent / Secondary (Sangrich Green & Pink) -->
+    <color name="accent">#22C55E</color>
+    <color name="secondary">#F85149</color>
+    <color name="secondary_variant">#D946EF</color>
+
+    <!-- Finance Colors (Vibrant Green/Coral Red/Blue/Yellow) -->
+    <color name="income_green">#22C55E</color>
+    <color name="expense_red">#F85149</color>
+    <color name="warning_yellow">#FF9800</color>
+
+    <!-- Background / Surface (Sangrich Obsidian Dark Theme) -->
+    <color name="background">#090D16</color>
+    <color name="surface">#161B2A</color>
+    <color name="surface_variant">#1F263B</color>
+    <color name="card_background">#161B2A</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#8B949E</color>
+    <color name="text_hint">#586069</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_on_surface">#FFFFFF</color>
+
+    <!-- Divider -->
+    <color name="divider">#1F263B</color>
+
+    <!-- Status -->
+    <color name="status_active">#22C55E</color>
+    <color name="status_pending">#FF9800</color>
+    <color name="status_cancelled">#8B949E</color>
+
+    <!-- Progress Bar -->
+    <color name="progress_background">#1F263B</color>
+    <color name="progress_normal">#22C55E</color>
+    <color name="progress_warning">#FF9800</color>
+    <color name="progress_danger">#F85149</color>
+
+    <!-- Google Button (Slate dark style) -->
+    <color name="google_button_bg">#161B2A</color>
+    <color name="google_button_text">#FFFFFF</color>
+
+    <!-- Splash -->
+    <color name="splash_background">#090D16</color>
+
+    <!-- Black/White -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

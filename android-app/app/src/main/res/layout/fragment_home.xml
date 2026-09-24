@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Profile Header Row -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true">
+
+                    <TextView
+                        android:id="@+id/tvGreeting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="Chúc ngủ ngon"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvUsername"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="Sangrich"
+                        android:textColor="@color/text_primary"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="2dp" />
+
+                    <!-- Green Badge: Hôm nay chưa chi tiêu -->
+                    <LinearLayout
+                        android:id="@+id/badgeNoExpense"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:background="@drawable/bg_button_rounded"
+                        android:backgroundTint="#162E21"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:layout_marginTop="6dp">
+
+                        <ImageView
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:src="@drawable/ic_profile"
+                            app:tint="#10B981" />
+
+                        <TextView
+                            android:id="@+id/tvBadgeText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="@string/home_today_no_expense"
+                            android:textColor="#10B981"
+                            android:textSize="11sp"
+                            android:layout_marginStart="4dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Avatar Circle -->
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivAvatar"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_profile"
+                    app:shapeAppearanceOverlay="@style/CircleImage"
+                    app:strokeColor="@color/divider"
+                    app:strokeWidth="1dp" />
+            </RelativeLayout>
+
+            <!-- Day / Month Segmented Control -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_rounded_card"
+                android:backgroundTint="@color/surface"
+                android:padding="3dp"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@+id/btnDayTab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="6dp"
+                    android:background="@drawable/bg_button_rounded"
+                    android:backgroundTint="@android:color/transparent">
+
+                    <TextView
+                        android:id="@+id/tvDayLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_day"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvDayBubbleText"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        tools:text="2"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        android:background="@drawable/bg_circle"
+                        android:backgroundTint="#2E2E33"
+                        android:gravity="center"
+                        android:layout_marginStart="6dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnMonthTab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="6dp"
+                    android:background="@drawable/bg_button_rounded"
+                    android:backgroundTint="#2E2E33">
+
+                    <TextView
+                        android:id="@+id/tvMonthLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_month"
+                        android:textColor="@color/text_primary"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/ivMonthIcon"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:src="@drawable/ic_budget"
+                        android:layout_marginStart="6dp"
+                        app:tint="@color/text_primary" />
+
+                    <TextView
+                        android:id="@+id/tvMonthBubbleText"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        tools:text="3"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        android:background="@drawable/bg_circle"
+                        android:backgroundTint="#3B82F6"
+                        android:gravity="center"
+                        android:layout_marginStart="4dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Chi / Thu side-by-side cards -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:baselineAligned="false"
+                android:layout_marginBottom="16dp">
+
+                <!-- Expense Card -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/bg_rounded_card"
+                    android:backgroundTint="@color/surface"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/bg_circle"
+                        android:backgroundTint="#2A1616"
+                        android:src="@drawable/ic_arrow_up"
+                        android:padding="8dp"
+                        app:tint="@color/expense_red" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="12dp">
+
+                        <TextView
+                            android:id="@+id/tvExpenseAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="236.000đ"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_expense"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Income Card -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/bg_rounded_card"
+                    android:backgroundTint="@color/surface"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/bg_circle"
+                        android:backgroundTint="#162A21"
+                        android:src="@drawable/ic_arrow_down"
+                        android:padding="8dp"
+                        app:tint="@color/income_green" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="12dp">
+
+                        <TextView
+                            android:id="@+id/tvIncomeAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="0đ"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_income"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Horizontal Wallets Card List (Hidden as per user request) -->
+            <LinearLayout
+                android:id="@+id/layoutMyWallets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginBottom="16dp">
+
+                <!-- Header Row -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_my_wallets"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true" />
+
+                    <LinearLayout
+                        android:id="@+id/btnQuickAddAccount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:padding="4dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_add_wallet"
+                            android:textColor="@color/primary"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <!-- Swipeable Horizontal RecyclerView -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvHorizontalWallets"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_horizontal_wallet" />
+            </LinearLayout>
+
+            <!-- Month Calendar Navigation Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:background="@drawable/bg_rounded_card"
+                android:backgroundTint="@color/surface"
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="16dp"
+                android:layout_marginBottom="12dp">
+
+                <ImageView
+                    android:id="@+id/btnPrevMonth"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_arrow_back"
+                    app:tint="@color/text_primary" />
+
+                <LinearLayout
+                    android:id="@+id/monthSelectorContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <TextView
+                        android:id="@+id/tvMonthTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="tháng 4 2026"
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:src="@drawable/ic_arrow_down"
+                        android:layout_marginStart="4dp"
+                        app:tint="@color/text_primary" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/btnResetMonth"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_menu_revert"
+                    android:layout_marginEnd="16dp"
+                    app:tint="@color/text_primary" />
+
+                <ImageView
+                    android:id="@+id/btnNextMonth"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_arrow_down"
+                    android:rotation="270"
+                    app:tint="@color/text_primary" />
+            </LinearLayout>
+
+            <!-- Static Weekdays Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp"
+                android:layout_marginBottom="4dp">
+
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/home_weekday_monday" android:textColor="@color/text_secondary" android:gravity="center" android:textSize="12sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/home_weekday_tuesday" android:textColor="@color/text_secondary" android:gravity="center" android:textSize="12sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/home_weekday_wednesday" android:textColor="@color/text_secondary" android:gravity="center" android:textSize="12sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/home_weekday_thursday" android:textColor="@color/text_secondary" android:gravity="center" android:textSize="12sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/home_weekday_friday" android:textColor="@color/text_secondary" android:gravity="center" android:textSize="12sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/home_weekday_saturday" android:textColor="@color/text_secondary" android:gravity="center" android:textSize="12sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/home_weekday_sunday" android:textColor="@color/text_secondary" android:gravity="center" android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Monthly Calendar Grid Card Container -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="@color/surface"
+                android:padding="8dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCalendarGrid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:padding="8dp" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Budget Progress Card Container -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/divider"
+                app:cardBackgroundColor="@color/surface">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:id="@+id/tvBudgetTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="NGÂN SÁCH THÁNG 6/2026"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.05"
+                            android:layout_alignParentStart="true" />
+
+                        <TextView
+                            android:id="@+id/tvBudPercent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="0%"
+                            android:textColor="@color/primary"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/progressBudget"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        app:trackCornerRadius="4dp"
+                        app:trackThickness="8dp"
+                        app:trackColor="@color/progress_background"
+                        app:indicatorColor="@color/primary"
+                        android:progress="0"
+                        android:layout_marginBottom="8dp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvBudgetSpent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="Đã dùng: 0đ"
+                            android:textColor="@color/text_primary"
+                            android:textSize="12sp"
+                            android:layout_alignParentStart="true" />
+
+                        <TextView
+                            android:id="@+id/tvBudgetTotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="Hạn mức: 0đ"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Floating Action Button at Bottom Right -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_add"
+        app:tint="@color/white"
+        app:backgroundTint="@color/primary"
+        app:fabSize="normal"
+        app:maxImageSize="28dp"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/home_quick_add" />
+
+    <!-- Overlay Selection Pill Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSelectedDayPill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        tools:text="Đã chọn 21/04 ✓"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:backgroundTint="#1D4ED8"
+        app:cornerRadius="24dp"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="12dp"
+        android:visibility="gone"
+        app:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

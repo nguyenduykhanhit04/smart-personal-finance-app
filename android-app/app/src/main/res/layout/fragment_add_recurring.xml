@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/formScroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:clipToPadding="false"
+        android:paddingBottom="88dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomSaveBar">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Top Header Row -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:id="@+id/tvFormTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ui_them_giao_dich_dinh_ky"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true" />
+
+            <ImageView
+                android:id="@+id/btnClose"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_close"
+                app:tint="@color/text_secondary"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true" />
+        </RelativeLayout>
+
+        <!-- Chi / Thu Pill Toggle Switch -->
+        <LinearLayout
+            android:id="@+id/toggleContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_rounded_card"
+            android:backgroundTint="@color/surface"
+            android:padding="4dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:id="@+id/toggleExpense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="10dp"
+                android:text="@string/home_expense"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_button_rounded"
+                android:backgroundTint="@color/expense_red"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/toggleIncome"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="10dp"
+                android:text="@string/home_income"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true" />
+        </LinearLayout>
+
+        <!-- Category Dropdown Selection -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_categories"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:layout_marginBottom="6dp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardCategorySelect"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/divider"
+            app:strokeWidth="1dp"
+            app:cardBackgroundColor="@color/surface"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginBottom="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="16dp">
+
+                <ImageView
+                    android:id="@+id/ivCategoryIcon"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_recurring"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    app:tint="@color/text_primary" />
+
+                <TextView
+                    android:id="@+id/tvCategoryName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_select_category"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/ivCategoryIcon"
+                    android:layout_marginStart="12dp" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_arrow_back"
+                    android:rotation="180"
+                    app:tint="@color/text_hint"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Amount Input Field -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_so_tien"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:layout_marginBottom="6dp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginBottom="20dp">
+
+            <EditText
+                android:id="@+id/edtAmount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_input_field"
+                android:hint="@string/ui_500_000"
+                android:textColor="@color/white"
+                android:textColorHint="@color/text_hint"
+                android:textSize="15sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="48dp"
+                android:inputType="numberDecimal"
+                android:gravity="center_vertical" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ui_d"
+                android:textColor="@color/text_secondary"
+                android:textSize="16sp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="16dp" />
+        </FrameLayout>
+
+        <!-- Frequency Tabs Picker -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_tan_suat_lap"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:layout_marginBottom="6dp" />
+
+        <LinearLayout
+            android:id="@+id/freqContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_rounded_card"
+            android:backgroundTint="@color/surface"
+            android:padding="3dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:id="@+id/freqDaily"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:text="@string/home_day"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/freqWeekly"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:text="@string/ui_tuan"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/freqMonthly"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:text="@string/home_month"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_button_rounded"
+                android:backgroundTint="#2E2E33"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/freqYearly"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:text="@string/ui_nam"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- Repeat Every (Lặp lại mỗi) Numeric Input -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_lap_lai_moi"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:layout_marginBottom="6dp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginBottom="20dp">
+
+            <EditText
+                android:id="@+id/edtRepeatInterval"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_input_field"
+                android:hint="@string/ui_1"
+                android:textColor="@color/white"
+                android:textColorHint="@color/text_hint"
+                android:textSize="15sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="80dp"
+                android:inputType="number"
+                android:gravity="center_vertical" />
+
+            <TextView
+                android:id="@+id/tvIntervalSuffix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ui_thang"
+                android:textColor="@color/text_secondary"
+                android:textSize="15sp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="16dp" />
+        </FrameLayout>
+
+        <!-- Day of Occurrence Picker (e.g. "Ngày thực hiện" 1 to 31 dropdown selector) -->
+        <TextView
+            android:id="@+id/tvDayLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_ngay_thuc_hien"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:layout_marginBottom="6dp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardDayOfMonthSelect"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/divider"
+            app:strokeWidth="1dp"
+            app:cardBackgroundColor="@color/surface"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginBottom="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="16dp">
+
+                <TextView
+                    android:id="@+id/tvDayOfMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ui_moi_ngay_20"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp"
+                    android:layout_centerVertical="true" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_arrow_back"
+                    android:rotation="180"
+                    app:tint="@color/text_hint"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Start Date Picker Selection -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_ngay_bat_dau"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:layout_marginBottom="6dp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardStartDate"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/divider"
+            app:strokeWidth="1dp"
+            app:cardBackgroundColor="@color/surface"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginBottom="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="16dp">
+
+                <TextView
+                    android:id="@+id/tvStartDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ui_20_05_2026"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp"
+                    android:layout_centerVertical="true" />
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_budget"
+                    app:tint="@color/text_hint"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Auto Create Switch Toggle -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/switchAutoCreate">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ui_tu_dong_tao_giao_dich"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/ui_tu_dong_ghi_nhan_khi_den_ngay_thuc_hien"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switchAutoCreate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:checked="true" />
+        </RelativeLayout>
+
+        <!-- Note Text Input Field -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_ghi_chu_tuy_chon"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:layout_marginBottom="6dp" />
+
+        <EditText
+            android:id="@+id/edtNote"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/bg_input_field"
+            android:hint="@string/ui_thanh_toan_hoa_don_tien_dien"
+            android:textColor="@color/white"
+            android:textColorHint="@color/text_hint"
+            android:textSize="14sp"
+            android:padding="16dp"
+            android:gravity="top|start"
+            android:inputType="textMultiLine"
+            android:layout_marginBottom="32dp" />
+
+        <!-- Save Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSaveInline"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_button_rounded"
+            android:backgroundTint="@color/primary"
+            android:text="@string/ui_luu_giao_dich"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/bottomSaveBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_button_rounded"
+            android:backgroundTint="@color/primary"
+            android:text="@string/ui_luu_giao_dich"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textAllCaps="false" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

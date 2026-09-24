@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingVertical="12dp"
+    android:paddingHorizontal="4dp">
+
+    <!-- Circle Icon -->
+    <View
+        android:id="@+id/viewCategoryBg"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_circle"
+        android:backgroundTint="@color/status_active" />
+
+    <ImageView
+        android:id="@+id/imgCategoryIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="-30dp"
+        android:src="@drawable/ic_transaction"
+        app:tint="@color/white" />
+
+    <!-- Name and Progress Bar -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="16dp">
+
+        <TextView
+            android:id="@+id/tvCategoryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_an_uong"
+            android:textColor="@color/text_primary"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <!-- Custom HSL tailored progress bar -->
+        <ProgressBar
+            android:id="@+id/pbCategory"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_marginTop="8dp"
+            android:progress="69"
+            android:progressDrawable="@android:drawable/progress_horizontal"
+            android:indeterminate="false" />
+    </LinearLayout>
+
+    <!-- Amount and Percentage -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical|end">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/tvCategoryAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ui_242_000d"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvCategoryPercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_69"
+            android:textColor="@color/status_active"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp" />
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_arrow_down"
+            android:rotation="270"
+            android:layout_marginStart="8dp"
+            app:tint="@color/text_hint" />
+    </LinearLayout>
+
+</LinearLayout>

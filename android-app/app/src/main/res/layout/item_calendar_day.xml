@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingVertical="8dp">
+
+    <!-- The Circle Container -->
+    <FrameLayout
+        android:id="@+id/circleContainer"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:gravity="center">
+
+        <!-- Dotted empty day border -->
+        <View
+            android:id="@+id/viewDashedBorder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_circle_dashed" />
+
+        <!-- Plus icon for empty day -->
+        <ImageView
+            android:id="@+id/imgPlus"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_add"
+            app:tint="@color/text_hint" />
+
+        <!-- Transaction thumbnail container (e.g. rounded shape) -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgThumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:shapeAppearanceOverlay="@style/CircleImage"
+            android:src="@drawable/ic_transaction"
+            app:strokeColor="#3B82F6"
+            app:strokeWidth="1.5dp" />
+
+        <!-- Background Thumbnail for stacked images -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgThumbnailBack"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="start|top"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:shapeAppearanceOverlay="@style/RoundedImage"
+            app:strokeColor="#3B82F6"
+            app:strokeWidth="1.5dp" />
+
+        <!-- Front Thumbnail for stacked images -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgThumbnailFront"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="end|bottom"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:shapeAppearanceOverlay="@style/RoundedImage"
+            app:strokeColor="#3B82F6"
+            app:strokeWidth="1.5dp" />
+    </FrameLayout>
+
+    <!-- Day Number Text -->
+    <TextView
+        android:id="@+id/tvDayNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ui_1"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        android:layout_marginTop="4dp"
+        android:textStyle="bold" />
+
+</LinearLayout>

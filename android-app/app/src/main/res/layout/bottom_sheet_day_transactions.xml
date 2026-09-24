@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_bottom_sheet"
+    android:backgroundTint="@color/surface"
+    android:padding="20dp">
+
+    <!-- Handle drag bar -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/divider"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Custom Header Container (2 Rows) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
+
+        <!-- Row 1: Close Button (Left) and Date (Full width, centered) -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:id="@+id/btnClose"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_close"
+                android:padding="6dp"
+                android:background="@drawable/bg_circle"
+                android:backgroundTint="#2E2E33"
+                app:tint="@color/text_primary"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="@string/ui_close" />
+
+            <TextView
+                android:id="@+id/tvDayTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/btnClose"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="40dp"
+                android:text="@string/ui_thu_sau_ngay_3_thg_4_2026"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:gravity="center"
+                android:singleLine="true"
+                android:ellipsize="end" />
+        </RelativeLayout>
+
+        <!-- Row 2: Count (Left) and Total Indicator Badges (Right) -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvTransactionCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="@string/ui_2_2"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary" />
+
+            <LinearLayout
+                android:id="@+id/layoutTotals"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:orientation="vertical"
+                android:gravity="end">
+
+                <!-- Income Badge -->
+                <TextView
+                    android:id="@+id/tvDayIncome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ui_thu_500_000d"
+                    android:textColor="#22C55E"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_button_rounded"
+                    android:backgroundTint="#122B1E"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="6dp"
+                    android:visibility="gone" />
+
+                <!-- Expense Badge -->
+                <TextView
+                    android:id="@+id/tvDayExpense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ui_chi_207_000d"
+                    android:textColor="#F85149"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_button_rounded"
+                    android:backgroundTint="#2E1616"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="6dp"
+                    android:layout_marginTop="4dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Transactions RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDayTransactions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxHeight="350dp" />
+
+</LinearLayout>

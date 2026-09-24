@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <!-- Header bar -->
+    <RelativeLayout
+        android:id="@+id/headerBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow_back"
+            android:padding="6dp"
+            android:background="@drawable/bg_circle"
+            android:backgroundTint="@color/surface"
+            app:tint="@color/text_primary"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/ui_quay_lai" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/ui_chi_tiet_ngay"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btnMonthCalendar"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_recurring"
+            android:padding="6dp"
+            android:background="@drawable/bg_circle"
+            android:backgroundTint="@color/surface"
+            app:tint="@color/text_primary"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/ui_lich_thang" />
+    </RelativeLayout>
+
+    <!-- Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/headerBar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Selected Date Title -->
+            <TextView
+                android:id="@+id/tvDayDetailDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ui_thu_ba_21_04_2026"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Summary Cards Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:baselineAligned="false"
+                android:layout_marginBottom="16dp">
+
+                <!-- Expense Card -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/bg_rounded_card"
+                    android:backgroundTint="#2E1616"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/bg_circle"
+                        android:backgroundTint="#3D1C1C"
+                        android:src="@drawable/ic_arrow_up"
+                        android:padding="8dp"
+                        app:tint="@color/expense_red" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="10dp">
+
+                        <TextView
+                            android:id="@+id/tvExpenseAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ui_236_000d"
+                            android:textColor="@color/expense_red"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvExpensePercent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ui_12_so_voi_t4"
+                            android:textColor="#10B981"
+                            android:textSize="10sp"
+                            android:layout_marginTop="1dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Income Card -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/bg_rounded_card"
+                    android:backgroundTint="#162E21"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/bg_circle"
+                        android:backgroundTint="#1C3D2B"
+                        android:src="@drawable/ic_arrow_down"
+                        android:padding="8dp"
+                        app:tint="@color/income_green" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="10dp">
+
+                        <TextView
+                            android:id="@+id/tvIncomeAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ui_0d"
+                            android:textColor="@color/income_green"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvIncomePercent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ui_0_so_voi_t4"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="10sp"
+                            android:layout_marginTop="1dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Segmented Control Tabs (Tất cả / Chi / Thu) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_rounded_card"
+                android:backgroundTint="@color/surface"
+                android:padding="3dp"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:id="@+id/btnFilterAll"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ui_tat_ca"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:paddingVertical="8dp"
+                    android:background="@drawable/bg_button_rounded"
+                    android:backgroundTint="@color/primary"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+                <TextView
+                    android:id="@+id/btnFilterExpense"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/home_expense"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:paddingVertical="8dp"
+                    android:background="@drawable/bg_button_rounded"
+                    android:backgroundTint="@android:color/transparent"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+                <TextView
+                    android:id="@+id/btnFilterIncome"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/home_income"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:paddingVertical="8dp"
+                    android:background="@drawable/bg_button_rounded"
+                    android:backgroundTint="@android:color/transparent"
+                    android:clickable="true"
+                    android:focusable="true" />
+            </LinearLayout>
+
+            <!-- List Subtitle -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ui_giao_dich_trong_ngay"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.05"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Empty State Layout -->
+            <LinearLayout
+                android:id="@+id/layoutEmptyState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingVertical="40dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_credit_card"
+                    android:padding="16dp"
+                    app:tint="@color/text_hint" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ui_chua_co_giao_dich"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ui_hay_them_giao_dich_de_quan_lynthu_chi_hieu_qua_h"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:layout_marginTop="6dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEmptyAddTransaction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/btn_add_transaction"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/primary"
+                    app:cornerRadius="12dp"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="8dp" />
+            </LinearLayout>
+
+            <!-- RecyclerView list -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDayTransactions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_day_transaction" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Bottom Right Floating Action Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddTransaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add"
+        app:tint="@color/white"
+        app:backgroundTint="@color/primary"
+        app:fabSize="normal"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/btn_add_transaction" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

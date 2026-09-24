@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121214">
+
+    <!-- Top Action Bar -->
+    <RelativeLayout
+        android:id="@+id/detailTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:paddingHorizontal="16dp"
+        android:layout_alignParentTop="true">
+
+        <!-- Left Icons: Options and Gallery -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:id="@+id/btnOptions"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_share"
+                android:padding="8dp"
+                app:tint="@color/white"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <ImageView
+                android:id="@+id/btnGalleryIcon"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/ic_categories"
+                android:padding="8dp"
+                app:tint="@color/white" />
+        </LinearLayout>
+
+        <!-- Center Date/Time Info (e.g. lúc 18:38 ngày 3 tháng 4, 2026) -->
+        <TextView
+            android:id="@+id/tvDetailDateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/ui_luc_18_38_ngay_3_thang_4_2026"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:background="@drawable/bg_button_rounded"
+            android:backgroundTint="#2E2E33"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp" />
+
+        <!-- Close Button (Right) -->
+        <ImageView
+            android:id="@+id/btnDetailClose"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_close"
+            android:padding="6dp"
+            android:background="@drawable/bg_circle"
+            android:backgroundTint="#2E2E33"
+            app:tint="@color/white"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/ui_close" />
+    </RelativeLayout>
+
+    <!-- Center Photo Card Container -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/photoCardView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tvDetailIndex"
+        android:layout_below="@+id/detailTopBar"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="16dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="4dp"
+        app:strokeWidth="0dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Transaction Image -->
+            <ImageView
+                android:id="@+id/ivDetailPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_credit_card" />
+
+            <!-- Semi-transparent overlay to ensure text stands out -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_image_card_overlay" />
+
+            <!-- Top Overlay Pill Tags (Category & Wallet) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="16dp">
+
+                <!-- Category Pill -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_pill_category"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="6dp">
+
+                    <ImageView
+                        android:id="@+id/ivCategoryTagIcon"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/ic_transaction"
+                        app:tint="@color/white"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/tvCategoryTag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ui_an_uong"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Wallet Pill (Hidden as requested) -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_pill_category"
+                    android:backgroundTint="#4F46E5"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="6dp"
+                    android:layout_marginStart="8dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/ic_credit_card"
+                        app:tint="@color/white"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:id="@+id/tvWalletTag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ui_wallet"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Bottom Content Card Overlay (Amount & Notes) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="20dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/bg_rounded_card"
+                android:backgroundTint="#B318181B"> <!-- Dark semi-transparent grey -->
+
+                <!-- Amount -->
+                <TextView
+                    android:id="@+id/tvDetailAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ui_87_000d"
+                    android:textColor="@color/white"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+                <!-- Note/Title -->
+                <TextView
+                    android:id="@+id/tvDetailNote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/ui_an_banh_trang_nha"
+                    android:textColor="#E4E4E7"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+        </FrameLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Bottom Index indicator (e.g. 12 / 14) -->
+    <TextView
+        android:id="@+id/tvDetailIndex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:text="@string/ui_12_14"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        android:background="@drawable/bg_button_rounded"
+        android:backgroundTint="#2E2E33"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="6dp" />
+
+</RelativeLayout>
