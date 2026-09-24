@@ -1,0 +1,75 @@
+# ===============================
+# OS & IDE Files
+# ===============================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+# ===============================
+# Sensitive Files & Credentials
+# ===============================
+*google-services.json
+*firebase-service-account*.json
+*.keystore
+*.jks
+local.properties
+.env
+.env.*
+!*.env.example
+
+# ===============================
+# Android & Gradle
+# ===============================
+.gradle/
+build/
+**/build/
+.navigation/
+captures/
+*.apk
+*.aab
+.cxx/
+
+# ===============================
+# Java & Spring Boot / Maven
+# ===============================
+target/
+**/target/
+*.class
+*.jar
+*.war
+*.log
+logs/
+**/logs/
+uploads/
+**/uploads/
+
+# ===============================
+# Python & Machine Learning
+# ===============================
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Model weights (Large binaries)
+*.pt
+*.pth
+*.h5
+*.tflite
+*.weights
