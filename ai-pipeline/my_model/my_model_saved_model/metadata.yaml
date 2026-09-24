@@ -1,0 +1,40 @@
+description: Ultralytics YOLO26s model trained on /content/yolo_dataset/data.yaml
+author: Ultralytics
+date: '2026-06-16T23:41:25.409709'
+version: 8.4.59
+license: AGPL-3.0 License (https://ultralytics.com/license)
+docs: https://docs.ultralytics.com
+stride: 32
+task: detect
+batch: 1
+imgsz:
+- 640
+- 640
+names:
+  0: bottled_water
+  1: bread
+  2: clothes
+  3: coffee_cup
+  4: cosmetic
+  5: electronic_item
+  6: fastfood
+  7: helmet
+  8: medicine
+  9: milk_tea
+  10: motorbike
+  11: noodle
+  12: rice_meal
+  13: shoes
+  14: snack
+  15: soft_drink
+  16: taxi_car
+  17: toy_game
+args:
+  data: null
+  batch: 1
+  fraction: 1.0
+  half: false
+  int8: false
+  nms: false
+channels: 3
+end2end: true
