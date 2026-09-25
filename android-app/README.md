@@ -324,7 +324,7 @@ com.example.personalfinance/
 ### 3. Cấu hình Model AI TFLite
 Đảm bảo file model đã được đặt trong thư mục assets:
 ```
-android-app/app/src/main/assets/yolov8.tflite
+android-app/app/src/main/assets/yolo_product.tflite
 ```
 
 ### 4. Build và Chạy ứng dụng
