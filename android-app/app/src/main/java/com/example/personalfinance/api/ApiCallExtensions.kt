@@ -1,4 +1,4 @@
-package com.example.personalfinance.repositories
+package com.example.personalfinance.api
 
 import com.example.personalfinance.models.ApiResponse
 import retrofit2.Call

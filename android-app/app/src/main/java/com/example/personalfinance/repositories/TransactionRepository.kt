@@ -1,6 +1,8 @@
 package com.example.personalfinance.repositories
 
+import com.example.personalfinance.api.ApiCallback
 import com.example.personalfinance.api.RetrofitClient
+import com.example.personalfinance.api.enqueueCallback
 import com.example.personalfinance.models.*
 
 class TransactionRepository {

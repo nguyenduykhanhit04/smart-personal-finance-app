@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.personalfinance.models.Budget
 import com.example.personalfinance.models.Category
+import com.example.personalfinance.api.ApiCallback
 import com.example.personalfinance.repositories.AccountRepository
-import com.example.personalfinance.repositories.ApiCallback
 import com.example.personalfinance.repositories.BudgetRepository
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger

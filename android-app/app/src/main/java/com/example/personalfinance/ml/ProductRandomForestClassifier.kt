@@ -1,7 +1,7 @@
 package com.example.personalfinance.ml
 
 import android.util.Log
-import com.example.personalfinance.yolo.YoloDetector
+import com.example.personalfinance.ml.yolo.YoloDetector
 import java.util.Arrays
 
 class ProductRandomForestClassifier {

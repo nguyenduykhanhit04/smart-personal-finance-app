@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.personalfinance.models.ReportDTO
 import com.example.personalfinance.models.Transaction
-import com.example.personalfinance.repositories.ApiCallback
+import com.example.personalfinance.api.ApiCallback
 import com.example.personalfinance.repositories.TransactionRepository
 import com.example.personalfinance.utils.DateUtils
 import java.util.Calendar

@@ -1,5 +1,6 @@
 package com.example.personalfinance.repositories
 
+import com.example.personalfinance.api.ApiCallback
 import com.example.personalfinance.api.RetrofitClient
 import com.example.personalfinance.models.ApiResponse
 import com.example.personalfinance.models.LoginRequest

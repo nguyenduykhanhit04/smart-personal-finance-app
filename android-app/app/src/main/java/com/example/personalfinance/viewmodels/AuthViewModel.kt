@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.personalfinance.firebase.FirebaseAuthHelper
 import com.example.personalfinance.models.LoginRequest
 import com.example.personalfinance.models.User
-import com.example.personalfinance.repositories.ApiCallback
+import com.example.personalfinance.api.ApiCallback
 import com.example.personalfinance.repositories.AuthRepository
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseUser

@@ -37,8 +37,8 @@ import com.example.personalfinance.models.ProductClassificationRequest
 import com.example.personalfinance.models.User
 import com.example.personalfinance.utils.DateUtils
 import com.example.personalfinance.utils.SharedPrefManager
-import com.example.personalfinance.yolo.BoundingBoxOverlay
-import com.example.personalfinance.yolo.YoloDetector
+import com.example.personalfinance.ml.yolo.BoundingBoxOverlay
+import com.example.personalfinance.ml.yolo.YoloDetector
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

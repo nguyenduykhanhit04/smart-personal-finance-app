@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.personalfinance.models.*
+import com.example.personalfinance.api.ApiCallback
 import com.example.personalfinance.repositories.AccountRepository
-import com.example.personalfinance.repositories.ApiCallback
 import com.example.personalfinance.repositories.TransactionRepository
 
 class TransactionViewModel : ViewModel() {
