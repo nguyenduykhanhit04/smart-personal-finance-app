@@ -16,7 +16,7 @@ import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.DialogFragment
 import com.example.personalfinance.R
 import com.example.personalfinance.api.RetrofitClient
-import com.example.personalfinance.models.Transaction
+import com.example.personalfinance.models.domain.Transaction
 import com.example.personalfinance.utils.CurrencyFormatter
 import com.example.personalfinance.utils.DateUtils
 import java.io.ByteArrayInputStream

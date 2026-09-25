@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.personalfinance.R
 import com.example.personalfinance.adapters.CategoryStatsAdapter
 import com.example.personalfinance.databinding.FragmentTransactionBinding
-import com.example.personalfinance.models.ReportDTO
-import com.example.personalfinance.models.User
+import com.example.personalfinance.models.dto.ReportDTO
+import com.example.personalfinance.models.domain.User
 import com.example.personalfinance.repositories.TransactionRepository
 import com.example.personalfinance.utils.Constants
 import com.example.personalfinance.utils.CurrencyFormatter

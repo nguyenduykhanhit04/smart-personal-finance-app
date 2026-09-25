@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personalfinance.R
 import com.example.personalfinance.databinding.ItemReportCategoryBinding
-import com.example.personalfinance.models.ReportDTO
+import com.example.personalfinance.models.dto.ReportDTO
 import com.example.personalfinance.utils.CurrencyFormatter
 import java.util.Locale
 import kotlin.math.abs

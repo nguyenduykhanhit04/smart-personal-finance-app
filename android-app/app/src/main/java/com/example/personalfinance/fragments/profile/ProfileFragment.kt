@@ -26,8 +26,8 @@ import com.example.personalfinance.R
 import com.example.personalfinance.activities.LoginActivity
 import com.example.personalfinance.api.RetrofitClient
 import com.example.personalfinance.databinding.FragmentProfileBinding
-import com.example.personalfinance.models.ApiResponse
-import com.example.personalfinance.models.User
+import com.example.personalfinance.models.dto.ApiResponse
+import com.example.personalfinance.models.domain.User
 import com.example.personalfinance.utils.CurrencyFormatter
 import com.example.personalfinance.utils.SharedPrefManager
 import com.example.personalfinance.viewmodels.HomeViewModel

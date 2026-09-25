@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personalfinance.R
 import com.example.personalfinance.databinding.ItemHorizontalWalletBinding
-import com.example.personalfinance.models.Account
+import com.example.personalfinance.models.domain.Account
 import com.example.personalfinance.utils.CurrencyFormatter
 import java.util.Locale
 

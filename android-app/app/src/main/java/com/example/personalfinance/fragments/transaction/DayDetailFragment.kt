@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.personalfinance.R
 import com.example.personalfinance.adapters.DayTransactionsAdapter
 import com.example.personalfinance.databinding.FragmentDayDetailBinding
-import com.example.personalfinance.models.Transaction
-import com.example.personalfinance.models.User
+import com.example.personalfinance.models.domain.Transaction
+import com.example.personalfinance.models.domain.User
 import com.example.personalfinance.repositories.TransactionRepository
 import com.example.personalfinance.utils.CurrencyFormatter
 import com.example.personalfinance.utils.SharedPrefManager

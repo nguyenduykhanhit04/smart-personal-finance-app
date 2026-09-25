@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personalfinance.R
 import com.example.personalfinance.databinding.ItemTransactionBinding
-import com.example.personalfinance.models.Transaction
+import com.example.personalfinance.models.domain.Transaction
 import com.example.personalfinance.utils.Constants
 import com.example.personalfinance.utils.CurrencyFormatter
 import com.example.personalfinance.utils.DateUtils

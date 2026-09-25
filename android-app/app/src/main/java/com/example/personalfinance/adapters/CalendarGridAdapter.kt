@@ -18,8 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.personalfinance.R
 import com.example.personalfinance.api.RetrofitClient
 import com.example.personalfinance.databinding.ItemCalendarDayBinding
-import com.example.personalfinance.models.CalendarDay
-import com.example.personalfinance.models.Transaction
+import com.example.personalfinance.models.domain.CalendarDay
+import com.example.personalfinance.models.domain.Transaction
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.RelativeCornerSize
 import java.io.ByteArrayInputStream

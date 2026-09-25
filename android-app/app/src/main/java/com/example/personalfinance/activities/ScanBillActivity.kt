@@ -26,10 +26,10 @@ import com.example.personalfinance.R
 import com.example.personalfinance.api.RetrofitClient
 import com.example.personalfinance.databinding.ActivityScanBillBinding
 import com.example.personalfinance.fragments.transaction.AddTransactionFragment
-import com.example.personalfinance.models.AiScanResult
-import com.example.personalfinance.models.ApiResponse
-import com.example.personalfinance.models.OcrRequest
-import com.example.personalfinance.models.User
+import com.example.personalfinance.models.dto.AiScanResult
+import com.example.personalfinance.models.dto.ApiResponse
+import com.example.personalfinance.models.dto.OcrRequest
+import com.example.personalfinance.models.domain.User
 import com.example.personalfinance.utils.DateUtils
 import com.example.personalfinance.utils.SharedPrefManager
 import com.google.gson.Gson

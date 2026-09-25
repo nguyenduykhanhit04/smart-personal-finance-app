@@ -20,8 +20,8 @@ import com.example.personalfinance.R
 import com.example.personalfinance.databinding.FragmentCategoryLimitBinding
 import com.example.personalfinance.databinding.ItemCategoryLimitBinding
 import com.example.personalfinance.fragments.budget.AddBudgetFragment
-import com.example.personalfinance.models.Budget
-import com.example.personalfinance.models.User
+import com.example.personalfinance.models.domain.Budget
+import com.example.personalfinance.models.domain.User
 import com.example.personalfinance.utils.CurrencyFormatter
 import com.example.personalfinance.utils.DateUtils
 import com.example.personalfinance.utils.SharedPrefManager

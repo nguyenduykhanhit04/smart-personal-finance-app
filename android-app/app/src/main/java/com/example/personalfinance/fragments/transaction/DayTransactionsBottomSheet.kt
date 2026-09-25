@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personalfinance.R
 import com.example.personalfinance.api.RetrofitClient
-import com.example.personalfinance.models.Transaction
+import com.example.personalfinance.models.domain.Transaction
 import com.example.personalfinance.utils.CurrencyFormatter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.io.ByteArrayInputStream

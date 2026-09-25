@@ -3,8 +3,8 @@ package com.example.personalfinance.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.personalfinance.models.ReportDTO
-import com.example.personalfinance.models.Transaction
+import com.example.personalfinance.models.dto.ReportDTO
+import com.example.personalfinance.models.domain.Transaction
 import com.example.personalfinance.api.ApiCallback
 import com.example.personalfinance.repositories.TransactionRepository
 import com.example.personalfinance.utils.DateUtils

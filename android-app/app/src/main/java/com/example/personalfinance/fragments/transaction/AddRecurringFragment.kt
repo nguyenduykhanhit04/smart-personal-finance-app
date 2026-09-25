@@ -13,11 +13,11 @@ import androidx.core.content.ContextCompat
 import com.example.personalfinance.R
 import com.example.personalfinance.api.RetrofitClient
 import com.example.personalfinance.databinding.FragmentAddRecurringBinding
-import com.example.personalfinance.models.Account
-import com.example.personalfinance.models.ApiResponse
-import com.example.personalfinance.models.Category
-import com.example.personalfinance.models.RecurringTransaction
-import com.example.personalfinance.models.User
+import com.example.personalfinance.models.domain.Account
+import com.example.personalfinance.models.dto.ApiResponse
+import com.example.personalfinance.models.domain.Category
+import com.example.personalfinance.models.domain.RecurringTransaction
+import com.example.personalfinance.models.domain.User
 import com.example.personalfinance.utils.Constants
 import com.example.personalfinance.utils.DateUtils
 import com.example.personalfinance.utils.SharedPrefManager

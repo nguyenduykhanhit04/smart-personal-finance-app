@@ -28,11 +28,11 @@ import com.example.personalfinance.fragments.profile.ProfileFragment
 import com.example.personalfinance.fragments.transaction.AddTransactionFragment
 import com.example.personalfinance.fragments.transaction.DayDetailFragment
 import com.example.personalfinance.fragments.transaction.DayTransactionsBottomSheet
-import com.example.personalfinance.models.Account
-import com.example.personalfinance.models.Budget
-import com.example.personalfinance.models.CalendarDay
-import com.example.personalfinance.models.Transaction
-import com.example.personalfinance.models.User
+import com.example.personalfinance.models.domain.Account
+import com.example.personalfinance.models.domain.Budget
+import com.example.personalfinance.models.domain.CalendarDay
+import com.example.personalfinance.models.domain.Transaction
+import com.example.personalfinance.models.domain.User
 import com.example.personalfinance.utils.CurrencyFormatter
 import com.example.personalfinance.utils.DateUtils
 import com.example.personalfinance.utils.SharedPrefManager

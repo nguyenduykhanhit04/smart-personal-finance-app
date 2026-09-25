@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.personalfinance.firebase.FirebaseAuthHelper
-import com.example.personalfinance.models.LoginRequest
-import com.example.personalfinance.models.User
+import com.example.personalfinance.models.dto.LoginRequest
+import com.example.personalfinance.models.domain.User
 import com.example.personalfinance.api.ApiCallback
 import com.example.personalfinance.repositories.AuthRepository
 import com.google.firebase.FirebaseNetworkException

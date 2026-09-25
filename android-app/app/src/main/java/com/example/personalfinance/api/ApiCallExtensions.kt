@@ -1,6 +1,6 @@
 package com.example.personalfinance.api
 
-import com.example.personalfinance.models.ApiResponse
+import com.example.personalfinance.models.dto.ApiResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

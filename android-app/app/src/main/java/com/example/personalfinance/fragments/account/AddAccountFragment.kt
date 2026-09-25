@@ -9,8 +9,8 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.personalfinance.R
 import com.example.personalfinance.databinding.FragmentAddAccountBinding
-import com.example.personalfinance.models.Account
-import com.example.personalfinance.models.User
+import com.example.personalfinance.models.domain.Account
+import com.example.personalfinance.models.domain.User
 import com.example.personalfinance.utils.SharedPrefManager
 import com.example.personalfinance.viewmodels.AccountViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

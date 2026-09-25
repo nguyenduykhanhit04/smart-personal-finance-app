@@ -18,9 +18,9 @@ import com.example.personalfinance.api.RetrofitClient
 import com.example.personalfinance.databinding.FragmentRecurringListBinding
 import com.example.personalfinance.databinding.ItemRecurringTransactionBinding
 import com.example.personalfinance.fragments.transaction.AddRecurringFragment
-import com.example.personalfinance.models.ApiResponse
-import com.example.personalfinance.models.RecurringTransaction
-import com.example.personalfinance.models.User
+import com.example.personalfinance.models.dto.ApiResponse
+import com.example.personalfinance.models.domain.RecurringTransaction
+import com.example.personalfinance.models.domain.User
 import com.example.personalfinance.utils.Constants
 import com.example.personalfinance.utils.CurrencyFormatter
 import com.example.personalfinance.utils.SharedPrefManager

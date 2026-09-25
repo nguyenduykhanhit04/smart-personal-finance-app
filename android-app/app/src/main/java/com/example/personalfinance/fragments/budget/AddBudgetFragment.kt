@@ -14,9 +14,9 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.example.personalfinance.R
 import com.example.personalfinance.databinding.FragmentAddBudgetBinding
-import com.example.personalfinance.models.Budget
-import com.example.personalfinance.models.Category
-import com.example.personalfinance.models.User
+import com.example.personalfinance.models.domain.Budget
+import com.example.personalfinance.models.domain.Category
+import com.example.personalfinance.models.domain.User
 import com.example.personalfinance.utils.Constants
 import com.example.personalfinance.utils.DateUtils
 import com.example.personalfinance.utils.SharedPrefManager

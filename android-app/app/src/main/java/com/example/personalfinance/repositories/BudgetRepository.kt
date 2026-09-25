@@ -3,7 +3,7 @@ package com.example.personalfinance.repositories
 import com.example.personalfinance.api.ApiCallback
 import com.example.personalfinance.api.RetrofitClient
 import com.example.personalfinance.api.enqueueCallback
-import com.example.personalfinance.models.Budget
+import com.example.personalfinance.models.domain.Budget
 
 class BudgetRepository {
 
