@@ -333,8 +333,3 @@ android-app/app/src/main/assets/yolov8.tflite
 3. Kiểm tra Base URL trong file `RetrofitClient.kt` trỏ tới địa chỉ server backend đang chạy (ngrok hoặc IP mạng LAN).
 4. Nhấn **Run (Shift + F10)** để cài đặt và chạy ứng dụng trên thiết bị / máy ảo.
 
----
-
-## 👥 Nhóm phát triển
-- **Đồ án**: Khoa học Máy tính & Công nghệ Phần mềm - Nhóm 3
-- **Đề tài**: Ứng dụng Quản lý Tài chính Cá nhân Thông minh (Smart Personal Finance)
