@@ -5,7 +5,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitClient {
+object ApiClient {
 
     private const val DEFAULT_BASE_URL = "https://unwinsome-vapoury-eustolia.ngrok-free.dev"
     private const val HTTP_SCHEME = "http://"
@@ -35,6 +35,7 @@ object RetrofitClient {
                 clean = clean.removePrefix(HTTPS_SCHEME)
             }
             clean.startsWith(HTTP_SCHEME) -> {
+                scheme = HTTP_SCHEME
                 clean = clean.removePrefix(HTTP_SCHEME)
             }
         }
@@ -58,7 +59,7 @@ object RetrofitClient {
                 level = HttpLoggingInterceptor.Level.BODY
             }
             val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(TokenInterceptor())
+                .addInterceptor(AuthInterceptor())
                 .addInterceptor(logging)
                 .build()
 
@@ -71,5 +72,11 @@ object RetrofitClient {
         }
     }
 
+    val client: Retrofit
+        get() = getClient()
+
     fun getApiService(): ApiService = getClient().create(ApiService::class.java)
+
+    val apiService: ApiService
+        get() = getApiService()
 }

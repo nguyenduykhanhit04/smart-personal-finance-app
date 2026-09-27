@@ -16,7 +16,7 @@ import android.view.ViewGroup
 import androidx.exifinterface.media.ExifInterface
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personalfinance.R
-import com.example.personalfinance.api.RetrofitClient
+import com.example.personalfinance.api.ApiClient
 import com.example.personalfinance.databinding.ItemCalendarDayBinding
 import com.example.personalfinance.models.domain.CalendarDay
 import com.example.personalfinance.models.domain.Transaction
@@ -93,7 +93,7 @@ class CalendarGridAdapter(
     private fun loadImage(relativeUrl: String?, imageView: ShapeableImageView) {
         if (relativeUrl.isNullOrBlank()) return
 
-        val baseUrl = RetrofitClient.client.baseUrl().toString()
+        val baseUrl = ApiClient.client.baseUrl().toString()
         val path = if (relativeUrl.startsWith("/")) relativeUrl.substring(1) else relativeUrl
         val fullUrl = baseUrl + path
 

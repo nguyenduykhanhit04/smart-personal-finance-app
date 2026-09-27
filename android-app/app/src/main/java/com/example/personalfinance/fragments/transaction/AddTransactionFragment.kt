@@ -29,7 +29,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.personalfinance.R
 import com.example.personalfinance.activities.MainActivity
 import com.example.personalfinance.activities.ScanBillActivity
-import com.example.personalfinance.api.RetrofitClient
+import com.example.personalfinance.api.ApiClient
 import com.example.personalfinance.databinding.FragmentAddTransactionBinding
 import com.example.personalfinance.models.domain.Account
 import com.example.personalfinance.models.dto.ApiResponse
@@ -214,7 +214,7 @@ class AddTransactionFragment : DialogFragment() {
                 binding.btnSave.setText(R.string.label_update_transaction)
             }
             if (!existingImageUrl.isNullOrEmpty()) {
-                val baseUrl = RetrofitClient.getClient().baseUrl().toString()
+                val baseUrl = ApiClient.getClient().baseUrl().toString()
                 val path = if (existingImageUrl!!.startsWith("/")) existingImageUrl!!.substring(1) else existingImageUrl!!
                 loadNetworkImage(baseUrl + path)
             }
@@ -723,7 +723,7 @@ class AddTransactionFragment : DialogFragment() {
             binding.btnSave.isEnabled = false
             Toast.makeText(requireContext(), "Đang tải ảnh lên...", Toast.LENGTH_SHORT).show()
 
-            RetrofitClient.getApiService().uploadTransactionImage(txId, body)
+            ApiClient.getApiService().uploadTransactionImage(txId, body)
                 .enqueue(object : Callback<ApiResponse<Void>> {
                     override fun onResponse(call: Call<ApiResponse<Void>>, response: Response<ApiResponse<Void>>) {
                         val apiResponse = response.body()

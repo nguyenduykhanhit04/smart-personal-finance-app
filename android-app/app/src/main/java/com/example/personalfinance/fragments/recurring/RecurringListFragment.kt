@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personalfinance.R
-import com.example.personalfinance.api.RetrofitClient
+import com.example.personalfinance.api.ApiClient
 import com.example.personalfinance.databinding.FragmentRecurringListBinding
 import com.example.personalfinance.databinding.ItemRecurringTransactionBinding
 import com.example.personalfinance.fragments.transaction.AddRecurringFragment
@@ -83,7 +83,7 @@ class RecurringListFragment : Fragment() {
 
     private fun loadRecurringTransactions() {
         val user = currentUser ?: return
-        RetrofitClient.apiService.getRecurringTransactions(user.userId)
+        ApiClient.apiService.getRecurringTransactions(user.userId)
             .enqueue(object : Callback<ApiResponse<List<RecurringTransaction>>> {
                 override fun onResponse(
                     call: Call<ApiResponse<List<RecurringTransaction>>>,
@@ -217,7 +217,7 @@ class RecurringListFragment : Fragment() {
 
     private fun updateRecurringStatus(item: RecurringTransaction) {
         val id = item.recurringId ?: return
-        RetrofitClient.apiService.updateRecurringTransaction(id, item)
+        ApiClient.apiService.updateRecurringTransaction(id, item)
             .enqueue(object : Callback<ApiResponse<RecurringTransaction>> {
                 override fun onResponse(call: Call<ApiResponse<RecurringTransaction>>, response: Response<ApiResponse<RecurringTransaction>>) {
                     val isActive = item.isActive ?: false
@@ -233,7 +233,7 @@ class RecurringListFragment : Fragment() {
 
     private fun deleteRecurringTransaction(item: RecurringTransaction) {
         val id = item.recurringId ?: return
-        RetrofitClient.apiService.deleteRecurringTransaction(id)
+        ApiClient.apiService.deleteRecurringTransaction(id)
             .enqueue(object : Callback<ApiResponse<Void>> {
                 override fun onResponse(call: Call<ApiResponse<Void>>, response: Response<ApiResponse<Void>>) {
                     Toast.makeText(requireContext(), "Đã xóa khoản định kỳ!", Toast.LENGTH_SHORT).show()

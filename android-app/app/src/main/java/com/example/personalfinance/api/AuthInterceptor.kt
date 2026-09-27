@@ -6,7 +6,7 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
 
-class TokenInterceptor : Interceptor {
+class AuthInterceptor : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         // Add ngrok bypass header to prevent browser warning on dynamic/API hosts

@@ -114,7 +114,7 @@ smart-personal-finance-app/
 ### 3. Mobile App (Android)
 1. Mở thư mục `android-app/` bằng **Android Studio** (Koala / Ladybug hoặc mới hơn).
 2. Đặt tệp cấu hình `google-services.json` vào thư mục `android-app/app/`.
-3. Kiểm tra địa chỉ API Backend tại `com.example.personalfinance.api.RetrofitClient`:
+3. Kiểm tra địa chỉ API Backend tại `com.example.personalfinance.api.ApiClient`:
    - Đối với máy ảo Android Emulator: dùng `http://10.0.2.2:8080/`
    - Đối với thiết bị thật: dùng địa chỉ IP nội bộ của máy chủ (ví dụ `http://192.168.1.x:8080/`) hoặc Ngrok domain.
 4. Nhấn **Sync Project with Gradle Files** và chạy ứng dụng (`Run 'app'`).

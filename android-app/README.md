@@ -46,7 +46,7 @@
 - **Mạng (Networking)**:
   - Retrofit 2.9.0 & OkHttp 4.12.0
   - Gson Converter (Serialize/Deserialize JSON)
-  - Custom Interceptors (`TokenInterceptor` đính kèm Firebase JWT, dynamic base URL)
+  - Custom Interceptors (`AuthInterceptor` đính kèm Firebase JWT, dynamic base URL)
 - **Bảo mật & Xác thực**:
   - Firebase Authentication (Email, Google Sign-In, Facebook Login)
   - Encrypted / Custom `SharedPrefManager`
@@ -116,8 +116,8 @@ com.example.personalfinance/
 │   ├── ApiCallback.kt           # Interface generic xử lý callback onSuccess / onError
 │   ├── ApiCallExtensions.kt     # Extension functions hỗ trợ gọi Retrofit Call an toàn
 │   ├── ApiService.kt            # Khai báo toàn bộ các REST endpoints Backend
-│   ├── RetrofitClient.kt        # Khởi tạo singleton Retrofit, cấu hình Timeout, Converter
-│   └── TokenInterceptor.kt      # Tự động lấy Firebase ID Token và gán vào Header: Bearer <token>
+│   ├── ApiClient.kt             # Khởi tạo singleton Retrofit / API client, cấu hình Timeout, Converter
+│   └── AuthInterceptor.kt       # Tự động lấy Firebase ID Token và gán vào Header: Bearer <token>
 │
 ├── firebase/                    # Tầng tích hợp dịch vụ Firebase
 │   ├── FirebaseAuthCallback.kt  # Interface nhận kết quả đăng nhập / đăng ký Firebase
@@ -207,7 +207,7 @@ com.example.personalfinance/
            (Firebase Auth SDK)                                   (Firebase ID Token)
                    │                                                     │
                    ▼                                                     ▼
-        Đăng nhập thành công                                    [TokenInterceptor]
+        Đăng nhập thành công                                    [AuthInterceptor]
                    │                                                     │
                    └──────────────────────────┬──────────────────────────┘
                                               ▼
@@ -280,8 +280,8 @@ com.example.personalfinance/
 
 ## 🌐 Mạng & Giao tiếp Backend (Network Layer)
 
-- **Base URL cấu hình động**: Được quản lý tập trung tại `RetrofitClient.kt`.
-- **Xác thực tự động**: `TokenInterceptor` tự động lấy Firebase JWT Token mới nhất và thêm vào header:
+- **Base URL cấu hình động**: Được quản lý tập trung tại `ApiClient.kt`.
+- **Xác thực tự động**: `AuthInterceptor` tự động lấy Firebase JWT Token mới nhất và thêm vào header:
   ```http
   Authorization: Bearer <FIREBASE_ID_TOKEN>
   ```
@@ -330,6 +330,6 @@ android-app/app/src/main/assets/yolo_product.tflite
 ### 4. Build và Chạy ứng dụng
 1. Mở thư mục `android-app` bằng Android Studio.
 2. Chờ Android Studio đồng bộ Gradle (`Sync Project with Gradle Files`).
-3. Kiểm tra Base URL trong file `RetrofitClient.kt` trỏ tới địa chỉ server backend đang chạy (ngrok hoặc IP mạng LAN).
+3. Kiểm tra Base URL trong file `ApiClient.kt` trỏ tới địa chỉ server backend đang chạy (ngrok hoặc IP mạng LAN).
 4. Nhấn **Run (Shift + F10)** để cài đặt và chạy ứng dụng trên thiết bị / máy ảo.
 

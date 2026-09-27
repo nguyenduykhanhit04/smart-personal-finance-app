@@ -12,7 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.personalfinance.R
-import com.example.personalfinance.api.RetrofitClient
+import com.example.personalfinance.api.ApiClient
 import com.example.personalfinance.databinding.ActivityLoginBinding
 import com.example.personalfinance.firebase.FirebaseAuthCallback
 import com.example.personalfinance.firebase.FirebaseAuthHelper
@@ -40,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Load saved server IP and update base URL
         val savedIp = SharedPrefManager.getInstance(this).getServerIp()
-        RetrofitClient.updateBaseUrl(savedIp)
+        ApiClient.updateBaseUrl(savedIp)
 
         // Long click App Logo to change local Server IP
         binding.ivLogo.setOnLongClickListener {
@@ -143,7 +143,7 @@ class LoginActivity : AppCompatActivity() {
                 val newIp = input.text.toString().trim()
                 if (newIp.isNotEmpty()) {
                     SharedPrefManager.getInstance(this).saveServerIp(newIp)
-                    RetrofitClient.updateBaseUrl(newIp)
+                    ApiClient.updateBaseUrl(newIp)
                     Toast.makeText(this, "Đã cập nhật IP Server thành: $newIp", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(this, "IP không được để trống!", Toast.LENGTH_SHORT).show()
