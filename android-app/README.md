@@ -1,6 +1,6 @@
 # 📱 Smart Personal Finance - Android Application
 
-Ứng dụng quản lý tài chính cá nhân thông minh (*Smart Personal Finance App*) trên nền tảng Android, xây dựng theo kiến trúc chuẩn **MVVM (Model - View - ViewModel)** bằng ngôn ngữ **Kotlin**. Ứng dụng tích hợp công nghệ AI/ML tiên tiến (Google ML Kit, YOLOv8 TFLite, Random Forest) để tự động hóa việc nhận diện hóa đơn và phân loại chi tiêu sản phẩm.
+Ứng dụng quản lý tài chính cá nhân thông minh (*Smart Personal Finance App*) trên nền tảng Android, xây dựng theo kiến trúc chuẩn **MVVM (Model - View - ViewModel)** bằng ngôn ngữ **Kotlin**. Ứng dụng tích hợp công nghệ AI/ML tiên tiến (Google ML Kit Text Recognition, YOLOv8 TFLite, Random Forest Classifier) để tự động hóa việc nhận diện hóa đơn và phân loại chi tiêu sản phẩm.
 
 ---
 
@@ -8,11 +8,12 @@
 1. [Tính năng chính](#-tính-năng-chính)
 2. [Công nghệ & Thư viện sử dụng](#-công-nghệ--thư-viện-sử-dụng)
 3. [Kiến trúc hệ thống](#-kiến-trúc-hệ-thống)
-4. [Cấu trúc thư mục & giải thích chi tiết](#-cấu-trúc-thư-mục--giải-thích-chi-tiết)
-5. [Luồng hoạt động chính (Data Flow)](#-luồng-hoạt-động-chính-data-flow)
-6. [Tích hợp Trí tuệ Nhân tạo (ML / AI)](#-tích-hợp-trí-tuệ-nhân-tạo-ml--ai)
-7. [Mạng & Giao tiếp Backend (Network Layer)](#-mạng--giao-tiếp-backend-network-layer)
-8. [Hướng dẫn cài đặt & Chạy ứng dụng](#-hướng-dẫn-cài-đặt--chạy-ứng-dụng)
+4. [Cấu trúc thư mục & Giải thích chi tiết](#-cấu-trúc-thư-mục--giải-thích-chi-tiết)
+5. [Cấu trúc Tài nguyên Giao diện (res/)](#-cấu-trúc-tài-nguyên-giao-diện-res)
+6. [Luồng hoạt động chính (Data Flow)](#-luồng-hoạt-động-chính-data-flow)
+7. [Tích hợp Trí tuệ Nhân tạo (ML / AI)](#-tích-hợp-trí-tuệ-nhân-tạo-ml--ai)
+8. [Mạng & Giao tiếp Backend (Network Layer)](#-mạng--giao-tiếp-backend-network-layer)
+9. [Hướng dẫn cài đặt & Chạy ứng dụng](#-hướng-dẫn-cài-đặt--chạy-ứng-dụng)
 
 ---
 
@@ -21,12 +22,12 @@
 | Phân hệ | Tính năng chi tiết |
 | :--- | :--- |
 | **Xác thực (Auth)** | • Đăng nhập / Đăng ký qua Firebase Authentication (Email/Password)<br>• Hỗ trợ xác thực bằng tài khoản Google & Facebook<br>• Tự động đồng bộ tài khoản người dùng về Backend qua JWT Bearer Token |
-| **Giao dịch (Transactions)** | • Thêm, sửa, xóa, xem danh sách giao dịch thu/chi<br>• Lọc giao dịch theo ví tài khoản, danh mục, thời gian<br>• Phân loại thu nhập (INCOME) / chi phí (EXPENSE) |
-| **Giao dịch định kỳ (Recurring)** | • Thiết lập các khoản thu/chi tự động lặp lại theo chu kỳ (Hàng ngày, Hàng tuần, Hàng tháng, Hàng năm) |
+| **Giao dịch (Transactions)** | • Thêm, sửa, xóa, xem danh sách giao dịch thu/chi<br>• Lọc giao dịch theo ví tài khoản, danh mục, thời gian<br>• Phân loại thu nhập (INCOME) / chi phí (EXPENSE)<br>• Đính kèm và xem chi tiết ảnh chụp hóa đơn/giao dịch |
+| **Giao dịch định kỳ (Recurring)** | • Thiết lập các khoản thu/chi tự động lặp lại theo chu kỳ (Hàng ngày, Hàng tuần, Hàng tháng, Hàng năm)<br>• Bật/tắt trạng thái hoạt động của từng khoản định kỳ |
 | **Quản lý Tài khoản / Ví (Accounts)** | • Quản lý nhiều tài khoản/ví (Tiền mặt, Tài khoản ngân hàng, Thẻ tín dụng, Ví điện tử)<br>• Theo dõi số dư từng ví và tổng tài sản thời gian thực |
 | **Ngân sách (Budgets)** | • Thiết lập hạn mức chi tiêu cho từng danh mục theo tháng<br>• Cảnh báo trực quan khi chi tiêu vượt hoặc sắp chạm ngưỡng ngân sách |
 | **Danh mục (Categories)** | • Phân loại chi tiêu đa dạng (Ăn uống, Mua sắm, Di chuyển, Hóa đơn...) với icon và màu sắc trực quan |
-| **Báo cáo & Thống kê (Reports)** | • Biểu đồ tròn (PieChart) & Biểu đồ cột phân tích tỷ trọng chi tiêu (MPAndroidChart)<br>• Theo dõi biến động tài chính theo tuần/tháng/năm |
+| **Báo cáo & Thống kê (Reports)** | • Biểu đồ tròn (PieChart) phân tích tỷ trọng chi tiêu (MPAndroidChart)<br>• Thống kê chi tiết thu/chi theo ngày, tuần, tháng, danh mục |
 | **AI Quét hóa đơn (OCR Scan Bill)** | • Chụp ảnh hóa đơn qua CameraX<br>• Nhận diện văn bản offline bằng **Google ML Kit Text Recognition**<br>• Gửi text trích xuất lên Backend AI để phân loại và tự động điền form giao dịch |
 | **AI Quét sản phẩm (YOLO Scan)** | • Nhận diện vật thể thời gian thực qua CameraX sử dụng **YOLOv8 TFLite** (18 classes)<br>• Trích xuất vector 27 đặc trưng và phân loại sơ bộ qua **Random Forest Classifier**<br>• Gợi ý giá tiền, danh mục và cảnh báo chi tiêu cần thiết hay lãng phí |
 
@@ -46,15 +47,15 @@
 - **Mạng (Networking)**:
   - Retrofit 2.9.0 & OkHttp 4.12.0
   - Gson Converter (Serialize/Deserialize JSON)
-  - Custom Interceptors (`AuthInterceptor` đính kèm Firebase JWT, dynamic base URL)
+  - Custom Interceptors (`AuthInterceptor` đính kèm Firebase JWT, dynamic base URL bypass ngrok)
 - **Bảo mật & Xác thực**:
   - Firebase Authentication (Email, Google Sign-In, Facebook Login)
-  - Encrypted / Custom `SharedPrefManager`
+  - `SharedPrefManager` quản lý cache người dùng & IP máy chủ
 - **Camera & Machine Learning (On-device)**:
   - CameraX (v1.3.x): Camera điều khiển linh hoạt, tương thích đa thiết bị
   - Google ML Kit Text Recognition: Nhận diện chữ tiếng Việt / Latin trên hóa đơn
-  - TensorFlow Lite (TFLite 2.14.0): Suy luận mô hình YOLOv8 trực tiếp trên thiết bị Android
-  - Model Random Forest tùy chỉnh (phân loại nhãn chi tiêu từ 27 feature vectors)
+  - TensorFlow Lite (TFLite 2.14.0): Suy luận mô hình YOLOv8 trực tiếp trên thiết bị Android (`yolo_product.tflite`)
+  - Random Forest Classifier tùy chỉnh (phân loại nhãn chi tiêu từ 27 feature vectors)
 
 ---
 
@@ -83,8 +84,8 @@
               ▼                            ▼
 ┌───────────────────────────┐ ┌──────────────────────────┐
 │       NETWORK / API       │ │      LOCAL STORAGE       │
-│ Retrofit2 + OkHttp Client │ │    SharedPrefManager     │
-│   (Firebase Token Auth)   │ │  (SharedPreferences/Gson)│
+│  ApiClient + OkHttpClient │ │    SharedPrefManager     │
+│   (AuthInterceptor JWT)   │ │  (SharedPreferences/Gson)│
 └───────────────────────────┘ └──────────────────────────┘
 ```
 
@@ -92,104 +93,137 @@
 
 ## 📂 Cấu trúc thư mục & Giải thích chi tiết
 
-Mã nguồn tại thư mục: `app/src/main/java/com/example/personalfinance/`
+Mã nguồn Kotlin tại thư mục: `app/src/main/java/com/example/personalfinance/`
 
 ```
 com.example.personalfinance/
 ├── activities/                  # Các màn hình Activity chính và luồng Camera
 │   ├── BaseActivity.kt          # Lớp cơ sở cho Activity (hỗ trợ cấu hình chung)
-│   ├── LoginActivity.kt         # Màn hình đăng nhập (Firebase / Google / Facebook)
+│   ├── LoginActivity.kt         # Màn hình đăng nhập (Firebase / Google / Facebook, đổi IP server)
 │   ├── MainActivity.kt          # Màn hình chính (chứa BottomNavigation & Container Fragment)
 │   ├── RegisterActivity.kt      # Màn hình đăng ký tài khoản mới
-│   ├── ScanBillActivity.kt      # Màn hình CameraX quét hóa đơn qua OCR
-│   ├── ScanProductActivity.kt   # Màn hình CameraX quét vật thể bằng YOLOv8
+│   ├── ScanBillActivity.kt      # Màn hình CameraX quét hóa đơn qua Google ML Kit OCR
+│   ├── ScanProductActivity.kt   # Màn hình CameraX quét vật thể bằng YOLOv8 TFLite
 │   └── SplashActivity.kt        # Màn hình khởi động, kiểm tra session đăng nhập
 │
 ├── adapters/                    # Bộ chuyển đổi dữ liệu hiển thị lên RecyclerView
-│   ├── AccountAdapter.kt        # Hiển thị danh sách ví / tài khoản ngân hàng
-│   ├── BudgetAdapter.kt         # Hiển thị danh sách các mục ngân sách & tiến độ chi tiêu
-│   ├── CategoryAdapter.kt       # Hiển thị danh mục chi tiêu (kèm icon, màu sắc)
-│   ├── RecurringAdapter.kt      # Hiển thị danh sách các khoản thu/chi định kỳ
-│   └── TransactionAdapter.kt    # Hiển thị lịch sử các giao dịch thu/chi
+│   ├── CalendarGridAdapter.kt   # Hiển thị lịch dạng lưới theo ngày và chỉ số chi tiêu
+│   ├── CategoryStatsAdapter.kt  # Hiển thị thống kê danh mục chi tiêu kèm thanh tỷ lệ
+│   ├── DayTransactionsAdapter.kt# Danh sách chi tiết giao dịch trong một ngày cụ thể
+│   ├── HorizontalAccountAdapter.kt # Hiển thị danh sách thẻ ví vuốt ngang
+│   └── TransactionAdapter.kt    # Hiển thị lịch sử các giao dịch thu/chi chính
 │
-├── api/                         # Tầng kết nối mạng (REST API Client)
-│   ├── ApiCallback.kt           # Interface generic xử lý callback onSuccess / onError
-│   ├── ApiCallExtensions.kt     # Extension functions hỗ trợ gọi Retrofit Call an toàn
-│   ├── ApiService.kt            # Khai báo toàn bộ các REST endpoints Backend
-│   ├── ApiClient.kt             # Khởi tạo singleton Retrofit / API client, cấu hình Timeout, Converter
-│   └── AuthInterceptor.kt       # Tự động lấy Firebase ID Token và gán vào Header: Bearer <token>
+├── api/                         # Tầng kết nối mạng chuẩn hóa (REST API Client)
+│   ├── ApiCallExtensions.kt     # Extension functions hỗ trợ gọi Retrofit Call an toàn & ApiCallback
+│   ├── ApiClient.kt             # Singleton Retrofit Client, cấu hình Timeout, Converter, dynamic Base URL
+│   ├── ApiService.kt            # Interface khai báo toàn bộ các REST endpoints Backend
+│   └── AuthInterceptor.kt       # OkHttp Interceptor tự động lấy Firebase JWT Token và gán Bearer Header
 │
 ├── firebase/                    # Tầng tích hợp dịch vụ Firebase
 │   ├── FirebaseAuthCallback.kt  # Interface nhận kết quả đăng nhập / đăng ký Firebase
-│   └── FirebaseAuthManager.kt   # Singleton quản lý đăng nhập Email, Google, Facebook & lấy Token
+│   └── FirebaseAuthHelper.kt    # Quản lý đăng nhập Email, Google, Facebook & lấy ID Token
 │
 ├── fragments/                   # Các màn hình con (UI Fragments)
 │   ├── account/                 # Phân hệ quản lý Tài khoản / Ví
-│   │   ├── AccountFragment.kt       # Danh sách tài khoản & tổng số dư
-│   │   └── AddAccountFragment.kt    # Form thêm/sửa tài khoản ví
+│   │   ├── AccountDetailsFragment.kt # Xem chi tiết và lịch sử giao dịch của một tài khoản ví
+│   │   └── AddAccountFragment.kt     # Form thêm/sửa tài khoản ví
 │   ├── budget/                  # Phân hệ Ngân sách
-│   │   ├── AddBudgetFragment.kt     # Form tạo ngân sách chi tiêu
-│   │   └── BudgetFragment.kt        # Xem danh sách và tiến độ các ngân sách
+│   │   └── AddBudgetFragment.kt      # Form tạo và thiết lập hạn mức ngân sách
 │   ├── category/                # Phân hệ Danh mục chi tiêu
-│   │   └── CategoryFragment.kt      # Quản lý danh mục (ăn uống, mua sắm...)
+│   │   └── CategoryLimitFragment.kt  # Quản lý hạn mức và danh mục chi tiêu
 │   ├── home/                    # Màn hình trang chủ & thống kê
-│   │   ├── HomeFragment.kt          # Tổng quan số dư, giao dịch gần đây, biểu đồ tròn
-│   │   └── ReportFragment.kt        # Báo cáo chi tiết thu/chi theo thời gian
+│   │   └── HomeFragment.kt           # Tổng quan số dư, giao dịch gần đây, biểu đồ tròn
 │   ├── profile/                 # Phân hệ người dùng cá nhân
-│   │   └── ProfileFragment.kt       # Thông tin cá nhân, cài đặt và đăng xuất
+│   │   └── ProfileFragment.kt        # Thông tin cá nhân, cập nhật avatar/tên, cài đặt và đăng xuất
 │   ├── recurring/               # Phân hệ Giao dịch định kỳ
-│   │   ├── AddRecurringFragment.kt  # Form tạo giao dịch tự động lặp lại
-│   │   └── RecurringFragment.kt     # Quản lý danh sách giao dịch định kỳ
+│   │   └── RecurringListFragment.kt  # Danh sách, bật/tắt và quản lý giao dịch lặp lại
 │   └── transaction/             # Phân hệ Giao dịch
-│       ├── AddTransactionFragment.kt # Form tạo/sửa giao dịch (hỗ trợ nhận dữ liệu từ AI Scanner)
-│       └── TransactionFragment.kt    # Danh sách lịch sử tất cả các giao dịch
+│       ├── AddRecurringFragment.kt   # BottomSheet thêm giao dịch định kỳ
+│       ├── AddTransactionFragment.kt # Form tạo/sửa giao dịch (nhận dữ liệu từ OCR / YOLO)
+│       ├── DayDetailFragment.kt      # Chi tiết thu/chi trong ngày
+│       ├── DayTransactionsBottomSheet.kt # Bảng trượt xem danh sách giao dịch ngày
+│       ├── TransactionFragment.kt    # Màn hình thống kê và báo cáo giao dịch tổng quan
+│       ├── TransactionListFragment.kt# Danh sách lịch sử tất cả các giao dịch
+│       └── TransactionPhotoDetailDialog.kt # Hộp thoại xem chi tiết ảnh hóa đơn đính kèm
 │
 ├── ml/                          # Tích hợp Machine Learning trên thiết bị
 │   ├── ProductRandomForestClassifier.kt # Trích xuất 27 features & phân loại Random Forest
-│   ├── TextRecognizerHelper.kt          # Xử lý ảnh CameraX với Google ML Kit OCR
+│   ├── ProductRandomForestModel.kt      # Cây quyết định (Decision Trees) nhúng cục bộ
 │   └── yolo/                            # Module nhận diện vật thể YOLOv8
-│       ├── BoundingBoxOverlay.kt        # View vẽ khung chữ nhật bao quanh vật thể thời gian thực
-│       └── YoloDetector.kt              # Nạp model TFLite, xử lý ảnh đầu vào 640x640 & NMS
+│       ├── BoundingBoxOverlay.kt        # Custom View vẽ khung chữ nhật bao quanh vật thể thời gian thực
+│       └── YoloDetector.kt              # Nạp model TFLite, tiền xử lý ảnh 640x640 & thuật toán NMS
 │
 ├── models/                      # Mô hình dữ liệu
-│   ├── domain/                  # Các đối tượng nghiệp vụ thuần (Entity / Business Data)
+│   ├── domain/                  # Các thực thể nghiệp vụ thuần (Business Entities)
 │   │   ├── Account.kt               # Thực thể Ví / Tài khoản
 │   │   ├── Budget.kt                # Thực thể Ngân sách
-│   │   ├── Category.kt              # Thực thể Danh mục
-│   │   ├── MonthlyReport.kt         # Dữ liệu báo cáo thống kê tháng
+│   │   ├── CalendarDay.kt           # Dữ liệu ngày trên lịch giao dịch
+│   │   ├── Category.kt              # Thực thể Danh mục thu/chi
 │   │   ├── RecurringTransaction.kt  # Thực thể Giao dịch định kỳ
 │   │   ├── Transaction.kt           # Thực thể Giao dịch thu/chi
 │   │   └── User.kt                  # Thông tin người dùng
 │   └── dto/                     # Data Transfer Objects (trao đổi dữ liệu với REST API)
-│       ├── ApiResponse.kt           # Wrapper chuẩn cho response từ server
-│       ├── AuthResponse.kt          # Response sau khi xác thực
-│       ├── BudgetProgress.kt        # DTO tiến độ hoàn thành ngân sách
-│       ├── CreateAccountRequest.kt  # DTO payload tạo ví mới
-│       ├── CreateBudgetRequest.kt   # DTO payload tạo ngân sách
-│       ├── CreateRecurringRequest.kt# DTO payload tạo giao dịch định kỳ
-│       ├── CreateTransactionRequest.kt # DTO payload tạo giao dịch
-│       ├── OcrClassifyRequest.kt    # DTO gửi văn bản OCR lên backend
-│       └── ProductClassifyRequest.kt# DTO gửi thông tin nhận diện sản phẩm lên backend
+│       ├── AiProductResult.kt       # Kết quả phân tích sản phẩm từ AI
+│       ├── AiScanResult.kt          # Kết quả trích xuất thông tin hóa đơn từ AI
+│       ├── ApiResponse.kt           # Generic wrapper phản hồi từ Backend (`success`, `data`, `message`)
+│       ├── LoginRequest.kt          # Payload đăng nhập Firebase Token
+│       ├── OcrRequest.kt            # Payload gửi văn bản OCR hóa đơn
+│       ├── ProductClassificationRequest.kt # Payload gửi danh sách vật thể YOLO
+│       ├── ProductFeedbackRequest.kt# Payload gửi phản hồi đánh giá sản phẩm
+│       ├── ReportDTO.kt             # DTO báo cáo thống kê thu chi theo kỳ
+│       └── ScanFeedbackRequest.kt   # Payload gửi phản hồi kết quả quét hóa đơn
 │
 ├── repositories/                # Tầng quản lý dữ liệu (Repository Layer)
-│   ├── AccountRepository.kt     # Tương tác API ví tài khoản
+│   ├── AccountRepository.kt     # Tương tác API ví tài khoản & danh mục
+│   ├── AuthRepository.kt        # Tương tác API xác thực và đồng bộ User
 │   ├── BudgetRepository.kt      # Tương tác API ngân sách
-│   ├── CategoryRepository.kt    # Tương tác API danh mục
-│   └── TransactionRepository.kt # Tương tác API giao dịch & báo cáo
+│   └── TransactionRepository.kt # Tương tác API giao dịch, báo cáo & gửi feedback AI
 │
 ├── utils/                       # Các hàm tiện ích
-│   ├── CurrencyFormatter.kt     # Định dạng tiền tệ (VND, phân tách hàng nghìn)
+│   ├── Constants.kt             # Các hằng số dùng chung trong ứng dụng
+│   ├── CurrencyFormatter.kt     # Định dạng tiền tệ VND (phân tách hàng nghìn)
 │   ├── DateUtils.kt             # Xử lý chuỗi ngày tháng (ISO 8601, format hiển thị)
-│   ├── NotificationHelper.kt    # Quản lý thông báo đẩy cục bộ
-│   └── SharedPrefManager.kt     # Lưu trữ Session, User Profile, Token qua SharedPreferences
+│   └── SharedPrefManager.kt     # Lưu trữ Session, User Profile, Server IP qua SharedPreferences
 │
 └── viewmodels/                  # Tầng ViewModel (State Management)
-    ├── AccountViewModel.kt      # Quản lý trạng thái và dữ liệu ví
+    ├── AccountViewModel.kt      # Quản lý trạng thái và danh sách ví tài khoản
+    ├── AuthViewModel.kt         # Quản lý trạng thái xác thực và đăng nhập
     ├── BudgetViewModel.kt       # Quản lý trạng thái và dữ liệu ngân sách
-    ├── CategoryViewModel.kt     # Quản lý trạng thái danh mục
     ├── HomeViewModel.kt         # Quản lý số liệu trang chủ và biểu đồ
-    └── TransactionViewModel.kt   # Quản lý lịch sử giao dịch và thêm/xóa/sửa
+    └── TransactionViewModel.kt  # Quản lý lịch sử giao dịch và thêm/xóa/sửa
 ```
+
+---
+
+## 🎨 Cấu trúc Tài nguyên Giao diện (`res/`)
+
+Thư mục tài nguyên tại `app/src/main/res/` được chuẩn hóa theo quy tắc tiền tố (**Prefix Naming Convention**) của Google Android, giúp các tệp cùng nhóm tự động gom cạnh nhau theo bảng chữ cái:
+
+```
+app/src/main/res/
+├── drawable/                    # 37 tệp: Icon vector, background shape bo góc, logo
+│   ├── bg_*                     # Background shapes, viền, gradient (bg_button_rounded.xml, bg_input_field.xml...)
+│   ├── ic_*                     # Icon vector (ic_home.xml, ic_scan.xml, ic_budget.xml, ic_add.xml...)
+│   └── ic_app_logo_glow.png     # Logo ứng dụng chính thức
+│
+├── layout/                      # 40 tệp: Giao diện XML phân loại theo quy chuẩn tiền tố
+│   ├── activity_*               # Giao diện màn hình chính (activity_main, activity_login...)
+│   ├── fragment_*               # Giao diện màn hình con (fragment_home, fragment_transaction...)
+│   ├── item_*                   # Thiết kế từng dòng danh sách RecyclerView (item_transaction, item_calendar_day...)
+│   ├── dialog_*                 # Hộp thoại pop-up (dialog_change_password, dialog_month_year_picker...)
+│   └── bottom_sheet_*           # Bảng trượt từ đáy màn hình (bottom_sheet_add_options, bottom_sheet_day_transactions...)
+│
+├── menu/                        # Menu điều hướng
+│   └── bottom_nav_menu.xml      # Định nghĩa 5 tab trên thanh điều hướng Bottom Navigation
+│
+└── values/                      # Định nghĩa giá trị hệ thống
+    ├── colors.xml               # Bảng màu chủ đạo, màu nền thẻ, màu trạng thái thu/chi
+    ├── strings.xml              # Chuỗi văn bản hiển thị toàn ứng dụng (hỗ trợ bản địa hóa)
+    └── themes.xml               # Thiết lập chủ đề Material 3 (NoActionBar)
+```
+
+> [!NOTE]
+> Các thư mục rỗng `mipmap-*` tự sinh ban đầu từ template Android Studio đã được dọn dẹp sạch sẽ do biểu tượng ứng dụng đã được cấu hình trực tiếp qua `@drawable/ic_app_logo_glow` trong `AndroidManifest.xml`.
 
 ---
 
@@ -198,27 +232,27 @@ com.example.personalfinance/
 ### 1. Luồng Xác thực (Authentication Flow)
 ```
 [User] ──(Email/Password/Google/FB)──► [LoginActivity]
-                                              │
-                                              ▼
-                                   [FirebaseAuthManager]
-                                              │
-                   ┌──────────────────────────┴──────────────────────────┐
-                   ▼                                                     ▼
-           (Firebase Auth SDK)                                   (Firebase ID Token)
-                   │                                                     │
-                   ▼                                                     ▼
-        Đăng nhập thành công                                    [AuthInterceptor]
-                   │                                                     │
-                   └──────────────────────────┬──────────────────────────┘
-                                              ▼
-                                     [POST /api/auth/sync]
-                                              │
-                                              ▼
-                                    Lưu User vào Local
-                                   [SharedPrefManager]
-                                              │
-                                              ▼
-                                       [MainActivity]
+                   │
+                   ▼
+          [FirebaseAuthHelper]
+                   │
+         ┌─────────┴─────────┐
+         ▼                   ▼
+ (Firebase Auth SDK)  (Firebase ID Token)
+         │                   │
+         ▼                   ▼
+  Đăng nhập thành công   [AuthInterceptor]
+         │                   │
+         └─────────┬─────────┘
+                   ▼
+         [POST /api/auth/sync]
+                   │
+                   ▼
+         Lưu User vào Local
+        [SharedPrefManager]
+                   │
+                   ▼
+            [MainActivity]
 ```
 
 ### 2. Luồng Quét Hóa Đơn AI (OCR Bill Scanning Flow)
@@ -226,10 +260,10 @@ com.example.personalfinance/
 [User chụp hóa đơn] ──► [ScanBillActivity (CameraX)]
                                  │
                                  ▼
-                     [TextRecognizerHelper (ML Kit)]
+              [Google ML Kit Text Recognition (On-device)]
                                  │ Trích xuất văn bản thô
                                  ▼
-                 [POST /api/ai-scan/classify (Retrofit)]
+                  [POST /api/ai-scan/classify (Retrofit)]
                                  │
                                  ▼
               Backend phân tích (Tổng tiền, Ngày, Danh mục)
@@ -266,24 +300,23 @@ com.example.personalfinance/
 ## 🤖 Tích hợp Trí tuệ Nhân tạo (ML / AI)
 
 ### 1. Nhận diện chữ viết hóa đơn (Google ML Kit Text Recognition)
-- Chạy **on-device (hoàn toàn ngoại tuyến)** không cần kết nối mạng để đọc chữ.
-- Sử dụng camera của CameraX để bắt khung hình chất lượng cao.
-- Nhận diện các trường: Tên hóa đơn, ngày tháng, danh sách sản phẩm và tổng tiền thanh toán.
-- Gửi kết quả văn bản lên backend AI Service để phân loại chính xác danh mục thu/chi.
+- Chạy **on-device (hoàn toàn ngoại tuyến)** không cần kết nối mạng để đọc chữ từ ảnh hóa đơn chụp qua CameraX.
+- Trích xuất văn bản thô và gửi lên backend AI Service (`/api/ai-scan/classify`) để phân tích cú pháp (regex + rule-based) trích xuất ngày, số tiền và loại hóa đơn tự động.
 
 ### 2. Nhận diện vật thể & phân loại chi tiêu (YOLOv8 + Random Forest)
-- **Model Object Detection**: YOLOv8 định dạng TFLite (`best_float32.tflite` / `yolov8.tflite`), kích thước đầu vào `640x640`.
+- **Model Object Detection**: YOLOv8 định dạng TFLite (`yolo_product.tflite` trong `assets/`), kích thước đầu vào `640x640`.
 - Hỗ trợ 18 danh mục sản phẩm tiêu dùng phổ biến.
-- **Random Forest Classifier**: Trích xuất vector 27 thuộc tính từ vật thể được nhận diện (kích thước bounding box, tỉ lệ khung hình, độ tin cậy, phân bố không gian...) để đưa ra gợi ý phân loại ban đầu trước khi đồng bộ backend.
+- **Random Forest Classifier**: Trích xuất vector 27 thuộc tính từ vật thể được nhận diện (kích thước bounding box, tỉ lệ khung hình, độ tin cậy, phân bố không gian...) để đưa ra gợi ý phân loại ban đầu trước khi đồng bộ backend (`/api/ai-product/classify`).
 
 ---
 
 ## 🌐 Mạng & Giao tiếp Backend (Network Layer)
 
-- **Base URL cấu hình động**: Được quản lý tập trung tại `ApiClient.kt`.
-- **Xác thực tự động**: `AuthInterceptor` tự động lấy Firebase JWT Token mới nhất và thêm vào header:
+- **Base URL cấu hình động**: Được quản lý tập trung tại [ApiClient.kt](file:///d:/Project/KHMT/KHMT&CNPM%20-%20NHOM%203/android-app/app/src/main/java/com/example/personalfinance/api/ApiClient.kt). Hỗ trợ nhấn giữ logo ở màn hình Login để đổi IP server cục bộ tức thời khi kiểm thử.
+- **Xác thực tự động**: [AuthInterceptor.kt](file:///d:/Project/KHMT/KHMT&CNPM%20-%20NHOM%203/android-app/app/src/main/java/com/example/personalfinance/api/AuthInterceptor.kt) tự động lấy Firebase JWT Token mới nhất và thêm vào header:
   ```http
   Authorization: Bearer <FIREBASE_ID_TOKEN>
+  ngrok-skip-browser-warning: true
   ```
 - **Xử lý Callbacks**: Áp dụng Extension Function [ApiCallExtensions.kt](file:///d:/Project/KHMT/KHMT&CNPM%20-%20NHOM%203/android-app/app/src/main/java/com/example/personalfinance/api/ApiCallExtensions.kt) giúp code ngắn gọn, tự động bắt lỗi mạng và parse response chuẩn.
 
@@ -293,8 +326,9 @@ com.example.personalfinance/
 - `POST /api/accounts`: Tạo mới ví tài khoản.
 - `GET /api/transactions`: Lấy danh sách giao dịch (hỗ trợ phân trang, lọc).
 - `POST /api/transactions`: Thêm giao dịch thu/chi mới.
-- `GET /api/budgets/progress`: Lấy tiến độ chi tiêu theo ngân sách.
-- `GET /api/categories`: Lấy toàn bộ danh mục thu chi.
+- `GET /api/budgets`: Lấy danh sách ngân sách và tiến độ chi tiêu.
+- `POST /api/budgets`: Thiết lập ngân sách mới.
+- `GET /api/categories`: Lấy danh mục thu chi.
 - `POST /api/ai-scan/classify`: Phân loại nội dung hóa đơn từ văn bản OCR.
 - `POST /api/ai-product/classify`: Phân tích sản phẩm quét từ camera và trả về gợi ý ngân sách.
 
@@ -332,4 +366,3 @@ android-app/app/src/main/assets/yolo_product.tflite
 2. Chờ Android Studio đồng bộ Gradle (`Sync Project with Gradle Files`).
 3. Kiểm tra Base URL trong file `ApiClient.kt` trỏ tới địa chỉ server backend đang chạy (ngrok hoặc IP mạng LAN).
 4. Nhấn **Run (Shift + F10)** để cài đặt và chạy ứng dụng trên thiết bị / máy ảo.
-
