@@ -3,6 +3,7 @@ package com.example.personalfinance.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import java.util.concurrent.atomic.AtomicInteger
 import com.example.personalfinance.models.domain.Account
 import com.example.personalfinance.models.domain.Category
 import com.example.personalfinance.models.domain.Transaction
@@ -51,24 +52,31 @@ class TransactionViewModel : ViewModel() {
 
     fun loadFormData(userId: Int) {
         _isLoading.value = true
+        val pending = AtomicInteger(2) // 2 parallel requests: accounts + categories
+        fun finishRequest() {
+            if (pending.decrementAndGet() == 0) _isLoading.postValue(false)
+        }
+
         // Load accounts
         accountRepository.getAccounts(userId, object : ApiCallback<List<Account>?> {
             override fun onSuccess(result: List<Account>?) {
                 _accounts.postValue(result ?: emptyList())
+                finishRequest()
             }
             override fun onError(errorMessage: String?) {
                 _errorMessage.postValue("Lỗi tải ví: $errorMessage")
+                finishRequest()
             }
         })
         // Load categories
         accountRepository.getCategories(userId, object : ApiCallback<List<Category>?> {
             override fun onSuccess(result: List<Category>?) {
                 _categories.postValue(result ?: emptyList())
-                _isLoading.postValue(false)
+                finishRequest()
             }
             override fun onError(errorMessage: String?) {
                 _errorMessage.postValue("Lỗi tải danh mục: $errorMessage")
-                _isLoading.postValue(false)
+                finishRequest()
             }
         })
     }

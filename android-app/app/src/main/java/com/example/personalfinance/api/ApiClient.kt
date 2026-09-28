@@ -1,5 +1,6 @@
 package com.example.personalfinance.api
 
+import com.example.personalfinance.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -18,11 +19,15 @@ object ApiClient {
     @Volatile
     private var retrofit: Retrofit? = null
 
+    @Volatile
+    private var cachedApiService: ApiService? = null
+
     @Synchronized
     fun updateBaseUrl(newIp: String?) {
         if (newIp.isNullOrBlank()) return
         baseUrl = buildBaseUrl(newIp)
-        retrofit = null // Force recreation with new URL
+        retrofit = null          // Force recreation with new URL
+        cachedApiService = null  // Invalidate cached service
     }
 
     private fun buildBaseUrl(serverAddress: String): String {
@@ -56,7 +61,10 @@ object ApiClient {
     fun getClient(): Retrofit {
         return retrofit ?: run {
             val logging = HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
+                level = if (BuildConfig.DEBUG)
+                    HttpLoggingInterceptor.Level.BODY
+                else
+                    HttpLoggingInterceptor.Level.NONE
             }
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(AuthInterceptor())
@@ -75,7 +83,11 @@ object ApiClient {
     val client: Retrofit
         get() = getClient()
 
-    fun getApiService(): ApiService = getClient().create(ApiService::class.java)
+    @Synchronized
+    fun getApiService(): ApiService {
+        return cachedApiService ?: getClient().create(ApiService::class.java)
+            .also { cachedApiService = it }
+    }
 
     val apiService: ApiService
         get() = getApiService()
