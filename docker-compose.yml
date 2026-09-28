@@ -1,0 +1,55 @@
+services:
+
+  # ============================================================
+  # MySQL Database
+  # ============================================================
+  db:
+    image: mysql:8.0
+    container_name: finance_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: personal_finance_app
+      MYSQL_USER: finance_user
+      MYSQL_PASSWORD: finance_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      # Dữ liệu MySQL được lưu vĩnh viễn (không mất khi restart)
+      - mysql_data:/var/lib/mysql
+      # Tự động chạy schema + seed data khi khởi động lần đầu
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./database/seed_data.sql:/docker-entrypoint-initdb.d/02-seed.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ============================================================
+  # Spring Boot Backend
+  # ============================================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: finance_backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      # Kết nối tới MySQL container (dùng tên service "db" thay vì localhost)
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/personal_finance_app?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: finance_user
+      SPRING_DATASOURCE_PASSWORD: finance_pass
+      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
+    volumes:
+      # Lưu file upload (avatar, hình giao dịch) ra ngoài container
+      - ./backend/uploads:/app/uploads
+      - ./backend/logs:/app/logs
+    depends_on:
+      db:
+        condition: service_healthy  # Chờ MySQL sẵn sàng rồi mới khởi động
+
+volumes:
+  mysql_data:
