@@ -15,8 +15,8 @@ import android.widget.TextView
 import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.DialogFragment
 import com.example.personalfinance.R
-import com.example.personalfinance.api.RetrofitClient
-import com.example.personalfinance.models.Transaction
+import com.example.personalfinance.api.ApiClient
+import com.example.personalfinance.models.domain.Transaction
 import com.example.personalfinance.utils.CurrencyFormatter
 import com.example.personalfinance.utils.DateUtils
 import java.io.ByteArrayInputStream
@@ -150,7 +150,7 @@ class TransactionPhotoDetailDialog : DialogFragment() {
     private fun loadImage(relativeUrl: String?, imageView: ImageView) {
         if (relativeUrl.isNullOrBlank()) return
 
-        val baseUrl = RetrofitClient.client.baseUrl().toString()
+        val baseUrl = ApiClient.client.baseUrl().toString()
         val path = if (relativeUrl.startsWith("/")) relativeUrl.substring(1) else relativeUrl
         val fullUrl = baseUrl + path
 

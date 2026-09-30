@@ -1,11 +1,12 @@
 package com.example.personalfinance.api
 
+import com.example.personalfinance.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitClient {
+object ApiClient {
 
     private const val DEFAULT_BASE_URL = "https://unwinsome-vapoury-eustolia.ngrok-free.dev"
     private const val HTTP_SCHEME = "http://"
@@ -18,11 +19,15 @@ object RetrofitClient {
     @Volatile
     private var retrofit: Retrofit? = null
 
+    @Volatile
+    private var cachedApiService: ApiService? = null
+
     @Synchronized
     fun updateBaseUrl(newIp: String?) {
         if (newIp.isNullOrBlank()) return
         baseUrl = buildBaseUrl(newIp)
-        retrofit = null // Force recreation with new URL
+        retrofit = null          // Force recreation with new URL
+        cachedApiService = null  // Invalidate cached service
     }
 
     private fun buildBaseUrl(serverAddress: String): String {
@@ -35,6 +40,7 @@ object RetrofitClient {
                 clean = clean.removePrefix(HTTPS_SCHEME)
             }
             clean.startsWith(HTTP_SCHEME) -> {
+                scheme = HTTP_SCHEME
                 clean = clean.removePrefix(HTTP_SCHEME)
             }
         }
@@ -55,10 +61,13 @@ object RetrofitClient {
     fun getClient(): Retrofit {
         return retrofit ?: run {
             val logging = HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
+                level = if (BuildConfig.DEBUG)
+                    HttpLoggingInterceptor.Level.BODY
+                else
+                    HttpLoggingInterceptor.Level.NONE
             }
             val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(TokenInterceptor())
+                .addInterceptor(AuthInterceptor())
                 .addInterceptor(logging)
                 .build()
 
@@ -71,5 +80,15 @@ object RetrofitClient {
         }
     }
 
-    fun getApiService(): ApiService = getClient().create(ApiService::class.java)
+    val client: Retrofit
+        get() = getClient()
+
+    @Synchronized
+    fun getApiService(): ApiService {
+        return cachedApiService ?: getClient().create(ApiService::class.java)
+            .also { cachedApiService = it }
+    }
+
+    val apiService: ApiService
+        get() = getApiService()
 }

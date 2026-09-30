@@ -1,6 +1,21 @@
 package com.example.personalfinance.api
 
-import com.example.personalfinance.models.*
+import com.example.personalfinance.models.domain.Account
+import com.example.personalfinance.models.domain.Budget
+import com.example.personalfinance.models.domain.Category
+import com.example.personalfinance.models.domain.Transaction
+import com.example.personalfinance.models.domain.User
+import com.example.personalfinance.models.domain.RecurringTransaction
+import com.example.personalfinance.models.domain.CalendarDay
+import com.example.personalfinance.models.dto.ApiResponse
+import com.example.personalfinance.models.dto.LoginRequest
+import com.example.personalfinance.models.dto.OcrRequest
+import com.example.personalfinance.models.dto.AiScanResult
+import com.example.personalfinance.models.dto.AiProductResult
+import com.example.personalfinance.models.dto.ScanFeedbackRequest
+import com.example.personalfinance.models.dto.ProductFeedbackRequest
+import com.example.personalfinance.models.dto.ProductClassificationRequest
+import com.example.personalfinance.models.dto.ReportDTO
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*

@@ -24,10 +24,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.personalfinance.R
 import com.example.personalfinance.activities.LoginActivity
-import com.example.personalfinance.api.RetrofitClient
+import com.example.personalfinance.api.ApiClient
 import com.example.personalfinance.databinding.FragmentProfileBinding
-import com.example.personalfinance.models.ApiResponse
-import com.example.personalfinance.models.User
+import com.example.personalfinance.models.dto.ApiResponse
+import com.example.personalfinance.models.domain.User
 import com.example.personalfinance.utils.CurrencyFormatter
 import com.example.personalfinance.utils.SharedPrefManager
 import com.example.personalfinance.viewmodels.HomeViewModel
@@ -109,7 +109,7 @@ class ProfileFragment : Fragment() {
             return
         }
 
-        val baseUrl = RetrofitClient.client.baseUrl().toString()
+        val baseUrl = ApiClient.client.baseUrl().toString()
         val path = if (relativeUrl.startsWith("/")) relativeUrl.substring(1) else relativeUrl
         val fullUrl = baseUrl + path
         loadImageFromUrl(fullUrl)
@@ -239,7 +239,7 @@ class ProfileFragment : Fragment() {
 
             Toast.makeText(requireContext(), "Đang tải ảnh đại diện lên...", Toast.LENGTH_SHORT).show()
 
-            RetrofitClient.apiService.uploadAvatar(user.userId, body)
+            ApiClient.apiService.uploadAvatar(user.userId, body)
                 .enqueue(object : Callback<ApiResponse<User>> {
                     override fun onResponse(call: Call<ApiResponse<User>>, response: Response<ApiResponse<User>>) {
                         val apiResponse = response.body()
@@ -359,7 +359,7 @@ class ProfileFragment : Fragment() {
 
         Toast.makeText(requireContext(), "Đang cập nhật tên...", Toast.LENGTH_SHORT).show()
 
-        RetrofitClient.apiService.updateUser(user.userId, userUpdate)
+        ApiClient.apiService.updateUser(user.userId, userUpdate)
             .enqueue(object : Callback<ApiResponse<User>> {
                 override fun onResponse(call: Call<ApiResponse<User>>, response: Response<ApiResponse<User>>) {
                     val apiResponse = response.body()

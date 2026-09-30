@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personalfinance.R
-import com.example.personalfinance.models.Transaction
+import com.example.personalfinance.models.domain.Transaction
 import com.example.personalfinance.utils.CurrencyFormatter
 import java.util.Locale
 import kotlin.math.abs

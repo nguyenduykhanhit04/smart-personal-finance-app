@@ -1,7 +1,7 @@
 package com.example.personalfinance.utils
 
 import android.content.Context
-import com.example.personalfinance.models.User
+import com.example.personalfinance.models.domain.User
 import com.google.gson.Gson
 
 class SharedPrefManager private constructor(context: Context) {

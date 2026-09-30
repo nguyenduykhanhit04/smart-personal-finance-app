@@ -22,8 +22,8 @@ import com.example.personalfinance.activities.ScanProductActivity
 import com.example.personalfinance.adapters.TransactionAdapter
 import com.example.personalfinance.databinding.FragmentTransactionListBinding
 import com.example.personalfinance.fragments.recurring.RecurringListFragment
-import com.example.personalfinance.models.Transaction
-import com.example.personalfinance.models.User
+import com.example.personalfinance.models.domain.Transaction
+import com.example.personalfinance.models.domain.User
 import com.example.personalfinance.utils.Constants
 import com.example.personalfinance.utils.CurrencyFormatter
 import com.example.personalfinance.utils.DateUtils

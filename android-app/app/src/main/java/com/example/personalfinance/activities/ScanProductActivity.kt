@@ -28,17 +28,17 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.exifinterface.media.ExifInterface
-import com.example.personalfinance.api.RetrofitClient
+import com.example.personalfinance.api.ApiClient
 import com.example.personalfinance.databinding.ActivityScanProductBinding
 import com.example.personalfinance.fragments.transaction.AddTransactionFragment
-import com.example.personalfinance.models.AiProductResult
-import com.example.personalfinance.models.ApiResponse
-import com.example.personalfinance.models.ProductClassificationRequest
-import com.example.personalfinance.models.User
+import com.example.personalfinance.models.dto.AiProductResult
+import com.example.personalfinance.models.dto.ApiResponse
+import com.example.personalfinance.models.dto.ProductClassificationRequest
+import com.example.personalfinance.models.domain.User
 import com.example.personalfinance.utils.DateUtils
 import com.example.personalfinance.utils.SharedPrefManager
-import com.example.personalfinance.yolo.BoundingBoxOverlay
-import com.example.personalfinance.yolo.YoloDetector
+import com.example.personalfinance.ml.yolo.BoundingBoxOverlay
+import com.example.personalfinance.ml.yolo.YoloDetector
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -275,7 +275,7 @@ class ScanProductActivity : AppCompatActivity() {
         binding.progressBar.visibility = View.VISIBLE
         binding.btnCapture.isEnabled = false
 
-        RetrofitClient.apiService.classifyProduct(request)
+        ApiClient.apiService.classifyProduct(request)
             .enqueue(object : Callback<ApiResponse<AiProductResult>> {
                 override fun onResponse(
                     call: Call<ApiResponse<AiProductResult>>,

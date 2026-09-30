@@ -1,4 +1,4 @@
-package com.example.personalfinance.models
+package com.example.personalfinance.models.dto
 
 data class ProductFeedbackRequest(
     var aiProductLogId: Int? = null,

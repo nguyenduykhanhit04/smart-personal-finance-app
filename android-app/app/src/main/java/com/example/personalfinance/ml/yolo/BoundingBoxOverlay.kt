@@ -1,4 +1,4 @@
-package com.example.personalfinance.yolo
+package com.example.personalfinance.ml.yolo
 
 import android.content.Context
 import android.graphics.Canvas

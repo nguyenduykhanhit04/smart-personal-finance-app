@@ -1,4 +1,4 @@
-package com.example.personalfinance.models
+package com.example.personalfinance.models.domain
 
 data class User(
     var userId: Int? = null,

@@ -12,7 +12,7 @@ import com.example.personalfinance.fragments.home.HomeFragment
 import com.example.personalfinance.fragments.transaction.AddTransactionFragment
 import com.example.personalfinance.fragments.transaction.TransactionFragment
 import com.example.personalfinance.fragments.transaction.TransactionListFragment
-import com.example.personalfinance.models.User
+import com.example.personalfinance.models.domain.User
 import com.example.personalfinance.utils.SharedPrefManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 

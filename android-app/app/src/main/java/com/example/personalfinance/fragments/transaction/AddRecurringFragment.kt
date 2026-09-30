@@ -11,13 +11,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.personalfinance.R
-import com.example.personalfinance.api.RetrofitClient
+import com.example.personalfinance.api.ApiClient
 import com.example.personalfinance.databinding.FragmentAddRecurringBinding
-import com.example.personalfinance.models.Account
-import com.example.personalfinance.models.ApiResponse
-import com.example.personalfinance.models.Category
-import com.example.personalfinance.models.RecurringTransaction
-import com.example.personalfinance.models.User
+import com.example.personalfinance.models.domain.Account
+import com.example.personalfinance.models.dto.ApiResponse
+import com.example.personalfinance.models.domain.Category
+import com.example.personalfinance.models.domain.RecurringTransaction
+import com.example.personalfinance.models.domain.User
 import com.example.personalfinance.utils.Constants
 import com.example.personalfinance.utils.DateUtils
 import com.example.personalfinance.utils.SharedPrefManager
@@ -214,7 +214,7 @@ class AddRecurringFragment : BottomSheetDialogFragment() {
 
     private fun fetchCategories() {
         val user = currentUser ?: return
-        RetrofitClient.apiService.getCategories(user.userId).enqueue(object : Callback<ApiResponse<List<Category>>> {
+        ApiClient.apiService.getCategories(user.userId).enqueue(object : Callback<ApiResponse<List<Category>>> {
             override fun onResponse(call: Call<ApiResponse<List<Category>>>, response: Response<ApiResponse<List<Category>>>) {
                 val body = response.body()
                 if (response.isSuccessful && body?.isSuccess == true) {
@@ -230,7 +230,7 @@ class AddRecurringFragment : BottomSheetDialogFragment() {
 
     private fun fetchAccounts() {
         val user = currentUser ?: return
-        RetrofitClient.apiService.getAccounts(user.userId).enqueue(object : Callback<ApiResponse<List<Account>>> {
+        ApiClient.apiService.getAccounts(user.userId).enqueue(object : Callback<ApiResponse<List<Account>>> {
             override fun onResponse(call: Call<ApiResponse<List<Account>>>, response: Response<ApiResponse<List<Account>>>) {
                 val body = response.body()
                 if (response.isSuccessful && body?.isSuccess == true) {
@@ -415,9 +415,9 @@ class AddRecurringFragment : BottomSheetDialogFragment() {
 
         val editId = editingItem?.recurringId
         if (editId != null) {
-            RetrofitClient.apiService.updateRecurringTransaction(editId, item).enqueue(callback)
+            ApiClient.apiService.updateRecurringTransaction(editId, item).enqueue(callback)
         } else {
-            RetrofitClient.apiService.createRecurringTransaction(item).enqueue(callback)
+            ApiClient.apiService.createRecurringTransaction(item).enqueue(callback)
         }
     }
 

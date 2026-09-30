@@ -1,9 +1,10 @@
 package com.example.personalfinance.repositories
 
-import com.example.personalfinance.api.RetrofitClient
-import com.example.personalfinance.models.ApiResponse
-import com.example.personalfinance.models.LoginRequest
-import com.example.personalfinance.models.User
+import com.example.personalfinance.api.ApiCallback
+import com.example.personalfinance.api.ApiClient
+import com.example.personalfinance.models.dto.ApiResponse
+import com.example.personalfinance.models.dto.LoginRequest
+import com.example.personalfinance.models.domain.User
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -12,7 +13,7 @@ import retrofit2.Response
 class AuthRepository {
 
     fun firebaseLogin(loginRequest: LoginRequest, callback: ApiCallback<User?>) {
-        RetrofitClient.getApiService().firebaseLogin(loginRequest)
+        ApiClient.getApiService().firebaseLogin(loginRequest)
             .enqueue(object : Callback<ApiResponse<User>> {
                 override fun onResponse(call: Call<ApiResponse<User>>, response: Response<ApiResponse<User>>) {
                     val body = response.body()
