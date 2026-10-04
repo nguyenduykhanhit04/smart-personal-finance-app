@@ -14,6 +14,7 @@ services:
       MYSQL_DATABASE: personal_finance_app
       MYSQL_USER: finance_user
       MYSQL_PASSWORD: finance_pass
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     ports:
       - "3306:3306"
     volumes:
@@ -42,7 +43,7 @@ services:
       - "8080:8080"
     environment:
       # Kết nối tới MySQL container (dùng tên service "db" thay vì localhost)
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/personal_finance_app?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/personal_finance_app?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=UTF-8
       SPRING_DATASOURCE_USERNAME: finance_user
       SPRING_DATASOURCE_PASSWORD: finance_pass
       SPRING_JPA_HIBERNATE_DDL_AUTO: validate
