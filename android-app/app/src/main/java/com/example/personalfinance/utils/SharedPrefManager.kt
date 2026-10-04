@@ -29,7 +29,7 @@ class SharedPrefManager private constructor(context: Context) {
     fun getServerIp(): String {
         val savedIp = sharedPreferences.getString(KEY_SERVER_IP, DEFAULT_SERVER_IP) ?: DEFAULT_SERVER_IP
         // Migrate legacy IPs to current default
-        if (savedIp in listOf(LEGACY_DEFAULT_SERVER_IP, LAN_SERVER_IP, ADB_REVERSE_SERVER_IP)) {
+        if (savedIp in listOf(LEGACY_DEFAULT_SERVER_IP, LAN_SERVER_IP, ADB_REVERSE_SERVER_IP, "https://unwinsome-vapoury-eustolia.ngrok-free.dev/")) {
             saveServerIp(DEFAULT_SERVER_IP)
             return DEFAULT_SERVER_IP
         }
@@ -45,9 +45,9 @@ class SharedPrefManager private constructor(context: Context) {
         private const val KEY_USER = "key_user"
         private const val KEY_SERVER_IP = "server_ip"
         private const val LEGACY_DEFAULT_SERVER_IP = "192.168.30.103"
-        private const val EMULATOR_HOST_SERVER_IP = "https://unwinsome-vapoury-eustolia.ngrok-free.dev/"
-        private const val LAN_SERVER_IP = "192.168.1.63"
-        private const val ADB_REVERSE_SERVER_IP = "127.0.0.1"
+        private const val EMULATOR_HOST_SERVER_IP = "10.0.2.2:8080"
+        private const val LAN_SERVER_IP = "192.168.1.125:8080"
+        private const val ADB_REVERSE_SERVER_IP = "127.0.0.1:8080"
         private const val DEFAULT_SERVER_IP = EMULATOR_HOST_SERVER_IP
 
         @Volatile

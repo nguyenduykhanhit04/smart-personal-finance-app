@@ -1,27 +1,9 @@
-# ============================================================
-# Stage 1: Build JAR bằng Maven (build environment)
-# ============================================================
-FROM eclipse-temurin:21-jdk-alpine AS builder
+FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
-# Copy pom.xml trước để cache Maven dependencies
-COPY pom.xml .
-RUN apk add --no-cache maven && mvn dependency:go-offline -q
-
-# Copy source code và build
-COPY src ./src
-RUN mvn package -DskipTests -q
-
-# ============================================================
-# Stage 2: Chạy app (runtime environment - nhỏ hơn nhiều)
-# ============================================================
-FROM eclipse-temurin:21-jre-alpine
-
-WORKDIR /app
-
-# Copy JAR từ stage build
-COPY --from=builder /app/target/finance-backend-*.jar app.jar
+# Copy JAR đã build sẵn từ target
+COPY target/finance-backend-*.jar app.jar
 
 # Copy các file cần thiết khi runtime
 COPY src/main/resources/firebase-service-account.json ./firebase-service-account.json
