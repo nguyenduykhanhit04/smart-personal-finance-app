@@ -1,6 +1,7 @@
 package com.example.financebackend.service;
 
 import com.example.financebackend.dto.BudgetDTO;
+import com.example.financebackend.exception.ResourceNotFoundException;
 import com.example.financebackend.model.Budget;
 import com.example.financebackend.model.Category;
 import com.example.financebackend.model.Transaction;
@@ -52,19 +53,19 @@ public class BudgetService {
 
     public BudgetDTO getBudgetById(Integer budgetId) {
         Budget budget = budgetRepository.findById(budgetId)
-                .orElseThrow(() -> new RuntimeException("Budget not found with id: " + budgetId));
+                .orElseThrow(() -> new ResourceNotFoundException("Budget not found with id: " + budgetId));
         return toDTO(budget);
     }
 
     @Transactional
     public BudgetDTO createBudget(BudgetDTO dto) {
         User user = userRepository.findById(dto.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + dto.getUserId()));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + dto.getUserId()));
 
         Category category = null;
         if (dto.getCategoryId() != null) {
             category = categoryRepository.findById(dto.getCategoryId())
-                    .orElseThrow(() -> new RuntimeException("Category not found with id: " + dto.getCategoryId()));
+                    .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + dto.getCategoryId()));
         }
 
         Budget budget = Budget.builder()
@@ -85,7 +86,7 @@ public class BudgetService {
     @Transactional
     public BudgetDTO updateBudget(Integer budgetId, BudgetDTO dto) {
         Budget budget = budgetRepository.findById(budgetId)
-                .orElseThrow(() -> new RuntimeException("Budget not found with id: " + budgetId));
+                .orElseThrow(() -> new ResourceNotFoundException("Budget not found with id: " + budgetId));
 
         if (dto.getBudgetName() != null) budget.setBudgetName(dto.getBudgetName());
         if (dto.getAmountLimit() != null) budget.setAmountLimit(dto.getAmountLimit());
@@ -94,7 +95,7 @@ public class BudgetService {
         if (dto.getEndDate() != null) budget.setEndDate(dto.getEndDate());
         if (dto.getCategoryId() != null) {
             Category category = categoryRepository.findById(dto.getCategoryId())
-                    .orElseThrow(() -> new RuntimeException("Category not found with id: " + dto.getCategoryId()));
+                    .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + dto.getCategoryId()));
             budget.setCategory(category);
         }
 
@@ -105,7 +106,7 @@ public class BudgetService {
     @Transactional
     public void deleteBudget(Integer budgetId) {
         if (!budgetRepository.existsById(budgetId)) {
-            throw new RuntimeException("Budget not found with id: " + budgetId);
+            throw new ResourceNotFoundException("Budget not found with id: " + budgetId);
         }
         budgetRepository.deleteById(budgetId);
     }

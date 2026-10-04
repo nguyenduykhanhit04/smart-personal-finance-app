@@ -11,6 +11,7 @@ import com.example.financebackend.service.CategoryService;
 import com.example.financebackend.service.ai.AiScanService;
 import com.example.financebackend.service.ai.GeminiService;
 
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -41,11 +42,8 @@ public class AiScanController {
     }
 
     @PostMapping("/classify")
-    public ResponseEntity<ApiResponse<AiScanResponse>> classifyBill(@RequestBody AiScanClassifyRequest request) {
+    public ResponseEntity<ApiResponse<AiScanResponse>> classifyBill(@Valid @RequestBody AiScanClassifyRequest request) {
         String rawText = request.getRawOcrText();
-        if (rawText == null || rawText.isBlank()) {
-            throw new IllegalArgumentException("OCR text is empty");
-        }
 
         logger.info("OCR classify request userId={}, rawLength={}", request.getUserId(), rawText.length());
         logger.info("OCR raw text:\n{}", rawText);
@@ -88,10 +86,7 @@ public class AiScanController {
     }
 
     @PostMapping("/feedback")
-    public ResponseEntity<ApiResponse<String>> saveFeedback(@RequestBody AiScanFeedbackRequest request) {
-        if (request.getAiScanLogId() == null || request.getAiScanLogId() <= 0) {
-            throw new IllegalArgumentException("AI scan log id is required");
-        }
+    public ResponseEntity<ApiResponse<String>> saveFeedback(@Valid @RequestBody AiScanFeedbackRequest request) {
         aiScanService.saveFeedback(
                 request.getAiScanLogId(),
                 request.getTransactionId(),

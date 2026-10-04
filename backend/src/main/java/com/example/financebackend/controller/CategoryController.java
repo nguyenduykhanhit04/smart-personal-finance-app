@@ -1,8 +1,9 @@
 package com.example.financebackend.controller;
 
-import com.example.financebackend.dto.response.ApiResponse;
 import com.example.financebackend.dto.CategoryDTO;
+import com.example.financebackend.dto.response.ApiResponse;
 import com.example.financebackend.service.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,41 +21,25 @@ public class CategoryController {
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<CategoryDTO>>> getCategoriesByUserId(@RequestParam Integer userId) {
-        try {
-            List<CategoryDTO> categories = categoryService.getCategoriesByUserId(userId);
-            return ResponseEntity.ok(ApiResponse.success(categories));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
-        }
+        List<CategoryDTO> categories = categoryService.getCategoriesByUserId(userId);
+        return ResponseEntity.ok(ApiResponse.success(categories));
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse<CategoryDTO>> createCategory(@RequestBody CategoryDTO categoryDTO) {
-        try {
-            CategoryDTO created = categoryService.createCategory(categoryDTO);
-            return ResponseEntity.ok(ApiResponse.success("Category created successfully", created));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
-        }
+    public ResponseEntity<ApiResponse<CategoryDTO>> createCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
+        CategoryDTO created = categoryService.createCategory(categoryDTO);
+        return ResponseEntity.ok(ApiResponse.success("Category created successfully", created));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<CategoryDTO>> updateCategory(@PathVariable Integer id, @RequestBody CategoryDTO categoryDTO) {
-        try {
-            CategoryDTO updated = categoryService.updateCategory(id, categoryDTO);
-            return ResponseEntity.ok(ApiResponse.success("Category updated successfully", updated));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
-        }
+    public ResponseEntity<ApiResponse<CategoryDTO>> updateCategory(@PathVariable Integer id, @Valid @RequestBody CategoryDTO categoryDTO) {
+        CategoryDTO updated = categoryService.updateCategory(id, categoryDTO);
+        return ResponseEntity.ok(ApiResponse.success("Category updated successfully", updated));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> deleteCategory(@PathVariable Integer id) {
-        try {
-            categoryService.deleteCategory(id);
-            return ResponseEntity.ok(ApiResponse.success("Category deleted successfully", null));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
-        }
+        categoryService.deleteCategory(id);
+        return ResponseEntity.ok(ApiResponse.success("Category deleted successfully", null));
     }
 }

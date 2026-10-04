@@ -29,7 +29,7 @@ class TransactionAdapter(
         private const val TYPE_TRANSACTION = 1
     }
 
-    private sealed class DisplayItem {
+    sealed class DisplayItem {
         data class Header(val dateStr: String, val netAmount: Double) : DisplayItem()
         data class Item(val transaction: Transaction) : DisplayItem()
     }

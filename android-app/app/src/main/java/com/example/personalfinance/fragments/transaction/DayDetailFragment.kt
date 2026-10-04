@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.personalfinance.R
 import com.example.personalfinance.adapters.DayTransactionsAdapter
+import com.example.personalfinance.api.ApiCallback
 import com.example.personalfinance.databinding.FragmentDayDetailBinding
 import com.example.personalfinance.models.domain.Transaction
 import com.example.personalfinance.models.domain.User
@@ -140,7 +141,7 @@ class DayDetailFragment : Fragment() {
 
     private fun loadDayTransactions() {
         val userId = currentUser?.userId ?: return
-        repository.getTransactions(userId, selectedDate, selectedDate, object : TransactionRepository.ApiCallback<List<Transaction>> {
+        repository.getTransactions(userId, selectedDate, selectedDate, object : ApiCallback<List<Transaction>?> {
             override fun onSuccess(result: List<Transaction>?) {
                 if (isAdded) {
                     allTransactions.clear()
@@ -152,7 +153,7 @@ class DayDetailFragment : Fragment() {
                 }
             }
 
-            override fun onError(errorMessage: String) {
+            override fun onError(errorMessage: String?) {
                 if (isAdded) {
                     Toast.makeText(requireContext(), "Lỗi tải giao dịch: $errorMessage", Toast.LENGTH_SHORT).show()
                     calculateDailySummary()

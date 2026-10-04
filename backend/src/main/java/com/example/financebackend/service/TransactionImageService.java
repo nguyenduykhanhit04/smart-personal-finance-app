@@ -1,5 +1,6 @@
 package com.example.financebackend.service;
 
+import com.example.financebackend.exception.ResourceNotFoundException;
 import com.example.financebackend.model.Transaction;
 import com.example.financebackend.model.TransactionImage;
 import com.example.financebackend.repository.TransactionImageRepository;
@@ -34,7 +35,7 @@ public class TransactionImageService {
         }
 
         Transaction transaction = transactionRepository.findById(transactionId)
-                .orElseThrow(() -> new RuntimeException("Transaction not found with id: " + transactionId));
+                .orElseThrow(() -> new ResourceNotFoundException("Transaction not found with id: " + transactionId));
 
         // Create uploads folder if not exists
         File uploadDir = new File("uploads");

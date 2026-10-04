@@ -1,7 +1,9 @@
 package com.example.financebackend.service;
 
-import com.example.financebackend.config.AppTime;
+import com.example.financebackend.util.AppTime;
 import com.example.financebackend.dto.TransactionDTO;
+import com.example.financebackend.exception.BadRequestException;
+import com.example.financebackend.exception.ResourceNotFoundException;
 import com.example.financebackend.model.*;
 import com.example.financebackend.repository.*;
 import org.springframework.stereotype.Service;
@@ -51,7 +53,7 @@ public class TransactionService {
 
     public TransactionDTO getTransactionById(Integer transactionId) {
         Transaction transaction = transactionRepository.findById(transactionId)
-                .orElseThrow(() -> new RuntimeException("Transaction not found with id: " + transactionId));
+                .orElseThrow(() -> new ResourceNotFoundException("Transaction not found with id: " + transactionId));
         return toDTO(transaction);
     }
 
@@ -60,12 +62,12 @@ public class TransactionService {
         validateTransactionDateNotInFuture(dto.getTransactionDate());
 
         User user = userRepository.findById(dto.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + dto.getUserId()));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + dto.getUserId()));
 
         Account account;
         if (dto.getAccountId() != null) {
             account = accountRepository.findById(dto.getAccountId())
-                    .orElseThrow(() -> new RuntimeException("Account not found with id: " + dto.getAccountId()));
+                    .orElseThrow(() -> new ResourceNotFoundException("Account not found with id: " + dto.getAccountId()));
         } else {
             // Auto-assign default wallet "Ví chính"
             account = accountService.getOrCreateDefaultAccount(dto.getUserId());
@@ -74,7 +76,7 @@ public class TransactionService {
         Category category = null;
         if (dto.getCategoryId() != null) {
             category = categoryRepository.findById(dto.getCategoryId())
-                    .orElseThrow(() -> new RuntimeException("Category not found with id: " + dto.getCategoryId()));
+                    .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + dto.getCategoryId()));
         }
 
         Transaction transaction = Transaction.builder()
@@ -104,7 +106,7 @@ public class TransactionService {
         }
 
         Transaction transaction = transactionRepository.findById(transactionId)
-                .orElseThrow(() -> new RuntimeException("Transaction not found with id: " + transactionId));
+                .orElseThrow(() -> new ResourceNotFoundException("Transaction not found with id: " + transactionId));
 
         // Reverse old balance effect
         accountService.updateBalance(
@@ -115,12 +117,12 @@ public class TransactionService {
 
         if (dto.getAccountId() != null) {
             Account account = accountRepository.findById(dto.getAccountId())
-                    .orElseThrow(() -> new RuntimeException("Account not found with id: " + dto.getAccountId()));
+                    .orElseThrow(() -> new ResourceNotFoundException("Account not found with id: " + dto.getAccountId()));
             transaction.setAccount(account);
         }
         if (dto.getCategoryId() != null) {
             Category category = categoryRepository.findById(dto.getCategoryId())
-                    .orElseThrow(() -> new RuntimeException("Category not found with id: " + dto.getCategoryId()));
+                    .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + dto.getCategoryId()));
             transaction.setCategory(category);
         }
         if (dto.getTitle() != null) transaction.setTitle(dto.getTitle());
@@ -145,7 +147,7 @@ public class TransactionService {
     @Transactional
     public void deleteTransaction(Integer transactionId) {
         Transaction transaction = transactionRepository.findById(transactionId)
-                .orElseThrow(() -> new RuntimeException("Transaction not found with id: " + transactionId));
+                .orElseThrow(() -> new ResourceNotFoundException("Transaction not found with id: " + transactionId));
 
         // Reverse balance effect
         accountService.updateBalance(
@@ -159,10 +161,10 @@ public class TransactionService {
 
     private void validateTransactionDateNotInFuture(LocalDate transactionDate) {
         if (transactionDate == null) {
-            throw new RuntimeException("Transaction date is required");
+            throw new BadRequestException("Transaction date is required");
         }
         if (transactionDate.isAfter(AppTime.today())) {
-            throw new RuntimeException("Không thể tạo giao dịch cho ngày trong tương lai");
+            throw new BadRequestException("Không thể tạo giao dịch cho ngày trong tương lai");
         }
     }
 

@@ -159,7 +159,8 @@ class AccountDetailsFragment : Fragment() {
 
     private fun loadTransactions() {
         val user = currentUser ?: return
-        viewModel.loadTransactions(user.userId, "2000-01-01", "2100-12-31")
+        val userId = user.userId ?: return
+        viewModel.loadTransactions(userId, "2000-01-01", "2100-12-31")
     }
 
     private fun observeViewModel() {

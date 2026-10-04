@@ -80,6 +80,7 @@ object ApiClient {
         }
     }
 
+    @get:JvmName("retrofitClient")
     val client: Retrofit
         get() = getClient()
 
@@ -89,6 +90,7 @@ object ApiClient {
             .also { cachedApiService = it }
     }
 
+    @get:JvmName("apiServiceInstance")
     val apiService: ApiService
         get() = getApiService()
 }

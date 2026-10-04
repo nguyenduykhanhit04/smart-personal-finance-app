@@ -85,7 +85,7 @@ class HomeFragment : Fragment() {
 
         loadDataForSelectedMonth()
         updateTabStyles()
-        accountViewModel.loadAccounts(currentUser!!.userId)
+        currentUser?.userId?.let { accountViewModel.loadAccounts(it) }
     }
 
     private fun setupDynamicGreeting() {
@@ -137,7 +137,7 @@ class HomeFragment : Fragment() {
 
                     if (!isMonthMode) {
                         val dayDateStr = DateUtils.formatApiDate(currentCalendar.time)
-                        viewModel.fetchDailyReport(currentUser!!.userId, dayDateStr)
+                        currentUser?.userId?.let { viewModel.fetchDailyReport(it, dayDateStr) }
                     }
 
                     val month = currentCalendar.get(Calendar.MONTH) + 1
@@ -193,7 +193,7 @@ class HomeFragment : Fragment() {
         binding.btnQuickAddAccount.setOnClickListener {
             val addFragment = AddAccountFragment()
             addFragment.setOnAccountSavedListener {
-                accountViewModel.loadAccounts(currentUser!!.userId)
+                currentUser?.userId?.let { accountViewModel.loadAccounts(it) }
             }
             addFragment.show(parentFragmentManager, "AddAccountFragment")
         }
@@ -235,7 +235,7 @@ class HomeFragment : Fragment() {
             isMonthMode = false
             updateTabStyles()
             val dateStr = DateUtils.formatApiDate(currentCalendar.time)
-            viewModel.fetchDailyReport(currentUser!!.userId, dateStr)
+            currentUser?.userId?.let { viewModel.fetchDailyReport(it, dateStr) }
         }
 
         binding.btnMonthTab.setOnClickListener {
@@ -243,7 +243,7 @@ class HomeFragment : Fragment() {
             updateTabStyles()
             val month = currentCalendar.get(Calendar.MONTH) + 1
             val year = currentCalendar.get(Calendar.YEAR)
-            viewModel.fetchDashboardData(currentUser!!.userId, month, year)
+            currentUser?.userId?.let { viewModel.fetchDashboardData(it, month, year) }
         }
     }
 

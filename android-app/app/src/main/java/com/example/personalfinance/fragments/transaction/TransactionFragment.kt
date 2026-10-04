@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.personalfinance.R
 import com.example.personalfinance.adapters.CategoryStatsAdapter
+import com.example.personalfinance.api.ApiCallback
 import com.example.personalfinance.databinding.FragmentTransactionBinding
 import com.example.personalfinance.models.dto.ReportDTO
 import com.example.personalfinance.models.domain.User
@@ -144,7 +145,7 @@ class TransactionFragment : Fragment() {
     private fun loadStatistics() {
         val userId = currentUser?.userId ?: return
         val range = resolveDateRange()
-        repository.getCategoryReport(userId, range.startDate, range.endDate, object : TransactionRepository.ApiCallback<ReportDTO> {
+        repository.getCategoryReport(userId, range.startDate, range.endDate, object : ApiCallback<ReportDTO?> {
             override fun onSuccess(result: ReportDTO?) {
                 currentReport = result
                 if (_binding != null) {
@@ -152,7 +153,7 @@ class TransactionFragment : Fragment() {
                 }
             }
 
-            override fun onError(errorMessage: String) {
+            override fun onError(errorMessage: String?) {
                 if (isAdded) {
                     Toast.makeText(requireContext(), "Lỗi tải thống kê: $errorMessage", Toast.LENGTH_SHORT).show()
                 }
@@ -283,7 +284,6 @@ class TransactionFragment : Fragment() {
             description.isEnabled = false
 
             val title = if (Constants.TYPE_EXPENSE == selectedType) "Chi tiêu" else "Thu nhập"
-            isCenterTextScaled = false
             centerText = "$title\n${CurrencyFormatter.formatVND(totalVal)}\n${list.size} Danh mục"
             setCenterTextColor(Color.parseColor("#F3F4F6"))
             setCenterTextSize(12f)

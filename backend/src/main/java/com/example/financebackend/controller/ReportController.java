@@ -1,7 +1,7 @@
 package com.example.financebackend.controller;
 
-import com.example.financebackend.dto.response.ApiResponse;
 import com.example.financebackend.dto.ReportDTO;
+import com.example.financebackend.dto.response.ApiResponse;
 import com.example.financebackend.service.ReportService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +23,8 @@ public class ReportController {
     public ResponseEntity<ApiResponse<ReportDTO>> getDailyReport(
             @RequestParam Integer userId,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        try {
-            ReportDTO report = reportService.getDailyReport(userId, date);
-            return ResponseEntity.ok(ApiResponse.success(report));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
-        }
+        ReportDTO report = reportService.getDailyReport(userId, date);
+        return ResponseEntity.ok(ApiResponse.success(report));
     }
 
     @GetMapping("/monthly")
@@ -36,12 +32,8 @@ public class ReportController {
             @RequestParam Integer userId,
             @RequestParam int year,
             @RequestParam int month) {
-        try {
-            ReportDTO report = reportService.getMonthlyReport(userId, year, month);
-            return ResponseEntity.ok(ApiResponse.success(report));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
-        }
+        ReportDTO report = reportService.getMonthlyReport(userId, year, month);
+        return ResponseEntity.ok(ApiResponse.success(report));
     }
 
     @GetMapping("/by-category")
@@ -49,11 +41,7 @@ public class ReportController {
             @RequestParam Integer userId,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-        try {
-            ReportDTO report = reportService.getByCategory(userId, startDate, endDate);
-            return ResponseEntity.ok(ApiResponse.success(report));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
-        }
+        ReportDTO report = reportService.getByCategory(userId, startDate, endDate);
+        return ResponseEntity.ok(ApiResponse.success(report));
     }
 }

@@ -96,7 +96,8 @@ class AddBudgetFragment : BottomSheetDialogFragment() {
 
         bindInitialUi()
         observeViewModel()
-        viewModel.loadCategories(currentUser!!.userId)
+        val userId = currentUser?.userId ?: return
+        viewModel.loadCategories(userId)
     }
 
     private fun bindInitialUi() {

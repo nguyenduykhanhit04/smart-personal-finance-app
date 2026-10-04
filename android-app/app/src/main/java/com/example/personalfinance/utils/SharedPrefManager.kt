@@ -18,6 +18,10 @@ class SharedPrefManager private constructor(context: Context) {
         return Gson().fromJson(json, User::class.java)
     }
 
+    @get:JvmName("currentUser")
+    val user: User?
+        get() = getUser()
+
     fun saveServerIp(ip: String) {
         sharedPreferences.edit().putString(KEY_SERVER_IP, ip).apply()
     }
