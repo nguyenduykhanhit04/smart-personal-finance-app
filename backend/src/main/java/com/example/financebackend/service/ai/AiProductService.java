@@ -1,4 +1,4 @@
-package com.example.financebackend.service;
+package com.example.financebackend.service.ai;
 
 import com.example.financebackend.model.AiProductLog;
 import com.example.financebackend.model.Category;

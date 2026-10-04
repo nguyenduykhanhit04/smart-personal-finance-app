@@ -1,4 +1,4 @@
-package com.example.financebackend.service;
+package com.example.financebackend.service.ai;
 
 import ai.onnxruntime.OnnxTensor;
 import ai.onnxruntime.OrtEnvironment;

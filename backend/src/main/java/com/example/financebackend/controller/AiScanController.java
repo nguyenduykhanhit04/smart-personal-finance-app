@@ -7,9 +7,9 @@ import com.example.financebackend.dto.response.ApiResponse;
 import com.example.financebackend.dto.response.GeminiReceiptResponse;
 import com.example.financebackend.model.AiScanLog;
 import com.example.financebackend.model.Category;
-import com.example.financebackend.service.AiScanService;
 import com.example.financebackend.service.CategoryService;
-import com.example.financebackend.service.GeminiService;
+import com.example.financebackend.service.ai.AiScanService;
+import com.example.financebackend.service.ai.GeminiService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
