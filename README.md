@@ -29,7 +29,7 @@
                                         │
                                         ▼
 ┌──────────────────────────────────────────────────────────────────────────────┐
-│                    MOBILE CLIENT (Android - 100% Kotlin)                     │
+│                         MOBILE CLIENT (Android - Kotlin)                     │
 │  ├── Kiến trúc MVVM, ViewBinding, LiveData, Coroutines, Navigation Component │
 │  ├── CameraX Preview + Google ML Kit Text Recognition (OCR hóa đơn)          │
 │  ├── TensorFlow Lite: YOLOv8 Object Detection (Vẽ khung Bounding Box)        │
@@ -70,10 +70,11 @@ Mỗi thành phần trong dự án đều được tài liệu hóa chi tiết t
 
 ```text
 smart-personal-finance-app/
-├── android-app/            # [XEM CHI TIẾT](android-app/README.md) - Ứng dụng Android Native Kotlin 100%
+├── android-app/            # [XEM CHI TIẾT](android-app/README.md) - Ứng dụng Android (Kotlin)
 ├── backend/                # [XEM CHI TIẾT](backend/README.md) - REST API Spring Boot 3 & ONNX Runtime
 ├── database/               # [XEM CHI TIẾT](database/README.md) - Thiết kế CSDL MySQL 8 & Seed Data
 ├── ai-pipeline/            # [XEM CHI TIẾT](ai-pipeline/README.md) - Pipeline huấn luyện YOLOv8 & Random Forest
+├── INTEGRATIONS.md         # [XEM CHI TIẾT](INTEGRATIONS.md) - Tổng hợp 7 điểm tích hợp công nghệ đặc biệt
 ├── docker-compose.yml      # Cấu hình khởi chạy toàn bộ hệ thống bằng Docker
 └── README.md               # Tài liệu tổng quan dự án
 ```
@@ -108,7 +109,7 @@ docker compose ps
    ```text
    android-app
    ```
-2. Chờ Android Studio sync Gradle (dự án đã được cấu hình và build thành công 100%).
+2. Chờ Android Studio sync Gradle (dự án đã được cấu hình sẵn).
 3. Khởi chạy ứng dụng:
    - **Trên Máy ảo (Android Emulator):** Ứng dụng đã được cấu hình mặc định trỏ về `http://10.0.2.2:8080/` (cầu nối trực tiếp vào Docker Backend). Bạn chỉ cần bấm nút **Run ▶️** là app chạy và kết nối được ngay.
    - **Trên Điện thoại thật:**
