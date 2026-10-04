@@ -1,4 +1,4 @@
-package com.example.financebackend.service.ocr;
+package com.example.financebackend.service.ai.ocr;
 
 import lombok.Builder;
 import lombok.Value;

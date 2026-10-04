@@ -1,4 +1,4 @@
-package com.example.financebackend.service;
+package com.example.financebackend.service.ai;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,10 +10,10 @@ import java.io.*;
 import java.math.BigDecimal;
 import java.util.*;
 
-import com.example.financebackend.service.ocr.ReceiptFeatures;
-import com.example.financebackend.service.ocr.ReceiptParser;
-import com.example.financebackend.service.ocr.ReceiptFeatureExtractor;
-import com.example.financebackend.service.ocr.ReceiptData;
+import com.example.financebackend.service.ai.ocr.ReceiptFeatures;
+import com.example.financebackend.service.ai.ocr.ReceiptParser;
+import com.example.financebackend.service.ai.ocr.ReceiptFeatureExtractor;
+import com.example.financebackend.service.ai.ocr.ReceiptData;
 import com.example.financebackend.repository.AiScanLogRepository;
 import com.example.financebackend.model.AiScanLog;
 import com.example.financebackend.model.Category;

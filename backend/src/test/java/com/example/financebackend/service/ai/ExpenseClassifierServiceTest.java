@@ -1,8 +1,8 @@
-package com.example.financebackend.service;
+package com.example.financebackend.service.ai;
 
 import com.example.financebackend.repository.AiScanLogRepository;
-import com.example.financebackend.service.ocr.ReceiptFeatureExtractor;
-import com.example.financebackend.service.ocr.ReceiptParser;
+import com.example.financebackend.service.ai.ocr.ReceiptFeatureExtractor;
+import com.example.financebackend.service.ai.ocr.ReceiptParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
