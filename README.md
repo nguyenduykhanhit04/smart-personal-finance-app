@@ -74,6 +74,7 @@ smart-personal-finance-app/
 ├── backend/                # [XEM CHI TIẾT](backend/README.md) - REST API Spring Boot 3 & ONNX Runtime
 ├── database/               # [XEM CHI TIẾT](database/README.md) - Thiết kế CSDL MySQL 8 & Seed Data
 ├── ai-pipeline/            # [XEM CHI TIẾT](ai-pipeline/README.md) - Pipeline huấn luyện YOLOv8 & Random Forest
+├── INTEGRATIONS.md         # [XEM CHI TIẾT](INTEGRATIONS.md) - Tổng hợp 7 điểm tích hợp công nghệ đặc biệt
 ├── docker-compose.yml      # Cấu hình khởi chạy toàn bộ hệ thống bằng Docker
 └── README.md               # Tài liệu tổng quan dự án
 ```
