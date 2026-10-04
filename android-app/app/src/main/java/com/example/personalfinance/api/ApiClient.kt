@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
 
-    private const val DEFAULT_BASE_URL = "https://unwinsome-vapoury-eustolia.ngrok-free.dev"
+    private const val DEFAULT_BASE_URL = "http://10.0.2.2:8080/"
     private const val HTTP_SCHEME = "http://"
     private const val HTTPS_SCHEME = "https://"
     private const val DEFAULT_PORT = "8080"
@@ -80,6 +80,7 @@ object ApiClient {
         }
     }
 
+    @get:JvmName("retrofitClient")
     val client: Retrofit
         get() = getClient()
 
@@ -89,6 +90,7 @@ object ApiClient {
             .also { cachedApiService = it }
     }
 
+    @get:JvmName("apiServiceInstance")
     val apiService: ApiService
         get() = getApiService()
 }

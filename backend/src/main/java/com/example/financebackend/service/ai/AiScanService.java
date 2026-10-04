@@ -1,5 +1,6 @@
 package com.example.financebackend.service.ai;
 
+import com.example.financebackend.exception.ResourceNotFoundException;
 import com.example.financebackend.model.AiScanLog;
 import com.example.financebackend.model.Category;
 import com.example.financebackend.model.User;
@@ -37,7 +38,7 @@ public class AiScanService {
                               BigDecimal detectedAmount, LocalDate detectedDate,
                               Integer suggestedCategoryId, BigDecimal confidenceScore) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
 
         Category suggestedCategory = null;
         if (suggestedCategoryId != null) {
@@ -61,17 +62,17 @@ public class AiScanService {
     @Transactional
     public AiScanLog saveFeedback(Integer aiScanLogId, Integer transactionId, Integer actualCategoryId) {
         AiScanLog log = aiScanLogRepository.findById(aiScanLogId)
-                .orElseThrow(() -> new RuntimeException("AI scan log not found with id: " + aiScanLogId));
+                .orElseThrow(() -> new ResourceNotFoundException("AI scan log not found with id: " + aiScanLogId));
 
         if (transactionId != null) {
             log.setTransaction(transactionRepository.findById(transactionId)
-                    .orElseThrow(() -> new RuntimeException("Transaction not found with id: " + transactionId)));
+                    .orElseThrow(() -> new ResourceNotFoundException("Transaction not found with id: " + transactionId)));
         }
 
         Category actualCategory = null;
         if (actualCategoryId != null) {
             actualCategory = categoryRepository.findById(actualCategoryId)
-                    .orElseThrow(() -> new RuntimeException("Category not found with id: " + actualCategoryId));
+                    .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + actualCategoryId));
         }
 
         log.setActualCategory(actualCategory);

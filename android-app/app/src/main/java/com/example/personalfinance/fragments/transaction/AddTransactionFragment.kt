@@ -29,6 +29,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.personalfinance.R
 import com.example.personalfinance.activities.MainActivity
 import com.example.personalfinance.activities.ScanBillActivity
+import com.example.personalfinance.api.ApiCallback
 import com.example.personalfinance.api.ApiClient
 import com.example.personalfinance.databinding.FragmentAddTransactionBinding
 import com.example.personalfinance.models.domain.Account
@@ -837,7 +838,7 @@ class AddTransactionFragment : DialogFragment() {
         }
 
         val userId = currentUser?.userId ?: return false
-        BudgetRepository().getBudgets(userId, object : BudgetRepository.ApiCallback<List<Budget>> {
+        BudgetRepository().getBudgets(userId, object : ApiCallback<List<Budget>?> {
             override fun onSuccess(result: List<Budget>?) {
                 val warningBudget = findWarningBudget(result, transaction)
                 if (warningBudget == null) {
@@ -857,7 +858,7 @@ class AddTransactionFragment : DialogFragment() {
                 }
             }
 
-            override fun onError(errorMessage: String) {
+            override fun onError(errorMessage: String?) {
                 finishSaveTransaction()
             }
         })

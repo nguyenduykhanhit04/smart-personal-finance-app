@@ -60,7 +60,8 @@ class DayTransactionsAdapter(
         }
 
         // Category color & icon mapping
-        val name = "${tx.title.lowercase(Locale.ROOT)} ${categoryName.lowercase(Locale.ROOT)}"
+        val titleStr = tx.title?.lowercase(Locale.ROOT) ?: ""
+        val name = "$titleStr ${categoryName.lowercase(Locale.ROOT)}"
         val (colorVal, iconRes) = when {
             name.contains("ăn uống") || name.contains("food") || name.contains("cà phê") || name.contains("bánh") || name.contains("highlands") ->
                 Pair(Color.parseColor("#10B981"), R.drawable.ic_transaction)

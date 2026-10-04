@@ -239,7 +239,8 @@ class ProfileFragment : Fragment() {
 
             Toast.makeText(requireContext(), "Đang tải ảnh đại diện lên...", Toast.LENGTH_SHORT).show()
 
-            ApiClient.apiService.uploadAvatar(user.userId, body)
+            val userId = user.userId ?: return
+            ApiClient.apiService.uploadAvatar(userId, body)
                 .enqueue(object : Callback<ApiResponse<User>> {
                     override fun onResponse(call: Call<ApiResponse<User>>, response: Response<ApiResponse<User>>) {
                         val apiResponse = response.body()
@@ -359,7 +360,8 @@ class ProfileFragment : Fragment() {
 
         Toast.makeText(requireContext(), "Đang cập nhật tên...", Toast.LENGTH_SHORT).show()
 
-        ApiClient.apiService.updateUser(user.userId, userUpdate)
+        val userId = user.userId ?: return
+        ApiClient.apiService.updateUser(userId, userUpdate)
             .enqueue(object : Callback<ApiResponse<User>> {
                 override fun onResponse(call: Call<ApiResponse<User>>, response: Response<ApiResponse<User>>) {
                     val apiResponse = response.body()
@@ -450,7 +452,8 @@ class ProfileFragment : Fragment() {
 
     private fun loadMetrics(month: Int, year: Int) {
         val user = currentUser ?: return
-        homeViewModel.fetchDashboardData(user.userId, month, year)
+        val userId = user.userId ?: return
+        homeViewModel.fetchDashboardData(userId, month, year)
     }
 
     private fun observeViewModel() {

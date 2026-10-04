@@ -21,17 +21,8 @@ public class TransactionImageController {
     @PostMapping("/upload")
     public ResponseEntity<ApiResponse<Void>> uploadImage(
             @RequestParam("transactionId") Integer transactionId,
-            @RequestParam("file") MultipartFile file) {
-
-        try {
-            transactionImageService.uploadImage(transactionId, file);
-            return ResponseEntity.ok(ApiResponse.success("Image uploaded successfully", null));
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
-        } catch (IOException e) {
-            return ResponseEntity.badRequest().body(ApiResponse.error("Failed to save image file: " + e.getMessage()));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
-        }
+            @RequestParam("file") MultipartFile file) throws IOException {
+        transactionImageService.uploadImage(transactionId, file);
+        return ResponseEntity.ok(ApiResponse.success("Image uploaded successfully", null));
     }
 }

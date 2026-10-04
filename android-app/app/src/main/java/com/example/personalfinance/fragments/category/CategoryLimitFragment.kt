@@ -115,7 +115,8 @@ class CategoryLimitFragment : Fragment() {
 
     private fun loadBudgets() {
         val user = currentUser ?: return
-        viewModel.loadBudgets(user.userId)
+        val userId = user.userId ?: return
+        viewModel.loadBudgets(userId)
     }
 
     private fun observeViewModel() {

@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Bounding Box Overlay -->
-    <com.example.personalfinance.yolo.BoundingBoxOverlay
+    <com.example.personalfinance.ml.yolo.BoundingBoxOverlay
         android:id="@+id/overlayView"
         android:layout_width="0dp"
         android:layout_height="0dp"

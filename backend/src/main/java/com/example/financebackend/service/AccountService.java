@@ -1,6 +1,7 @@
 package com.example.financebackend.service;
 
 import com.example.financebackend.dto.AccountDTO;
+import com.example.financebackend.exception.ResourceNotFoundException;
 import com.example.financebackend.model.Account;
 import com.example.financebackend.model.User;
 import com.example.financebackend.repository.AccountRepository;
@@ -33,7 +34,7 @@ public class AccountService {
     @Transactional
     public AccountDTO createAccount(AccountDTO dto) {
         User user = userRepository.findById(dto.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + dto.getUserId()));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + dto.getUserId()));
 
         Account account = Account.builder()
                 .user(user)
@@ -50,7 +51,7 @@ public class AccountService {
     @Transactional
     public AccountDTO updateAccount(Integer accountId, AccountDTO dto) {
         Account account = accountRepository.findById(accountId)
-                .orElseThrow(() -> new RuntimeException("Account not found with id: " + accountId));
+                .orElseThrow(() -> new ResourceNotFoundException("Account not found with id: " + accountId));
 
         if (dto.getAccountName() != null) account.setAccountName(dto.getAccountName());
         if (dto.getAccountType() != null) account.setAccountType(dto.getAccountType());
@@ -64,7 +65,7 @@ public class AccountService {
     @Transactional
     public void deleteAccount(Integer accountId) {
         if (!accountRepository.existsById(accountId)) {
-            throw new RuntimeException("Account not found with id: " + accountId);
+            throw new ResourceNotFoundException("Account not found with id: " + accountId);
         }
         accountRepository.deleteById(accountId);
     }
@@ -72,7 +73,7 @@ public class AccountService {
     @Transactional
     public void updateBalance(Integer accountId, BigDecimal amount, String transactionType) {
         Account account = accountRepository.findById(accountId)
-                .orElseThrow(() -> new RuntimeException("Account not found with id: " + accountId));
+                .orElseThrow(() -> new ResourceNotFoundException("Account not found with id: " + accountId));
 
         if ("income".equalsIgnoreCase(transactionType)) {
             account.setBalance(account.getBalance().add(amount));
@@ -86,7 +87,7 @@ public class AccountService {
     @Transactional
     public Account getOrCreateDefaultAccount(Integer userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
 
         List<Account> accounts = accountRepository.findByUserUserId(userId);
         java.util.Optional<Account> defaultAccountOpt = accounts.stream()

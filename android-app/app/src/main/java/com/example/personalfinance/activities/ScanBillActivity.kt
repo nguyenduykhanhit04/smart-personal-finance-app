@@ -244,8 +244,9 @@ class ScanBillActivity : AppCompatActivity() {
         response.errorBody()?.let { errorBody ->
             try {
                 val error = Gson().fromJson(errorBody.string(), ApiResponse::class.java)
-                if (!error?.message.isNullOrBlank()) {
-                    return error.message
+                val msg = error?.message
+                if (!msg.isNullOrBlank()) {
+                    return msg
                 }
             } catch (e: Exception) {
                 Log.w(TAG, "Could not parse OCR error response", e)

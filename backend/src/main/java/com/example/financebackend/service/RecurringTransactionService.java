@@ -1,8 +1,9 @@
 package com.example.financebackend.service;
 
-import com.example.financebackend.config.AppTime;
+import com.example.financebackend.util.AppTime;
 import com.example.financebackend.dto.RecurringTransactionDTO;
 import com.example.financebackend.dto.TransactionDTO;
+import com.example.financebackend.exception.ResourceNotFoundException;
 import com.example.financebackend.model.*;
 import com.example.financebackend.repository.*;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -45,9 +46,9 @@ public class RecurringTransactionService {
     @Transactional
     public RecurringTransactionDTO createRecurring(RecurringTransactionDTO dto) {
         User user = userRepository.findById(dto.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         Account account = accountRepository.findById(dto.getAccountId())
-                .orElseThrow(() -> new RuntimeException("Account not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Account not found"));
         Category category = null;
         if (dto.getCategoryId() != null) {
             category = categoryRepository.findById(dto.getCategoryId()).orElse(null);
@@ -76,7 +77,7 @@ public class RecurringTransactionService {
     @Transactional
     public RecurringTransactionDTO updateRecurring(Integer id, RecurringTransactionDTO dto) {
         RecurringTransaction rt = recurringTransactionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Recurring transaction not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Recurring transaction not found"));
 
         if (dto.getTitle() != null) rt.setTitle(dto.getTitle());
         if (dto.getAmount() != null) rt.setAmount(dto.getAmount());
@@ -96,7 +97,7 @@ public class RecurringTransactionService {
 
         if (dto.getAccountId() != null) {
             Account account = accountRepository.findById(dto.getAccountId())
-                    .orElseThrow(() -> new RuntimeException("Account not found"));
+                    .orElseThrow(() -> new ResourceNotFoundException("Account not found"));
             rt.setAccount(account);
         }
 

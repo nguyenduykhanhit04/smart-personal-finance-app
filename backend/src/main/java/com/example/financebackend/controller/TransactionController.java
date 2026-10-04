@@ -1,8 +1,9 @@
 package com.example.financebackend.controller;
 
-import com.example.financebackend.dto.response.ApiResponse;
 import com.example.financebackend.dto.TransactionDTO;
+import com.example.financebackend.dto.response.ApiResponse;
 import com.example.financebackend.service.TransactionService;
+import jakarta.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,56 +26,33 @@ public class TransactionController {
             @RequestParam Integer userId,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-        try {
-            List<TransactionDTO> transactions;
-            if (startDate != null && endDate != null) {
-                transactions = transactionService.getTransactionsByDateRange(userId, startDate, endDate);
-            } else {
-                transactions = transactionService.getTransactionsByUserId(userId);
-            }
-            return ResponseEntity.ok(ApiResponse.success(transactions));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
-        }
+        List<TransactionDTO> transactions = (startDate != null && endDate != null)
+                ? transactionService.getTransactionsByDateRange(userId, startDate, endDate)
+                : transactionService.getTransactionsByUserId(userId);
+        return ResponseEntity.ok(ApiResponse.success(transactions));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<TransactionDTO>> getTransactionById(@PathVariable Integer id) {
-        try {
-            TransactionDTO transaction = transactionService.getTransactionById(id);
-            return ResponseEntity.ok(ApiResponse.success(transaction));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
-        }
+        TransactionDTO transaction = transactionService.getTransactionById(id);
+        return ResponseEntity.ok(ApiResponse.success(transaction));
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse<TransactionDTO>> createTransaction(@RequestBody TransactionDTO transactionDTO) {
-        try {
-            TransactionDTO created = transactionService.createTransaction(transactionDTO);
-            return ResponseEntity.ok(ApiResponse.success("Transaction created successfully", created));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
-        }
+    public ResponseEntity<ApiResponse<TransactionDTO>> createTransaction(@Valid @RequestBody TransactionDTO transactionDTO) {
+        TransactionDTO created = transactionService.createTransaction(transactionDTO);
+        return ResponseEntity.ok(ApiResponse.success("Transaction created successfully", created));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<TransactionDTO>> updateTransaction(@PathVariable Integer id, @RequestBody TransactionDTO transactionDTO) {
-        try {
-            TransactionDTO updated = transactionService.updateTransaction(id, transactionDTO);
-            return ResponseEntity.ok(ApiResponse.success("Transaction updated successfully", updated));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
-        }
+    public ResponseEntity<ApiResponse<TransactionDTO>> updateTransaction(@PathVariable Integer id, @Valid @RequestBody TransactionDTO transactionDTO) {
+        TransactionDTO updated = transactionService.updateTransaction(id, transactionDTO);
+        return ResponseEntity.ok(ApiResponse.success("Transaction updated successfully", updated));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> deleteTransaction(@PathVariable Integer id) {
-        try {
-            transactionService.deleteTransaction(id);
-            return ResponseEntity.ok(ApiResponse.success("Transaction deleted successfully", null));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
-        }
+        transactionService.deleteTransaction(id);
+        return ResponseEntity.ok(ApiResponse.success("Transaction deleted successfully", null));
     }
 }

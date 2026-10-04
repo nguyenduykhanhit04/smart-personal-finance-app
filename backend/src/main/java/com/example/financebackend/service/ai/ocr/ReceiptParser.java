@@ -1,6 +1,6 @@
 package com.example.financebackend.service.ai.ocr;
 
-import com.example.financebackend.config.AppTime;
+import com.example.financebackend.util.AppTime;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

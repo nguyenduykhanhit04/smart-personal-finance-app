@@ -5,11 +5,13 @@ import com.example.financebackend.dto.request.AiProductClassifyRequest;
 import com.example.financebackend.dto.request.AiProductFeedbackRequest;
 import com.example.financebackend.dto.response.AiProductResponse;
 import com.example.financebackend.dto.response.ApiResponse;
+import com.example.financebackend.exception.ResourceNotFoundException;
 import com.example.financebackend.model.AiProductLog;
 import com.example.financebackend.service.CategoryService;
 import com.example.financebackend.service.ai.AiProductService;
 import com.example.financebackend.service.ai.ProductClassifierService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -37,11 +39,7 @@ public class AiProductController {
     }
 
     @PostMapping("/classify")
-    public ResponseEntity<ApiResponse<AiProductResponse>> classifyProduct(@RequestBody AiProductClassifyRequest request) {
-        if (request.getDetections() == null || request.getDetections().isEmpty()) {
-            throw new IllegalArgumentException("Detections list is empty");
-        }
-
+    public ResponseEntity<ApiResponse<AiProductResponse>> classifyProduct(@Valid @RequestBody AiProductClassifyRequest request) {
         logger.info("YOLO classify request userId={}, detectionsCount={}", request.getUserId(), request.getDetections().size());
 
         int suggestedCategoryId = productClassifierService.classify(request.getDetections());
@@ -49,7 +47,7 @@ public class AiProductController {
         CategoryDTO category = categoryService.getCategoriesByUserId(request.getUserId()).stream()
                 .filter(c -> c.getCategoryId().equals(suggestedCategoryId))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Category not found: " + suggestedCategoryId));
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + suggestedCategoryId));
         String categoryName = category.getCategoryName();
 
         String rawYoloJson = "[]";
@@ -70,10 +68,7 @@ public class AiProductController {
     }
 
     @PostMapping("/feedback")
-    public ResponseEntity<ApiResponse<String>> saveFeedback(@RequestBody AiProductFeedbackRequest request) {
-        if (request.getAiProductLogId() == null || request.getAiProductLogId() <= 0) {
-            throw new IllegalArgumentException("AI product log id is required");
-        }
+    public ResponseEntity<ApiResponse<String>> saveFeedback(@Valid @RequestBody AiProductFeedbackRequest request) {
         aiProductService.saveFeedback(request.getAiProductLogId(), request.getTransactionId());
         return ResponseEntity.ok(ApiResponse.success("Feedback saved successfully", "Thank you for your feedback"));
     }

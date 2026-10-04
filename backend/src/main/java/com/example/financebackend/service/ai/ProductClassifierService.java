@@ -51,8 +51,8 @@ public class ProductClassifierService {
             } else {
                 logger.warn("ONNX model file not found in resources: {}. Product classification will use rule-based fallback.", MODEL_RESOURCE_NAME);
             }
-        } catch (Exception e) {
-            logger.error("Failed to initialize ONNX runtime / load model from resources", e);
+        } catch (Throwable e) {
+            logger.error("Failed to initialize ONNX runtime / load model from resources. Falling back to rule-based classifier.", e);
         }
     }
 
@@ -65,7 +65,7 @@ public class ProductClassifierService {
             if (env != null) {
                 env.close();
             }
-        } catch (Exception e) {
+        } catch (Throwable e) {
             logger.error("Error closing ONNX runtime resources", e);
         }
     }

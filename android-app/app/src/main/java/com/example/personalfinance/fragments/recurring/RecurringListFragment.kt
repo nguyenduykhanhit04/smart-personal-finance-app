@@ -83,7 +83,8 @@ class RecurringListFragment : Fragment() {
 
     private fun loadRecurringTransactions() {
         val user = currentUser ?: return
-        ApiClient.apiService.getRecurringTransactions(user.userId)
+        val userId = user.userId ?: return
+        ApiClient.apiService.getRecurringTransactions(userId)
             .enqueue(object : Callback<ApiResponse<List<RecurringTransaction>>> {
                 override fun onResponse(
                     call: Call<ApiResponse<List<RecurringTransaction>>>,
@@ -252,7 +253,7 @@ class RecurringListFragment : Fragment() {
         _binding = null
     }
 
-    private static class RecurringAdapter(
+    private class RecurringAdapter(
         private val context: Context,
         private val list: List<RecurringTransaction>
     ) : RecyclerView.Adapter<RecurringAdapter.ViewHolder>() {

@@ -1,5 +1,6 @@
 package com.example.financebackend.service.ai;
 
+import com.example.financebackend.exception.ResourceNotFoundException;
 import com.example.financebackend.model.AiProductLog;
 import com.example.financebackend.model.Category;
 import com.example.financebackend.model.User;
@@ -31,10 +32,10 @@ public class AiProductService {
     @Transactional
     public AiProductLog saveLog(Integer userId, String rawYoloJson, Integer suggestedCategoryId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
 
         Category suggestedCategory = categoryRepository.findById(suggestedCategoryId)
-                .orElseThrow(() -> new RuntimeException("Suggested category not found with id: " + suggestedCategoryId));
+                .orElseThrow(() -> new ResourceNotFoundException("Suggested category not found with id: " + suggestedCategoryId));
 
         AiProductLog log = AiProductLog.builder()
                 .user(user)
@@ -48,11 +49,11 @@ public class AiProductService {
     @Transactional
     public AiProductLog saveFeedback(Integer aiProductLogId, Integer transactionId) {
         AiProductLog log = aiProductLogRepository.findById(aiProductLogId)
-                .orElseThrow(() -> new RuntimeException("AI product log not found with id: " + aiProductLogId));
+                .orElseThrow(() -> new ResourceNotFoundException("AI product log not found with id: " + aiProductLogId));
 
         if (transactionId != null) {
             log.setTransaction(transactionRepository.findById(transactionId)
-                    .orElseThrow(() -> new RuntimeException("Transaction not found with id: " + transactionId)));
+                    .orElseThrow(() -> new ResourceNotFoundException("Transaction not found with id: " + transactionId)));
         }
 
         return aiProductLogRepository.save(log);

@@ -1,6 +1,7 @@
 package com.example.financebackend.service;
 
 import com.example.financebackend.dto.CategoryDTO;
+import com.example.financebackend.exception.ResourceNotFoundException;
 import com.example.financebackend.model.Category;
 import com.example.financebackend.model.User;
 import com.example.financebackend.repository.CategoryRepository;
@@ -82,7 +83,7 @@ public class CategoryService {
         User user = null;
         if (dto.getUserId() != null) {
             user = userRepository.findById(dto.getUserId())
-                    .orElseThrow(() -> new RuntimeException("User not found with id: " + dto.getUserId()));
+                    .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + dto.getUserId()));
         }
 
         Category category = Category.builder()
@@ -101,7 +102,7 @@ public class CategoryService {
     @Transactional
     public CategoryDTO updateCategory(Integer categoryId, CategoryDTO dto) {
         Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new RuntimeException("Category not found with id: " + categoryId));
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + categoryId));
 
         if (dto.getCategoryName() != null) category.setCategoryName(dto.getCategoryName());
         if (dto.getCategoryType() != null) category.setCategoryType(dto.getCategoryType());
@@ -115,7 +116,7 @@ public class CategoryService {
     @Transactional
     public void deleteCategory(Integer categoryId) {
         if (!categoryRepository.existsById(categoryId)) {
-            throw new RuntimeException("Category not found with id: " + categoryId);
+            throw new ResourceNotFoundException("Category not found with id: " + categoryId);
         }
         categoryRepository.deleteById(categoryId);
     }

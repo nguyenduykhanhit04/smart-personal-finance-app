@@ -1,6 +1,7 @@
 package com.example.financebackend.service;
 
 import com.example.financebackend.dto.UserDTO;
+import com.example.financebackend.exception.ResourceNotFoundException;
 import com.example.financebackend.model.User;
 import com.example.financebackend.repository.UserRepository;
 import com.google.firebase.auth.FirebaseToken;
@@ -88,14 +89,14 @@ public class UserService {
 
     public UserDTO getUserById(Integer userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
         return toDTO(user);
     }
 
     @Transactional
     public UserDTO updateUser(Integer userId, UserDTO userDTO) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
 
         if (userDTO.getFullName() != null) user.setFullName(userDTO.getFullName());
         if (userDTO.getPhone() != null) user.setPhone(userDTO.getPhone());

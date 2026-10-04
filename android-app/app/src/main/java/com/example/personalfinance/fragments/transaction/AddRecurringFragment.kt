@@ -214,7 +214,8 @@ class AddRecurringFragment : BottomSheetDialogFragment() {
 
     private fun fetchCategories() {
         val user = currentUser ?: return
-        ApiClient.apiService.getCategories(user.userId).enqueue(object : Callback<ApiResponse<List<Category>>> {
+        val userId = user.userId ?: return
+        ApiClient.apiService.getCategories(userId).enqueue(object : Callback<ApiResponse<List<Category>>> {
             override fun onResponse(call: Call<ApiResponse<List<Category>>>, response: Response<ApiResponse<List<Category>>>) {
                 val body = response.body()
                 if (response.isSuccessful && body?.isSuccess == true) {
@@ -230,7 +231,8 @@ class AddRecurringFragment : BottomSheetDialogFragment() {
 
     private fun fetchAccounts() {
         val user = currentUser ?: return
-        ApiClient.apiService.getAccounts(user.userId).enqueue(object : Callback<ApiResponse<List<Account>>> {
+        val userId = user.userId ?: return
+        ApiClient.apiService.getAccounts(userId).enqueue(object : Callback<ApiResponse<List<Account>>> {
             override fun onResponse(call: Call<ApiResponse<List<Account>>>, response: Response<ApiResponse<List<Account>>>) {
                 val body = response.body()
                 if (response.isSuccessful && body?.isSuccess == true) {
@@ -257,8 +259,8 @@ class AddRecurringFragment : BottomSheetDialogFragment() {
         if (allCategories.isEmpty()) return
         for (cat in allCategories) {
             if (selectedType.equals(cat.categoryType, ignoreCase = true)) {
-                selectedCategoryId = cat.categoryId
-                selectedCategoryName = cat.categoryName
+                selectedCategoryId = cat.categoryId ?: 1
+                selectedCategoryName = cat.categoryName ?: "Khác"
                 selectedCategoryColor = cat.color ?: "#6366F1"
                 binding.tvCategoryName.text = selectedCategoryName
                 break
@@ -296,8 +298,8 @@ class AddRecurringFragment : BottomSheetDialogFragment() {
             .setTitle("Chọn danh mục")
             .setItems(names) { _, which ->
                 val selectedCat = filtered[which]
-                selectedCategoryId = selectedCat.categoryId
-                selectedCategoryName = selectedCat.categoryName
+                selectedCategoryId = selectedCat.categoryId ?: 1
+                selectedCategoryName = selectedCat.categoryName ?: "Khác"
                 selectedCategoryColor = selectedCat.color ?: "#6366F1"
                 binding.tvCategoryName.text = selectedCategoryName
             }
