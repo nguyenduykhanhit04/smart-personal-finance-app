@@ -1,12 +1,12 @@
 # 📱 Android Application Module - Smart Personal Finance App
 
-Ứng dụng di động Native Android xây dựng hoàn toàn bằng **100% Kotlin**, áp dụng kiến trúc **MVVM (Model-View-ViewModel)** chuẩn của Google, tích hợp trí tuệ nhân tạo thị giác máy tính On-Device AI (CameraX, YOLOv8 TFLite, Google ML Kit OCR) và kết nối RESTful API với Backend.
+Ứng dụng di động Android xây dựng bằng **Kotlin**, áp dụng kiến trúc **MVVM (Model-View-ViewModel)** chuẩn của Google, tích hợp trí tuệ nhân tạo thị giác máy tính On-Device AI (CameraX, YOLOv8 TFLite, Google ML Kit OCR) và kết nối RESTful API với Backend.
 
 ---
 
 ## 🛠️ Công nghệ & Thư viện sử dụng
 
-- **Ngôn ngữ:** Kotlin 1.9.x (100% Codebase).
+- **Ngôn ngữ:** Kotlin.
 - **Target SDK:** Android 14 (API 34), Min SDK: Android 7.0 (API 24).
 - **Kiến trúc:** MVVM (Model - View - ViewModel), Repository Pattern.
 - **Android Jetpack:**

@@ -117,7 +117,7 @@
          │
          ▼
 [ Google Gemini Generative AI Response ]
-  Trả về dữ liệu có cấu trúc 100% chuẩn JSON:
+  Trả về dữ liệu có cấu trúc chuẩn JSON:
   {
      "merchant": "Highlands Coffee",
      "amount": 89000,
@@ -179,8 +179,8 @@
 - **Giải pháp trong dự án:** Tại màn hình Đăng nhập ([LoginActivity.kt](file:///d:/Project/KHMT/KHMT&CNPM%20-%20NHOM%203/android-app/app/src/main/java/com/example/personalfinance/activities/LoginActivity.kt)), **nhấn giữ vào Logo app khoảng 2 giây** sẽ kích hoạt hộp thoại tùy biến địa chỉ IP Server ngay lập tức mà không cần sửa một dòng code nào.
 
 ### 2. Chuẩn hóa Data Validation & Exception Handling tập trung
-- 100% Request DTOs đều được kiểm soát bởi Bean Validation (`@NotNull`, `@NotBlank`, `@PositiveOrZero`).
-- Tất cả các lỗi nghiệp vụ, lỗi cú pháp hoặc lỗi cơ sở dữ liệu đều được chuyển đổi qua `GlobalExceptionHandler` thành dạng chuẩn JSON `ApiResponse` thống nhất, giúp ứng dụng Android không bao giờ bị văng/crash khi có lỗi mạng hay lỗi dữ liệu.
+- Các Request DTOs đều được kiểm soát bởi Bean Validation (`@NotNull`, `@NotBlank`, `@PositiveOrZero`).
+- Các lỗi nghiệp vụ hoặc ngoại lệ hệ thống đều được xử lý qua `GlobalExceptionHandler` trả về dạng JSON `ApiResponse` thống nhất.
 
 ---
 
@@ -192,4 +192,4 @@
 | **Phân loại danh mục** | Gán cứng if-else đơn giản | **Random Forest qua ONNX Runtime Java** (< 2ms) + Fallback |
 | **Quét hóa đơn** | Regex trích xuất văn bản thô dễ sai sót | **Google ML Kit OCR + Google Gemini 2.5 Flash LLM** |
 | **Xác thực người dùng**| Lưu mật khẩu MD5/Bcrypt tại CSDL cục bộ | **Firebase Auth + JWT Stateless Token Verification** |
-| **Triển khai hệ thống**| Cài đặt Java, MySQL, cấu hình thủ công | **1 lệnh Docker Compose tự động hóa 100%** |
+| **Triển khai hệ thống**| Cài đặt Java, MySQL, cấu hình thủ công | **Docker Compose tự động hóa đóng gói dịch vụ** |
