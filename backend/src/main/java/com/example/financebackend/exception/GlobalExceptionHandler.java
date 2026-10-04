@@ -1,6 +1,6 @@
 package com.example.financebackend.exception;
 
-import com.example.financebackend.dto.ApiResponse;
+import com.example.financebackend.dto.response.ApiResponse;
 import org.apache.catalina.connector.ClientAbortException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

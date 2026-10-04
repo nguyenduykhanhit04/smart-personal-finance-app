@@ -1,7 +1,7 @@
 package com.example.financebackend.controller;
 
-import com.example.financebackend.dto.ApiResponse;
-import com.example.financebackend.dto.LoginRequest;
+import com.example.financebackend.dto.request.LoginRequest;
+import com.example.financebackend.dto.response.ApiResponse;
 import com.example.financebackend.dto.UserDTO;
 import com.example.financebackend.service.UserService;
 import com.google.firebase.auth.FirebaseAuth;

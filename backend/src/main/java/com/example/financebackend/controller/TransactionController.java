@@ -1,6 +1,6 @@
 package com.example.financebackend.controller;
 
-import com.example.financebackend.dto.ApiResponse;
+import com.example.financebackend.dto.response.ApiResponse;
 import com.example.financebackend.dto.TransactionDTO;
 import com.example.financebackend.service.TransactionService;
 import org.springframework.format.annotation.DateTimeFormat;

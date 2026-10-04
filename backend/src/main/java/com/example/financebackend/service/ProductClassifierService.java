@@ -4,9 +4,9 @@ import ai.onnxruntime.OnnxTensor;
 import ai.onnxruntime.OrtEnvironment;
 import ai.onnxruntime.OrtSession;
 import ai.onnxruntime.OrtSession.Result;
+import com.example.financebackend.dto.YoloDetectionDTO;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -40,12 +40,6 @@ public class ProductClassifierService {
     private OrtEnvironment env;
     private OrtSession session;
 
-    @Data
-    public static class YoloDetection {
-        private String className;
-        private double confidence;
-    }
-
     @PostConstruct
     public void init() {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream(MODEL_RESOURCE_NAME)) {
@@ -76,7 +70,7 @@ public class ProductClassifierService {
         }
     }
 
-    public int classify(List<YoloDetection> detections) {
+    public int classify(List<YoloDetectionDTO> detections) {
         if (session == null) {
             logger.info("No ONNX session active, falling back to rule-based classification.");
             return fallbackClassify(detections);
@@ -131,7 +125,7 @@ public class ProductClassifierService {
         }
     }
 
-    private double[] extractFeatures(List<YoloDetection> detections) {
+    private double[] extractFeatures(List<YoloDetectionDTO> detections) {
         double[] features = new double[27];
         if (detections == null || detections.isEmpty()) {
             return features;
@@ -141,13 +135,13 @@ public class ProductClassifierService {
         int total = 0;
         int lowConfidenceCount = 0;
 
-        for (YoloDetection detection : detections) {
+        for (YoloDetectionDTO detection : detections) {
             if (detection == null) {
                 continue;
             }
 
-            String className = detection.className != null ? detection.className : "";
-            double confidence = detection.confidence;
+            String className = detection.getClassName() != null ? detection.getClassName() : "";
+            double confidence = detection.getConfidence();
             total++;
             confidenceSum += confidence;
             features[24] = Math.max(features[24], confidence);
@@ -203,7 +197,7 @@ public class ProductClassifierService {
         }
     }
 
-    private int fallbackClassify(List<YoloDetection> detections) {
+    private int fallbackClassify(List<YoloDetectionDTO> detections) {
         double[] features = extractFeatures(detections);
         double foodScore = features[18];
         double transportScore = features[19];

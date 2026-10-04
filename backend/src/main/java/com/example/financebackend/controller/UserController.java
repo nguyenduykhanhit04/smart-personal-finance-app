@@ -1,6 +1,6 @@
 package com.example.financebackend.controller;
 
-import com.example.financebackend.dto.ApiResponse;
+import com.example.financebackend.dto.response.ApiResponse;
 import com.example.financebackend.dto.UserDTO;
 import com.example.financebackend.service.UserService;
 import org.springframework.http.ResponseEntity;
