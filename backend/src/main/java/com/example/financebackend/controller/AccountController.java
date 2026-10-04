@@ -1,7 +1,7 @@
 package com.example.financebackend.controller;
 
 import com.example.financebackend.dto.AccountDTO;
-import com.example.financebackend.dto.ApiResponse;
+import com.example.financebackend.dto.response.ApiResponse;
 import com.example.financebackend.service.AccountService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

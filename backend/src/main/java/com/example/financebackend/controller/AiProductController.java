@@ -1,19 +1,19 @@
 package com.example.financebackend.controller;
 
-import com.example.financebackend.dto.ApiResponse;
+import com.example.financebackend.dto.CategoryDTO;
+import com.example.financebackend.dto.request.AiProductClassifyRequest;
+import com.example.financebackend.dto.request.AiProductFeedbackRequest;
+import com.example.financebackend.dto.response.AiProductResponse;
+import com.example.financebackend.dto.response.ApiResponse;
 import com.example.financebackend.model.AiProductLog;
-import com.example.financebackend.model.Category;
-import com.example.financebackend.repository.CategoryRepository;
 import com.example.financebackend.service.AiProductService;
+import com.example.financebackend.service.CategoryService;
 import com.example.financebackend.service.ProductClassifierService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/ai-product")
@@ -23,21 +23,21 @@ public class AiProductController {
 
     private final ProductClassifierService productClassifierService;
     private final AiProductService aiProductService;
-    private final CategoryRepository categoryRepository;
+    private final CategoryService categoryService;
     private final ObjectMapper objectMapper;
 
     public AiProductController(ProductClassifierService productClassifierService,
                                AiProductService aiProductService,
-                               CategoryRepository categoryRepository,
+                               CategoryService categoryService,
                                ObjectMapper objectMapper) {
         this.productClassifierService = productClassifierService;
         this.aiProductService = aiProductService;
-        this.categoryRepository = categoryRepository;
+        this.categoryService = categoryService;
         this.objectMapper = objectMapper;
     }
 
     @PostMapping("/classify")
-    public ResponseEntity<ApiResponse<AiProductResult>> classifyProduct(@RequestBody ProductClassificationRequest request) {
+    public ResponseEntity<ApiResponse<AiProductResponse>> classifyProduct(@RequestBody AiProductClassifyRequest request) {
         if (request.getDetections() == null || request.getDetections().isEmpty()) {
             throw new IllegalArgumentException("Detections list is empty");
         }
@@ -46,7 +46,9 @@ public class AiProductController {
 
         int suggestedCategoryId = productClassifierService.classify(request.getDetections());
 
-        Category category = categoryRepository.findById(suggestedCategoryId)
+        CategoryDTO category = categoryService.getCategoriesByUserId(request.getUserId()).stream()
+                .filter(c -> c.getCategoryId().equals(suggestedCategoryId))
+                .findFirst()
                 .orElseThrow(() -> new RuntimeException("Category not found: " + suggestedCategoryId));
         String categoryName = category.getCategoryName();
 
@@ -59,7 +61,7 @@ public class AiProductController {
 
         AiProductLog log = aiProductService.saveLog(request.getUserId(), rawYoloJson, suggestedCategoryId);
 
-        AiProductResult result = new AiProductResult();
+        AiProductResponse result = new AiProductResponse();
         result.setAiProductLogId(log.getAiProductLogId());
         result.setSuggestedCategoryId(suggestedCategoryId);
         result.setSuggestedCategoryName(categoryName);
@@ -68,7 +70,7 @@ public class AiProductController {
     }
 
     @PostMapping("/feedback")
-    public ResponseEntity<ApiResponse<String>> saveFeedback(@RequestBody ProductFeedbackRequest request) {
+    public ResponseEntity<ApiResponse<String>> saveFeedback(@RequestBody AiProductFeedbackRequest request) {
         if (request.getAiProductLogId() == null || request.getAiProductLogId() <= 0) {
             throw new IllegalArgumentException("AI product log id is required");
         }
@@ -76,22 +78,4 @@ public class AiProductController {
         return ResponseEntity.ok(ApiResponse.success("Feedback saved successfully", "Thank you for your feedback"));
     }
 
-    @Data
-    public static class ProductClassificationRequest {
-        private Integer userId;
-        private List<ProductClassifierService.YoloDetection> detections;
-    }
-
-    @Data
-    public static class ProductFeedbackRequest {
-        private Integer aiProductLogId;
-        private Integer transactionId;
-    }
-
-    @Data
-    public static class AiProductResult {
-        private Integer aiProductLogId;
-        private Integer suggestedCategoryId;
-        private String suggestedCategoryName;
-    }
 }

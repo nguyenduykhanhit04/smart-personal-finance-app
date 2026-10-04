@@ -1,8 +1,8 @@
 package com.example.financebackend.service;
 
+import com.example.financebackend.dto.response.GeminiReceiptResponse;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,7 +40,7 @@ public class GeminiService {
         this.objectMapper = objectMapper;
     }
 
-    public GeminiReceiptResult analyzeReceipt(String rawOcrText) {
+    public GeminiReceiptResponse analyzeReceipt(String rawOcrText) {
         String url = apiUrl + "?key=" + apiKey;
 
         String prompt = "Phân tích đoạn văn bản OCR từ hóa đơn sau và trích xuất các thông tin:\n"
@@ -104,7 +104,7 @@ public class GeminiService {
         }
     }
 
-    private GeminiReceiptResult parseGeminiResponse(String responseJson) {
+    private GeminiReceiptResponse parseGeminiResponse(String responseJson) {
         try {
             JsonNode root = objectMapper.readTree(responseJson);
             JsonNode candidates = root.path("candidates");
@@ -119,7 +119,7 @@ public class GeminiService {
                 logger.info("Raw JSON response text from Gemini: {}", rawTextJson);
 
                 JsonNode resultNode = objectMapper.readTree(rawTextJson);
-                GeminiReceiptResult result = new GeminiReceiptResult();
+                GeminiReceiptResponse result = new GeminiReceiptResponse();
 
                 if (resultNode.has("merchant") && !resultNode.get("merchant").isNull()) {
                     result.setMerchant(resultNode.get("merchant").asText());
@@ -180,11 +180,4 @@ public class GeminiService {
         }
     }
 
-    @Data
-    public static class GeminiReceiptResult {
-        private String merchant;
-        private BigDecimal amount;
-        private LocalDate date;
-        private String category;
-    }
 }

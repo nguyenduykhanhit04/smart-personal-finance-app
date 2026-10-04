@@ -1,13 +1,16 @@
 package com.example.financebackend.controller;
 
-import com.example.financebackend.dto.ApiResponse;
+import com.example.financebackend.dto.request.AiScanClassifyRequest;
+import com.example.financebackend.dto.request.AiScanFeedbackRequest;
+import com.example.financebackend.dto.response.AiScanResponse;
+import com.example.financebackend.dto.response.ApiResponse;
+import com.example.financebackend.dto.response.GeminiReceiptResponse;
 import com.example.financebackend.model.AiScanLog;
 import com.example.financebackend.model.Category;
 import com.example.financebackend.service.AiScanService;
 import com.example.financebackend.service.CategoryService;
 import com.example.financebackend.service.GeminiService;
 
-import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +41,7 @@ public class AiScanController {
     }
 
     @PostMapping("/classify")
-    public ResponseEntity<ApiResponse<AiScanResult>> classifyBill(@RequestBody OcrRequest request) {
+    public ResponseEntity<ApiResponse<AiScanResponse>> classifyBill(@RequestBody AiScanClassifyRequest request) {
         String rawText = request.getRawOcrText();
         if (rawText == null || rawText.isBlank()) {
             throw new IllegalArgumentException("OCR text is empty");
@@ -47,7 +50,7 @@ public class AiScanController {
         logger.info("OCR classify request userId={}, rawLength={}", request.getUserId(), rawText.length());
         logger.info("OCR raw text:\n{}", rawText);
 
-        GeminiService.GeminiReceiptResult geminiResult = geminiService.analyzeReceipt(rawText);
+        GeminiReceiptResponse geminiResult = geminiService.analyzeReceipt(rawText);
         BigDecimal amount = geminiResult.getAmount();
         LocalDate date = geminiResult.getDate();
         String merchant = geminiResult.getMerchant();
@@ -73,7 +76,7 @@ public class AiScanController {
                 confidenceScore
         );
 
-        AiScanResult result = new AiScanResult();
+        AiScanResponse result = new AiScanResponse();
         result.setAiScanLogId(log.getAiScanLogId());
         result.setDetectedMerchant(merchant);
         result.setDetectedAmount(amount);
@@ -85,7 +88,7 @@ public class AiScanController {
     }
 
     @PostMapping("/feedback")
-    public ResponseEntity<ApiResponse<String>> saveFeedback(@RequestBody ScanFeedbackRequest request) {
+    public ResponseEntity<ApiResponse<String>> saveFeedback(@RequestBody AiScanFeedbackRequest request) {
         if (request.getAiScanLogId() == null || request.getAiScanLogId() <= 0) {
             throw new IllegalArgumentException("AI scan log id is required");
         }
@@ -97,27 +100,4 @@ public class AiScanController {
         return ResponseEntity.ok(ApiResponse.success("Feedback saved successfully", "Thank you for your feedback"));
     }
 
-    @Data
-    public static class OcrRequest {
-        private Integer userId;
-        private String rawOcrText;
-    }
-
-    @Data
-    public static class ScanFeedbackRequest {
-        private Integer aiScanLogId;
-        private Integer transactionId;
-        private Integer actualCategoryId;
-    }
-
-    @Data
-    public static class AiScanResult {
-        private Integer aiScanLogId;
-        private String detectedMerchant;
-        private BigDecimal detectedAmount;
-        private LocalDate detectedDate;
-        private Integer suggestedCategoryId;
-        private String suggestedCategoryName;
-        private BigDecimal confidenceScore;
-    }
 }
