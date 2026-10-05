@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import jakarta.annotation.PostConstruct;
 
 import java.io.*;
-import java.math.BigDecimal;
 import java.util.*;
 
 import com.example.financebackend.service.ai.ocr.ReceiptFeatures;
