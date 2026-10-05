@@ -81,7 +81,7 @@
    - 18 nhãn nhị phân: `has_coffee_cup`, `has_bread`, `has_fastfood`...
    - 5 nhóm đếm tần suất: `food_drink_count`, `transport_count`, `shopping_count`, `entertainment_count`, `health_count`.
    - 4 thông số chất lượng nhận diện: `total_objects`, `max_confidence`, `avg_confidence`, `low_confidence_count`.
-2. **Suy luận siêu tốc (< 2ms):** Mô hình Random Forest đã được xuất thành [random_forest_model.onnx](file:///d:/Project/KHMT/KHMT&CNPM%20-%20NHOM%203/backend/src/main/resources/random_forest_model.onnx) được nạp vào bộ nhớ RAM của Spring Boot.
+2. **Suy luận siêu tốc (< 2ms):** Mô hình Random Forest đã được xuất thành [random_forest_model.onnx](file:///d:/Project/KHMT/DATN/backend/src/main/resources/random_forest_model.onnx) được nạp vào bộ nhớ RAM của Spring Boot.
 3. **Cơ chế phòng vệ thông minh (Graceful Fallback):**
    ```java
    try {
@@ -163,7 +163,7 @@
 ## Tích hợp 6: Đóng gói Đa dịch vụ Docker Compose & Xử lý Bộ mã UTF-8
 
 ### Điểm đặc biệt:
-- **Zero-Configuration Quickstart:** Toàn bộ hệ sinh thái (Database MySQL 8.0, Spring Boot Backend Java 21) được cấu hình trọn vẹn trong [docker-compose.yml](file:///d:/Project/KHMT/KHMT&CNPM%20-%20NHOM%203/docker-compose.yml).
+- **Zero-Configuration Quickstart:** Toàn bộ hệ sinh thái (Database MySQL 8.0, Spring Boot Backend Java 21) được cấu hình trọn vẹn trong [docker-compose.yml](file:///d:/Project/KHMT/DATN/docker-compose.yml).
 - **Chuẩn hóa triệt để Tiếng Việt UTF-8 (Chống lỗi Mojibake):**
   - Cấu hình server MySQL: `--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci`.
   - Khởi tạo script có: `SET NAMES utf8mb4;`.
@@ -176,7 +176,7 @@
 
 ### 1. Phím tắt cấu hình IP Server (Developer Easter Egg)
 - Thông thường khi phát triển ứng dụng di động kết nối Backend nội bộ, việc đổi IP từ máy ảo (`10.0.2.2`) sang máy thật (`192.168.x.x`) đòi hỏi phải sửa code và build lại app.
-- **Giải pháp trong dự án:** Tại màn hình Đăng nhập ([LoginActivity.kt](file:///d:/Project/KHMT/KHMT&CNPM%20-%20NHOM%203/android-app/app/src/main/java/com/example/personalfinance/activities/LoginActivity.kt)), **nhấn giữ vào Logo app khoảng 2 giây** sẽ kích hoạt hộp thoại tùy biến địa chỉ IP Server ngay lập tức mà không cần sửa một dòng code nào.
+- **Giải pháp trong dự án:** Tại màn hình Đăng nhập ([LoginActivity.kt](file:///d:/Project/KHMT/DATN/android-app/app/src/main/java/com/example/personalfinance/activities/LoginActivity.kt)), **nhấn giữ vào Logo app khoảng 2 giây** sẽ kích hoạt hộp thoại tùy biến địa chỉ IP Server ngay lập tức mà không cần sửa một dòng code nào.
 
 ### 2. Chuẩn hóa Data Validation & Exception Handling tập trung
 - Các Request DTOs đều được kiểm soát bởi Bean Validation (`@NotNull`, `@NotBlank`, `@PositiveOrZero`).

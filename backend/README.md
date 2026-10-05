@@ -182,7 +182,7 @@ Khi có lỗi xác thực hoặc lỗi hệ thống, mã lỗi HTTP chuẩn (400
 Lớp `ProductClassifierService` xử lý thông minh kết quả nhận diện từ Camera thiết bị:
 1. Tiếp nhận danh sách nhận diện từ Mobile: Nhãn sản phẩm (`coffee_cup`, `fastfood`, `clothes`...) kèm xác suất nhận diện (`confidence`).
 2. Vector hóa thành 27 đặc trưng (`RF_FEATURES`): bao gồm cờ nhị phân từng nhãn, số lượng nhóm danh mục và thống kê độ tin cậy.
-3. Chạy suy luận qua Microsoft ONNX Runtime Java với mô hình [random_forest_model.onnx](file:///d:/Project/KHMT/KHMT&CNPM%20-%20NHOM%203/backend/src/main/resources/random_forest_model.onnx).
+3. Chạy suy luận qua Microsoft ONNX Runtime Java với mô hình [random_forest_model.onnx](file:///d:/Project/KHMT/DATN/backend/src/main/resources/random_forest_model.onnx).
 4. **Cơ chế chịu lỗi (Graceful Fallback):** Nếu môi trường thiếu thư viện native hoặc không tìm thấy mô hình, hệ thống tự động chuyển sang bộ quy tắc suy luận heuristic (Rule-based Fallback), đảm bảo ứng dụng không bao giờ bị dừng đột ngột.
 
 ---
