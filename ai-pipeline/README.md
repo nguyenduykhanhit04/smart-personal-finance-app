@@ -53,7 +53,7 @@ Mô hình nhận diện **18 lớp đối tượng mua sắm phổ biến**:
 
 ## 🔬 Kỹ thuật Kỹ thuật Đặc trưng (Feature Engineering - 27 Features)
 
-Từ kết quả phát hiện của YOLO, hàm `compute_features()` trong [config.py](file:///d:/Project/KHMT/KHMT&CNPM%20-%20NHOM%203/ai-pipeline/config.py) chuyển đổi thành vector 27 chiều:
+Từ kết quả phát hiện của YOLO, hàm `compute_features()` trong [config.py](file:///d:/Project/KHMT/DATN/ai-pipeline/config.py) chuyển đổi thành vector 27 chiều:
 
 1. **18 Đặc trưng Nhị phân (`has_<label>`):** Đánh dấu có sự xuất hiện của từng loại sản phẩm trong khung hình (Giá trị `0` hoặc `1`).
 2. **5 Đặc trưng Nhóm đếm (`group_counts`):**
