@@ -26,7 +26,7 @@
   - Google Play Services Auth.
 - **Trí tuệ Nhân tạo Trên Thiết bị (On-Device AI):**
   - CameraX (Điều khiển camera mượt mà, phân tích khung hình thời gian thực).
-  - Google ML Kit Text Recognition (OCR quét hóa đơn siêu tốc không cần mạng).
+  - Google ML Kit Text Recognition (OCR offline trên thiết bị, kết hợp **Google Gemini 2.5 Flash** phân tích JSON trên Backend).
   - TensorFlow Lite (TFLite) & Ultralytics YOLOv8 (Nhận diện đồ vật/sản phẩm trực tiếp qua camera).
 
 ---
@@ -43,16 +43,15 @@ android-app/
 │   │   │   │   ├── LoginActivity.kt          # Đăng nhập (Email/Mật khẩu, Google)
 │   │   │   │   ├── RegisterActivity.kt       # Đăng ký tài khoản mới
 │   │   │   │   ├── MainActivity.kt           # Khung chứa Bottom Navigation chính
-│   │   │   │   ├── ScanBillActivity.kt       # Quét hóa đơn OCR tự động
-│   │   │   │   ├── ScanProductActivity.kt    # Camera AI nhận diện sản phẩm YOLO
-│   │   │   │   ├── ImagePreviewActivity.kt   # Xem ảnh chứng từ đính kèm
-│   │   │   │   └── TransactionDetailActivity.kt
+│   │   │   │   ├── ScanBillActivity.kt       # Quét hóa đơn (OCR + Gemini AI)
+│   │   │   │   └── ScanProductActivity.kt    # Camera AI nhận diện sản phẩm YOLO
 │   │   │   ├── fragments/            # Các màn hình chức năng con (Fragment)
 │   │   │   │   ├── home/                     # Trang chủ tổng quan số dư, thu chi gần đây
 │   │   │   │   ├── transaction/              # Lịch sử giao dịch, chi tiết ngày, thêm mới
 │   │   │   │   ├── budget/                   # Quản lý ngân sách & tiến độ hạn mức
 │   │   │   │   ├── category/                 # Cài đặt hạn mức & quản lý danh mục
 │   │   │   │   ├── account/                  # Chi tiết ví/tài khoản
+│   │   │   │   ├── recurring/                # Giao dịch định kỳ
 │   │   │   │   └── profile/                  # Thông tin cá nhân & cài đặt
 │   │   │   ├── adapters/             # RecyclerView Adapters hiển thị danh sách
 │   │   │   ├── api/                  # Tầng kết nối mạng RESTful API
@@ -64,6 +63,7 @@ android-app/
 │   │   │   │   ├── BoundingBoxOverlay.kt     # Vẽ khung nhận diện vật thể thời gian thực
 │   │   │   │   └── YoloDetector.kt           # Nạp model TFLite và xử lý bounding box
 │   │   │   ├── models/               # Data models, DTOs và Domain Entities
+│   │   │   ├── repositories/         # Repository pattern xử lý gọi API & cache dữ liệu
 │   │   │   ├── utils/                # Tiện ích định dạng tiền tệ, ngày tháng, SharedPreferences
 │   │   │   └── viewmodels/           # ViewModels xử lý logic và cung cấp LiveData cho UI
 │   │   ├── res/                      # Tài nguyên giao diện XML, hình ảnh, màu sắc
@@ -94,12 +94,14 @@ android-app/
 - Đính kèm hình ảnh hóa đơn hoặc hình chụp mặt hàng.
 - Lọc giao dịch theo từng ngày cụ thể hoặc theo tháng.
 
-### 4. Quét Hóa đơn Thông minh (OCR Scanner)
+### 4. Quét Hóa đơn Thông minh (OCR + Gemini AI)
 - Mở camera chụp hóa đơn hoặc phiếu thu/chi.
-- Google ML Kit phân tích tức thì các khối văn bản, tự động bóc tách:
+- Google ML Kit phân tích tức thì các khối văn bản (offline), gửi text thô lên Backend.
+- **Google Gemini 2.5 Flash LLM** phân tích ngữ cảnh và bóc tách chính xác:
   - **Tổng tiền thanh toán**.
   - **Ngày phát sinh hóa đơn**.
-  - Nội dung chi tiết hóa đơn.
+  - **Tên cửa hàng / đơn vị cung cấp**.
+  - **Gợi ý danh mục chi tiêu** (Thực phẩm, Điện, Nước...).
 - Tự động điền trước các thông tin này vào form thêm giao dịch giúp tiết kiệm tối đa thời gian nhập liệu.
 
 ### 5. Nhận diện Sản phẩm Mua sắm (YOLO AI Camera)
@@ -121,9 +123,9 @@ android-app/
 ## 🚀 Hướng dẫn Cài đặt & Khởi chạy
 
 ### 1. Mở dự án trong Android Studio
-1. Khởi động **Android Studio** (bản Iguana / Jellyfish / Koala / Ladybug).
+1. Khởi động **Android Studio** (bản Iguana / Jellyfish / Koala / Ladybug / Meerkat trở lên).
 2. Chọn **Open** và dẫn tới thư mục `android-app/`.
-3. Chờ Gradle đồng bộ dependencies.
+3. Chờ Gradle đồng bộ dependencies (lần đầu có thể mất vài phút do tải TFLite và Firebase).
 
 ### 2. Cấu hình kết nối tới Backend
 

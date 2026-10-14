@@ -1,6 +1,6 @@
 # 🧠 AI Pipeline Module - Smart Personal Finance App
 
-Module Trí tuệ Nhân tạo & Thị giác Máy tính (AI & Computer Vision) chịu trách nhiệm nhận diện mặt hàng mua sắm qua camera và tự động phân loại giao dịch vào danh mục tài chính phù hợp (Ăn uống, Di chuyển, Mua sắm, Giải trí, Sức khỏe, Khác).
+Module Trí tuệ Nhân tạo & Thị giác Máy tính (AI & Computer Vision) chịu trách nhiệm nhận diện mặt hàng mua sắm qua camera và tự động phân loại giao dịch vào danh mục tài chính phù hợp (Ăn uống, Di chuyển, Mua sắm, Giải trí, Sức khỏe, Khác). Module này tập trung vào **Pipeline YOLO + Random Forest**. Tích hợp Gemini AI cho quét hóa đơn nằm trong Backend Service (`GeminiService.java`).
 
 ---
 
@@ -134,3 +134,31 @@ Lệnh này sẽ tự động thực hiện:
   - YOLO On-Device (TFLite): ~35-50ms / frame trên điện thoại Android tầm trung.
   - Random Forest (ONNX Java): **< 2ms** cho một lần phân loại trên Spring Boot Backend.
 - **Tính ổn định:** Tích hợp cơ chế Fallback tự động sang Rule-based Engine nếu dữ liệu đầu vào có độ tin cậy thấp hoặc môi trường không tải được native runtime.
+
+---
+
+## 🤖 Pipeline AI Quét Hóa đơn (OCR + Gemini)
+
+Ngoài pipeline YOLO + Random Forest, hệ thống còn tích hợp pipeline quét hóa đơn xử lý hoàn toàn trong Backend:
+
+```text
+[ Ảnh chụp Hóa đơn (Android) ]
+         │
+         ▼
+[ Google ML Kit OCR (Offline trên thiết bị) ]
+  Trích xuất toàn bộ text thô dạng khối
+         │
+         │ Gửi rawText lên Backend
+         ▼
+[ GeminiService.java (Spring Boot Backend) ]
+  Gửi prompt + JSON Schema đến Gemini 2.5 Flash API
+         │
+         ▼
+[ Phản hồi JSON có cấu trúc ]
+  { "merchant": "Highlands Coffee", "amount": 89000, "date": "2026-10-04" }
+         │
+         ▼
+[ Điền tự động vào Form Giao dịch trên Android ]
+```
+
+Xem chi tiết tại: [backend/src/main/java/.../service/ai/GeminiService.java](file:///d:/Project/KHMT/DATN/backend/src/main/java/com/example/financebackend/service/ai/GeminiService.java)
