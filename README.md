@@ -1,14 +1,14 @@
 # 💰 Smart Personal Finance App
 
 > **Ứng dụng quản lý tài chính cá nhân thông minh tích hợp Trí tuệ Nhân tạo & Thị giác Máy tính (AI & Computer Vision)**  
-> Tự động quét hóa đơn (OCR), nhận diện sản phẩm mua sắm qua camera và phân loại danh mục chi tiêu theo thời gian thực.
+> Tự động quét hóa đơn (OCR + Gemini LLM), nhận diện sản phẩm mua sắm qua camera và phân loại danh mục chi tiêu theo thời gian thực.
 
 ---
 
 ## 🌟 Tính năng nổi bật
 
 - 📊 **Quản lý thu chi toàn diện:** Theo dõi dòng tiền, thu nhập, chi phí và số dư các tài khoản/ví điện tử (Tiền mặt, Ngân hàng, Ví điện tử) theo thời gian thực.
-- 🧾 **Quét hóa đơn thông minh (OCR):** Tích hợp Google ML Kit Text Recognition bóc tách tức thì tổng tiền, ngày tháng và nội dung hóa đơn, tự động điền form thêm giao dịch.
+- 🧾 **Quét hóa đơn thông minh (OCR + AI):** Kết hợp Google ML Kit Text Recognition (OCR offline trên thiết bị) và **Google Gemini 2.5 Flash LLM** để bóc tách tức thì tổng tiền, ngày tháng, tên cửa hàng và danh mục giao dịch từ hóa đơn, tự động điền form thêm giao dịch.
 - 📸 **Nhận diện sản phẩm bằng Camera AI:** 
   - Mô hình **YOLOv8** phát hiện 18 nhóm mặt hàng/sản phẩm trực tiếp qua camera với khung nhận diện (Bounding Box) thời gian thực.
   - Mô hình **Random Forest** (triển khai qua Microsoft ONNX Runtime Java) phân tích 27 đặc trưng đa chiều để gợi ý chuẩn xác danh mục chi tiêu.
@@ -44,16 +44,17 @@
 │                     BACKEND API (Spring Boot 3 - Java 21)                    │
 │  ├── Spring Security + FirebaseAuthFilter: Xác thực Token tập trung          │
 │  ├── Controller Layer: 11 REST Controllers chuẩn hóa ApiResponse<T>          │
-│  ├── Bean Validation: Kiểm soát chặt chẽ dữ liệu đầu vào (@Valid)             │
+│  ├── Bean Validation: Kiểm soát chặt chẽ dữ liệu đầu vào (@Valid)            │
 │  ├── Service Layer: Xử lý toàn bộ logic nghiệp vụ tài chính                  │
+│  ├── GeminiService: Tích hợp Google Gemini 2.5 Flash LLM bóc tách JSON       │
 │  ├── AI Engine: Microsoft ONNX Runtime Java nạp Random Forest Model          │
 │  │   └── Cơ chế Fallback sang Rule-based Engine khi thiếu môi trường native  │
 │  └── Spring Data JPA & Hibernate ORM: Quản lý truy xuất dữ liệu              │
-└───────────────────────────────────────┬──────────────────────────────────────┘
-                                        │
-                                        │ JDBC Connection Pool (HikariCP)
-                                        │ Charset: utf8mb4 / utf8mb4_unicode_ci
-                                        ▼
+└───────────────────────────────┬──────────────────────────┬───────────────────┘
+                                │                          │
+                      JDBC HikariCP (utf8mb4)      Google Gemini API (Cloud)
+                                │
+                                ▼
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │                           DATABASE (MySQL 8.0)                               │
 │  ├── Chuẩn hóa 9 bảng: users, accounts, categories, transactions, budgets... │
@@ -136,8 +137,8 @@ Bạn có thể kết nối bất kỳ phần mềm quản lý CSDL nào vào c�
 | Thành phần | Công nghệ chính |
 | :--- | :--- |
 | **Mobile App** | Kotlin, Android SDK 34, MVVM, ViewBinding, LiveData, CameraX, Retrofit 2, OkHttp 4, MPAndroidChart |
-| **Backend API** | Java 21, Spring Boot 3.2.5, Spring Security, Spring Data JPA, Hibernate, Bean Validation |
-| **AI / Machine Learning** | Google ML Kit (OCR), Ultralytics YOLOv8 (TFLite), Scikit-learn Random Forest, Microsoft ONNX Runtime Java |
+| **Backend API** | Java 21, Spring Boot 3.2.5, Spring Security, Spring Data JPA, Hibernate, Bean Validation, Lombok |
+| **AI / Machine Learning** | Google ML Kit (OCR), Ultralytics YOLOv8 (TFLite), Scikit-learn Random Forest, Microsoft ONNX Runtime Java, **Google Gemini 2.5 Flash** |
 | **Cơ sở dữ liệu** | MySQL 8.0 Community Server (utf8mb4 / utf8mb4_unicode_ci) |
 | **Xác thực & Cloud** | Firebase Authentication, Firebase Admin SDK |
 | **DevOps & Triển khai**| Docker, Docker Compose, Multi-stage Docker build, Eclipse Temurin JRE 21 |

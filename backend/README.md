@@ -11,8 +11,10 @@ Dịch vụ RESTful API trung tâm của ứng dụng Quản lý Tài chính Cá
 - **Bảo mật & Xác thực:** Spring Security 6, Firebase Admin SDK 9.2.0 (Xác thực Firebase ID Token).
 - **Truy xuất dữ liệu:** Spring Data JPA, Hibernate ORM 6.4, HikariCP, MySQL Connector/J 8.3.
 - **Data Validation:** Spring Boot Starter Validation (Hibernate Validator, `@Valid`, `@NotNull`, `@NotBlank`, `@PositiveOrZero`).
+- **Giảm mã (Boilerplate Reduction):** Lombok (tự sinh getter/setter/constructor/builder).
 - **AI & Machine Learning Inference:**
   - Microsoft ONNX Runtime Java (`ai.onnxruntime:1.17.1`) - Nạp và dự đoán trực tiếp mô hình Random Forest (`random_forest_model.onnx`).
+  - **Google Gemini 2.5 Flash** (Generative AI LLM) - Bóc tách dữ liệu có cấu trúc JSON từ text thô OCR hóa đơn.
   - Smile Machine Learning (`com.github.haifengl:smile-core:3.0.2`).
 - **Build tool & Containerization:** Apache Maven 3.9+, Docker, Docker Compose (Multi-stage build / JRE 21 Temurin).
 
@@ -31,15 +33,15 @@ backend/
 │   │   │   │   └── SecurityConfig.java
 │   │   │   ├── controller/           # 11 REST Controllers tiếp nhận HTTP requests
 │   │   │   │   ├── AccountController.java
+│   │   │   │   ├── AiProductController.java
 │   │   │   │   ├── AiScanController.java
 │   │   │   │   ├── AuthController.java
 │   │   │   │   ├── BudgetController.java
 │   │   │   │   ├── CategoryController.java
-│   │   │   │   ├── ProductClassifierController.java
 │   │   │   │   ├── RecurringTransactionController.java
 │   │   │   │   ├── ReportController.java
-│   │   │   │   ├── TestController.java
 │   │   │   │   ├── TransactionController.java
+│   │   │   │   ├── TransactionImageController.java
 │   │   │   │   └── UserController.java
 │   │   │   ├── dto/                  # Data Transfer Objects
 │   │   │   │   ├── request/          # DTO nhận từ Client có tích hợp Bean Validation
@@ -50,17 +52,22 @@ backend/
 │   │   │   │   └── response/         # Chuẩn hóa ApiResponse<T> trả về cho Client
 │   │   │   │       ├── ApiResponse.java
 │   │   │   │       └── ...
-│   │   │   ├── entity/               # Các JPA Entities ánh xạ tới bảng MySQL
+│   │   │   ├── model/                # Các JPA Entities ánh xạ tới bảng MySQL
 │   │   │   ├── exception/            # Xử lý ngoại lệ tập trung (GlobalExceptionHandler)
 │   │   │   │   ├── GlobalExceptionHandler.java
 │   │   │   │   ├── ResourceNotFoundException.java
 │   │   │   │   └── BadRequestException.java
 │   │   │   ├── repository/           # Spring Data JPA Repositories
+│   │   │   ├── util/                 # Tiện ích (FileStorageUtil, giải mã JWT...)
 │   │   │   └── service/              # Tầng nghiệp vụ xử lý logic tài chính
-│   │   │       ├── ai/               # Dịch vụ phân tích AI (ONNX & Rule-based)
-│   │   │       │   ├── ProductClassifierService.java
-│   │   │       │   └── ExpenseClassifierService.java
-│   │   │       └── impl/             # Các Service triển khai cụ thể
+│   │   │       ├── ai/               # Dịch vụ AI (ONNX, Rule-based, Gemini)
+│   │   │       │   ├── AiProductService.java       # Quản lý log AI nhận diện sản phẩm
+│   │   │       │   ├── AiScanService.java          # Quản lý log AI quét hóa đơn
+│   │   │       │   ├── ExpenseClassifierService.java  # Rule-based Fallback classifier
+│   │   │       │   ├── GeminiService.java          # Tích hợp Google Gemini 2.5 Flash LLM
+│   │   │       │   ├── ProductClassifierService.java  # ONNX Runtime Random Forest
+│   │   │       │   └── ocr/                    # Utilities xử lý OCR
+│   │   │       └── ...                   # Các Service triển khai cụ thể
 │   │   └── resources/
 │   │       ├── application.properties
 │   │       ├── firebase-service-account.json # Chứng chỉ Firebase Admin SDK
@@ -166,7 +173,7 @@ Khi có lỗi xác thực hoặc lỗi hệ thống, mã lỗi HTTP chuẩn (400
 ### 🤖 8. Dịch vụ Trí tuệ Nhân tạo (`/api/ai`)
 | Method | Endpoint | Yêu cầu Auth | Mô tả |
 | :--- | :--- | :---: | :--- |
-| `POST` | `/api/ai/scan-bill` | Token | Trích xuất thông tin hóa đơn (Tổng tiền, ngày, đơn vị) |
+| `POST` | `/api/ai/scan-bill` | Token | OCR trích xuất text hóa đơn + **Gemini LLM** phân tích JSON (tiền, ngày, cửa hàng) |
 | `POST` | `/api/ai/classify-product` | Token | Nhận danh sách vật thể từ YOLO -> Phân loại danh mục qua ONNX Random Forest |
 
 ### 📊 9. Báo cáo & Thống kê (`/api/reports`)
@@ -177,13 +184,29 @@ Khi có lỗi xác thực hoặc lỗi hệ thống, mã lỗi HTTP chuẩn (400
 
 ---
 
-## 🧠 Tích hợp Mô hình AI ONNX Runtime
+## 🧠 Tích hợp Mô hình AI
 
+### 1. ONNX Runtime - Random Forest Classifier
 Lớp `ProductClassifierService` xử lý thông minh kết quả nhận diện từ Camera thiết bị:
 1. Tiếp nhận danh sách nhận diện từ Mobile: Nhãn sản phẩm (`coffee_cup`, `fastfood`, `clothes`...) kèm xác suất nhận diện (`confidence`).
 2. Vector hóa thành 27 đặc trưng (`RF_FEATURES`): bao gồm cờ nhị phân từng nhãn, số lượng nhóm danh mục và thống kê độ tin cậy.
 3. Chạy suy luận qua Microsoft ONNX Runtime Java với mô hình [random_forest_model.onnx](file:///d:/Project/KHMT/DATN/backend/src/main/resources/random_forest_model.onnx).
 4. **Cơ chế chịu lỗi (Graceful Fallback):** Nếu môi trường thiếu thư viện native hoặc không tìm thấy mô hình, hệ thống tự động chuyển sang bộ quy tắc suy luận heuristic (Rule-based Fallback), đảm bảo ứng dụng không bao giờ bị dừng đột ngột.
+
+### 2. Google Gemini 2.5 Flash - LLM Hóa đơn
+Lớp `GeminiService` thiện hóa kết quả OCR từ Google ML Kit:
+1. Nhận `rawText` thô từ OCR (toàn bộ văn bản trên hóa đơn).
+2. Gửi prompt kỹ thuật ngữ cảnh kèm JSON Schema đến **Google Gemini 2.5 Flash API**.
+3. Nhận và giải mã phản hồi JSON có cấu trúc:
+   ```json
+   {
+     "merchant": "Highlands Coffee",
+     "amount": 89000,
+     "date": "2026-10-04",
+     "category": "food"
+   }
+   ```
+4. Trả về đối tượng `BillScanResult` được điền tự động vào form giao dịch trên Android.
 
 ---
 
