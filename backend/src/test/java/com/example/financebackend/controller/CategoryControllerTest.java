@@ -1,4 +1,4 @@
-﻿package com.example.financebackend.controller;
+package com.example.financebackend.controller;
 
 import com.example.financebackend.dto.CategoryDTO;
 import com.example.financebackend.service.CategoryService;
@@ -34,7 +34,7 @@ class CategoryControllerTest {
         return CategoryDTO.builder()
                 .categoryId(1)
                 .categoryName("An uong")
-                .type("expense")
+                .categoryType("expense")
                 .color("#FF5722")
                 .userId(1)
                 .build();
@@ -57,7 +57,7 @@ class CategoryControllerTest {
     void createCategory_ValidPayload_ReturnsCreated() throws Exception {
         CategoryDTO input = CategoryDTO.builder()
                 .categoryName("Di lai")
-                .type("expense")
+                .categoryType("expense")
                 .color("#2196F3")
                 .userId(1)
                 .build();

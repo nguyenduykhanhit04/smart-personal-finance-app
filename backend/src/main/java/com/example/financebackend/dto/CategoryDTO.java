@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 public class CategoryDTO {
     private Integer categoryId;
     private Integer userId;

@@ -1,4 +1,4 @@
-﻿package com.example.financebackend.controller;
+package com.example.financebackend.controller;
 
 import com.example.financebackend.dto.BudgetDTO;
 import com.example.financebackend.service.BudgetService;
@@ -37,7 +37,7 @@ class BudgetControllerTest {
                 .budgetId(1)
                 .userId(1)
                 .categoryId(1)
-                .limitAmount(BigDecimal.valueOf(2000000))
+                .amountLimit(BigDecimal.valueOf(2000000))
                 .startDate(LocalDate.of(2026, 10, 1))
                 .endDate(LocalDate.of(2026, 10, 31))
                 .build();

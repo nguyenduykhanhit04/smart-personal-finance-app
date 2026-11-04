@@ -1,4 +1,4 @@
-﻿package com.example.financebackend.controller;
+package com.example.financebackend.controller;
 
 import com.example.financebackend.dto.AccountDTO;
 import com.example.financebackend.service.AccountService;
