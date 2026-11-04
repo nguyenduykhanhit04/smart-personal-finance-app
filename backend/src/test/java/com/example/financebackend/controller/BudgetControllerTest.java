@@ -93,7 +93,7 @@ class BudgetControllerTest {
 
     @Test
     void updateBudget_ValidPayload_ReturnsUpdated() throws Exception {
-        BudgetDTO update = sampleBudget().toBuilder().limitAmount(BigDecimal.valueOf(3000000)).build();
+        BudgetDTO update = sampleBudget().toBuilder().amountLimit(BigDecimal.valueOf(3000000)).build();
 
         when(budgetService.updateBudget(eq(1), any(BudgetDTO.class))).thenReturn(update);
 
@@ -101,7 +101,7 @@ class BudgetControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(update)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data.limitAmount").value(3000000));
+                .andExpect(jsonPath("$.data.amountLimit").value(3000000));
     }
 
     @Test
