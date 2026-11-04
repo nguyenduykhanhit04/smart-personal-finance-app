@@ -52,6 +52,7 @@ logs/
 **/logs/
 uploads/
 **/uploads/
+!**/uploads/.gitkeep
 
 # ===============================
 # Python & Machine Learning
