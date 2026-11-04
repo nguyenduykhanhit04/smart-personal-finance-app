@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 public class AccountDTO {
     private Integer accountId;
     private Integer userId;

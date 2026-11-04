@@ -1,4 +1,4 @@
-﻿package com.example.financebackend.controller;
+package com.example.financebackend.controller;
 
 import com.example.financebackend.dto.ReportDTO;
 import com.example.financebackend.service.ReportService;
@@ -30,7 +30,7 @@ class ReportControllerTest {
         return ReportDTO.builder()
                 .totalIncome(BigDecimal.valueOf(5000000))
                 .totalExpense(BigDecimal.valueOf(2000000))
-                .netBalance(BigDecimal.valueOf(3000000))
+                .netAmount(BigDecimal.valueOf(3000000))
                 .build();
     }
 
