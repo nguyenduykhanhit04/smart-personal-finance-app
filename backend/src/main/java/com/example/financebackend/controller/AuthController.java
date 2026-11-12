@@ -41,4 +41,10 @@ public class AuthController {
         UserDTO syncedUser = userService.syncFirebaseUserWithToken(decodedToken);
         return ResponseEntity.ok(ApiResponse.success("User synced successfully", syncedUser));
     }
+
+    @PostMapping("/demo-login")
+    public ResponseEntity<ApiResponse<UserDTO>> demoLogin() {
+        UserDTO demoUser = userService.getOrCreateDemoUser();
+        return ResponseEntity.ok(ApiResponse.success("Demo user login successful", demoUser));
+    }
 }

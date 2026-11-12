@@ -61,6 +61,9 @@ class LoginActivity : AppCompatActivity() {
         // Facebook Login is not available yet.
         binding.btnFacebookLogin.setOnClickListener { showComingSoon() }
 
+        // Quick Demo Login (Offline / Demo Mode)
+        binding.btnDemoLogin.setOnClickListener { handleDemoLogin() }
+
         observeViewModel()
     }
 
@@ -187,5 +190,13 @@ class LoginActivity : AppCompatActivity() {
     private fun enableSocialButtons(enabled: Boolean) {
         binding.btnGoogleLogin.isEnabled = enabled
         binding.btnFacebookLogin.isEnabled = enabled
+        binding.btnDemoLogin.isEnabled = enabled
+    }
+
+    private fun handleDemoLogin() {
+        binding.progressBar.visibility = View.VISIBLE
+        binding.btnLogin.isEnabled = false
+        enableSocialButtons(false)
+        viewModel.loginAsDemo(this)
     }
 }

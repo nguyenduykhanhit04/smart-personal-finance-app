@@ -36,6 +36,14 @@ class SharedPrefManager private constructor(context: Context) {
         return savedIp
     }
 
+    fun saveDemoToken(token: String?) {
+        sharedPreferences.edit().putString(KEY_DEMO_TOKEN, token).apply()
+    }
+
+    fun getDemoToken(): String? {
+        return sharedPreferences.getString(KEY_DEMO_TOKEN, null)
+    }
+
     fun clear() {
         sharedPreferences.edit().clear().apply()
     }
@@ -43,6 +51,7 @@ class SharedPrefManager private constructor(context: Context) {
     companion object {
         private const val SHARED_PREF_NAME = "personal_finance_prefs"
         private const val KEY_USER = "key_user"
+        private const val KEY_DEMO_TOKEN = "key_demo_token"
         private const val KEY_SERVER_IP = "server_ip"
         private const val LEGACY_DEFAULT_SERVER_IP = "192.168.30.103"
         private const val EMULATOR_HOST_SERVER_IP = "10.0.2.2:8080"
@@ -53,9 +62,12 @@ class SharedPrefManager private constructor(context: Context) {
         @Volatile
         private var instance: SharedPrefManager? = null
 
-        fun getInstance(context: Context): SharedPrefManager {
+        fun getInstance(context: Context? = null): SharedPrefManager {
             return instance ?: synchronized(this) {
-                instance ?: SharedPrefManager(context.applicationContext).also { instance = it }
+                if (instance == null && context != null) {
+                    instance = SharedPrefManager(context.applicationContext)
+                }
+                instance ?: throw IllegalStateException("SharedPrefManager is not initialized yet")
             }
         }
     }

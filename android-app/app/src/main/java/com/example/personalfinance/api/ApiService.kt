@@ -26,6 +26,9 @@ interface ApiService {
     @POST("api/auth/firebase-login")
     fun firebaseLogin(@Body loginRequest: LoginRequest): Call<ApiResponse<User>>
 
+    @POST("api/auth/demo-login")
+    fun demoLogin(): Call<ApiResponse<User>>
+
     @PUT("api/users/{id}")
     fun updateUser(@Path("id") id: Int, @Body user: User): Call<ApiResponse<User>>
 

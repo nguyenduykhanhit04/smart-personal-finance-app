@@ -26,8 +26,9 @@ class SplashActivity : AppCompatActivity() {
         // Smooth delay to transition to core activities
         Handler(Looper.getMainLooper()).postDelayed({
             val currentUser = FirebaseAuth.getInstance().currentUser
-            if (currentUser != null) {
-                // User is signed in, go to main dashboard
+            val savedUser = SharedPrefManager.getInstance(this).getUser()
+            if (currentUser != null || savedUser != null) {
+                // User is signed in or logged in via Demo session, go to main dashboard
                 startActivity(Intent(this, MainActivity::class.java))
             } else {
                 // User is not signed in, go to login

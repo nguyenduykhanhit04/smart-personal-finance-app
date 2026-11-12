@@ -37,4 +37,29 @@ class AuthRepository {
                 }
             })
     }
+
+    fun demoLogin(callback: ApiCallback<User?>) {
+        ApiClient.getApiService().demoLogin()
+            .enqueue(object : Callback<ApiResponse<User>> {
+                override fun onResponse(call: Call<ApiResponse<User>>, response: Response<ApiResponse<User>>) {
+                    val body = response.body()
+                    if (response.isSuccessful && body != null && body.success) {
+                        callback.onSuccess(body.data)
+                    } else {
+                        val errorMsg = try {
+                            response.errorBody()?.string()?.let { errJson ->
+                                Gson().fromJson(errJson, ApiResponse::class.java)?.message
+                            } ?: body?.message
+                        } catch (e: Exception) {
+                            body?.message
+                        } ?: "Lỗi không xác định khi đăng nhập Demo"
+                        callback.onError(errorMsg)
+                    }
+                }
+
+                override fun onFailure(call: Call<ApiResponse<User>>, t: Throwable) {
+                    callback.onError(t.message)
+                }
+            })
+    }
 }
