@@ -4,8 +4,10 @@ import com.example.financebackend.dto.UserDTO;
 import com.example.financebackend.service.UserService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseToken;
+import org.mockito.MockedStatic;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -16,6 +18,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(AuthController.class)
+@AutoConfigureMockMvc(addFilters = false)
 class AuthControllerTest {
 
     @Autowired
@@ -40,19 +43,22 @@ class AuthControllerTest {
                 .authProvider("google")
                 .build();
 
-        when(firebaseAuth.verifyIdToken(fakeToken)).thenReturn(decodedToken);
-        when(userService.syncFirebaseUserWithToken(decodedToken)).thenReturn(userDTO);
+        try (MockedStatic<FirebaseAuth> mocked = mockStatic(FirebaseAuth.class)) {
+            mocked.when(FirebaseAuth::getInstance).thenReturn(firebaseAuth);
+            when(firebaseAuth.verifyIdToken(fakeToken)).thenReturn(decodedToken);
+            when(userService.syncFirebaseUserWithToken(decodedToken)).thenReturn(userDTO);
 
-        mockMvc.perform(post("/api/auth/firebase-login")
-                        .header("Authorization", "Bearer " + fakeToken)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.success").value(true))
-                .andExpect(jsonPath("$.data.email").value("user@example.com"))
-                .andExpect(jsonPath("$.data.fullName").value("Nguyen Van A"));
+            mockMvc.perform(post("/api/auth/firebase-login")
+                            .header("Authorization", "Bearer " + fakeToken)
+                            .contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.success").value(true))
+                    .andExpect(jsonPath("$.data.email").value("user@example.com"))
+                    .andExpect(jsonPath("$.data.fullName").value("Nguyen Van A"));
 
-        verify(firebaseAuth).verifyIdToken(fakeToken);
-        verify(userService).syncFirebaseUserWithToken(decodedToken);
+            verify(firebaseAuth).verifyIdToken(fakeToken);
+            verify(userService).syncFirebaseUserWithToken(decodedToken);
+        }
     }
 
     @Test
@@ -60,5 +66,27 @@ class AuthControllerTest {
         mockMvc.perform(post("/api/auth/firebase-login")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void demoLogin_ReturnsDemoUser() throws Exception {
+        UserDTO demoDTO = UserDTO.builder()
+                .userId(99)
+                .email("demo@financeapp.com")
+                .fullName("Người Dùng Demo")
+                .firebaseUid("demo_account_uid_2026")
+                .authProvider("demo")
+                .build();
+
+        when(userService.getOrCreateDemoUser()).thenReturn(demoDTO);
+
+        mockMvc.perform(post("/api/auth/demo-login")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.success").value(true))
+                .andExpect(jsonPath("$.data.email").value("demo@financeapp.com"))
+                .andExpect(jsonPath("$.data.fullName").value("Người Dùng Demo"));
+
+        verify(userService).getOrCreateDemoUser();
     }
 }

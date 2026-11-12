@@ -74,6 +74,50 @@ public class UserService {
         return toDTO(user);
     }
 
+    @Transactional
+    public UserDTO getOrCreateDemoUser() {
+        String demoUid = "demo_account_uid_2026";
+        String demoEmail = "demo@financeapp.com";
+        Optional<User> existing = userRepository.findByFirebaseUid(demoUid);
+        User user;
+        if (existing.isPresent()) {
+            user = existing.get();
+        } else {
+            user = User.builder()
+                    .firebaseUid(demoUid)
+                    .email(demoEmail)
+                    .fullName("Người Dùng Demo")
+                    .avatarUrl("")
+                    .authProvider("demo")
+                    .build();
+            user = userRepository.save(user);
+        }
+        accountService.getOrCreateDefaultAccount(user.getUserId());
+        return toDTO(user);
+    }
+
+    @Transactional
+    public UserDTO getOrCreateDemoUser() {
+        String demoUid = "demo_account_uid_2026";
+        String demoEmail = "demo@financeapp.com";
+        Optional<User> existing = userRepository.findByFirebaseUid(demoUid);
+        User user;
+        if (existing.isPresent()) {
+            user = existing.get();
+        } else {
+            user = User.builder()
+                    .firebaseUid(demoUid)
+                    .email(demoEmail)
+                    .fullName("Người Dùng Demo")
+                    .avatarUrl("")
+                    .authProvider("demo")
+                    .build();
+            user = userRepository.save(user);
+        }
+        accountService.getOrCreateDefaultAccount(user.getUserId());
+        return toDTO(user);
+    }
+
     private Optional<User> findExistingFirebaseUser(String firebaseUid, String email) {
         Optional<User> existingUser = userRepository.findByFirebaseUid(firebaseUid);
         if (existingUser.isPresent()) {
@@ -94,6 +138,28 @@ public class UserService {
     }
 
     @Transactional
+    public UserDTO getOrCreateDemoUser() {
+        String demoUid = "demo_account_uid_2026";
+        String demoEmail = "demo@financeapp.com";
+        Optional<User> existing = userRepository.findByFirebaseUid(demoUid);
+        User user;
+        if (existing.isPresent()) {
+            user = existing.get();
+        } else {
+            user = User.builder()
+                    .firebaseUid(demoUid)
+                    .email(demoEmail)
+                    .fullName("Người Dùng Demo")
+                    .avatarUrl("")
+                    .authProvider("demo")
+                    .build();
+            user = userRepository.save(user);
+        }
+        accountService.getOrCreateDefaultAccount(user.getUserId());
+        return toDTO(user);
+    }
+
+    @Transactional
     public UserDTO updateUser(Integer userId, UserDTO userDTO) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
@@ -103,6 +169,28 @@ public class UserService {
         if (userDTO.getAvatarUrl() != null) user.setAvatarUrl(userDTO.getAvatarUrl());
 
         user = userRepository.save(user);
+        return toDTO(user);
+    }
+
+    @Transactional
+    public UserDTO getOrCreateDemoUser() {
+        String demoUid = "demo_account_uid_2026";
+        String demoEmail = "demo@financeapp.com";
+        Optional<User> existing = userRepository.findByFirebaseUid(demoUid);
+        User user;
+        if (existing.isPresent()) {
+            user = existing.get();
+        } else {
+            user = User.builder()
+                    .firebaseUid(demoUid)
+                    .email(demoEmail)
+                    .fullName("Người Dùng Demo")
+                    .avatarUrl("")
+                    .authProvider("demo")
+                    .build();
+            user = userRepository.save(user);
+        }
+        accountService.getOrCreateDefaultAccount(user.getUserId());
         return toDTO(user);
     }
 

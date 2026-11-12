@@ -77,6 +77,35 @@ class AuthViewModel : ViewModel() {
         })
     }
 
+    fun loginAsDemo(context: android.content.Context) {
+        _isLoading.value = true
+        repository.demoLogin(object : ApiCallback<User?> {
+            override fun onSuccess(result: User?) {
+                if (result != null) {
+                    com.example.personalfinance.utils.SharedPrefManager.getInstance(context).saveDemoToken("demo-token-session")
+                    _syncedUser.postValue(result)
+                } else {
+                    _errorMessage.postValue("Không thể tạo tài khoản Demo")
+                }
+                _isLoading.postValue(false)
+            }
+
+            override fun onError(errorMessage: String?) {
+                // Offline fallback if local server is not running
+                val offlineDemoUser = User(
+                    userId = 1,
+                    email = "demo@financeapp.com",
+                    fullName = "Người Dùng Demo",
+                    avatarUrl = "",
+                    authProvider = "demo"
+                )
+                com.example.personalfinance.utils.SharedPrefManager.getInstance(context).saveDemoToken("demo-token-session")
+                _syncedUser.postValue(offlineDemoUser)
+                _isLoading.postValue(false)
+            }
+        })
+    }
+
     fun getReadableAuthError(exception: Exception?): String {
         if (exception is FirebaseNetworkException) {
             return "Không kết nối được tới Firebase. Kiểm tra Internet trên điện thoại rồi thử lại."

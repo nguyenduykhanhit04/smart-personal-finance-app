@@ -208,12 +208,27 @@
                 app:iconPadding="0dp" />
         </LinearLayout>
 
+        <!-- Quick Demo Login Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDemoLogin"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="⚡ Dùng thử ngay (Chế độ Demo)"
+            android:textColor="@color/primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layoutSocial" />
+
         <!-- Register Link -->
         <TextView
             android:id="@+id/tvRegisterLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="24dp"
             android:padding="8dp"
             android:text="@string/msg_no_account_register"
@@ -223,7 +238,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layoutSocial" />
+            app:layout_constraintTop_toBottomOf="@id/btnDemoLogin" />
 
         <!-- Loading Progress -->
         <ProgressBar
