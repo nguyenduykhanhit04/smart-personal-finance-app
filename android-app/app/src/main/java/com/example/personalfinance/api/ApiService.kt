@@ -121,6 +121,9 @@ interface ApiService {
     @DELETE("api/recurring-transactions/{id}")
     fun deleteRecurringTransaction(@Path("id") id: Int): Call<ApiResponse<Void>>
 
+    @POST("api/recurring-transactions/trigger")
+    fun triggerRecurringTransactions(): Call<ApiResponse<Void>>
+
     // TRANSACTION IMAGES
     @Multipart
     @POST("api/transaction-images/upload")

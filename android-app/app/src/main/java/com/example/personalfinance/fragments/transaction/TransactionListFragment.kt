@@ -340,24 +340,36 @@ class TransactionListFragment : Fragment() {
         val btnOcr = bottomSheetView.findViewById<View>(R.id.btnOptionOcr)
         val btnYolo = bottomSheetView.findViewById<View>(R.id.btnOptionYolo)
 
-        btnManual?.setOnClickListener {
+        val manualClickListener = View.OnClickListener {
             bottomSheetDialog.dismiss()
             val addFragment = AddTransactionFragment()
             addFragment.setOnTransactionSavedListener { loadTransactions() }
             addFragment.show(parentFragmentManager, "AddTransactionFragment")
         }
+        btnManual?.setRecursiveClickListener(manualClickListener)
 
-        btnOcr?.setOnClickListener {
+        val ocrClickListener = View.OnClickListener {
             bottomSheetDialog.dismiss()
             startActivity(Intent(requireContext(), ScanBillActivity::class.java))
         }
+        btnOcr?.setRecursiveClickListener(ocrClickListener)
 
-        btnYolo?.setOnClickListener {
+        val yoloClickListener = View.OnClickListener {
             bottomSheetDialog.dismiss()
             startActivity(Intent(requireContext(), ScanProductActivity::class.java))
         }
+        btnYolo?.setRecursiveClickListener(yoloClickListener)
 
         bottomSheetDialog.show()
+    }
+
+    private fun View.setRecursiveClickListener(listener: View.OnClickListener) {
+        setOnClickListener(listener)
+        if (this is ViewGroup) {
+            for (i in 0 until childCount) {
+                getChildAt(i).setRecursiveClickListener(listener)
+            }
+        }
     }
 
     override fun onDestroyView() {

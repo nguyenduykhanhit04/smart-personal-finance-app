@@ -73,6 +73,31 @@ class RecurringListFragment : Fragment() {
         binding.btnFilter.setOnClickListener {
             Toast.makeText(requireContext(), "Lọc đang tải...", Toast.LENGTH_SHORT).show()
         }
+        binding.btnTriggerNow.setOnClickListener {
+            triggerRecurringNow()
+        }
+    }
+
+    private fun triggerRecurringNow() {
+        binding.btnTriggerNow.isEnabled = false
+        Toast.makeText(requireContext(), "Đang quét và xử lý giao dịch định kỳ...", Toast.LENGTH_SHORT).show()
+        ApiClient.apiService.triggerRecurringTransactions()
+            .enqueue(object : Callback<ApiResponse<Void>> {
+                override fun onResponse(call: Call<ApiResponse<Void>>, response: Response<ApiResponse<Void>>) {
+                    binding.btnTriggerNow.isEnabled = true
+                    if (response.isSuccessful) {
+                        Toast.makeText(requireContext(), "Đã quét & xử lý định kỳ thành công!", Toast.LENGTH_SHORT).show()
+                        loadRecurringTransactions()
+                    } else {
+                        Toast.makeText(requireContext(), "Xử lý định kỳ thất bại (${response.code()})", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<ApiResponse<Void>>, t: Throwable) {
+                    binding.btnTriggerNow.isEnabled = true
+                    Toast.makeText(requireContext(), "Lỗi kết nối: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
     }
 
     private fun openAddRecurringFragment() {
