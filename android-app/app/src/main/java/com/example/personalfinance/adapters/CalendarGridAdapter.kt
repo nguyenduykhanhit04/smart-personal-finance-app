@@ -6,14 +6,14 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Matrix
-import android.os.Handler
-import android.os.Looper
 import android.util.LruCache
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.exifinterface.media.ExifInterface
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personalfinance.R
 import com.example.personalfinance.api.ApiClient
@@ -22,18 +22,30 @@ import com.example.personalfinance.models.domain.CalendarDay
 import com.example.personalfinance.models.domain.Transaction
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.RelativeCornerSize
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.Calendar
 import java.util.Locale
-import kotlin.concurrent.thread
 
 class CalendarGridAdapter(
     private val context: Context,
     private val calendarDays: List<CalendarDay>
 ) : RecyclerView.Adapter<CalendarGridAdapter.CalendarViewHolder>() {
+
+    private val adapterScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
+
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+        adapterScope.cancel()
+    }
 
     companion object {
         private val imageCache = LruCache<String, Bitmap>(30)
@@ -104,40 +116,43 @@ class CalendarGridAdapter(
         }
 
         imageView.tag = fullUrl
-        thread {
-            try {
-                val url = URL(fullUrl)
-                val conn = (url.openConnection() as HttpURLConnection).apply {
-                    doInput = true
-                    setRequestProperty("ngrok-skip-browser-warning", "true")
-                    setRequestProperty("User-Agent", "Android-App")
-                    connect()
-                }
-
-                if (conn.responseCode == 200) {
-                    val bytes = conn.inputStream.use { inputStream ->
-                        val bos = ByteArrayOutputStream()
-                        val buffer = ByteArray(8192)
-                        var len: Int
-                        while (inputStream.read(buffer).also { len = it } != -1) {
-                            bos.write(buffer, 0, len)
-                        }
-                        bos.toByteArray()
+        val scope = (context as? LifecycleOwner)?.lifecycleScope ?: adapterScope
+        scope.launch {
+            val bitmap = withContext(Dispatchers.IO) {
+                try {
+                    val url = URL(fullUrl)
+                    val conn = (url.openConnection() as HttpURLConnection).apply {
+                        doInput = true
+                        setRequestProperty("ngrok-skip-browser-warning", "true")
+                        setRequestProperty("User-Agent", "Android-App")
+                        connect()
                     }
 
-                    var bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                    if (bitmap != null) {
-                        bitmap = rotateBitmapIfNeeded(bitmap, bytes)
-                        imageCache.put(fullUrl, bitmap)
-                        val finalBitmap = bitmap
-                        Handler(Looper.getMainLooper()).post {
-                            if (fullUrl == imageView.tag) {
-                                imageView.setImageBitmap(finalBitmap)
+                    if (conn.responseCode == 200) {
+                        val bytes = conn.inputStream.use { inputStream ->
+                            val bos = ByteArrayOutputStream()
+                            val buffer = ByteArray(8192)
+                            var len: Int
+                            while (inputStream.read(buffer).also { len = it } != -1) {
+                                bos.write(buffer, 0, len)
                             }
+                            bos.toByteArray()
                         }
-                    }
+
+                        var bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                        if (bmp != null) {
+                            bmp = rotateBitmapIfNeeded(bmp, bytes)
+                            imageCache.put(fullUrl, bmp)
+                        }
+                        bmp
+                    } else null
+                } catch (ignored: Exception) {
+                    null
                 }
-            } catch (ignored: Exception) {}
+            }
+            if (bitmap != null && fullUrl == imageView.tag) {
+                imageView.setImageBitmap(bitmap)
+            }
         }
     }
 

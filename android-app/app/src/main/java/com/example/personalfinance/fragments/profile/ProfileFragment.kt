@@ -22,6 +22,10 @@ import androidx.core.content.ContextCompat
 import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import com.example.personalfinance.R
 import com.example.personalfinance.activities.LoginActivity
 import com.example.personalfinance.api.ApiClient
@@ -117,37 +121,37 @@ class ProfileFragment : Fragment() {
 
     private fun loadImageFromUrl(fullUrl: String) {
         binding.imgAvatar.tag = fullUrl
-        thread {
-            try {
-                val url = URL(fullUrl)
-                val conn = (url.openConnection() as HttpURLConnection).apply {
-                    doInput = true
-                    setRequestProperty("ngrok-skip-browser-warning", "true")
-                    setRequestProperty("User-Agent", "Android-App")
-                    connect()
-                }
-
-                if (conn.responseCode == 200) {
-                    val bytes = conn.inputStream.use { inputStream ->
-                        val bos = ByteArrayOutputStream()
-                        val buffer = ByteArray(8192)
-                        var len: Int
-                        while (inputStream.read(buffer).also { len = it } != -1) {
-                            bos.write(buffer, 0, len)
-                        }
-                        bos.toByteArray()
+        viewLifecycleOwner.lifecycleScope.launch {
+            val bitmap = withContext(Dispatchers.IO) {
+                try {
+                    val url = URL(fullUrl)
+                    val conn = (url.openConnection() as HttpURLConnection).apply {
+                        doInput = true
+                        setRequestProperty("ngrok-skip-browser-warning", "true")
+                        setRequestProperty("User-Agent", "Android-App")
+                        connect()
                     }
 
-                    val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                    if (bitmap != null) {
-                        Handler(Looper.getMainLooper()).post {
-                            if (fullUrl == binding.imgAvatar.tag && _binding != null) {
-                                binding.imgAvatar.setImageBitmap(bitmap)
+                    if (conn.responseCode == 200) {
+                        val bytes = conn.inputStream.use { inputStream ->
+                            val bos = ByteArrayOutputStream()
+                            val buffer = ByteArray(8192)
+                            var len: Int
+                            while (inputStream.read(buffer).also { len = it } != -1) {
+                                bos.write(buffer, 0, len)
                             }
+                            bos.toByteArray()
                         }
-                    }
+
+                        BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                    } else null
+                } catch (ignored: Exception) {
+                    null
                 }
-            } catch (ignored: Exception) {}
+            }
+            if (bitmap != null && fullUrl == binding.imgAvatar.tag && _binding != null) {
+                binding.imgAvatar.setImageBitmap(bitmap)
+            }
         }
     }
 

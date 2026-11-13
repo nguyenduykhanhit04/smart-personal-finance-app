@@ -26,6 +26,10 @@ import androidx.core.content.ContextCompat
 import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import com.example.personalfinance.R
 import com.example.personalfinance.activities.MainActivity
 import com.example.personalfinance.activities.ScanBillActivity
@@ -957,42 +961,31 @@ class AddTransactionFragment : DialogFragment() {
     }
 
     private fun loadNetworkImage(url: String) {
-        Thread {
-            try {
-                Log.d("AddTransactionFragment", "Loading image from URL: $url")
-                val imageUrl = URL(url)
-                val conn = (imageUrl.openConnection() as HttpURLConnection).apply {
-                    doInput = true
-                    setRequestProperty("ngrok-skip-browser-warning", "true")
-                    setRequestProperty("User-Agent", "Android-App")
-                    connect()
-                }
-
-                val responseCode = conn.responseCode
-                Log.d("AddTransactionFragment", "HTTP Response code: $responseCode")
-
-                if (responseCode in 200..299) {
-                    val inputStream: InputStream = conn.inputStream
-                    val bitmap = BitmapFactory.decodeStream(inputStream)
-                    if (bitmap == null) {
-                        Log.e("AddTransactionFragment", "Failed to decode bitmap from stream!")
-                    } else {
-                        Log.d("AddTransactionFragment", "Successfully decoded bitmap! Size: ${bitmap.width}x${bitmap.height}")
+        viewLifecycleOwner.lifecycleScope.launch {
+            val bitmap = withContext(Dispatchers.IO) {
+                try {
+                    val imageUrl = URL(url)
+                    val conn = (imageUrl.openConnection() as HttpURLConnection).apply {
+                        doInput = true
+                        setRequestProperty("ngrok-skip-browser-warning", "true")
+                        setRequestProperty("User-Agent", "Android-App")
+                        connect()
                     }
-                    activity?.runOnUiThread {
-                        if (_binding != null && bitmap != null) {
-                            binding.ivThumbnail.setImageBitmap(bitmap)
-                            binding.layoutImagePreview.visibility = View.VISIBLE
-                            binding.btnAddImage.visibility = View.GONE
+                    if (conn.responseCode in 200..299) {
+                        conn.inputStream.use { inputStream ->
+                            BitmapFactory.decodeStream(inputStream)
                         }
-                    }
-                } else {
-                    Log.e("AddTransactionFragment", "Failed to load image, HTTP response: $responseCode")
+                    } else null
+                } catch (e: Exception) {
+                    null
                 }
-            } catch (e: Exception) {
-                Log.e("AddTransactionFragment", "Error loading image: ", e)
             }
-        }.start()
+            if (_binding != null && bitmap != null) {
+                binding.ivThumbnail.setImageBitmap(bitmap)
+                binding.layoutImagePreview.visibility = View.VISIBLE
+                binding.btnAddImage.visibility = View.GONE
+            }
+        }
     }
 
     override fun onDestroyView() {
