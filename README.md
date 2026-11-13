@@ -13,10 +13,11 @@
   - Mô hình **YOLOv8** phát hiện 18 nhóm mặt hàng/sản phẩm trực tiếp qua camera với khung nhận diện (Bounding Box) thời gian thực.
   - Mô hình **Random Forest** (triển khai qua Microsoft ONNX Runtime Java) phân tích 27 đặc trưng đa chiều để gợi ý chuẩn xác danh mục chi tiêu.
 - 🎯 **Quản lý ngân sách & Cảnh báo vượt hạn mức:** Thiết lập hạn mức chi tiêu theo danh mục/tháng. Thanh tiến độ trực quan tự động đổi màu cảnh báo khi tiệm cận hoặc vượt quá ngân sách.
-- 🔄 **Giao dịch định kỳ (Recurring Transactions):** Tự động lên lịch và ghi nhận các khoản chi cố định (tiền thuê nhà, hóa đơn điện nước, dịch vụ định kỳ) qua Cronjob 00:00 hàng ngày, kèm nút kích hoạt tức thì (`btnTriggerNow`) hỗ trợ kiểm thử và demo nhanh.
+- 🔄 **Giao dịch định kỳ (Recurring Transactions):** Tự động lên lịch và ghi nhận các khoản chi cố định (tiền thuê nhà, hóa đơn điện nước, dịch vụ định kỳ) qua Cronjob 00:00 hàng ngày, kèm tiện ích kích hoạt tức thì (`POST /api/recurring-transactions/trigger`) hỗ trợ kiểm thử và demo nhanh.
 - 📈 **Báo cáo & Phân tích trực quan:** Biểu đồ cơ cấu chi tiêu (PieChart) và xu hướng tài chính (BarChart) đa góc nhìn (theo tháng, theo năm) với MPAndroidChart.
 - 🎨 **Giao diện Obsidian Dark Theme cao cấp:** Thiết kế tối màu hiện đại, tối ưu trải nghiệm người dùng và tiết kiệm pin OLED.
-- 🔐 **Bảo mật & Đăng nhập đa nền tảng:** Xác thực qua Firebase Authentication (Email/Mật khẩu và Google Sign-In 1 chạm).
+- 🔐 **Bảo mật & Đăng nhập chuẩn hóa:** Xác thực qua Firebase Authentication (Email/Mật khẩu và Google Sign-In 1 chạm).
+- ⚡ **Tối ưu hóa hiệu năng & Dung lượng Lean APK:** Áp dụng Kotlin Coroutines (`lifecycleScope`), tinh giản luồng lưu giao dịch trực tiếp 1-step, loại bỏ các SDK thừa (Facebook SDK) giúp giảm 3–5MB dung lượng file APK, khởi động nhanh và tiết kiệm băng thông mạng.
 
 ---
 
@@ -76,7 +77,7 @@ smart-personal-finance-app/
 ├── backend/                # [XEM CHI TIẾT](backend/README.md) - REST API Spring Boot 3 & ONNX Runtime
 ├── database/               # [XEM CHI TIẾT](database/README.md) - Thiết kế CSDL MySQL 8 & Seed Data
 ├── ai-pipeline/            # [XEM CHI TIẾT](ai-pipeline/README.md) - Pipeline huấn luyện YOLOv8 & Random Forest
-├── INTEGRATIONS.md         # [XEM CHI TIẾT](INTEGRATIONS.md) - Tổng hợp 7 điểm tích hợp công nghệ đặc biệt
+├── INTEGRATIONS.md         # [XEM CHI TIẾT](INTEGRATIONS.md) - Tổng hợp 10 điểm tích hợp công nghệ đặc biệt
 ├── docker-compose.yml      # Cấu hình khởi chạy toàn bộ hệ thống bằng Docker
 └── README.md               # Tài liệu tổng quan dự án
 ```

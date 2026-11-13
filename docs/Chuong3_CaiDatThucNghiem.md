@@ -305,6 +305,10 @@ Trong quá trình thử nghiệm, hệ thống đã được tinh chỉnh và x�
 5. **Khắc phục lỗi tương thích kiến trúc bộ nhớ 16KB Page Size:** Cấu hình và chuẩn hóa môi trường giả lập AVD về kiến trúc bộ nhớ 4KB (`system-images\android-36.1`), loại bỏ lỗi từ chối thư viện C++ native `libtensorflowlite_jni.so` của YOLO TFLite trên các bản Android 16 thử nghiệm.
 6. **Tái cấu trúc hộp thoại thêm giao dịch (AddOptionsBottomSheet):** Xây dựng `AddOptionsBottomSheet : DialogFragment` thay cho BottomSheetDialog lồng layout phức tạp, giải quyết triệt để lỗi ép kiểu View (`ClassCastException`) và lỗi treo hoạt cảnh cửa sổ (`Window animation leash`) trên Android 14+.
 7. **Cơ chế kích hoạt giao dịch định kỳ tức thời (Instant Recurring Trigger):** Bổ sung endpoint `POST /api/recurring-transactions/trigger` và nút kích hoạt nhanh trên giao diện Android, cho phép hội đồng chấm thi và người dùng kiểm thử kết quả sinh giao dịch tự động theo thời gian thực mà không cần chờ đến mốc 00:00 của hệ thống Cronjob.
+8. **Tinh giản kích thước APK và tối ưu luồng mạng (Lean Architecture & Direct Commit):**
+   - Loại bỏ hoàn toàn Facebook SDK thừa, giúp giảm ~3–5 MB dung lượng file APK xuất xưởng, giảm thời gian khởi động ứng dụng và giải phóng các service chạy nền không cần thiết. Xác thực được chuẩn hóa tập trung vào Google Sign-In và Email/Password của Firebase.
+   - Tinh giản luồng mạng khi thêm giao dịch: chuyển đổi sang cơ chế ghi nhận trực tiếp (Direct Commit), lược bỏ các yêu cầu mạng âm thầm gửi log phản hồi (`submitScanFeedback`, `submitProductFeedback`), giúp ứng dụng phản hồi tức thì và tiết kiệm dữ liệu mạng di động.
+   - Tinh gọn giao diện trang Cá nhân (Profile): gỡ bỏ các View ẩn rác thừa và thông tin phiên bản tĩnh nhằm mang lại trải nghiệm tinh giản, tập trung và hiện đại.
 
 ---
 

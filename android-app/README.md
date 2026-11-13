@@ -121,7 +121,13 @@ android-app/
 
 ### 8. Giao dịch Định kỳ & Tiện ích Demo Tức thì
 - Thiết lập các giao dịch lặp lại theo chu kỳ: Ngày, Tuần, Tháng, Năm (tiền nhà, hóa đơn điện nước...).
-- Tích hợp nút **"⚡ Kích hoạt xử lý định kỳ ngay"** (`btnTriggerNow`) gửi yêu cầu tới Backend để quét và phát sinh giao dịch định kỳ tức thì, hỗ trợ demo trực quan trước hội đồng chấm thi mà không phải chờ sang ngày hôm sau.
+- Hỗ trợ endpoint đặc biệt `POST /api/recurring-transactions/trigger` gửi yêu cầu tới Backend để quét và phát sinh giao dịch định kỳ tức thì, hỗ trợ demo trực quan trước hội đồng chấm thi mà không phải chờ sang ngày hôm sau.
+
+### 9. Tinh giản Dung lượng APK & Tối ưu Luồng Lưu Giao dịch
+- **Lean APK Footprint:** Loại bỏ hoàn toàn Facebook SDK thừa, giúp giảm ~3–5 MB dung lượng file APK cài đặt và tối ưu thời gian khởi động ứng dụng.
+- **Xác thực tập trung an toàn:** Chuẩn hóa đăng nhập qua Google Sign-In 1 chạm và Email/Password của Firebase Authentication.
+- **Direct Commit (Lưu trực tiếp):** Lược bỏ các request mạng âm thầm gửi log phản hồi sau nhận diện AI (`submitScanFeedback`, `submitProductFeedback`), chuyển sang cơ chế lưu 1-step tức thì, tiết kiệm dữ liệu di động và pin thiết bị.
+- **Dọn dẹp giao diện Cá nhân (Profile):** Loại bỏ hoàn toàn hiển thị phiên bản tĩnh và các View ẩn không dùng trong layout XML.
 
 ---
 

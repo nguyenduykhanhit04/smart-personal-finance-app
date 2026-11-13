@@ -153,7 +153,7 @@ Xây dựng một ứng dụng quản lý tài chính cá nhân trên nền tả
 
 ### 1.5.4. Firebase Authentication
 
-**Firebase Authentication** là dịch vụ xác thực người dùng của Google, cung cấp hệ thống đăng nhập an toàn, hỗ trợ nhiều phương thức: Email/Password, Google Sign-In, Facebook, số điện thoại… Firebase tạo ra **ID Token (JWT)** có chữ ký số xác minh bởi Google, giúp Backend xác thực danh tính người dùng mà không cần tự quản lý mật khẩu.
+**Firebase Authentication** là dịch vụ xác thực người dùng của Google, cung cấp hệ thống đăng nhập an toàn, hỗ trợ nhiều phương thức: Email/Password, Google Sign-In, số điện thoại… Firebase tạo ra **ID Token (JWT)** có chữ ký số xác minh bởi Google, giúp Backend xác thực danh tính người dùng mà không cần tự quản lý mật khẩu.
 
 Đề tài áp dụng mô hình **Hybrid Authentication**: Client đăng nhập qua Firebase SDK, Backend xác thực Token bằng Firebase Admin SDK thông qua bộ lọc `FirebaseAuthFilter` trong Spring Security. Cơ chế này đảm bảo:
 - Không lưu trữ mật khẩu người dùng trên máy chủ.

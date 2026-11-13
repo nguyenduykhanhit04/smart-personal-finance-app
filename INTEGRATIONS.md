@@ -16,6 +16,7 @@
 8. [Tích hợp 7: Trải nghiệm Nhà phát triển, Kiểm thử & Khả năng Tương thích](#tích-hợp-7-trải-nghiệm-nhà-phát-triển-kiểm-thử--khả-năng-tương-thích)
 9. [Tích hợp 8: Bất đồng bộ Hiện đại với Kotlin Coroutines & Kiến trúc Lifecycle-Aware](#tích-hợp-8-bất-đồng-bộ-hiện-đại-với-kotlin-coroutines--kiến-trúc-lifecycle-aware)
 10. [Tích hợp 9: Tự động hóa Giao dịch Định kỳ & Tiện ích Kích hoạt Tức thì (Instant Trigger)](#tích-hợp-9-tự-động-hóa-giao-dịch-định-kỳ--tiện-ích-kích-hoạt-tức-thì-instant-trigger)
+11. [Tích hợp 10: Tinh giản Kiến trúc & Tối ưu Dung lượng APK (Lean Architecture & Direct Commit)](#tích-hợp-10-tinh-giản-kiến-trúc--tối-ưu-dung-lượng-apk-lean-architecture--direct-commit)
 
 ---
 
@@ -223,7 +224,17 @@
 - **Tự động hóa hoàn toàn (Automation):** Hệ thống tích hợp `@Scheduled(cron = "0 0 0 * * ?")` trên Spring Boot tự động quét và sinh các giao dịch thu/chi định kỳ (tiền nhà, tiền điện, dịch vụ đăng ký hàng tháng) vào đúng 00:00 mỗi ngày.
 - **Tiện ích kiểm thử tức thì (Demo-Ready Quick Trigger):** 
   - Trong quá trình bảo vệ khóa luận hoặc kiểm thử thực tế, việc chờ đến nửa đêm để kiểm tra tính năng là bất khả thi.
-  - Dự án bổ sung endpoint đặc biệt `POST /api/recurring-transactions/trigger` kết hợp nút bấm **"⚡ Kích hoạt xử lý định kỳ ngay"** trực tiếp trên màn hình Android, cho phép hội đồng chấm thi và giảng viên kiểm tra kết quả sinh giao dịch tự động ngay tức thì.
+  - Dự án bổ sung endpoint đặc biệt `POST /api/recurring-transactions/trigger` kết hợp tùy chọn kích hoạt trực tiếp trên Android / API, cho phép hội đồng chấm thi và giảng viên kiểm tra kết quả sinh giao dịch tự động ngay tức thì.
+
+---
+
+## Tích hợp 10: Tinh giản Kiến trúc & Tối ưu Dung lượng APK (Lean Architecture & Direct Commit)
+
+### Điểm đặc biệt:
+- **Tối ưu hóa kích thước cài đặt (Lean Footprint):** Loại bỏ hoàn toàn Facebook Login SDK và các siêu dữ liệu cấu hình liên quan, giúp giảm ngay ~3–5 MB dung lượng file APK xuất xưởng, rút ngắn thời gian khởi động ứng dụng và loại bỏ các tiến trình phân tích nền không cần thiết.
+- **Chuẩn hóa xác thực tập trung:** Toàn bộ quy trình đăng nhập được quy về 2 kênh chính thống: Google Sign-In 1 chạm và Email/Password của Firebase Authentication.
+- **Lưu giao dịch 1 bước trực tiếp (Direct Commit):** Cắt bỏ các request mạng âm thầm gửi log phản hồi sau khi nhận diện AI (`submitScanFeedback`, `submitProductFeedback`) trong [TransactionViewModel.kt](android-app/app/src/main/java/com/example/personalfinance/viewmodels/TransactionViewModel.kt), chuyển sang lưu 1-step nguyên tử, phản hồi tức thì và tiết kiệm dữ liệu di động cho người dùng.
+- **Tinh gọn giao diện trang Cá nhân (Profile):** Gỡ bỏ thông tin phiên bản tĩnh và các View ẩn rác thừa trong layout XML, giúp giao diện tối giản, hiện đại và tập trung vào các chức năng cốt lõi.
 
 ---
 
@@ -236,6 +247,7 @@
 | **Quét hóa đơn** | Regex trích xuất văn bản thô dễ sai sót | **Google ML Kit OCR + Google Gemini 2.5 Flash LLM** |
 | **Xác thực người dùng**| Lưu mật khẩu MD5/Bcrypt tại CSDL cục bộ | **Firebase Auth + JWT Stateless Token Verification** |
 | **Quản lý đa luồng Mobile**| Java raw Thread / Handler (Dễ rò rỉ bộ nhớ) | **Kotlin Coroutines + LifecycleScope** (Tự hủy luồng an toàn) |
-| **Giao dịch định kỳ** | Cronjob chạy ngầm khó kiểm thử demo | **Tự động Cron 00:00 + Quick Trigger API / UI nút bấm** |
+| **Giao dịch định kỳ** | Cronjob chạy ngầm khó kiểm thử demo | **Tự động Cron 00:00 + Quick Trigger API / Tiện ích kích hoạt** |
+| **Kích thước & Băng thông APK** | Cài nhiều SDK bên thứ 3, gọi API phản hồi ngầm | **Tối ưu Lean Footprint, gỡ bỏ Facebook SDK, Direct Commit tiết kiệm mạng** |
 | **Độ tin cậy hệ thống** | Kiểm thử thủ công | **86 bài kiểm thử tự động (100% Passed) Controller & Service** |
 | **Triển khai hệ thống**| Cài đặt Java, MySQL, cấu hình thủ công | **Docker Compose tự động hóa đóng gói dịch vụ** |
