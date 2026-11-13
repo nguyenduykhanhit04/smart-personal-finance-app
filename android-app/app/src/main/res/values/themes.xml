@@ -102,7 +102,8 @@
     </style>
 
     <!-- Bottom Sheet Dialog Theme -->
-    <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+    <style name="BottomSheetDialogTheme" parent="Theme.Material3.DayNight.BottomSheetDialog">
+        <item name="android:windowAnimationStyle">@null</item>
         <item name="bottomSheetStyle">@style/Widget.PersonalFinance.BottomSheet</item>
     </style>
 

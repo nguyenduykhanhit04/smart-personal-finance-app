@@ -332,44 +332,23 @@ class TransactionListFragment : Fragment() {
     }
 
     private fun showAddOptionsBottomSheet() {
-        val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
-        val bottomSheetView = LayoutInflater.from(requireContext()).inflate(R.layout.bottom_sheet_add_options, null)
-        bottomSheetDialog.setContentView(bottomSheetView)
-
-        val btnManual = bottomSheetView.findViewById<View>(R.id.btnOptionManual)
-        val btnOcr = bottomSheetView.findViewById<View>(R.id.btnOptionOcr)
-        val btnYolo = bottomSheetView.findViewById<View>(R.id.btnOptionYolo)
-
-        val manualClickListener = View.OnClickListener {
-            bottomSheetDialog.dismiss()
-            val addFragment = AddTransactionFragment()
-            addFragment.setOnTransactionSavedListener { loadTransactions() }
-            addFragment.show(parentFragmentManager, "AddTransactionFragment")
-        }
-        btnManual?.setRecursiveClickListener(manualClickListener)
-
-        val ocrClickListener = View.OnClickListener {
-            bottomSheetDialog.dismiss()
-            startActivity(Intent(requireContext(), ScanBillActivity::class.java))
-        }
-        btnOcr?.setRecursiveClickListener(ocrClickListener)
-
-        val yoloClickListener = View.OnClickListener {
-            bottomSheetDialog.dismiss()
-            startActivity(Intent(requireContext(), ScanProductActivity::class.java))
-        }
-        btnYolo?.setRecursiveClickListener(yoloClickListener)
-
-        bottomSheetDialog.show()
-    }
-
-    private fun View.setRecursiveClickListener(listener: View.OnClickListener) {
-        setOnClickListener(listener)
-        if (this is ViewGroup) {
-            for (i in 0 until childCount) {
-                getChildAt(i).setRecursiveClickListener(listener)
+        val sheet = AddOptionsBottomSheet.newInstance()
+        sheet.setOnOptionSelectedListener { option ->
+            when (option) {
+                AddOptionsBottomSheet.OptionType.MANUAL -> {
+                    val addFragment = AddTransactionFragment()
+                    addFragment.setOnTransactionSavedListener { loadTransactions() }
+                    addFragment.show(parentFragmentManager, "AddTransactionFragment")
+                }
+                AddOptionsBottomSheet.OptionType.OCR -> {
+                    startActivity(Intent(requireContext(), ScanBillActivity::class.java))
+                }
+                AddOptionsBottomSheet.OptionType.YOLO -> {
+                    startActivity(Intent(requireContext(), ScanProductActivity::class.java))
+                }
             }
         }
+        sheet.show(parentFragmentManager, "AddOptionsBottomSheet")
     }
 
     override fun onDestroyView() {

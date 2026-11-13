@@ -519,40 +519,31 @@ class HomeFragment : Fragment() {
     }
 
     private fun showAddOptionsBottomSheet(prefilledDay: Int) {
-        val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme).apply {
-            setContentView(R.layout.bottom_sheet_add_options)
-        }
-
-        val btnManual = bottomSheetDialog.findViewById<LinearLayout>(R.id.btnOptionManual)
-        val btnOcr = bottomSheetDialog.findViewById<LinearLayout>(R.id.btnOptionOcr)
-        val btnYolo = bottomSheetDialog.findViewById<LinearLayout>(R.id.btnOptionYolo)
-
-        btnManual?.setOnClickListener {
-            bottomSheetDialog.dismiss()
-            val addFragment = AddTransactionFragment().apply {
-                if (prefilledDay > 0) {
-                    arguments = Bundle().apply {
-                        val selectCal = currentCalendar.clone() as Calendar
-                        selectCal.set(Calendar.DAY_OF_MONTH, prefilledDay)
-                        putString("prefilled_date", DateUtils.formatApiDate(selectCal.time))
+        val sheet = com.example.personalfinance.fragments.transaction.AddOptionsBottomSheet.newInstance(prefilledDay)
+        sheet.setOnOptionSelectedListener { option ->
+            when (option) {
+                com.example.personalfinance.fragments.transaction.AddOptionsBottomSheet.OptionType.MANUAL -> {
+                    val addFragment = AddTransactionFragment().apply {
+                        if (prefilledDay > 0) {
+                            arguments = Bundle().apply {
+                                val selectCal = currentCalendar.clone() as Calendar
+                                selectCal.set(Calendar.DAY_OF_MONTH, prefilledDay)
+                                putString("prefilled_date", DateUtils.formatApiDate(selectCal.time))
+                            }
+                        }
+                        setOnTransactionSavedListener { loadDataForSelectedMonth() }
                     }
+                    addFragment.show(parentFragmentManager, "AddTransactionFragment")
                 }
-                setOnTransactionSavedListener { loadDataForSelectedMonth() }
+                com.example.personalfinance.fragments.transaction.AddOptionsBottomSheet.OptionType.OCR -> {
+                    startActivity(Intent(requireContext(), ScanBillActivity::class.java))
+                }
+                com.example.personalfinance.fragments.transaction.AddOptionsBottomSheet.OptionType.YOLO -> {
+                    startActivity(Intent(requireContext(), ScanProductActivity::class.java))
+                }
             }
-            addFragment.show(parentFragmentManager, "AddTransactionFragment")
         }
-
-        btnOcr?.setOnClickListener {
-            bottomSheetDialog.dismiss()
-            startActivity(Intent(requireContext(), ScanBillActivity::class.java))
-        }
-
-        btnYolo?.setOnClickListener {
-            bottomSheetDialog.dismiss()
-            startActivity(Intent(requireContext(), ScanProductActivity::class.java))
-        }
-
-        bottomSheetDialog.show()
+        sheet.show(parentFragmentManager, "AddOptionsBottomSheet")
     }
 
     private fun updateTabStyles() {

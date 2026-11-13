@@ -85,46 +85,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showAddOptionsBottomSheet() {
-        android.util.Log.d("AddOptions", "showAddOptionsBottomSheet called")
-        val bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
-        val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_add_options, null)
-        bottomSheetDialog.setContentView(sheetView)
-
-        val btnManual = sheetView.findViewById<View>(R.id.btnOptionManual)
-        val btnOcr = sheetView.findViewById<View>(R.id.btnOptionOcr)
-        val btnYolo = sheetView.findViewById<View>(R.id.btnOptionYolo)
-        android.util.Log.d("AddOptions", "btnManual is $btnManual")
-
-        val manualClickListener = View.OnClickListener {
-            android.util.Log.d("AddOptions", "btnManual CLICKED!")
-            bottomSheetDialog.dismiss()
-            val addFragment = AddTransactionFragment()
-            addFragment.setOnTransactionSavedListener { refreshCurrentFragment() }
-            addFragment.show(supportFragmentManager, "AddTransactionFragment")
-        }
-        btnManual?.setRecursiveClickListener(manualClickListener)
-
-        val ocrClickListener = View.OnClickListener {
-            bottomSheetDialog.dismiss()
-            startActivity(Intent(this, ScanBillActivity::class.java))
-        }
-        btnOcr?.setRecursiveClickListener(ocrClickListener)
-
-        val yoloClickListener = View.OnClickListener {
-            bottomSheetDialog.dismiss()
-            startActivity(Intent(this, ScanProductActivity::class.java))
-        }
-        btnYolo?.setRecursiveClickListener(yoloClickListener)
-
-        bottomSheetDialog.show()
-    }
-
-    private fun View.setRecursiveClickListener(listener: View.OnClickListener) {
-        setOnClickListener(listener)
-        if (this is android.view.ViewGroup) {
-            for (i in 0 until childCount) {
-                getChildAt(i).setRecursiveClickListener(listener)
+        val sheet = com.example.personalfinance.fragments.transaction.AddOptionsBottomSheet.newInstance()
+        sheet.setOnOptionSelectedListener { option ->
+            when (option) {
+                com.example.personalfinance.fragments.transaction.AddOptionsBottomSheet.OptionType.MANUAL -> {
+                    val addFragment = AddTransactionFragment()
+                    addFragment.setOnTransactionSavedListener { refreshCurrentFragment() }
+                    addFragment.show(supportFragmentManager, "AddTransactionFragment")
+                }
+                com.example.personalfinance.fragments.transaction.AddOptionsBottomSheet.OptionType.OCR -> {
+                    startActivity(Intent(this, ScanBillActivity::class.java))
+                }
+                com.example.personalfinance.fragments.transaction.AddOptionsBottomSheet.OptionType.YOLO -> {
+                    startActivity(Intent(this, ScanProductActivity::class.java))
+                }
             }
         }
+        sheet.show(supportFragmentManager, "AddOptionsBottomSheet")
     }
 }
