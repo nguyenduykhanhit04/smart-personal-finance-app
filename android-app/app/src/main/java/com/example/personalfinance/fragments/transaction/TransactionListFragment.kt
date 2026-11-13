@@ -223,6 +223,17 @@ class TransactionListFragment : Fragment() {
         binding.tvMonthTitle.text = getString(R.string.format_month_year, month, year)
     }
 
+    fun refreshData() {
+        loadTransactions()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (isAdded && currentUser != null) {
+            refreshData()
+        }
+    }
+
     private fun loadTransactions() {
         val userId = currentUser?.userId ?: return
         viewModel.loadTransactions(userId, "2000-01-01", "2100-12-31")
@@ -332,6 +343,7 @@ class TransactionListFragment : Fragment() {
         btnManual?.setOnClickListener {
             bottomSheetDialog.dismiss()
             val addFragment = AddTransactionFragment()
+            addFragment.setOnTransactionSavedListener { loadTransactions() }
             addFragment.show(parentFragmentManager, "AddTransactionFragment")
         }
 

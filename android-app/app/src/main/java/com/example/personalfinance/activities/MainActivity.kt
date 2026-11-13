@@ -74,6 +74,15 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.selectedItemId = itemId
     }
 
+    fun refreshCurrentFragment() {
+        val current = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
+        when (current) {
+            is HomeFragment -> current.refreshData()
+            is TransactionListFragment -> current.refreshData()
+            is CategoryLimitFragment -> current.refreshData()
+        }
+    }
+
     private fun showAddOptionsBottomSheet() {
         val bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme).apply {
             setContentView(R.layout.bottom_sheet_add_options)
@@ -86,6 +95,7 @@ class MainActivity : AppCompatActivity() {
         btnManual?.setOnClickListener {
             bottomSheetDialog.dismiss()
             val addFragment = AddTransactionFragment()
+            addFragment.setOnTransactionSavedListener { refreshCurrentFragment() }
             addFragment.show(supportFragmentManager, "AddTransactionFragment")
         }
 

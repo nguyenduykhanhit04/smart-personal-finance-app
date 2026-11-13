@@ -83,9 +83,20 @@ class HomeFragment : Fragment() {
         setupClickListeners()
         observeViewModel()
 
-        loadDataForSelectedMonth()
+        refreshData()
         updateTabStyles()
+    }
+
+    fun refreshData() {
+        loadDataForSelectedMonth()
         currentUser?.userId?.let { accountViewModel.loadAccounts(it) }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (isAdded && currentUser != null) {
+            refreshData()
+        }
     }
 
     private fun setupDynamicGreeting() {

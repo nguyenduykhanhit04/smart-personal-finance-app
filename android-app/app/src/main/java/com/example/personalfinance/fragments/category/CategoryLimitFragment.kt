@@ -74,7 +74,18 @@ class CategoryLimitFragment : Fragment() {
         observeViewModel()
         updatePeriodControls()
 
+        refreshData()
+    }
+
+    fun refreshData() {
         loadBudgets()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (isAdded && currentUser != null) {
+            refreshData()
+        }
     }
 
     private fun setupRecyclerView() {

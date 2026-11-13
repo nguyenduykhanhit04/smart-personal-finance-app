@@ -84,7 +84,18 @@ class AccountDetailsFragment : Fragment() {
         setupClickListeners()
         observeViewModel()
 
+        refreshData()
+    }
+
+    fun refreshData() {
         loadTransactions()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (isAdded && currentUser != null) {
+            refreshData()
+        }
     }
 
     private fun setupUI() {

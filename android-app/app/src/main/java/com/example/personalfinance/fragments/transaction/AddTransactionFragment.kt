@@ -516,9 +516,14 @@ class AddTransactionFragment : DialogFragment() {
 
         binding.btnSave.isEnabled = false
 
+        val accountIdx = binding.spAccount.selectedItemPosition
+        val selectedAccountId = if (accountIdx >= 0 && accountIdx < allAccounts.size) {
+            allAccounts[accountIdx].accountId
+        } else null
+
         val transaction = Transaction().apply {
             this.userId = currentUser?.userId
-            this.accountId = null
+            this.accountId = selectedAccountId
             this.categoryId = selectedCategory.categoryId
             this.title = title
             this.amount = amount
@@ -941,11 +946,8 @@ class AddTransactionFragment : DialogFragment() {
     }
 
     private fun finishSaveTransaction() {
-        if (onTransactionSavedListener != null) {
-            onTransactionSavedListener?.onTransactionSaved()
-        } else {
-            (activity as? MainActivity)?.setSelectedTab(R.id.nav_home)
-        }
+        onTransactionSavedListener?.onTransactionSaved()
+        (activity as? MainActivity)?.refreshCurrentFragment()
 
         val act = activity
         if (act != null && act !is MainActivity) {
