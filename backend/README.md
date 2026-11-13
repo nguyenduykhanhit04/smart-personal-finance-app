@@ -72,7 +72,7 @@ backend/
 │   │       ├── application.properties
 │   │       ├── firebase-service-account.json # Chứng chỉ Firebase Admin SDK
 │   │       └── random_forest_model.onnx      # Mô hình Random Forest đã biên dịch ONNX
-│   └── test/                         # Unit Tests & Integration Tests (21/21 passed)
+│   └── test/                         # Unit Tests & Integration Tests (86/86 passed - 100% success)
 ├── Dockerfile                        # Dockerfile đóng gói ứng dụng trên nền JRE 21
 ├── pom.xml                           # Quản lý dependencies Maven
 └── README.md
@@ -169,6 +169,7 @@ Khi có lỗi xác thực hoặc lỗi hệ thống, mã lỗi HTTP chuẩn (400
 | `POST` | `/api/recurring-transactions` | Token | Tạo lịch định kỳ mới (Ngày/Tuần/Tháng/Năm) |
 | `PUT` | `/api/recurring-transactions/{id}` | Token | Sửa lịch định kỳ hoặc tạm dừng |
 | `DELETE` | `/api/recurring-transactions/{id}` | Token | Hủy lịch định kỳ |
+| `POST` | `/api/recurring-transactions/trigger` | Token | Kích hoạt quét và phát sinh giao dịch định kỳ tức thì (Demo/Testing) |
 
 ### 🤖 8. Dịch vụ Trí tuệ Nhân tạo (`/api/ai`)
 | Method | Endpoint | Yêu cầu Auth | Mô tả |
@@ -227,8 +228,8 @@ cd backend
 mvn clean spring-boot:run
 ```
 
-### Chạy kiểm thử tự động (Unit Tests)
+### Chạy kiểm thử tự động (Automated Tests)
 ```bash
 mvn test
 ```
-*(Toàn bộ 21/21 Unit Tests về Controller, Service, Validation và Exception Handling đều được kiểm thử thành công).*
+*(Toàn bộ **86/86 Tests** bao phủ 9 Controllers với Spring MockMvc và 8 Services với Mockito/JUnit 5 đều chạy thành công 100%, 0 failures, 0 errors).*

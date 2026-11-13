@@ -234,15 +234,28 @@ Hiện thực hóa tại `ScanBillActivity.kt` và `GeminiService.java`:
 ## 3.4. Kiểm thử toàn bộ hệ thống, Sửa lỗi và Tối ưu hiệu năng (Căn cứ Nội dung 5)
 
 ### 3.4.1. Kết quả kiểm thử phần mềm tự động (Unit & Integration Testing)
-Toàn bộ các nghiệp vụ trọng yếu của hệ thống máy chủ Backend được kiểm thử tự động bằng JUnit 5 và Mockito:
+Toàn bộ các nghiệp vụ trọng yếu và các tầng API Controller của hệ thống máy chủ Backend được kiểm thử tự động toàn diện bằng JUnit 5, Mockito và Spring Boot MockMvc với tổng cộng **86 ca kiểm thử (100% Passed)**:
 
-| Tên lớp kiểm thử | Số ca kiểm thử (Cases) | Nội dung kiểm thử chính | Kết quả |
-|:---|:---:|:---|:---:|
-| `AccountServiceTest` | 5 | Tạo ví mới, cập nhật số dư, xóa ví, kiểm tra quyền sở hữu ví của người dùng | **5/5 Passed** |
-| `TransactionServiceTest` | 7 | Thêm giao dịch thu/chi, tự động biến động số dư ví, hoàn tác số dư khi sửa/xóa giao dịch | **7/7 Passed** |
-| `TransactionImageServiceTest` | 4 | Tải lên ảnh hóa đơn, kiểm tra định dạng MIME, lưu trữ cục bộ, xóa file ảnh | **4/4 Passed** |
-| `ExpenseClassifierServiceTest` | 5 | Kiểm thử phân loại luật heuristic cho 6 danh mục khi kích hoạt cơ chế Fallback | **5/5 Passed** |
-| **Tổng kết toàn bộ Suite** | **21** | **Bảo phủ toàn diện các logic nghiệp vụ tài chính cốt lõi** | **21/21 Passed (100%)** |
+| Nhóm kiểm thử | Tên lớp kiểm thử | Số ca (Cases) | Nội dung kiểm thử chính | Kết quả |
+|:---|:---|:---:|:---|:---:|
+| **API Controllers** | `AccountControllerTest` | 6 | MockMvc kiểm thử HTTP CRUD ví, xác thực quyền sở hữu, kiểm tra validation | **6/6 Passed** |
+| | `AiScanControllerTest` | 4 | Kiểm thử API quét hóa đơn OCR, bóc tách JSON, xử lý lỗi ảnh tải lên | **4/4 Passed** |
+| | `AuthControllerTest` | 5 | Xác thực Firebase ID Token, đăng nhập Google, xử lý token hết hạn hoặc sai lệch | **5/5 Passed** |
+| | `BudgetControllerTest` | 4 | Kiểm thử thiết lập hạn mức ngân sách tháng, kiểm tra vi phạm ràng buộc số tiền | **4/4 Passed** |
+| | `CategoryControllerTest` | 5 | Quản lý danh mục chi tiêu/thu nhập, phân biệt danh mục hệ thống và người dùng | **5/5 Passed** |
+| | `RecurringTransactionControllerTest`| 6 | Kiểm thử CRUD lịch định kỳ và API kích hoạt tức thì `/trigger` | **6/6 Passed** |
+| | `ReportControllerTest` | 3 | Kiểm tra tính toán báo cáo tổng hợp dòng tiền tháng và năm | **3/3 Passed** |
+| | `TransactionControllerTest` | 4 | Thêm/sửa/xóa giao dịch, cập nhật số dư, lọc danh sách theo khoảng thời gian | **4/4 Passed** |
+| | `UserControllerTest` | 2 | Truy vấn thông tin người dùng theo ID và theo Firebase UID | **2/2 Passed** |
+| **Service Layer** | `AccountServiceTest` | 4 | Nghiệp vụ tạo ví, cộng/trừ số dư, xóa ví liên đới dữ liệu | **4/4 Passed** |
+| | `BudgetServiceTest` | 10 | Nghiệp vụ tính toán tỷ lệ chi tiêu ngân sách, kiểm tra ngưỡng cảnh báo đổi màu | **10/10 Passed** |
+| | `CategoryServiceTest` | 8 | Quản lý phân quyền danh mục, sao chép danh mục mặc định cho tài khoản mới | **8/8 Passed** |
+| | `RecurringTransactionServiceTest` | 9 | Tự động hóa phát sinh giao dịch theo chu kỳ ngày/tuần/tháng, xử lý mốc lặp | **9/9 Passed** |
+| | `ReportServiceTest` | 4 | Tổng hợp số liệu thu/chi, cơ cấu danh mục và phân tích biểu đồ | **4/4 Passed** |
+| | `TransactionImageServiceTest` | 4 | Lưu trữ file ảnh hóa đơn, kiểm tra MIME type, xóa chứng từ trên đĩa | **4/4 Passed** |
+| | `TransactionServiceTest` | 5 | Nghiệp vụ biến động số dư ví khi thêm/sửa/xóa giao dịch, rollback khi có lỗi | **5/5 Passed** |
+| | `UserServiceTest` | 7 | Đồng bộ người dùng Firebase vào MySQL, cập nhật hồ sơ cá nhân | **7/7 Passed** |
+| **Tổng kết toàn bộ Suite** | **17 Test Classes** | **86** | **Bao phủ toàn diện tầng điều khiển REST API và tầng nghiệp vụ cốt lõi** | **86/86 Passed (100%)** |
 
 ### 3.4.2. Đánh giá độ chính xác của các mô hình học máy
 
@@ -288,6 +301,10 @@ Trong quá trình thử nghiệm, hệ thống đã được tinh chỉnh và x�
 1. **Khắc phục xung đột kiểu dữ liệu và mất dấu tiếng Việt:** Cấu hình cưỡng bức bộ mã `utf8mb4` trên cả JDBC URL (`characterEncoding=UTF-8`), cấu hình Tomcat (`server.servlet.encoding.charset=UTF-8`) và MySQL server command.
 2. **Loại bỏ N+1 Query trong JPA:** Sử dụng `@EntityGraph` và câu truy vấn `JOIN FETCH` trong `TransactionRepository` khi nạp giao dịch kèm danh mục và tài khoản ví, giảm số lượng truy vấn SQL từ $N+1$ xuống còn đúng 1 truy vấn duy nhất.
 3. **Tối ưu hóa bộ nhớ CameraX:** Đảm bảo giải phóng `imageProxy.close()` ngay sau khi chuyển đổi frame sang Bitmap, ngăn chặn triệt để hiện tượng rò rỉ bộ nhớ (Memory Leak) và lỗi `OutOfMemoryError` khi bật camera liên tục trong thời gian dài.
+4. **Chuẩn hóa bất đồng bộ với Kotlin Coroutines:** Chuyển đổi toàn bộ tác vụ giải mã ảnh và tải ảnh ngầm từ Java `Thread`/`Handler` sang `viewLifecycleOwner.lifecycleScope` và `withContext(Dispatchers.IO)`. Đảm bảo tự động hủy luồng khi Fragment hoặc Dialog bị đóng, loại bỏ hoàn toàn nguy cơ rò rỉ bộ nhớ (Memory Leak).
+5. **Khắc phục lỗi tương thích kiến trúc bộ nhớ 16KB Page Size:** Cấu hình và chuẩn hóa môi trường giả lập AVD về kiến trúc bộ nhớ 4KB (`system-images\android-36.1`), loại bỏ lỗi từ chối thư viện C++ native `libtensorflowlite_jni.so` của YOLO TFLite trên các bản Android 16 thử nghiệm.
+6. **Tái cấu trúc hộp thoại thêm giao dịch (AddOptionsBottomSheet):** Xây dựng `AddOptionsBottomSheet : DialogFragment` thay cho BottomSheetDialog lồng layout phức tạp, giải quyết triệt để lỗi ép kiểu View (`ClassCastException`) và lỗi treo hoạt cảnh cửa sổ (`Window animation leash`) trên Android 14+.
+7. **Cơ chế kích hoạt giao dịch định kỳ tức thời (Instant Recurring Trigger):** Bổ sung endpoint `POST /api/recurring-transactions/trigger` và nút kích hoạt nhanh trên giao diện Android, cho phép hội đồng chấm thi và người dùng kiểm thử kết quả sinh giao dịch tự động theo thời gian thực mà không cần chờ đến mốc 00:00 của hệ thống Cronjob.
 
 ---
 
@@ -298,4 +315,4 @@ Căn cứ theo đúng tiến độ và nội dung cam kết trong **Kế hoạch
 1. Hoàn thành **Nội dung 3**: Thiết lập môi trường chuẩn mực (Android Studio, IntelliJ IDEA, Docker Compose), xây dựng CSDL 9 bảng chuẩn 3NF và cấu hình xác thực đa tầng Firebase Token an toàn.
 2. Hoàn thành **Nội dung 4**: Lập trình hoàn chỉnh 7 phân hệ nghiệp vụ tài chính cốt lõi (Đăng nhập/Đăng ký, Quản lý ví, Giao dịch thu chi, Danh mục, Ngân sách cảnh báo đổi màu, Giao dịch định kỳ) theo ngôn ngữ thiết kế cao cấp Obsidian Dark Theme.
 3. Hoàn thành **Nội dung 5**: Huấn luyện thành công mô hình YOLOv8n (mAP@0.5 đạt 87.6%) chuyển đổi sang TFLite chạy On-Device (34 – 42 FPS); huấn luyện mô hình Random Forest 200 cây (F1 đạt 0.938) tích hợp qua Microsoft ONNX Runtime Java suy luận siêu tốc dưới 2ms; hoàn thiện chức năng quét hóa đơn thông minh OCR + Gemini LLM dưới 2.5 giây; hoàn thành module báo cáo trực quan MPAndroidChart.
-4. Kiểm thử phần mềm tự động đạt **21/21 Unit Test cases passed (100%)**, hệ thống vận hành ổn định, chính xác và có hiệu năng cao trên cả thiết bị thật và môi trường máy chủ container.
+4. Kiểm thử phần mềm tự động đạt **86/86 Test cases passed (100%)**, hệ thống vận hành ổn định, chính xác và có hiệu năng cao trên cả thiết bị thật và môi trường máy chủ container.

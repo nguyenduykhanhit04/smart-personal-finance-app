@@ -13,7 +13,7 @@
   - Mô hình **YOLOv8** phát hiện 18 nhóm mặt hàng/sản phẩm trực tiếp qua camera với khung nhận diện (Bounding Box) thời gian thực.
   - Mô hình **Random Forest** (triển khai qua Microsoft ONNX Runtime Java) phân tích 27 đặc trưng đa chiều để gợi ý chuẩn xác danh mục chi tiêu.
 - 🎯 **Quản lý ngân sách & Cảnh báo vượt hạn mức:** Thiết lập hạn mức chi tiêu theo danh mục/tháng. Thanh tiến độ trực quan tự động đổi màu cảnh báo khi tiệm cận hoặc vượt quá ngân sách.
-- 🔄 **Giao dịch định kỳ (Recurring Transactions):** Tự động lên lịch và ghi nhận các khoản chi cố định (tiền thuê nhà, hóa đơn điện nước, dịch vụ định kỳ).
+- 🔄 **Giao dịch định kỳ (Recurring Transactions):** Tự động lên lịch và ghi nhận các khoản chi cố định (tiền thuê nhà, hóa đơn điện nước, dịch vụ định kỳ) qua Cronjob 00:00 hàng ngày, kèm nút kích hoạt tức thì (`btnTriggerNow`) hỗ trợ kiểm thử và demo nhanh.
 - 📈 **Báo cáo & Phân tích trực quan:** Biểu đồ cơ cấu chi tiêu (PieChart) và xu hướng tài chính (BarChart) đa góc nhìn (theo tháng, theo năm) với MPAndroidChart.
 - 🎨 **Giao diện Obsidian Dark Theme cao cấp:** Thiết kế tối màu hiện đại, tối ưu trải nghiệm người dùng và tiết kiệm pin OLED.
 - 🔐 **Bảo mật & Đăng nhập đa nền tảng:** Xác thực qua Firebase Authentication (Email/Mật khẩu và Google Sign-In 1 chạm).
@@ -30,7 +30,7 @@
                                         ▼
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │                         MOBILE CLIENT (Android - Kotlin)                     │
-│  ├── Kiến trúc MVVM, ViewBinding, LiveData, Coroutines, Navigation Component │
+│  ├── Kiến trúc MVVM, ViewBinding, LiveData, Coroutines (LifecycleScope), Navigation Component │
 │  ├── CameraX Preview + Google ML Kit Text Recognition (OCR hóa đơn)          │
 │  ├── TensorFlow Lite: YOLOv8 Object Detection (Vẽ khung Bounding Box)        │
 │  ├── MPAndroidChart: Trực quan hóa dữ liệu thu chi đa chiều                  │
@@ -44,6 +44,7 @@
 │                     BACKEND API (Spring Boot 3 - Java 21)                    │
 │  ├── Spring Security + FirebaseAuthFilter: Xác thực Token tập trung          │
 │  ├── Controller Layer: 11 REST Controllers chuẩn hóa ApiResponse<T>          │
+│  ├── Test Suite: 86 Automated Unit & Integration Tests (100% Passed)         │
 │  ├── Bean Validation: Kiểm soát chặt chẽ dữ liệu đầu vào (@Valid)            │
 │  ├── Service Layer: Xử lý toàn bộ logic nghiệp vụ tài chính                  │
 │  ├── GeminiService: Tích hợp Google Gemini 2.5 Flash LLM bóc tách JSON       │
@@ -112,7 +113,7 @@ docker compose ps
    ```
 2. Chờ Android Studio sync Gradle (dự án đã được cấu hình sẵn).
 3. Khởi chạy ứng dụng:
-   - **Trên Máy ảo (Android Emulator):** Ứng dụng đã được cấu hình mặc định trỏ về `http://10.0.2.2:8080/` (cầu nối trực tiếp vào Docker Backend). Bạn chỉ cần bấm nút **Run ▶️** là app chạy và kết nối được ngay.
+   - **Trên Máy ảo (Android Emulator):** Ứng dụng đã được cấu hình mặc định trỏ về `http://10.0.2.2:8080/` (cầu nối trực tiếp vào Docker Backend). Bạn chỉ cần bấm nút **Run ▶️** là app chạy và kết nối được ngay. *(Khuyến nghị tạo AVD với System Image 4KB page size chuẩn như API 34 hoặc 36.1 để thư viện C++ native TFLite hoạt động tối ưu).*
    - **Trên Điện thoại thật:**
      - *Dùng Wi-Fi:* Mở app, tại màn hình Đăng nhập **nhấn giữ vào Logo app 2 giây** -> nhập IP máy tính của bạn (VD: `192.168.1.125:8080`) -> bấm **Lưu**.
      - *Dùng cáp USB:* Cắm cáp USB (bật USB Debugging) và chạy lệnh:
@@ -136,7 +137,7 @@ Bạn có thể kết nối bất kỳ phần mềm quản lý CSDL nào vào c�
 
 | Thành phần | Công nghệ chính |
 | :--- | :--- |
-| **Mobile App** | Kotlin, Android SDK 34, MVVM, ViewBinding, LiveData, CameraX, Retrofit 2, OkHttp 4, MPAndroidChart |
+| **Mobile App** | Kotlin, Android SDK 34, MVVM, ViewBinding, LiveData, Coroutines (LifecycleScope), CameraX, Retrofit 2, OkHttp 4, MPAndroidChart |
 | **Backend API** | Java 21, Spring Boot 3.2.5, Spring Security, Spring Data JPA, Hibernate, Bean Validation, Lombok |
 | **AI / Machine Learning** | Google ML Kit (OCR), Ultralytics YOLOv8 (TFLite), Scikit-learn Random Forest, Microsoft ONNX Runtime Java, **Google Gemini 2.5 Flash** |
 | **Cơ sở dữ liệu** | MySQL 8.0 Community Server (utf8mb4 / utf8mb4_unicode_ci) |

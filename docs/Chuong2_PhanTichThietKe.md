@@ -694,6 +694,7 @@ Hệ thống cung cấp hệ thống API RESTful toàn diện phục vụ toàn 
 | | `POST` | `/api/recurring-transactions` | Token | Tạo lịch định kỳ mới (ngày/tuần/tháng) |
 | | `PUT` | `/api/recurring-transactions/{id}` | Token | Cập nhật hoặc tạm dừng lịch định kỳ |
 | | `DELETE`| `/api/recurring-transactions/{id}` | Token | Hủy bỏ lịch định kỳ |
+| | `POST` | `/api/recurring-transactions/trigger` | Token | Kích hoạt quét và phát sinh giao dịch định kỳ tức thì |
 | **Trí tuệ Nhân tạo**| `POST`| `/api/ai/scan-bill` | Token | Bóc tách thông tin hóa đơn (OCR text -> Gemini LLM) |
 | | `POST` | `/api/ai/classify-product` | Token | Nhận danh sách vật thể YOLO -> Dự đoán danh mục qua ONNX |
 | **Báo cáo** | `GET` | `/api/reports/monthly?userId={id}&month={m}&year={y}` | Token | Báo cáo cơ cấu thu chi tháng & tỷ lệ danh mục |

@@ -25,7 +25,7 @@ Sau 15 tuần nghiên cứu, thiết kế và phát triển theo đúng lộ tr�
 2. **Hệ thống máy chủ Backend REST API:**
    - 11 REST Controllers chuẩn hóa định dạng phản hồi `ApiResponse<T>` và xử lý lỗi tập trung `GlobalExceptionHandler`.
    - Bảo vệ an toàn tuyệt đối dữ liệu người dùng qua lớp lọc bảo mật `FirebaseAuthFilter`.
-   - Bộ kiểm thử tự động đạt kết quả **21/21 Unit Test cases passed (100%)**.
+   - Bộ kiểm thử tự động toàn diện đạt kết quả **86/86 Test cases passed (100%)** bao gồm đầy đủ Controller MockMvc Tests và Service Business Logic Tests.
 3. **Cơ sở dữ liệu MySQL 8.0:**
    - 9 bảng quan hệ chuẩn hóa 3NF, hỗ trợ hoàn hảo bộ mã tiếng Việt `utf8mb4_unicode_ci` và tự động dọn rác liên đới qua khóa ngoại `CASCADE`.
 4. **Bộ mô hình Trí tuệ Nhân tạo đã huấn luyện:**

@@ -9,7 +9,8 @@
 - **Ngôn ngữ:** Kotlin.
 - **Target SDK:** Android 14 (API 34), Min SDK: Android 7.0 (API 24).
 - **Kiến trúc:** MVVM (Model - View - ViewModel), Repository Pattern.
-- **Android Jetpack:**
+- **Android Jetpack & Bất đồng bộ:**
+  - Kotlin Coroutines & LifecycleScope (`Dispatchers.IO`, `Dispatchers.Main` - Xử lý bất đồng bộ, lifecycle-aware concurrency, tự hủy luồng chống rò rỉ bộ nhớ).
   - ViewBinding (Thay thế hoàn toàn findViewById, an toàn kiểu dữ liệu).
   - ViewModel & LiveData (Quản lý trạng thái UI theo vòng đời).
   - Navigation Component (Điều hướng linh hoạt giữa các màn hình và Fragment).
@@ -118,6 +119,10 @@ android-app/
 - Biểu đồ tròn (Pie Chart) thể hiện tỷ trọng các danh mục chi tiêu.
 - Thống kê so sánh xu hướng thu chi theo từng tháng và theo năm.
 
+### 8. Giao dịch Định kỳ & Tiện ích Demo Tức thì
+- Thiết lập các giao dịch lặp lại theo chu kỳ: Ngày, Tuần, Tháng, Năm (tiền nhà, hóa đơn điện nước...).
+- Tích hợp nút **"⚡ Kích hoạt xử lý định kỳ ngay"** (`btnTriggerNow`) gửi yêu cầu tới Backend để quét và phát sinh giao dịch định kỳ tức thì, hỗ trợ demo trực quan trước hội đồng chấm thi mà không phải chờ sang ngày hôm sau.
+
 ---
 
 ## 🚀 Hướng dẫn Cài đặt & Khởi chạy
@@ -133,6 +138,7 @@ android-app/
 - Mặc định ứng dụng đã được cấu hình trỏ tới `http://10.0.2.2:8080/`.
 - `10.0.2.2` là địa chỉ chuẩn của Android Emulator để tự động chuyển tiếp về máy tính host đang chạy Backend Docker.
 - **Bạn chỉ cần bấm nút Run (▶️) là app kết nối được ngay!**
+- ⚠️ **Lưu ý về kích thước trang bộ nhớ (Page Size):** Khi tạo AVD, nên chọn các bản System Image chuẩn (Android 14 API 34 hoặc Android 15/16 với kiến trúc bộ nhớ chuẩn 4KB, tránh các bản `ps16k` thử nghiệm) để thư viện C++ native `libtensorflowlite_jni.so` của YOLO TFLite nạp thành công 100%.
 
 #### Chạy trên Điện thoại thật:
 - **Cách 1 (Cùng mạng Wi-Fi):** Mở app trên điện thoại -> Tại màn hình Login, **nhấn giữ vào Logo app 2 giây** -> Nhập địa chỉ IP Wi-Fi của máy tính (ví dụ: `192.168.1.125:8080`) -> Bấm **Lưu**.
