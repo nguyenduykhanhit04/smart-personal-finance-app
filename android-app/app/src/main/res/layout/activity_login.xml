@@ -175,32 +175,19 @@
                 style="@style/Widget.PersonalFinance.Button.Google"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                android:layout_marginEnd="16dp"
                 app:icon="@drawable/ic_google"
                 app:iconTint="@null"
                 app:iconSize="24dp"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp" />
 
-            <!-- Apple Button -->
-<!--            <com.google.android.material.button.MaterialButton-->
-<!--                android:id="@+id/btnAppleLogin"-->
-<!--                style="@style/Widget.PersonalFinance.Button.Google"-->
-<!--                android:layout_width="56dp"-->
-<!--                android:layout_height="56dp"-->
-<!--                android:layout_marginEnd="16dp"-->
-<!--                app:icon="@drawable/ic_apple"-->
-<!--                app:iconTint="@color/white"-->
-<!--                app:iconSize="24dp"-->
-<!--                app:iconGravity="textStart"-->
-<!--                app:iconPadding="0dp" />-->
-
-            <!-- Facebook Button (Represent Zalo/FB in layout) -->
+            <!-- Facebook Button (Hidden in Presentation Mode) -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnFacebookLogin"
                 style="@style/Widget.PersonalFinance.Button.Google"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
+                android:visibility="gone"
                 app:icon="@drawable/ic_facebook"
                 app:iconTint="@null"
                 app:iconSize="24dp"

@@ -306,7 +306,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Clock / Recurring Scheduler Trigger Button -->
+        <!-- Clock / Recurring Scheduler Trigger Button (Hidden in Presentation Mode) -->
         <FrameLayout
             android:id="@+id/btnRecurringScheduler"
             android:layout_width="48dp"
@@ -316,6 +316,7 @@
             android:elevation="6dp"
             android:clickable="true"
             android:focusable="true"
+            android:visibility="gone"
             android:layout_marginEnd="12dp">
 
             <ImageView
