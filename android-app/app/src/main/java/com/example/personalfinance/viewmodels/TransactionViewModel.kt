@@ -7,8 +7,6 @@ import java.util.concurrent.atomic.AtomicInteger
 import com.example.personalfinance.models.domain.Account
 import com.example.personalfinance.models.domain.Category
 import com.example.personalfinance.models.domain.Transaction
-import com.example.personalfinance.models.dto.ScanFeedbackRequest
-import com.example.personalfinance.models.dto.ProductFeedbackRequest
 import com.example.personalfinance.api.ApiCallback
 import com.example.personalfinance.repositories.AccountRepository
 import com.example.personalfinance.repositories.TransactionRepository
@@ -83,33 +81,15 @@ class TransactionViewModel : ViewModel() {
 
     fun createTransaction(
         transaction: Transaction,
-        aiScanLogId: Int,
-        aiProductLogId: Int,
-        actualCategoryId: Int
+        aiScanLogId: Int = 0,
+        aiProductLogId: Int = 0,
+        actualCategoryId: Int = 0
     ) {
         _isLoading.value = true
         transactionRepository.createTransaction(transaction, object : ApiCallback<Transaction?> {
             override fun onSuccess(result: Transaction?) {
                 result?.let { _transactionCreated.postValue(it) }
                 _isLoading.postValue(false)
-
-                // Submit silent feedback if OCR-based transaction
-                if (aiScanLogId > 0 && result != null) {
-                    val feedback = ScanFeedbackRequest(aiScanLogId, result.transactionId, actualCategoryId)
-                    transactionRepository.submitScanFeedback(feedback, object : ApiCallback<String?> {
-                        override fun onSuccess(result: String?) {} // Silent success
-                        override fun onError(errorMessage: String?) {} // Silent error
-                    })
-                }
-
-                // Submit silent feedback if YOLO-based transaction
-                if (aiProductLogId > 0 && result != null) {
-                    val feedback = ProductFeedbackRequest(aiProductLogId, result.transactionId)
-                    transactionRepository.submitProductFeedback(feedback, object : ApiCallback<String?> {
-                        override fun onSuccess(result: String?) {} // Silent success
-                        override fun onError(errorMessage: String?) {} // Silent error
-                    })
-                }
             }
             override fun onError(errorMessage: String?) {
                 _errorMessage.postValue("Lỗi lưu giao dịch: $errorMessage")

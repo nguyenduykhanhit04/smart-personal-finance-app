@@ -96,7 +96,6 @@ class ProfileFragment : Fragment() {
         binding.tvUserName.setOnClickListener { showEditNameDialog() }
         binding.btnChangePassword.setOnClickListener { showChangePasswordDialog() }
         binding.btnLogoutRow.setOnClickListener { handleLogout() }
-        binding.btnLogout.setOnClickListener { handleLogout() }
 
         observeViewModel()
         loadMetrics(month, year)
