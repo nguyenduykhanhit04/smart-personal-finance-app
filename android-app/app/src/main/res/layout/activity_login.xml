@@ -180,19 +180,6 @@
                 app:iconSize="24dp"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp" />
-
-            <!-- Facebook Button (Hidden in Presentation Mode) -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnFacebookLogin"
-                style="@style/Widget.PersonalFinance.Button.Google"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:visibility="gone"
-                app:icon="@drawable/ic_facebook"
-                app:iconTint="@null"
-                app:iconSize="24dp"
-                app:iconGravity="textStart"
-                app:iconPadding="0dp" />
         </LinearLayout>
 
         <!-- Quick Demo Login Button -->

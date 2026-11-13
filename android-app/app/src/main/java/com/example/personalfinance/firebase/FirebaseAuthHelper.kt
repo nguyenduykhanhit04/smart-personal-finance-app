@@ -3,17 +3,11 @@ package com.example.personalfinance.firebase
 import android.app.Activity
 import android.content.Intent
 import android.util.Log
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.login.LoginManager
-import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.CommonStatusCodes
-import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -28,7 +22,6 @@ class FirebaseAuthHelper {
 
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private var googleSignInClient: GoogleSignInClient? = null
-    private var facebookCallbackManager: CallbackManager? = null
 
     val currentUser: FirebaseUser? get() = mAuth.currentUser
     val isLoggedIn: Boolean get() = currentUser != null
@@ -36,7 +29,6 @@ class FirebaseAuthHelper {
     fun signOut() {
         mAuth.signOut()
         googleSignInClient?.signOut()
-        LoginManager.getInstance().logOut()
     }
 
     // ============ EMAIL/PASSWORD ============
@@ -125,51 +117,10 @@ class FirebaseAuthHelper {
         }
     }
 
-    // ============ FACEBOOK LOGIN ============
-
-    /**
-     * Initialize Facebook Login callback manager.
-     * @return CallbackManager to be used in onActivityResult
-     */
-    fun initFacebookLogin(callback: FirebaseAuthCallback): CallbackManager {
-        val manager = CallbackManager.Factory.create()
-        facebookCallbackManager = manager
-
-        LoginManager.getInstance().registerCallback(manager, object : FacebookCallback<LoginResult> {
-            override fun onSuccess(result: LoginResult) {
-                Log.d(TAG, "Facebook Login successful, authenticating with Firebase...")
-                val credential = FacebookAuthProvider.getCredential(result.accessToken.token)
-                firebaseAuthWithCredential(credential, callback)
-            }
-
-            override fun onCancel() {
-                Log.d(TAG, "Facebook Login cancelled")
-                callback.onFailure(Exception("Bạn đã hủy đăng nhập Facebook"))
-            }
-
-            override fun onError(error: FacebookException) {
-                Log.e(TAG, "Facebook Login error", error)
-                callback.onFailure(Exception("Đăng nhập Facebook thất bại: ${error.message}"))
-            }
-        })
-
-        return manager
-    }
-
-    /**
-     * Launch Facebook Login flow.
-     * @param activity The Activity to launch from
-     */
-    fun signInWithFacebook(activity: Activity) {
-        LoginManager.getInstance().logInWithReadPermissions(activity, listOf("email", "public_profile"))
-    }
-
-    fun getFacebookCallbackManager(): CallbackManager? = facebookCallbackManager
-
     // ============ SHARED CREDENTIAL AUTH ============
 
     /**
-     * Authenticate with Firebase using an AuthCredential (Google/Facebook).
+     * Authenticate with Firebase using an AuthCredential (Google).
      */
     private fun firebaseAuthWithCredential(
         credential: com.google.firebase.auth.AuthCredential,

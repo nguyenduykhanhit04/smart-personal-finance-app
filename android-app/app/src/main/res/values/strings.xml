@@ -35,7 +35,6 @@
     <string name="btn_login">Đăng Nhập</string>
     <string name="btn_register">Đăng Ký</string>
     <string name="btn_google_login">Đăng nhập bằng Google</string>
-    <string name="btn_facebook_login">Đăng nhập bằng Facebook</string>
     <string name="btn_save">Lưu</string>
     <string name="btn_cancel">Hủy</string>
     <string name="btn_delete">Xóa</string>
@@ -142,11 +141,6 @@
     <string name="cd_google_icon">Biểu tượng Google</string>
 
     <string name="msg_coming_soon">Coming soon!</string>
-
-    <!-- Facebook Login (Replace with your actual values from Facebook Developer Console) -->
-    <string name="facebook_app_id">1000227555738150</string>
-    <string name="facebook_client_token">691a6cdc5d73f04cb0b507351be9b653</string>
-    <string name="fb_login_protocol_scheme">fb1000227555738150</string>
 
     <!-- Budget Limit Warning -->
     <string name="budget_warning_title">Vượt hạn mức chi tiêu</string>

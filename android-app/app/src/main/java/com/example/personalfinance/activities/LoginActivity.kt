@@ -58,9 +58,6 @@ class LoginActivity : AppCompatActivity() {
         authHelper.initGoogleSignIn(this, getString(R.string.default_web_client_id))
         binding.btnGoogleLogin.setOnClickListener { handleGoogleLogin() }
 
-        // Facebook Login is not available yet.
-        binding.btnFacebookLogin.setOnClickListener { showComingSoon() }
-
         // Quick Demo Login (Offline / Demo Mode)
         binding.btnDemoLogin.setOnClickListener { handleDemoLogin() }
 
@@ -189,7 +186,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun enableSocialButtons(enabled: Boolean) {
         binding.btnGoogleLogin.isEnabled = enabled
-        binding.btnFacebookLogin.isEnabled = enabled
         binding.btnDemoLogin.isEnabled = enabled
     }
 
