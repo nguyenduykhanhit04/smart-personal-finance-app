@@ -1,5 +1,12 @@
 # CHƯƠNG 1: TỔNG QUAN ĐỀ TÀI
 
+**Đề tài:** XÂY DỰNG ỨNG DỤNG QUẢN LÝ TÀI CHÍNH CÁ NHÂN TRÊN NỀN TẢNG ANDROID TÍCH HỢP NHẬN DIỆN VÀ PHÂN LOẠI CHI TIÊU BẰNG TRÍ TUỆ NHÂN TẠO  
+**Sinh viên thực hiện:** Nguyễn Duy Khánh — Mã SV: 2255010114 — Lớp: 22CN4  
+**Giảng viên hướng dẫn:** TS. Nguyễn Mạnh Thắng  
+**Khoa:** Công nghệ Thông tin – Trường Đại học Kiến trúc Hà Nội  
+
+---
+
 ## 1.1. Đặt vấn đề
 
 Trong bối cảnh nền kinh tế số phát triển mạnh mẽ tại Việt Nam, quản lý tài chính cá nhân trở thành nhu cầu thiết yếu của mọi người, đặc biệt là giới trẻ và người đi làm. Tính đến cuối năm 2025, tỷ lệ người trưởng thành có tài khoản ngân hàng đạt 88,96%, số lượng tài khoản thanh toán cá nhân vượt mốc 232 triệu. Xu hướng thanh toán không dùng tiền mặt và sử dụng dịch vụ tài chính số ngày càng phổ biến, kéo theo nhu cầu theo dõi, kiểm soát dòng tiền một cách hiệu quả.
@@ -202,7 +209,7 @@ Xây dựng một ứng dụng quản lý tài chính cá nhân trên nền tả
 - Xử lý tốt dữ liệu nhiều chiều và dữ liệu mất cân bằng.
 - Dễ triển khai, hiệu năng ổn định.
 
-Đề tài huấn luyện Random Forest bằng **Scikit-learn** (Python) với **100 cây quyết định** trên **27 đặc trưng đa chiều** được trích xuất từ kết quả nhận diện của YOLOv8, nhằm phân loại giao dịch vào 6 danh mục chi tiêu (Ăn uống, Di chuyển, Mua sắm, Giải trí, Sức khỏe, Khác).
+Đề tài huấn luyện Random Forest bằng **Scikit-learn** (Python) với **200 cây quyết định** (`n_estimators = 200`) trên **27 đặc trưng đa chiều** được trích xuất từ kết quả nhận diện của YOLOv8, nhằm phân loại giao dịch vào 6 danh mục chi tiêu (Ăn uống, Di chuyển, Mua sắm, Giải trí, Sức khỏe, Khác).
 
 ### 1.5.9. ONNX Runtime
 

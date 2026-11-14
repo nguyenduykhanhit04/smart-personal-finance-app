@@ -96,47 +96,94 @@ Lưu nhật ký chi tiêu và thu nhập chi tiết theo thời gian thực.
 | Cột | Kiểu dữ liệu | Ràng buộc | Diễn giải |
 | :--- | :--- | :--- | :--- |
 | `transaction_id` | `INT` | `PK`, `AUTO_INCREMENT` | Mã giao dịch |
-| `account_id` | `INT` | `FK -> accounts(account_id)`, `CASCADE` | Tài khoản phát sinh giao dịch |
+| `user_id` | `INT` | `FK -> users(user_id)`, `CASCADE` | Người thực hiện giao dịch |
+| `account_id` | `INT` | `FK -> accounts(account_id)`, `RESTRICT` | Tài khoản/Ví phát sinh giao dịch |
 | `category_id` | `INT` | `FK -> categories(category_id)`, `RESTRICT` | Danh mục tương ứng |
+| `title` | `VARCHAR(150)` | `NOT NULL` | Tên/tiêu đề giao dịch |
 | `amount` | `DECIMAL(15,2)` | `NOT NULL` | Số tiền giao dịch |
 | `transaction_type` | `VARCHAR(20)`| `NOT NULL` | `expense` (chi tiêu) hoặc `income` (thu nhập)|
-| `transaction_date` | `DATETIME` | `NOT NULL` | Thời điểm phát sinh giao dịch |
+| `transaction_date` | `DATE` | `NOT NULL` | Ngày phát sinh giao dịch |
 | `note` | `TEXT` | `NULL` | Ghi chú chi tiết |
-| `source` | `VARCHAR(30)` | `DEFAULT 'manual'` | Nguồn tạo (`manual`, `ocr`, `product_ai`) |
+| `status` | `VARCHAR(20)` | `DEFAULT 'confirmed'` | Trạng thái giao dịch (`confirmed`, `pending`)|
+| `created_at` | `DATETIME` | `DEFAULT CURRENT_TIMESTAMP` | Thời điểm tạo bản ghi |
+| `updated_at` | `DATETIME` | `ON UPDATE CURRENT_TIMESTAMP`| Thời điểm cập nhật cuối |
 
 ### 5. Bảng `budgets` (Ngân sách chi tiêu)
-Quản lý hạn mức chi tiêu theo tháng và danh mục, phục vụ tính năng cảnh báo chi tiêu vượt ngưỡng.
+Quản lý hạn mức chi tiêu theo khoảng thời gian và danh mục, phục vụ tính năng cảnh báo chi tiêu vượt ngưỡng.
 | Cột | Kiểu dữ liệu | Ràng buộc | Diễn giải |
 | :--- | :--- | :--- | :--- |
 | `budget_id` | `INT` | `PK`, `AUTO_INCREMENT` | Mã ngân sách |
 | `user_id` | `INT` | `FK -> users(user_id)`, `CASCADE` | Người thiết lập ngân sách |
-| `category_id` | `INT` | `FK -> categories(category_id)`, `RESTRICT` | Danh mục áp dụng hạn mức |
-| `amount_limit` | `DECIMAL(15,2)` | `NOT NULL` | Số tiền tối đa cho phép chi |
-| `month` | `INT` | `NOT NULL (1 - 12)` | Tháng áp dụng |
-| `year` | `INT` | `NOT NULL` | Năm áp dụng |
+| `category_id` | `INT` | `FK -> categories(category_id)`, `SET NULL` | Danh mục áp dụng (`NULL` nếu áp dụng chung) |
+| `budget_name` | `VARCHAR(100)` | `NOT NULL` | Tên ngân sách |
+| `amount_limit` | `DECIMAL(15,2)` | `NOT NULL` | Hạn mức chi tiêu tối đa |
+| `daily_amount_limit` | `DECIMAL(15,2)` | `NULL` | Hạn mức chi tiêu ngày khuyến nghị |
+| `spent_amount` | `DECIMAL(15,2)` | `DEFAULT 0` | Số tiền đã chi tiêu thực tế |
+| `start_date` | `DATE` | `NOT NULL` | Ngày bắt đầu áp dụng |
+| `end_date` | `DATE` | `NOT NULL` | Ngày kết thúc áp dụng |
+| `created_at` | `DATETIME` | `DEFAULT CURRENT_TIMESTAMP` | Thời điểm tạo |
+| `updated_at` | `DATETIME` | `ON UPDATE CURRENT_TIMESTAMP`| Thời điểm cập nhật cuối |
 
 ### 6. Bảng `recurring_transactions` (Giao dịch định kỳ)
-Lên lịch tự động ghi nhận các khoản thu/chi theo chu kỳ (Tiền thuê nhà, tiền cước mạng, tiền lương...).
-| Cột | Kiểu dữ liệu | Diễn giải |
-| :--- | :--- | :--- |
-| `recurring_id` | `INT (PK)` | Mã lịch định kỳ |
-| `frequency` | `VARCHAR(20)` | Tần suất lặp: `daily`, `weekly`, `monthly`, `yearly` |
-| `interval_count` | `INT DEFAULT 1` | Bước nhảy chu kỳ (VD: Mỗi 2 tuần, Mỗi 1 tháng) |
-| `start_date` / `end_date` | `DATE` | Khoảng thời gian hiệu lực |
-| `is_active` | `BOOLEAN` | Trạng thái kích hoạt |
+Lên lịch tự động ghi nhận các khoản thu/chi theo chu kỳ (Tiền thuê nhà, cước mạng, tiền điện, lương...).
+| Cột | Kiểu dữ liệu | Ràng buộc | Diễn giải |
+| :--- | :--- | :--- | :--- |
+| `recurring_id` | `INT` | `PK`, `AUTO_INCREMENT` | Mã lịch định kỳ |
+| `user_id` | `INT` | `FK -> users(user_id)`, `CASCADE` | Người thiết lập |
+| `account_id` | `INT` | `FK -> accounts(account_id)`, `RESTRICT` | Ví thanh toán tự động |
+| `category_id` | `INT` | `FK -> categories(category_id)`, `SET NULL` | Danh mục chi tiêu tương ứng |
+| `title` | `VARCHAR(150)` | `NOT NULL` | Tiêu đề giao dịch lặp |
+| `amount` | `DECIMAL(15,2)` | `NOT NULL` | Số tiền định kỳ |
+| `transaction_type`| `VARCHAR(20)` | `NOT NULL` | Loại giao dịch: `expense` hoặc `income` |
+| `repeat_type` | `VARCHAR(20)` | `NOT NULL` | Chu kỳ lặp: `daily`, `weekly`, `monthly`, `yearly` |
+| `repeat_interval`| `INT` | `DEFAULT 1` | Bước nhảy chu kỳ (VD: Mỗi 1 tháng, Mỗi 2 tuần) |
+| `start_date` | `DATE` | `NOT NULL` | Ngày bắt đầu hiệu lực |
+| `end_date` | `DATE` | `NULL` | Ngày kết thúc hiệu lực |
+| `next_run_date` | `DATE` | `NOT NULL` | Ngày chạy tiếp theo (quét bởi Cronjob 00:00) |
+| `note` | `TEXT` | `NULL` | Ghi chú |
+| `is_active` | `BOOLEAN` | `DEFAULT TRUE` | Trạng thái kích hoạt |
+| `created_at` | `DATETIME` | `DEFAULT CURRENT_TIMESTAMP` | Thời điểm tạo |
+| `updated_at` | `DATETIME` | `ON UPDATE CURRENT_TIMESTAMP`| Thời điểm cập nhật |
 
 ### 7. Bảng `transaction_images` (Hình ảnh chứng từ đính kèm)
 Lưu trữ ảnh hóa đơn hoặc ảnh chụp sản phẩm phục vụ lưu trữ chứng từ chi tiêu.
-| Cột | Kiểu dữ liệu | Diễn giải |
-| :--- | :--- | :--- |
-| `image_id` | `INT (PK)` | Mã ảnh |
-| `transaction_id` | `INT (FK)` | Giao dịch đính kèm |
-| `image_url` | `VARCHAR(255)` | Đường dẫn URL hình ảnh tĩnh trên máy chủ |
+| Cột | Kiểu dữ liệu | Ràng buộc | Diễn giải |
+| :--- | :--- | :--- | :--- |
+| `image_id` | `INT` | `PK`, `AUTO_INCREMENT` | Mã ảnh |
+| `transaction_id` | `INT` | `FK -> transactions(transaction_id)`, `CASCADE`| Giao dịch đính kèm |
+| `image_url` | `TEXT` | `NOT NULL` | Đường dẫn ảnh hoặc URL lưu trữ |
+| `ocr_text` | `TEXT` | `NULL` | Văn bản bóc tách từ ảnh nếu có |
+| `uploaded_at` | `DATETIME` | `DEFAULT CURRENT_TIMESTAMP` | Thời điểm tải lên |
 
-### 8. Bảng `ai_scan_logs` & `ai_product_logs` (Nhật ký AI)
-Lưu vết các tác vụ Computer Vision & OCR để đánh giá độ chính xác của mô hình và phục vụ huấn luyện tiếp (Active Learning).
-- `ai_scan_logs`: Lưu kết quả OCR hóa đơn (tổng tiền nhận diện, ngày nhận diện, text thô trích xuất từ hóa đơn, độ tin cậy).
-- `ai_product_logs`: Lưu kết quả nhận diện vật thể YOLO và xác suất phân loại danh mục từ mô hình Random Forest.
+### 8. Bảng `ai_scan_logs` (Nhật ký Quét hóa đơn OCR + Gemini)
+Lưu trữ lịch sử OCR và bóc tách thực thể từ hóa đơn thanh toán.
+| Cột | Kiểu dữ liệu | Ràng buộc | Diễn giải |
+| :--- | :--- | :--- | :--- |
+| `ai_scan_log_id` | `INT` | `PK`, `AUTO_INCREMENT` | Mã nhật ký OCR |
+| `user_id` | `INT` | `FK -> users(user_id)`, `CASCADE` | Người thực hiện quét |
+| `transaction_id` | `INT` | `FK -> transactions`, `SET NULL` | Giao dịch tạo từ hóa đơn (nếu đã lưu) |
+| `raw_ocr_text` | `TEXT` | `NULL` | Văn bản thô bóc tách từ Google ML Kit |
+| `detected_merchant`| `VARCHAR(150)` | `NULL` | Tên cửa hàng/đơn vị do Gemini bóc tách |
+| `detected_amount` | `DECIMAL(15,2)` | `NULL` | Số tiền tổng cộng bóc tách |
+| `detected_date` | `DATE` | `NULL` | Ngày giao dịch trên hóa đơn |
+| `suggested_category_id` | `INT` | `FK -> categories`, `SET NULL` | Danh mục đề xuất ban đầu |
+| `actual_category_id` | `INT` | `FK -> categories`, `SET NULL` | Danh mục người dùng chọn thực tế |
+| `was_corrected` | `BOOLEAN` | `DEFAULT FALSE` | Cờ đánh dấu người dùng có chỉnh sửa không |
+| `confirmed_at` | `DATETIME` | `NULL` | Thời điểm người dùng xác nhận giao dịch |
+| `confidence_score`| `DECIMAL(5,4)` | `NULL` | Độ tin cậy dự đoán (0.0000 - 1.0000) |
+| `created_at` | `DATETIME` | `DEFAULT CURRENT_TIMESTAMP` | Thời điểm quét |
+
+### 9. Bảng `ai_product_logs` (Nhật ký Camera AI & Random Forest)
+Lưu trữ lịch sử nhận diện vật thể mua sắm và phân loại danh mục On-Device / ONNX.
+| Cột | Kiểu dữ liệu | Ràng buộc | Diễn giải |
+| :--- | :--- | :--- | :--- |
+| `ai_product_log_id` | `INT` | `PK`, `AUTO_INCREMENT` | Mã nhật ký Camera AI |
+| `user_id` | `INT` | `FK -> users(user_id)`, `CASCADE` | Người thực hiện quét |
+| `transaction_id` | `INT` | `FK -> transactions`, `SET NULL` | Giao dịch liên kết |
+| `raw_yolo_json` | `TEXT` | `NOT NULL` | JSON danh sách vật thể YOLO phát hiện |
+| `suggested_category_id` | `INT` | `FK -> categories`, `RESTRICT` | Danh mục do Random Forest ONNX gợi ý |
+| `created_at` | `DATETIME` | `DEFAULT CURRENT_TIMESTAMP` | Thời điểm nhận diện |
+
 
 ---
 
@@ -202,3 +249,11 @@ docker exec finance_db mysqldump -u root -prootpassword --default-character-set=
 ```bash
 docker exec -i finance_db mysql -u root -prootpassword --default-character-set=utf8mb4 personal_finance_app < backup_finance.sql
 ```
+
+---
+
+## 👨‍🎓 Thông tin Đề tài Đồ án Tốt nghiệp
+- **Đề tài:** Xây dựng ứng dụng quản lý tài chính cá nhân thông minh tích hợp Trí tuệ Nhân tạo và Thị giác Máy tính trên nền tảng Android
+- **Sinh viên thực hiện:** Nguyễn Duy Khánh — Mã SV: 2255010114 — Lớp: 22CN4
+- **Giảng viên hướng dẫn:** TS. Nguyễn Mạnh Thắng
+- **Cơ sở đào tạo:** Khoa Công nghệ Thông tin – Trường Đại học Kiến trúc Hà Nội

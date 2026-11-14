@@ -251,3 +251,11 @@
 | **Kích thước & Băng thông APK** | Cài nhiều SDK bên thứ 3, gọi API phản hồi ngầm | **Tối ưu Lean Footprint, gỡ bỏ Facebook SDK, Direct Commit tiết kiệm mạng** |
 | **Độ tin cậy hệ thống** | Kiểm thử thủ công | **86 bài kiểm thử tự động (100% Passed) Controller & Service** |
 | **Triển khai hệ thống**| Cài đặt Java, MySQL, cấu hình thủ công | **Docker Compose tự động hóa đóng gói dịch vụ** |
+
+---
+
+## 👨‍🎓 Thông tin Đề tài Đồ án Tốt nghiệp
+- **Đề tài:** Xây dựng ứng dụng quản lý tài chính cá nhân thông minh tích hợp Trí tuệ Nhân tạo và Thị giác Máy tính trên nền tảng Android
+- **Sinh viên thực hiện:** Nguyễn Duy Khánh — Mã SV: 2255010114 — Lớp: 22CN4
+- **Giảng viên hướng dẫn:** TS. Nguyễn Mạnh Thắng
+- **Cơ sở đào tạo:** Khoa Công nghệ Thông tin – Trường Đại học Kiến trúc Hà Nội

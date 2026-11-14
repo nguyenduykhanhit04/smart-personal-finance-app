@@ -1,5 +1,10 @@
 # CHƯƠNG 4: KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
 
+**Đề tài:** XÂY DỰNG ỨNG DỤNG QUẢN LÝ TÀI CHÍNH CÁ NHÂN TRÊN NỀN TẢNG ANDROID TÍCH HỢP NHẬN DIỆN VÀ PHÂN LOẠI CHI TIÊU BẰNG TRÍ TUỆ NHÂN TẠO  
+**Sinh viên thực hiện:** Nguyễn Duy Khánh — Mã SV: 2255010114 — Lớp: 22CN4  
+**Giảng viên hướng dẫn:** TS. Nguyễn Mạnh Thắng  
+**Khoa:** Công nghệ Thông tin – Trường Đại học Kiến trúc Hà Nội  
+
 > **Căn cứ thực hiện:**  
 > Nội dung Chương 4 trực tiếp hiện thực hóa **Nội dung 6 (Tuần 14 – Tuần 15)** trong **Đề xuất Kế hoạch Thực hiện Đề tài Tốt nghiệp** ([KE_HOACH_DO_AN.md](file:///d:/Project/KHMT/DATN/docs/KE_HOACH_DO_AN.md)):  
 > *"Hoàn thiện báo cáo đồ án tốt nghiệp, chuẩn bị bảo vệ: Triển khai hoàn chỉnh hệ thống và hoàn thành báo cáo đồ án tốt nghiệp."*

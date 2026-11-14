@@ -1,5 +1,10 @@
 # CHƯƠNG 2: PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG
 
+**Đề tài:** XÂY DỰNG ỨNG DỤNG QUẢN LÝ TÀI CHÍNH CÁ NHÂN TRÊN NỀN TẢNG ANDROID TÍCH HỢP NHẬN DIỆN VÀ PHÂN LOẠI CHI TIÊU BẰNG TRÍ TUỆ NHÂN TẠO  
+**Sinh viên thực hiện:** Nguyễn Duy Khánh — Mã SV: 2255010114 — Lớp: 22CN4  
+**Giảng viên hướng dẫn:** TS. Nguyễn Mạnh Thắng  
+**Khoa:** Công nghệ Thông tin – Trường Đại học Kiến trúc Hà Nội  
+
 Chương 2 tập trung vào việc phân tích các yêu cầu nghiệp vụ và thiết kế toàn diện kiến trúc hệ thống cho ứng dụng Quản lý Tài chính Cá nhân Thông minh (*Smart Personal Finance App*). Nội dung chương bao gồm: phân tích yêu cầu chức năng và phi chức năng, xây dựng mô hình Use Case, thiết kế cơ sở dữ liệu quan hệ (ERD), thiết kế kiến trúc hệ thống 3 tầng (Android MVVM – Spring Boot REST API – MySQL), thiết kế chi tiết luồng tích hợp Trí tuệ Nhân tạo (Pipeline AI 2 giai đoạn và trích xuất hóa đơn OCR + LLM), thiết kế cơ chế bảo mật xác thực đa tầng và quy hoạch luồng giao diện người dùng.
 
 ---

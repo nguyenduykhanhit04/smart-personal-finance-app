@@ -77,6 +77,14 @@ smart-personal-finance-app/
 ├── backend/                # [XEM CHI TIẾT](backend/README.md) - REST API Spring Boot 3 & ONNX Runtime
 ├── database/               # [XEM CHI TIẾT](database/README.md) - Thiết kế CSDL MySQL 8 & Seed Data
 ├── ai-pipeline/            # [XEM CHI TIẾT](ai-pipeline/README.md) - Pipeline huấn luyện YOLOv8 & Random Forest
+├── docs/                   # Hồ sơ báo cáo Đồ án tốt nghiệp toàn diện:
+│   ├── KE_HOACH_DO_AN.md                     # Kế hoạch tiến độ 15 tuần chuẩn
+│   ├── TAI_LIEU_THIET_KE_VA_TRIEN_KHAI_DATN.md# Tài liệu toàn văn thiết kế & triển khai
+│   ├── Chuong1_TongQuan.md                   # Chương 1: Tổng quan đề tài
+│   ├── Chuong2_PhanTichThietKe.md            # Chương 2: Phân tích và thiết kế hệ thống
+│   ├── Chuong3_CaiDatThucNghiem.md           # Chương 3: Cài đặt và thực nghiệm hệ thống
+│   ├── Chuong4_KetLuanHuongPhatTrien.md      # Chương 4: Kết luận và hướng phát triển
+│   └── TaiLieuThamKhao.md                    # Danh mục tài liệu tham khảo chuẩn học thuật
 ├── INTEGRATIONS.md         # [XEM CHI TIẾT](INTEGRATIONS.md) - Tổng hợp 10 điểm tích hợp công nghệ đặc biệt
 ├── docker-compose.yml      # Cấu hình khởi chạy toàn bộ hệ thống bằng Docker
 └── README.md               # Tài liệu tổng quan dự án
@@ -147,5 +155,15 @@ Bạn có thể kết nối bất kỳ phần mềm quản lý CSDL nào vào c�
 
 ---
 
+## 👨‍🎓 Thông tin Đề tài Đồ án Tốt nghiệp
+- **Đề tài:** Xây dựng ứng dụng quản lý tài chính cá nhân thông minh tích hợp Trí tuệ Nhân tạo và Thị giác Máy tính trên nền tảng Android
+- **Sinh viên thực hiện:** Nguyễn Duy Khánh
+- **Mã sinh viên:** 2255010114
+- **Lớp:** 22CN4
+- **Giảng viên hướng dẫn:** TS. Nguyễn Mạnh Thắng
+- **Cơ sở đào tạo:** Khoa Công nghệ Thông tin – Trường Đại học Kiến trúc Hà Nội
+
+---
+
 ## 📄 Bản quyền
-Dự án được xây dựng và phát triển dưới dạng ứng dụng cá nhân hoàn chỉnh phục vụ nghiên cứu và quản lý tài chính thông minh.
+Dự án được xây dựng và phát triển dưới dạng đồ án tốt nghiệp kỹ sư Công nghệ Thông tin phục vụ nghiên cứu và ứng dụng quản lý tài chính thông minh.

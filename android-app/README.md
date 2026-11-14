@@ -161,3 +161,11 @@ cd android-app
 ```
 File APK cài đặt sẽ được tạo tại:
 `android-app/app/build/outputs/apk/debug/app-debug.apk`
+
+---
+
+## 👨‍🎓 Thông tin Đề tài Đồ án Tốt nghiệp
+- **Đề tài:** Xây dựng ứng dụng quản lý tài chính cá nhân thông minh tích hợp Trí tuệ Nhân tạo và Thị giác Máy tính trên nền tảng Android
+- **Sinh viên thực hiện:** Nguyễn Duy Khánh — Mã SV: 2255010114 — Lớp: 22CN4
+- **Giảng viên hướng dẫn:** TS. Nguyễn Mạnh Thắng
+- **Cơ sở đào tạo:** Khoa Công nghệ Thông tin – Trường Đại học Kiến trúc Hà Nội

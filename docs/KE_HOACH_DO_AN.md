@@ -1,7 +1,9 @@
 # ĐỀ XUẤT KẾ HOẠCH DỰ KIẾN THỰC HIỆN ĐỀ TÀI TỐT NGHIỆP
 
-**Đề tài:** XÂY DỰNG ỨNG DỤNG QUẢN LÝ TÀI CHÍNH CÁ NHÂN THÔNG MINH TÍCH HỢP TRÍ TUỆ NHÂN TẠO VÀ THỊ GIÁC MÁY TÍNH TRÊN NỀN TẢNG ANDROID
-
+**Đề tài:** XÂY DỰNG ỨNG DỤNG QUẢN LÝ TÀI CHÍNH CÁ NHÂN THÔNG MINH TÍCH HỢP TRÍ TUỆ NHÂN TẠO VÀ THỊ GIÁC MÁY TÍNH TRÊN NỀN TẢNG ANDROID  
+**Sinh viên thực hiện:** Nguyễn Duy Khánh — Mã SV: 2255010114 — Lớp: 22CN4  
+**Giảng viên hướng dẫn:** TS. Nguyễn Mạnh Thắng  
+**Khoa:** Công nghệ Thông tin — Trường Đại học Kiến trúc Hà Nội  
 **Ngành:** Công nghệ thông tin  
 **Thời gian thực hiện:** 15 tuần (105 ngày) — Từ ngày: 05/10/2026 – 18/01/2027
 

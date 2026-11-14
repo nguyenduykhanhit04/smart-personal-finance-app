@@ -1,5 +1,10 @@
 # CHƯƠNG 3: CÀI ĐẶT VÀ THỰC NGHIỆM HỆ THỐNG
 
+**Đề tài:** XÂY DỰNG ỨNG DỤNG QUẢN LÝ TÀI CHÍNH CÁ NHÂN TRÊN NỀN TẢNG ANDROID TÍCH HỢP NHẬN DIỆN VÀ PHÂN LOẠI CHI TIÊU BẰNG TRÍ TUỆ NHÂN TẠO  
+**Sinh viên thực hiện:** Nguyễn Duy Khánh — Mã SV: 2255010114 — Lớp: 22CN4  
+**Giảng viên hướng dẫn:** TS. Nguyễn Mạnh Thắng  
+**Khoa:** Công nghệ Thông tin – Trường Đại học Kiến trúc Hà Nội  
+
 > **Căn cứ thực hiện:**  
 > Toàn bộ nội dung của Chương 3 được xây dựng và triển khai dựa trên **Đề xuất Kế hoạch Thực hiện Đề tài Tốt nghiệp** ([KE_HOACH_DO_AN.md](file:///d:/Project/KHMT/DATN/docs/KE_HOACH_DO_AN.md)), trực tiếp hiện thực hóa 3 nội dung trọng tâm:
 > - **Nội dung 3 (Tuần 4):** Cài đặt môi trường phát triển (Android Studio, IntelliJ IDEA, Docker); xây dựng cơ sở dữ liệu MySQL theo thiết kế ERD; cấu hình Firebase Authentication; dựng khung dự án Backend (Spring Boot) và Mobile (Android Kotlin).

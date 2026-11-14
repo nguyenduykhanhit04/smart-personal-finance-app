@@ -233,3 +233,11 @@ mvn clean spring-boot:run
 mvn test
 ```
 *(Toàn bộ **86/86 Tests** bao phủ 9 Controllers với Spring MockMvc và 8 Services với Mockito/JUnit 5 đều chạy thành công 100%, 0 failures, 0 errors).*
+
+---
+
+## 👨‍🎓 Thông tin Đề tài Đồ án Tốt nghiệp
+- **Đề tài:** Xây dựng ứng dụng quản lý tài chính cá nhân thông minh tích hợp Trí tuệ Nhân tạo và Thị giác Máy tính trên nền tảng Android
+- **Sinh viên thực hiện:** Nguyễn Duy Khánh — Mã SV: 2255010114 — Lớp: 22CN4
+- **Giảng viên hướng dẫn:** TS. Nguyễn Mạnh Thắng
+- **Cơ sở đào tạo:** Khoa Công nghệ Thông tin – Trường Đại học Kiến trúc Hà Nội

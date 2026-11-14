@@ -567,7 +567,7 @@ backend/src/main/java/com/finance/backend/
       }
   }
   ```
-- **API kích hoạt thủ công (Manual Trigger):** Cung cấp Endpoint `POST /api/recurring/trigger-now` dành cho việc kiểm thử tức thì mà không cần phải chờ đến nửa đêm.
+- **API kích hoạt thủ công (Manual Trigger):** Cung cấp Endpoint `POST /api/recurring-transactions/trigger` dành cho việc kiểm thử tức thì mà không cần phải chờ đến nửa đêm.
 
 ## 4.7. Hệ thống Thiết kế Giao diện Obsidian Dark Theme
 Giao diện ứng dụng được thiết kế tỉ mỉ theo ngôn ngữ thiết kế Obsidian Dark Theme hiện đại, mang lại trải nghiệm êm dịu cho mắt, tiết kiệm pin cho màn hình OLED/AMOLED và tôn vinh vẻ đẹp công nghệ cao:

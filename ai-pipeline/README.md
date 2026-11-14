@@ -123,7 +123,7 @@ Lệnh này sẽ tự động thực hiện:
   ```
 - **Cho Android Mobile App:** Sao chép file TFLite của YOLO vào thư mục assets của app:
   ```text
-  android-app/app/src/main/assets/yolov8n_float32.tflite
+  android-app/app/src/main/assets/yolo_product.tflite
   ```
 
 ---
@@ -162,3 +162,11 @@ Ngoài pipeline YOLO + Random Forest, hệ thống còn tích hợp pipeline qu�
 ```
 
 Xem chi tiết tại: [backend/src/main/java/.../service/ai/GeminiService.java](file:///d:/Project/KHMT/DATN/backend/src/main/java/com/example/financebackend/service/ai/GeminiService.java)
+
+---
+
+## 👨‍🎓 Thông tin Đề tài Đồ án Tốt nghiệp
+- **Đề tài:** Xây dựng ứng dụng quản lý tài chính cá nhân thông minh tích hợp Trí tuệ Nhân tạo và Thị giác Máy tính trên nền tảng Android
+- **Sinh viên thực hiện:** Nguyễn Duy Khánh — Mã SV: 2255010114 — Lớp: 22CN4
+- **Giảng viên hướng dẫn:** TS. Nguyễn Mạnh Thắng
+- **Cơ sở đào tạo:** Khoa Công nghệ Thông tin – Trường Đại học Kiến trúc Hà Nội

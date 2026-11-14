@@ -1,13 +1,19 @@
 # DANH MỤC TÀI LIỆU THAM KHẢO
 
+**Đề tài:** XÂY DỰNG ỨNG DỤNG QUẢN LÝ TÀI CHÍNH CÁ NHÂN TRÊN NỀN TẢNG ANDROID TÍCH HỢP NHẬN DIỆN VÀ PHÂN LOẠI CHI TIÊU BẰNG TRÍ TUỆ NHÂN TẠO  
+**Sinh viên thực hiện:** Nguyễn Duy Khánh — Mã SV: 2255010114 — Lớp: 22CN4  
+**Giảng viên hướng dẫn:** TS. Nguyễn Mạnh Thắng  
+**Khoa:** Công nghệ Thông tin – Trường Đại học Kiến trúc Hà Nội  
+
 ---
 
 ### Tiếng Việt
 
-1. **Nguyễn Văn A, Trần Văn B** (2023), *Giáo trình Nhập môn Trí tuệ Nhân tạo và Thị giác Máy tính*, Nhà xuất bản Đại học Quốc gia Hà Nội.
-2. **Đặng Văn C** (2022), *Lập trình ứng dụng di động Android chuyên sâu với Kotlin*, Nhà xuất bản Khoa học và Kỹ thuật.
-3. **Nguyễn Thị D** (2024), *Thiết kế kiến trúc hệ thống phần mềm doanh nghiệp với Spring Boot và Microservices*, Nhà xuất bản Thông tin và Truyền thông.
-4. **Ngân hàng Nhà nước Việt Nam** (2025), *Báo cáo toàn cảnh thanh toán không dùng tiền mặt và chuyển đổi số ngành ngân hàng năm 2025*, Cổng thông tin điện tử NHNN.
+1. **Hoàng Kiếm** (2021), *Giáo trình Nhập môn Trí tuệ Nhân tạo*, Nhà xuất bản Đại học Quốc gia TP. Hồ Chí Minh.
+2. **Huỳnh Quyết Thắng** (2020), *Giáo trình Phân tích và Thiết kế Hệ thống Thông tin*, Nhà xuất bản Bách Khoa Hà Nội.
+3. **Phạm Hữu Khang** (2022), *Lập trình ứng dụng di động Android chuyên sâu với Kotlin*, Nhà xuất bản Thông tin và Truyền thông.
+4. **Nguyễn Đức Huy, Trần Anh Dũng** (2023), *Khai phá dữ liệu và Học máy ứng dụng*, Nhà xuất bản Khoa học và Kỹ thuật.
+5. **Ngân hàng Nhà nước Việt Nam** (2025), *Báo cáo toàn cảnh thanh toán không dùng tiền mặt và chuyển đổi số ngành ngân hàng năm 2025*, Cổng thông tin điện tử NHNN.
 
 ---
 
