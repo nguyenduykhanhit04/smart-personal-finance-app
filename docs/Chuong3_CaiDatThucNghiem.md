@@ -239,28 +239,28 @@ Hiện thực hóa tại `ScanBillActivity.kt` và `GeminiService.java`:
 ## 3.4. Kiểm thử toàn bộ hệ thống, Sửa lỗi và Tối ưu hiệu năng (Căn cứ Nội dung 5)
 
 ### 3.4.1. Kết quả kiểm thử phần mềm tự động (Unit & Integration Testing)
-Toàn bộ các nghiệp vụ trọng yếu và các tầng API Controller của hệ thống máy chủ Backend được kiểm thử tự động toàn diện bằng JUnit 5, Mockito và Spring Boot MockMvc với tổng cộng **86 ca kiểm thử (100% Passed)**:
+Toàn bộ các nghiệp vụ trọng yếu và các tầng API Controller của hệ thống máy chủ Backend được kiểm thử tự động toàn diện bằng JUnit 5, Mockito và Spring Boot MockMvc với tổng cộng **78 ca kiểm thử (100% Passed)**:
 
 | Nhóm kiểm thử | Tên lớp kiểm thử | Số ca (Cases) | Nội dung kiểm thử chính | Kết quả |
 |:---|:---|:---:|:---|:---:|
-| **API Controllers** | `AccountControllerTest` | 6 | MockMvc kiểm thử HTTP CRUD ví, xác thực quyền sở hữu, kiểm tra validation | **6/6 Passed** |
-| | `AiScanControllerTest` | 4 | Kiểm thử API quét hóa đơn OCR, bóc tách JSON, xử lý lỗi ảnh tải lên | **4/4 Passed** |
-| | `AuthControllerTest` | 5 | Xác thực Firebase ID Token, đăng nhập Google, xử lý token hết hạn hoặc sai lệch | **5/5 Passed** |
-| | `BudgetControllerTest` | 4 | Kiểm thử thiết lập hạn mức ngân sách tháng, kiểm tra vi phạm ràng buộc số tiền | **4/4 Passed** |
-| | `CategoryControllerTest` | 5 | Quản lý danh mục chi tiêu/thu nhập, phân biệt danh mục hệ thống và người dùng | **5/5 Passed** |
-| | `RecurringTransactionControllerTest`| 6 | Kiểm thử CRUD lịch định kỳ và API kích hoạt tức thì `/trigger` | **6/6 Passed** |
+| **API Controllers** | `AccountControllerTest` | 4 | MockMvc kiểm thử HTTP CRUD ví, xác thực quyền sở hữu, kiểm tra validation | **4/4 Passed** |
+| | `AiScanControllerTest` | 2 | Kiểm thử API quét hóa đơn OCR, bóc tách JSON, xử lý lỗi ảnh tải lên | **2/2 Passed** |
+| | `AuthControllerTest` | 3 | Xác thực Firebase ID Token, đăng nhập Google, xử lý token hết hạn hoặc sai lệch | **3/3 Passed** |
+| | `BudgetControllerTest` | 6 | Kiểm thử thiết lập hạn mức ngân sách tháng, kiểm tra vi phạm ràng buộc số tiền | **6/6 Passed** |
+| | `CategoryControllerTest` | 4 | Quản lý danh mục chi tiêu/thu nhập, phân biệt danh mục hệ thống và người dùng | **4/4 Passed** |
+| | `RecurringTransactionControllerTest`| 5 | Kiểm thử CRUD lịch định kỳ và API kích hoạt tức thì `/trigger` | **5/5 Passed** |
 | | `ReportControllerTest` | 3 | Kiểm tra tính toán báo cáo tổng hợp dòng tiền tháng và năm | **3/3 Passed** |
-| | `TransactionControllerTest` | 4 | Thêm/sửa/xóa giao dịch, cập nhật số dư, lọc danh sách theo khoảng thời gian | **4/4 Passed** |
+| | `TransactionControllerTest` | 6 | Thêm/sửa/xóa giao dịch, cập nhật số dư, lọc danh sách theo khoảng thời gian | **6/6 Passed** |
 | | `UserControllerTest` | 2 | Truy vấn thông tin người dùng theo ID và theo Firebase UID | **2/2 Passed** |
 | **Service Layer** | `AccountServiceTest` | 4 | Nghiệp vụ tạo ví, cộng/trừ số dư, xóa ví liên đới dữ liệu | **4/4 Passed** |
 | | `BudgetServiceTest` | 10 | Nghiệp vụ tính toán tỷ lệ chi tiêu ngân sách, kiểm tra ngưỡng cảnh báo đổi màu | **10/10 Passed** |
-| | `CategoryServiceTest` | 8 | Quản lý phân quyền danh mục, sao chép danh mục mặc định cho tài khoản mới | **8/8 Passed** |
+| | `CategoryServiceTest` | 8 | Quản lý phân quyền danh mục, sao chép danh mục mặc định, chặn trùng tên | **8/8 Passed** |
 | | `RecurringTransactionServiceTest` | 9 | Tự động hóa phát sinh giao dịch theo chu kỳ ngày/tuần/tháng, xử lý mốc lặp | **9/9 Passed** |
 | | `ReportServiceTest` | 4 | Tổng hợp số liệu thu/chi, cơ cấu danh mục và phân tích biểu đồ | **4/4 Passed** |
 | | `TransactionImageServiceTest` | 4 | Lưu trữ file ảnh hóa đơn, kiểm tra MIME type, xóa chứng từ trên đĩa | **4/4 Passed** |
-| | `TransactionServiceTest` | 5 | Nghiệp vụ biến động số dư ví khi thêm/sửa/xóa giao dịch, rollback khi có lỗi | **5/5 Passed** |
+| | `TransactionServiceTest` | 5 | Nghiệp vụ biến động số dư ví khi thêm/sửa/xóa giao dịch, dọn ảnh đĩa, rollback | **5/5 Passed** |
 | | `UserServiceTest` | 7 | Đồng bộ người dùng Firebase vào MySQL, cập nhật hồ sơ cá nhân | **7/7 Passed** |
-| **Tổng kết toàn bộ Suite** | **17 Test Classes** | **86** | **Bao phủ toàn diện tầng điều khiển REST API và tầng nghiệp vụ cốt lõi** | **86/86 Passed (100%)** |
+| **Tổng kết toàn bộ Suite** | **17 Test Classes** | **78** | **Bao phủ toàn diện tầng điều khiển REST API và tầng nghiệp vụ cốt lõi** | **78/78 Passed (100%)** |
 
 ### 3.4.2. Đánh giá độ chính xác của các mô hình học máy
 
@@ -314,6 +314,8 @@ Trong quá trình thử nghiệm, hệ thống đã được tinh chỉnh và x�
    - Loại bỏ hoàn toàn Facebook SDK thừa, giúp giảm ~3–5 MB dung lượng file APK xuất xưởng, giảm thời gian khởi động ứng dụng và giải phóng các service chạy nền không cần thiết. Xác thực được chuẩn hóa tập trung vào Google Sign-In và Email/Password của Firebase.
    - Tinh giản luồng mạng khi thêm giao dịch: chuyển đổi sang cơ chế ghi nhận trực tiếp (Direct Commit), lược bỏ các yêu cầu mạng âm thầm gửi log phản hồi (`submitScanFeedback`, `submitProductFeedback`), giúp ứng dụng phản hồi tức thì và tiết kiệm dữ liệu mạng di động.
    - Tinh gọn giao diện trang Cá nhân (Profile): gỡ bỏ các View ẩn rác thừa và thông tin phiên bản tĩnh nhằm mang lại trải nghiệm tinh giản, tập trung và hiện đại.
+9. **Chặn trùng lặp tên danh mục thu chi (Category Name Uniqueness Validation):** Bổ sung logic kiểm tra trùng lặp tên danh mục trong `CategoryService.java` (cả tạo mới và chỉnh sửa), so sánh `equalsIgnoreCase` với các danh mục hiện có của người dùng hoặc danh mục hệ thống mặc định, ném `BadRequestException` (HTTP 400) để ngăn chặn rác dữ liệu và mâu thuẫn nghiệp vụ.
+10. **Tự động dọn dẹp file ảnh vật lý trên đĩa khi xóa giao dịch (Physical Asset Cleanup & Orphan File Prevention):** Tích hợp phương thức kiểm tra và xóa tệp tĩnh vật lý (`Files.deleteIfExists`) trong `TransactionService.java` khi xóa giao dịch, giải quyết triệt để tình trạng file rác tồn đọng trong thư mục `uploads/`.
 
 ---
 
@@ -324,4 +326,4 @@ Căn cứ theo đúng tiến độ và nội dung cam kết trong **Kế hoạch
 1. Hoàn thành **Nội dung 3**: Thiết lập môi trường chuẩn mực (Android Studio, IntelliJ IDEA, Docker Compose), xây dựng CSDL 9 bảng chuẩn 3NF và cấu hình xác thực đa tầng Firebase Token an toàn.
 2. Hoàn thành **Nội dung 4**: Lập trình hoàn chỉnh 7 phân hệ nghiệp vụ tài chính cốt lõi (Đăng nhập/Đăng ký, Quản lý ví, Giao dịch thu chi, Danh mục, Ngân sách cảnh báo đổi màu, Giao dịch định kỳ) theo ngôn ngữ thiết kế cao cấp Obsidian Dark Theme.
 3. Hoàn thành **Nội dung 5**: Huấn luyện thành công mô hình YOLOv8n (mAP@0.5 đạt 87.6%) chuyển đổi sang TFLite chạy On-Device (34 – 42 FPS); huấn luyện mô hình Random Forest 200 cây (F1 đạt 0.938) tích hợp qua Microsoft ONNX Runtime Java suy luận siêu tốc dưới 2ms; hoàn thiện chức năng quét hóa đơn thông minh OCR + Gemini LLM dưới 2.5 giây; hoàn thành module báo cáo trực quan MPAndroidChart.
-4. Kiểm thử phần mềm tự động đạt **86/86 Test cases passed (100%)**, hệ thống vận hành ổn định, chính xác và có hiệu năng cao trên cả thiết bị thật và môi trường máy chủ container.
+4. Kiểm thử phần mềm tự động đạt **78/78 Test cases passed (100%)**, hệ thống vận hành ổn định, chính xác và có hiệu năng cao trên cả thiết bị thật và môi trường máy chủ container.

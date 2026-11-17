@@ -253,7 +253,7 @@ Cơ sở dữ liệu của hệ thống được xây dựng trên hệ quản t
 
 ### 2.3.1. Sơ đồ quan hệ thực thể (ERD - Entity Relationship Diagram)
 
-Hệ thống bao gồm 9 bảng dữ liệu có quan hệ chặt chẽ với nhau:
+Hệ thống bao gồm 9 bảng dữ liệu quan hệ chặt chẽ với nhau, tuân thủ nghiêm ngặt chuẩn hóa dữ liệu 3NF và ràng buộc toàn vẹn:
 
 ```mermaid
 erDiagram
@@ -454,7 +454,7 @@ Bảng trung tâm ghi nhận toàn bộ biến động tài chính của ngườ
 | `title` | VARCHAR(150) | | No | | Tiêu đề giao dịch (Ví dụ: "Ăn trưa bún bò", "Nhận lương") |
 | `amount` | DECIMAL(15,2)| | No | | Số tiền phát sinh (luôn dương) |
 | `transaction_type`| VARCHAR(20)| | No | | Phân loại (`expense` hoặc `income`) |
-| `transaction_date`| DATE | | No | | Ngày diễn ra giao dịch |
+| `transaction_date`| DATE | | No | | Ngày diễn ra giao dịch (không được là ngày trong tương lai) |
 | `note` | TEXT | | Yes | NULL | Ghi chú chi tiết thêm của giao dịch |
 | `status` | VARCHAR(20) | | Yes | `'confirmed'` | Trạng thái giao dịch (`confirmed`, `pending`, `cancelled`) |
 | `created_at` | DATETIME | | Yes | `CURRENT_TIMESTAMP` | Thời điểm tạo bản ghi trên hệ thống |
@@ -551,7 +551,8 @@ Lưu trữ kết quả nhận diện vật thể từ YOLOv8 và kết quả ph�
 4. `idx_transactions_account_id` trên `transactions(account_id)`: Tối ưu hóa tính toán số dư và lịch sử biến động theo từng ví.
 5. `idx_transactions_transaction_date` trên `transactions(transaction_date)`: Tối ưu hóa việc lọc dữ liệu giao dịch theo khoảng thời gian (ngày, tháng, năm) phục vụ vẽ biểu đồ báo cáo.
 6. `idx_budgets_user_id` trên `budgets(user_id)`: Tối ưu hóa tra cứu các ngân sách đang hoạt động.
-7. `idx_ai_product_logs_transaction_id` và `idx_ai_product_logs_user_id`: Tối ưu hóa tra cứu lịch sử AI log.
+7. `idx_recurring_user_id` trên `recurring_transactions(user_id)`: Tối ưu hóa tra cứu các lịch định kỳ.
+8. `idx_ai_product_logs_transaction_id` và `idx_ai_product_logs_user_id`: Tối ưu hóa tra cứu lịch sử AI log.
 
 ---
 
@@ -705,6 +706,18 @@ Hệ thống cung cấp hệ thống API RESTful toàn diện phục vụ toàn 
 | **Báo cáo** | `GET` | `/api/reports/monthly?userId={id}&month={m}&year={y}` | Token | Báo cáo cơ cấu thu chi tháng & tỷ lệ danh mục |
 | | `GET` | `/api/reports/annual?userId={id}&year={y}` | Token | Báo cáo dòng tiền 12 tháng trong năm |
 
+### 2.4.5. Các quy tắc nghiệp vụ cốt lõi (Core Business Rules)
+
+Hệ thống thiết lập các quy tắc nghiệp vụ chặt chẽ nhằm bảo đảm tính toàn vẹn dữ liệu tài chính và tối ưu tài nguyên lưu trữ:
+
+| Mã quy tắc | Tên quy tắc nghiệp vụ | Mô tả chi tiết & Hành vi hệ thống | Nơi kiểm soát |
+|:---:|:---|:---|:---:|
+| **BR-01** | **Bảo toàn số dư ví (Balance Integrity)** | - Giao dịch chi tiêu tự động trừ số dư ví nguồn; thu nhập tự động cộng số dư.<br>- Khi sửa giao dịch: hoàn tác số dư cũ trước khi áp dụng số dư mới.<br>- Khi xóa giao dịch: tự động hoàn tác số dư ví. Thực hiện trong phiên `@Transactional`. | `AccountService.java`, `TransactionService.java` |
+| **BR-02** | **Chặn giao dịch tương lai (No Future Transactions)** | Giao dịch không được phép có ngày phát sinh lớn hơn ngày hiện tại (`transactionDate <= today`). Nếu vi phạm, ném `BadRequestException` (HTTP 400). | `TransactionService.java` |
+| **BR-03** | **Tính duy nhất của tên danh mục (Category Uniqueness)** | Tên danh mục không được để trống và không được trùng lặp (không phân biệt hoa/thường) với các danh mục của chính người dùng hoặc danh mục mặc định của hệ thống. Nếu vi phạm, ném `BadRequestException` (HTTP 400). | `CategoryService.java` |
+| **BR-04** | **Tự động dọn dẹp tài nguyên tệp tĩnh (Asset Cleanup)** | - Khi cập nhật ảnh đại diện mới, tệp avatar cũ được tự động xóa khỏi đĩa.<br>- Khi xóa một giao dịch, toàn bộ tệp ảnh đính kèm trên đĩa (`/uploads/...`) tự động được dọn dẹp qua `Files.deleteIfExists`, loại bỏ triệt để tình trạng tệp mồ côi (*orphan files*). | `UserController.java`, `TransactionService.java` |
+| **BR-05** | **Giám sát ngân sách 3 cấp độ (Budget Thresholds)** | - Tỷ lệ chi tiêu `< 80%`: Trạng thái An toàn (Hiển thị thanh tiến độ màu Xanh).<br>- Tỷ lệ `80% - 100%`: Trạng thái Cảnh báo tiệm cận (Hiển thị màu Vàng Cam).<br>- Tỷ lệ `> 100%`: Trạng thái Vượt hạn mức (Hiển thị màu Đỏ cảnh báo rủi ro). | `BudgetService.java`, Android UI |
+
 ---
 
 ## 2.5. Thiết kế luồng xử lý dữ liệu và tích hợp Trí tuệ Nhân tạo
@@ -768,7 +781,7 @@ sequenceDiagram
     Backend->>ONNX: Nạp Vector vào Session ONNX (Model: Random Forest)
     Note over ONNX: Suy luận siêu tốc: độ trễ < 2ms
     ONNX-->>Backend: Trả về nhãn dự đoán (Category ID)
-    Backend->>DB: Lưu lịch sử nhận diện vào `ai_product_logs`
+    Backend->>DB: Lưu lịch sử nhận diện vào `ai_feedback_logs`
     Backend-->>Camera: Trả về Suggested Category ID & Tên danh mục
     Camera-->>User: Mở Form Thêm Giao dịch với danh mục đã được chọn sẵn
 ```

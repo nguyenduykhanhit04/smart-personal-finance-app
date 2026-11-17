@@ -45,7 +45,7 @@
 │                     BACKEND API (Spring Boot 3 - Java 21)                    │
 │  ├── Spring Security + FirebaseAuthFilter: Xác thực Token tập trung          │
 │  ├── Controller Layer: 11 REST Controllers chuẩn hóa ApiResponse<T>          │
-│  ├── Test Suite: 86 Automated Unit & Integration Tests (100% Passed)         │
+│  ├── Test Suite: 78 Automated Unit & Integration Tests (100% Passed)         │
 │  ├── Bean Validation: Kiểm soát chặt chẽ dữ liệu đầu vào (@Valid)            │
 │  ├── Service Layer: Xử lý toàn bộ logic nghiệp vụ tài chính                  │
 │  ├── GeminiService: Tích hợp Google Gemini 2.5 Flash LLM bóc tách JSON       │
@@ -77,6 +77,7 @@ smart-personal-finance-app/
 ├── backend/                # [XEM CHI TIẾT](backend/README.md) - REST API Spring Boot 3 & ONNX Runtime
 ├── database/               # [XEM CHI TIẾT](database/README.md) - Thiết kế CSDL MySQL 8 & Seed Data
 ├── ai-pipeline/            # [XEM CHI TIẾT](ai-pipeline/README.md) - Pipeline huấn luyện YOLOv8 & Random Forest
+├── mds/                    # [XEM CHI TIẾT](mds/README.md) - Tài liệu Kỹ thuật Kiến trúc & Chức năng chuẩn mực (26 file)
 ├── docs/                   # Hồ sơ báo cáo Đồ án tốt nghiệp toàn diện:
 │   ├── KE_HOACH_DO_AN.md                     # Kế hoạch tiến độ 15 tuần chuẩn
 │   ├── TAI_LIEU_THIET_KE_VA_TRIEN_KHAI_DATN.md# Tài liệu toàn văn thiết kế & triển khai

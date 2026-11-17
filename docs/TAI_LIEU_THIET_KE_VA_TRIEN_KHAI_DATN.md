@@ -87,7 +87,7 @@ Khảo sát thực tiễn cho thấy trên 80% người dùng từ bỏ thói qu
 - **Hiệu năng (Performance):** Tốc độ phản hồi API < 200ms; nhận diện Camera AI đạt 34–42 FPS; suy luận ONNX < 2ms; bóc tách hóa đơn < 2.5s.
 - **Bảo mật (Security):** Toàn bộ giao tiếp qua HTTPS/TLS; xác thực Stateless qua Firebase JWT Token; mật khẩu băm chuẩn an toàn.
 - **Tương thích (Compatibility):** Hỗ trợ Android 7.0 đến Android 14 (API level 24 đến 34); tương thích cấu hình 4KB Page Size của AVD mới.
-- **Độ tin cậy & Ổn định:** Bộ test tự động đạt 86/86 Tests passed (100%); cơ chế tự động khôi phục kết nối HikariCP khi mất mạng tạm thời.
+- **Độ tin cậy & Ổn định:** Bộ test tự động đạt 78/78 Tests passed (100%); cơ chế tự động khôi phục kết nối HikariCP khi mất mạng tạm thời.
 
 ## 2.2. Thiết kế chức năng hệ thống
 
@@ -270,128 +270,138 @@ sequenceDiagram
 
 ```mermaid
 erDiagram
-    USERS ||--o{ ACCOUNTS : "sở hữu"
-    USERS ||--o{ CATEGORIES : "tạo"
-    USERS ||--o{ TRANSACTIONS : "thực hiện"
-    USERS ||--o{ BUDGETS : "thiết lập"
-    USERS ||--o{ RECURRING_TRANSACTIONS : "lên lịch"
-    USERS ||--o{ AI_PRODUCT_LOGS : "ghi nhật ký"
-    USERS ||--o{ AI_SCAN_LOGS : "ghi nhật ký"
-    
-    ACCOUNTS ||--o{ TRANSACTIONS : "ghi nhận số dư"
-    ACCOUNTS ||--o{ RECURRING_TRANSACTIONS : "trừ tiền tự động"
-    
-    CATEGORIES ||--o{ TRANSACTIONS : "phân loại"
-    CATEGORIES ||--o{ BUDGETS : "áp dụng hạn mức"
-    CATEGORIES ||--o{ RECURRING_TRANSACTIONS : "phân loại"
-    
-    TRANSACTIONS ||--o{ TRANSACTION_IMAGES : "đính kèm chứng từ"
+    USERS ||--o{ ACCOUNTS : "sở hữu 1:N (CASCADE)"
+    USERS ||--o{ CATEGORIES : "tạo riêng 1:N (CASCADE)"
+    USERS ||--o{ TRANSACTIONS : "thực hiện 1:N (CASCADE)"
+    USERS ||--o{ BUDGETS : "thiết lập 1:N (CASCADE)"
+    USERS ||--o{ RECURRING_TRANSACTIONS : "lên lịch 1:N (CASCADE)"
+    USERS ||--o{ AI_SCAN_LOGS : "lịch sử quét 1:N (CASCADE)"
+    USERS ||--o{ AI_FEEDBACK_LOGS : "phản hồi AI 1:N (CASCADE)"
+
+    ACCOUNTS ||--o{ TRANSACTIONS : "ví nguồn 1:N (RESTRICT)"
+    ACCOUNTS ||--o{ RECURRING_TRANSACTIONS : "ví trừ tiền 1:N (RESTRICT)"
+
+    CATEGORIES ||--o{ TRANSACTIONS : "phân loại 1:N (RESTRICT)"
+    CATEGORIES ||--o{ BUDGETS : "giới hạn 1:N (CASCADE)"
+    CATEGORIES ||--o{ RECURRING_TRANSACTIONS : "phân loại 1:N (RESTRICT)"
+
+    TRANSACTIONS ||--o{ TRANSACTION_IMAGES : "ảnh chứng từ 1:N (CASCADE)"
 
     USERS {
-        bigint id PK
+        int user_id PK
         varchar firebase_uid UK
         varchar email UK
-        varchar display_name
-        varchar photo_url
-        varchar phone
+        varchar full_name
+        varchar profile_picture
+        varchar role
+        boolean is_active
         datetime created_at
         datetime updated_at
     }
 
     ACCOUNTS {
-        bigint id PK
-        bigint user_id FK
-        varchar name
-        varchar type
+        int account_id PK
+        int user_id FK
+        varchar account_name
+        varchar account_type
         decimal balance
-        varchar currency
-        varchar color
-        varchar icon
-        boolean is_default
+        datetime created_at
+        datetime updated_at
     }
 
     CATEGORIES {
-        bigint id PK
-        bigint user_id FK "NULL nếu là mặc định hệ thống"
-        varchar name
-        varchar type "INCOME hoặc EXPENSE"
+        int category_id PK
+        int user_id FK "NULL nếu là danh mục mặc định"
+        varchar category_name
+        varchar category_type
         varchar icon
         varchar color
-        boolean is_system
+        boolean is_default
+        datetime created_at
     }
 
     TRANSACTIONS {
-        bigint id PK
-        bigint user_id FK
-        bigint account_id FK
-        bigint category_id FK
+        int transaction_id PK
+        int user_id FK
+        int account_id FK
+        int category_id FK
         decimal amount
-        varchar type "INCOME, EXPENSE, TRANSFER"
-        datetime transaction_date
+        varchar transaction_type
+        date transaction_date
+        varchar title
         text note
-        bigint destination_account_id "Dùng khi chuyển tiền"
+        varchar status
+        datetime created_at
+        datetime updated_at
     }
 
     BUDGETS {
-        bigint id PK
-        bigint user_id FK
-        bigint category_id FK "NULL nếu áp dụng cho toàn bộ chi tiêu"
-        decimal amount_limit
-        decimal current_spent
-        int month
-        int year
+        int budget_id PK
+        int user_id FK
+        int category_id FK
+        decimal amount
+        date start_date
+        date end_date
         datetime created_at
+        datetime updated_at
     }
 
     RECURRING_TRANSACTIONS {
-        bigint id PK
-        bigint user_id FK
-        bigint account_id FK
-        bigint category_id FK
+        int recurring_id PK
+        int user_id FK
+        int account_id FK
+        int category_id FK
         decimal amount
-        varchar type
-        varchar frequency "DAILY, WEEKLY, MONTHLY"
+        varchar transaction_type
+        varchar frequency
         date start_date
-        date next_execution_date
-        boolean is_active
+        date end_date
+        date next_occurrence
+        varchar status
+        text note
+        datetime created_at
+        datetime updated_at
     }
 
     TRANSACTION_IMAGES {
-        bigint id PK
-        bigint transaction_id FK
-        varchar image_url
+        int image_id PK
+        int transaction_id FK
+        text image_url
+        text ocr_text
         datetime uploaded_at
     }
 
-    AI_PRODUCT_LOGS {
-        bigint id PK
-        bigint user_id FK
-        varchar detected_class
-        float confidence
-        bigint predicted_category_id
+    AI_SCAN_LOGS {
+        int scan_id PK
+        int user_id FK
+        text ocr_text
+        decimal confidence_score
         datetime created_at
     }
 
-    AI_SCAN_LOGS {
-        bigint id PK
-        bigint user_id FK
-        text raw_ocr_text
-        text parsed_json
-        decimal extracted_amount
-        datetime scanned_at
+    AI_FEEDBACK_LOGS {
+        int log_id PK
+        int user_id FK
+        varchar detected_item
+        decimal predicted_price
+        int predicted_category_id
+        int actual_category_id
+        varchar model_type
+        varchar feedback_status
+        datetime logged_at
     }
 ```
 
 ### 2.4.2. Đặc tả chi tiết 9 bảng dữ liệu
-1. **`users`:** Lưu thông tin tài khoản đồng bộ từ Firebase Auth (ID, Firebase UID, Email, Họ tên, SĐT, Avatar, Ngày tạo).
-2. **`accounts`:** Lưu các ví tài chính (Tiền mặt, Ngân hàng, Ví điện tử) với trường `balance` định dạng `DECIMAL(15,2)` chống sai số dấu phẩy động.
-3. **`categories`:** Lưu danh mục thu chi; các danh mục có `user_id = NULL` và `is_system = TRUE` là danh mục dùng chung hệ thống.
-4. **`transactions`:** Bảng trung tâm lưu mọi phát sinh thu/chi/chuyển tiền; liên kết chặt chẽ với bảng `accounts` và `categories`.
-5. **`budgets`:** Lưu hạn mức ngân sách tháng; quản lý theo cặp `(user_id, category_id, month, year)`.
-6. **`recurring_transactions`:** Lưu cấu hình hóa đơn định kỳ lặp lại theo chu kỳ ngày/tuần/tháng; có trường `next_execution_date` cho Cronjob quét.
-7. **`transaction_images`:** Lưu trữ danh sách đường dẫn ảnh hóa đơn/chứng từ đính kèm với ràng buộc `ON DELETE CASCADE`.
-8. **`ai_product_logs`:** Lưu lịch sử nhận diện của Camera AI YOLOv8 và kết quả dự đoán của Random Forest ONNX để phục vụ đánh giá mô hình.
-9. **`ai_scan_logs`:** Lưu nhật ký OCR và JSON phản hồi từ Gemini 2.5 Flash phục vụ kiểm toán và phân tích lỗi bóc tách.
+1. **`users`:** Lưu thông tin tài khoản đồng bộ từ Firebase Auth (`user_id`, `firebase_uid`, `email`, `full_name`, `profile_picture`, `role`, `is_active`, `created_at`, `updated_at`).
+2. **`accounts`:** Lưu các ví tài chính (Tiền mặt, Ngân hàng, Ví điện tử) với trường `balance` định dạng `DECIMAL(15,2)` chống sai số dấu phẩy động (`account_id`, `user_id`, `account_name`, `account_type`, `balance`, `created_at`, `updated_at`).
+3. **`categories`:** Lưu danh mục thu chi; các danh mục có `user_id = NULL` và `is_default = TRUE` là danh mục dùng chung hệ thống (`category_id`, `user_id`, `category_name`, `category_type`, `icon`, `color`, `is_default`, `created_at`).
+4. **`transactions`:** Bảng trung tâm lưu mọi phát sinh thu/chi; liên kết chặt chẽ với bảng `accounts` và `categories` (`transaction_id`, `user_id`, `account_id`, `category_id`, `amount`, `transaction_type`, `transaction_date`, `title`, `note`, `status`, `created_at`, `updated_at`).
+5. **`budgets`:** Lưu hạn mức ngân sách chi tiêu theo danh mục trong khoảng thời gian (`budget_id`, `user_id`, `category_id`, `amount`, `start_date`, `end_date`, `created_at`, `updated_at`).
+6. **`recurring_transactions`:** Lưu cấu hình hóa đơn định kỳ lặp lại theo chu kỳ ngày/tuần/tháng; có trường `next_occurrence` cho Cronjob quét (`recurring_id`, `user_id`, `account_id`, `category_id`, `amount`, `transaction_type`, `frequency`, `start_date`, `end_date`, `next_occurrence`, `status`, `note`, `created_at`, `updated_at`).
+7. **`transaction_images`:** Lưu trữ danh sách đường dẫn ảnh hóa đơn/chứng từ đính kèm với ràng buộc `ON DELETE CASCADE` (`image_id`, `transaction_id`, `image_url`, `ocr_text`, `uploaded_at`).
+8. **`ai_scan_logs`:** Lưu nhật ký OCR và điểm tin cậy phục vụ đánh giá mô hình (`scan_id`, `user_id`, `ocr_text`, `confidence_score`, `created_at`).
+9. **`ai_feedback_logs`:** Lưu nhật ký nhận diện vật thể YOLOv8 và kết quả dự đoán của Random Forest ONNX cùng phản hồi xác nhận (`log_id`, `user_id`, `detected_item`, `predicted_price`, `predicted_category_id`, `actual_category_id`, `model_type`, `feedback_status`, `logged_at`).
 
 ---
 

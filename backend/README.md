@@ -72,7 +72,7 @@ backend/
 │   │       ├── application.properties
 │   │       ├── firebase-service-account.json # Chứng chỉ Firebase Admin SDK
 │   │       └── random_forest_model.onnx      # Mô hình Random Forest đã biên dịch ONNX
-│   └── test/                         # Unit Tests & Integration Tests (86/86 passed - 100% success)
+│   └── test/                         # Unit Tests & Integration Tests (78/78 passed - 100% success)
 ├── Dockerfile                        # Dockerfile đóng gói ứng dụng trên nền JRE 21
 ├── pom.xml                           # Quản lý dependencies Maven
 └── README.md
@@ -232,7 +232,7 @@ mvn clean spring-boot:run
 ```bash
 mvn test
 ```
-*(Toàn bộ **86/86 Tests** bao phủ 9 Controllers với Spring MockMvc và 8 Services với Mockito/JUnit 5 đều chạy thành công 100%, 0 failures, 0 errors).*
+*(Toàn bộ **78/78 Tests** bao phủ 9 Controllers với Spring MockMvc và 8 Services với Mockito/JUnit 5 đều chạy thành công 100%, 0 failures, 0 errors).*
 
 ---
 
