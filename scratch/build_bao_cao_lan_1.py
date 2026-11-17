@@ -300,8 +300,8 @@ def build_report_doc(output_path, img_dir):
     add_p("2. Thử nghiệm Phân loại Danh mục qua Random Forest ONNX: Xây dựng vector 27 đặc trưng kỹ thuật, huấn luyện mô hình Random Forest phân loại 6 nhóm danh mục chi tiêu, thử nghiệm nhúng qua Microsoft ONNX Runtime Java trên Spring Boot Backend với độ trễ suy luận dưới 2ms.")
     add_p("3. Thử nghiệm Quét hóa đơn (OCR + Gemini AI): Tích hợp thử nghiệm Google ML Kit OCR nhận dạng chữ offline kết hợp Google Gemini 2.5 Flash bóc tách thông tin tổng tiền và ngày tháng.")
 
-    add_h2("2.5. Kiểm thử Tự động Phần mềm")
-    add_p("Hệ thống máy chủ Backend đã được kiểm thử tự động toàn diện bằng JUnit 5, Mockito và MockMvc với tổng cộng 86 ca kiểm thử bao phủ các Controller và Service. Toàn bộ 86/86 bài kiểm thử đều chạy thành công 100% (0 errors, 0 failures), chứng minh tính ổn định của phân hệ nghiệp vụ đã hoàn thành.")
+    add_h2("2.5. Kiểm thử Tự động Phần mềm & Tối ưu hóa Nghiệp vụ")
+    add_p("Hệ thống máy chủ Backend đã được kiểm thử tự động toàn diện bằng JUnit 5, Mockito và MockMvc với tổng cộng 78 ca kiểm thử bao phủ toàn bộ Controller và Service. Toàn bộ 78/78 bài kiểm thử đều chạy thành công 100% (0 errors, 0 failures), chứng minh tính ổn định tuyệt đối của phân hệ nghiệp vụ đã hoàn thành. Bên cạnh đó, hệ thống đã tối ưu hóa hai nghiệp vụ quan trọng: chặn trùng lặp tên danh mục trong CategoryService (ném BadRequestException) và tự động dọn dẹp tệp ảnh vật lý trên đĩa khi xóa giao dịch trong TransactionService.")
 
     # 3. BẢNG ĐỐI CHIẾU TIẾN ĐỘ
     add_h1("3. BẢNG ĐỐI CHIẾU TIẾN ĐỘ CAM KẾT VÀ KẾT QUẢ THỰC TẾ")

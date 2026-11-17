@@ -263,7 +263,7 @@ def build_tracking_doc(output_path):
         (
             "7",
             "Tuần 7\n(16/11 – 21/11/2026)",
-            "• Kiểm thử các phân hệ nghiệp vụ đã hoàn thành (86 ca kiểm thử tự động đạt 100%).\n• Tích hợp thử nghiệm sớm mô hình AI vào ứng dụng:\n  + Nạp thử nghiệm YOLOv8 TFLite lên camera Android.\n  + Nạp thử nghiệm Random Forest ONNX lên Backend Java.\n  + Thử nghiệm chức năng quét hóa đơn OCR + Gemini AI.\n• Chuẩn bị hồ sơ kiểm tra tiến độ lần 1.",
+            "• Kiểm thử các phân hệ nghiệp vụ đã hoàn thành (78 ca kiểm thử tự động đạt 100%).\n• Tích hợp thử nghiệm sớm mô hình AI vào ứng dụng:\n  + Nạp thử nghiệm YOLOv8 TFLite lên camera Android.\n  + Nạp thử nghiệm Random Forest ONNX lên Backend Java.\n  + Thử nghiệm chức năng quét hóa đơn OCR + Gemini AI.\n• Chuẩn bị hồ sơ kiểm tra tiến độ lần 1.",
             "• Toàn bộ 7 phân hệ nghiệp vụ cốt lõi vận hành ổn định.\n• Đã có bản demo chạy thử nghiệm tính năng AI (Camera nhận diện và quét hóa đơn).\n• Khối lượng đồ án hoàn thành đạt khoảng 60% – 65% (Vượt tiến độ dự kiến khoảng 1–2 tuần).\n• Hồ sơ báo cáo tiến độ lần 1 hoàn chỉnh.",
             "VƯỢT TIẾN ĐỘ DỰ KIẾN! Hoàn thành sớm phân hệ nghiệp vụ cốt lõi và đã có bản demo thử nghiệm AI khả quan. Đạt khoảng 60–65% khối lượng. Đồng ý cho báo cáo Lần 1.",
             "Đã duyệt"
@@ -320,7 +320,7 @@ def build_tracking_doc(output_path):
     eval_data = [
         ("1. Tinh thần, thái độ làm việc:", "Rất tích cực, chủ động, có ý thức kỷ luật và trách nhiệm học tập cao. Sinh viên bám sát kế hoạch nghiên cứu, thường xuyên trao đổi báo cáo tiến độ đầy đủ theo từng tuần."),
         ("2. Khối lượng công việc đã hoàn thành:", "ĐẠT KHOẢNG 60% – 65% TOÀN BỘ KHỐI LƯỢNG ĐỒ ÁN TỐT NGHIỆP.\n(So với mức yêu cầu chuẩn tại thời điểm tuần 7 là khoảng 40–45%, sinh viên đã hoàn thành sớm toàn bộ các chức năng nghiệp vụ cốt lõi trước 1 tuần và đã chủ động nghiên cứu, tích hợp thử nghiệm bước đầu phân hệ Trí tuệ Nhân tạo)."),
-        ("3. Chất lượng sản phẩm phần mềm:", "Tốt. Phân hệ nghiệp vụ tài chính vận hành ổn định, giao diện Obsidian Dark Theme đẹp mắt, cơ sở dữ liệu chuẩn hóa tốt. Bộ kiểm thử tự động 86/86 test cases đều vượt qua. Bản demo thử nghiệm tính năng AI hoạt động khả quan."),
+        ("3. Chất lượng sản phẩm phần mềm:", "Tốt. Phân hệ nghiệp vụ tài chính vận hành ổn định, giao diện Obsidian Dark Theme đẹp mắt, cơ sở dữ liệu chuẩn hóa tốt. Bộ kiểm thử tự động 78/78 test cases đều vượt qua. Bản demo thử nghiệm tính năng AI hoạt động khả quan."),
         ("4. Đánh giá mức độ tiến độ:", "VƯỢT TIẾN ĐỘ DỰ KIẾN (Vượt trước khoảng 01 – 02 tuần so với kế hoạch ban đầu)."),
         ("5. Kết luận & Đề xuất:", "ĐỦ ĐIỀU KIỆN VÀ KHUYẾN NGHỊ TIỂU BAN ĐÁNH GIÁ ĐẠT KẾT QUẢ TỐT / XUẤT SẮC TRONG LẦN KIỂM TRA TIẾN ĐỘ 1.")
     ]

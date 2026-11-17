@@ -167,7 +167,7 @@ def build_demo_guide(output_path):
     add_h2("Bước 1: Trình diễn Kiến trúc và Kiểm thử Tự động (30 giây)")
     add_p("• Thao tác: Bấm chuyển sang cửa sổ Terminal tại `backend/`, gõ lệnh:")
     add_p("  mvn test", bold_prefix="  Lệnh: ")
-    add_p("• Lời thuyết minh: 'Kính thưa Thầy Cô, toàn bộ các tầng Controller và Service của phân hệ nghiệp vụ đã hoàn thành đều được kiểm thử tự động toàn diện. Như Thầy Cô thấy trên màn hình, toàn bộ 86/86 bài kiểm thử đều Passed 100%, bảo đảm độ tin cậy của logic biến động số dư ví và lưu trữ CSDL.'")
+    add_p("• Lời thuyết minh: 'Kính thưa Thầy Cô, toàn bộ các tầng Controller và Service của phân hệ nghiệp vụ đã hoàn thành đều được kiểm thử tự động toàn diện. Như Thầy Cô thấy trên màn hình, toàn bộ 78/78 bài kiểm thử đều Passed 100%, bảo đảm độ tin cậy của logic biến động số dư ví, chặn trùng tên danh mục, dọn dẹp file ảnh đĩa và lưu trữ CSDL.'")
 
     add_h2("Bước 2: Trình diễn Phân hệ Nghiệp vụ Cốt lõi & Giao diện Obsidian Dark Theme (60 giây)")
     add_p("• Thao tác 1: Mở app Android -> Bấm nút 'Đăng nhập bằng Google' -> Chọn tài khoản Google -> App chuyển ngay vào Dashboard.")
@@ -224,7 +224,7 @@ def build_demo_guide(output_path):
         ),
         (
             "Câu 9: Các bài kiểm thử tự động của em kiểm tra những tầng nào?",
-            "Trả lời: Thưa Thầy/Cô, bộ kiểm thử của em gồm 86 bài: 37 bài MockMvc Integration Tests kiểm thử tầng API Controllers (kiểm tra status code HTTP, định dạng ApiResponse, xác thực token, kiểm tra validation) và 49 bài Unit Tests kiểm thử tầng Service (kiểm tra nghiệp vụ biến động số dư, tính toán hạn mức ngân sách, phân loại AI, đồng bộ người dùng)."
+            "Trả lời: Thưa Thầy/Cô, bộ kiểm thử của em gồm 78 bài: 35 bài MockMvc Integration Tests kiểm thử tầng API Controllers (kiểm tra status code HTTP, định dạng ApiResponse, xác thực token, kiểm tra validation) và 43 bài Unit Tests kiểm thử tầng Service (kiểm tra nghiệp vụ biến động số dư, chặn trùng lặp danh mục, dọn dẹp file ảnh vật lý, tính toán hạn mức ngân sách, phân loại AI, đồng bộ người dùng)."
         ),
         (
             "Câu 10: Kế hoạch trong các tuần tới từ giờ đến khi bảo vệ là gì?",

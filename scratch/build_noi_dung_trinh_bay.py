@@ -237,7 +237,7 @@ def build_presentation_doc(output_path):
 
     # Subsection 3.4
     add_p("4. Hoàn thành Kiểm thử Tự động cho các Module Nghiệp vụ:", bold_prefix="[Đảm bảo chất lượng] ")
-    add_p("   - Xây dựng bộ kiểm thử tự động với 86 ca kiểm thử (MockMvc Integration Tests & Service Unit Tests), tất cả đều Passed 100%, bảo đảm tính đúng đắn của logic tính toán tiền tệ.")
+    add_p("   - Xây dựng bộ kiểm thử tự động với 78 ca kiểm thử (MockMvc Integration Tests & Service Unit Tests), tất cả đều Passed 100%, bảo đảm tính đúng đắn của logic tính toán tiền tệ, kèm theo các cơ chế bảo toàn số dư, chặn trùng lặp danh mục và dọn dẹp ảnh đĩa an toàn.")
 
     # Section 4
     add_sec_title("4", "Kịch bản Trình diễn Minh chứng Thực tế trên Máy tính (Dự kiến: 2 phút)")
