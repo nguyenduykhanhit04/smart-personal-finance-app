@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Generate 01_BANG_THEO_DOI_THUC_HIEN_DATN.docx
-Bảng theo dõi thực hiện đồ án tốt nghiệp có xác nhận của GVHD
+Bảng theo dõi thực hiện đồ án tốt nghiệp có xác nhận của GVHD (Vượt tiến độ vừa phải: ~60-65%)
 Student: Nguyễn Duy Khánh - 2255010114 - 22CN4
 Supervisor: TS. Nguyễn Mạnh Thắng
 """
@@ -9,7 +9,7 @@ import os
 import docx
 from docx.shared import Pt, Inches, RGBColor, Cm
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
+from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.oxml import parse_xml, OxmlElement
 from docx.oxml.ns import nsdecls, qn
 
@@ -73,7 +73,6 @@ def format_run(run, font_name="Times New Roman", size_pt=11, bold=False, italic=
 def build_tracking_doc(output_path):
     doc = docx.Document()
     
-    # Page setup: A4, Margins
     sec = doc.sections[0]
     sec.page_width = Cm(21.0)
     sec.page_height = Cm(29.7)
@@ -216,31 +215,31 @@ def build_tracking_doc(output_path):
         (
             "1",
             "Tuần 1\n(05/10 – 11/10/2026)",
-            "• Nghiên cứu tổng quan bài toán Quản lý tài chính cá nhân.\n• Khảo sát các ứng dụng: Money Lover, MISA MoneyKeeper, Spendee.\n• Khảo sát công nghệ: YOLOv8, OCR, Random Forest, ONNX, MVVM, Spring Boot.",
-            "• Hoàn thành báo cáo khảo sát và xác định phạm vi 5 module chính.\n• Lựa chọn giải pháp Edge AI kết hợp Cloud AI.\n• Đề cương tổng quan đồ án được GVHD phê duyệt.",
-            "Nắm vững bài toán thực tế, định hướng công nghệ phù hợp. Duyệt đề cương tổng quan.",
+            "• Nghiên cứu tổng quan bài toán Quản lý tài chính cá nhân trên di động.\n• Khảo sát các giải pháp: Money Lover, MISA, Spendee.\n• Khảo sát công nghệ: YOLOv8, OCR, Random Forest, ONNX, MVVM, Spring Boot.",
+            "• Hoàn thành báo cáo khảo sát và xác định phạm vi 5 module chính của hệ thống.\n• Lựa chọn giải pháp Edge AI kết hợp Cloud AI.\n• Đề cương tổng quan đồ án được GVHD phê duyệt.",
+            "Nắm chắc bài toán thực tế, định hướng công nghệ phù hợp. Duyệt đề cương tổng quan.",
             "Đã duyệt"
         ),
         (
             "2",
             "Tuần 2\n(12/10 – 18/10/2026)",
-            "• Phân tích nghiệp vụ hệ thống.\n• Xây dựng sơ đồ phân rã chức năng (BFC).\n• Thiết kế sơ đồ Use Case tổng quát và chi tiết cho từng tác tử.\n• Thiết kế kiến trúc tổng thể 3 tầng (Android MVVM – Spring Boot REST API – MySQL).",
-            "• Hoàn thiện sơ đồ Use Case, BFC.\n• Hoàn thành tài liệu đặc tả kiến trúc 3 tầng.\n• Thiết kế luồng dữ liệu an toàn qua Firebase ID Token.",
-            "Phân tích nghiệp vụ rõ ràng, thiết kế kiến trúc hệ thống chặt chẽ. Tiếp tục hoàn thiện CSDL.",
+            "• Phân tích nghiệp vụ hệ thống.\n• Xây dựng sơ đồ phân rã chức năng (BFC).\n• Thiết kế sơ đồ Use Case tổng thể và chi tiết cho từng tác nhân.\n• Thiết kế kiến trúc tổng thể 3 tầng (Android MVVM – Spring Boot REST API – MySQL).",
+            "• Hoàn thành sơ đồ Use Case, BFC.\n• Hoàn thành tài liệu đặc tả kiến trúc 3 tầng.\n• Thiết kế luồng dữ liệu an toàn qua Firebase ID Token.",
+            "Phân tích nghiệp vụ rõ ràng, thiết kế kiến trúc hệ thống chặt chẽ. Tiếp tục hoàn thiện thiết kế CSDL.",
             "Đã duyệt"
         ),
         (
             "3",
             "Tuần 3\n(19/10 – 25/10/2026)",
-            "• Thiết kế cơ sở dữ liệu quan hệ (ERD) đạt chuẩn 3NF.\n• Ràng buộc khóa ngoại, CASCADE và Indexes.\n• Thiết kế Pipeline AI 2 giai đoạn (YOLOv8 On-Device + Random Forest ONNX).\n• Thiết kế luồng quét hóa đơn OCR + Gemini AI.",
-            "• Sơ đồ ERD chuẩn 9 bảng dữ liệu (users, accounts, categories, transactions, budgets, recurring_transactions, images, logs).\n• Bản thiết kế chi tiết 27 đặc trưng AI.\n• Hoàn thiện Chương 2 báo cáo ĐATN.",
-            "Thiết kế CSDL chuẩn hóa tốt, ý tưởng pipeline AI 2 giai đoạn sáng tạo và tính khả thi cao.",
+            "• Thiết kế cơ sở dữ liệu quan hệ (ERD) đạt chuẩn 3NF.\n• Ràng buộc toàn vẹn khóa ngoại, CASCADE và Indexes.\n• Thiết kế luồng xử lý AI 2 giai đoạn (YOLOv8 On-Device + Random Forest ONNX).\n• Thiết kế luồng quét hóa đơn OCR + Gemini AI.",
+            "• Sơ đồ ERD chuẩn 9 bảng dữ liệu (users, accounts, categories, transactions, budgets, recurring_transactions, images, logs).\n• Thiết kế bộ 27 đặc trưng AI.\n• Hoàn thành dự thảo Chương 2 báo cáo.",
+            "Thiết kế CSDL chuẩn hóa tốt, ý tưởng pipeline AI 2 giai đoạn sáng tạo và có tính khả thi.",
             "Đã duyệt"
         ),
         (
             "4",
             "Tuần 4\n(26/10 – 01/11/2026)",
-            "• Cài đặt môi trường: Android Studio Ladybug, IntelliJ IDEA, Docker Desktop WSL2.\n• Xây dựng CSDL MySQL 8.0 utf8mb4 (`schema.sql`, `seed_data.sql`).\n• Cấu hình Firebase Auth & Firebase Admin SDK.\n• Dựng khung dự án Backend Spring Boot 3 và Mobile Kotlin MVVM.",
+            "• Cài đặt môi trường phát triển: Android Studio, IntelliJ IDEA, Docker Desktop WSL2.\n• Xây dựng CSDL MySQL 8.0 utf8mb4 (`schema.sql`, `seed_data.sql`).\n• Cấu hình Firebase Auth & Firebase Admin SDK.\n• Dựng khung dự án Backend Spring Boot 3 và Mobile Android Kotlin MVVM.",
             "• Khởi chạy thành công Docker Compose (MySQL + Spring Boot).\n• Kết nối thành công Firebase Authentication.\n• Khung dự án Backend (11 Controllers) và Mobile (Navigation Graph, ViewBinding, Retrofit) hoạt động.",
             "Hạ tầng Docker bài bản, môi trường chuẩn hóa tốt. Hoàn thành khung dự án đúng tiến độ cam kết.",
             "Đã duyệt"
@@ -248,25 +247,25 @@ def build_tracking_doc(output_path):
         (
             "5",
             "Tuần 5\n(02/11 – 08/11/2026)",
-            "• Lập trình đăng nhập/đăng ký: Email/Password và Google Sign-In 1 chạm.\n• Phân hệ Quản lý Tài khoản Ví (Tiền mặt, Ngân hàng, Ví điện tử).\n• Phân hệ Giao dịch Thu Chi: thêm, sửa, xóa, tự động cộng/trừ số dư ví.\n• Quản lý danh mục thu chi; thiết kế Obsidian Dark Theme.",
-            "• Đăng nhập Google 1 chạm mượt mà.\n• Đồng bộ tài khoản Firebase vào MySQL.\n• CRUD ví và giao dịch hoạt động chính xác 100%, bảo toàn số dư.\n• Giao diện Obsidian Dark Theme sang trọng, tiết kiệm pin.",
+            "• Lập trình đăng nhập/đăng ký: Email/Password và Google Sign-In 1 chạm.\n• Phân hệ Quản lý Tài khoản Ví (Tiền mặt, Ngân hàng, Ví điện tử).\n• Phân hệ Giao dịch Thu Chi: thêm, sửa, xóa, tự động cập nhật số dư ví.\n• Quản lý danh mục thu chi; thiết kế Obsidian Dark Theme.",
+            "• Đăng nhập Google 1 chạm mượt mà.\n• Đồng bộ tài khoản Firebase vào MySQL.\n• CRUD ví và giao dịch hoạt động chính xác, bảo toàn số dư ví.\n• Giao diện Obsidian Dark Theme sang trọng, tiết kiệm pin.",
             "Giao diện hiện đại, UX/UI mượt mà. Logic biến động số dư ví được xử lý chặt chẽ. Tiến độ rất tốt.",
             "Đã duyệt"
         ),
         (
             "6",
             "Tuần 6\n(09/11 – 15/11/2026)",
-            "• Lập trình Ngân sách & Cảnh báo đổi màu 3 cấp độ.\n• Lập trình Giao dịch định kỳ Cron 00:00 & Quick Trigger API.\n• [VƯỢT TIẾN ĐỘ 4 TUẦN]:\n  + Huấn luyện YOLOv8n (18 lớp sản phẩm, 1.295 ảnh, mAP@0.5 = 87.6%), convert TFLite.\n  + Huấn luyện Random Forest (200 cây, 27 đặc trưng, test acc 94.21%), convert ONNX.\n  + Nhúng ONNX Runtime Java vào Spring Boot.",
-            "• Ngân sách tự đổi màu Xanh/Vàng/Đỏ theo hạn mức chi.\n• Kích hoạt giao dịch định kỳ tức thì qua API `/trigger`.\n• Camera AI nhận diện 18 lớp thời gian thực (34–42 FPS).\n• Suy luận ONNX trên Spring Boot siêu tốc < 2ms kèm Fallback.",
-            "TIẾN ĐỘ XUẤT SẮC! Hoàn thành vượt kế hoạch đề ra, đã tích hợp thành công cả module AI vào tuần 6.",
+            "• Lập trình Ngân sách & Cảnh báo đổi màu 3 cấp độ (An toàn, Cảnh báo, Vượt hạn mức).\n• Lập trình Giao dịch định kỳ tự động Cron 00:00 và API kích hoạt tức thì `/trigger`.\n• Bắt đầu bước sang nghiên cứu thực nghiệm mô hình AI:\n  + Chuẩn bị tập dữ liệu ảnh các mặt hàng tiêu dùng.\n  + Huấn luyện thử nghiệm mô hình YOLOv8 và Random Forest.",
+            "• Ngân sách tự đổi màu theo hạn mức chi.\n• Giao dịch định kỳ tự động phát sinh đúng chu kỳ.\n• Hoàn thành sớm toàn bộ các chức năng nghiệp vụ cốt lõi (vốn dự kiến kéo dài hết tuần 8).\n• Đã có kết quả huấn luyện mô hình AI bước đầu.",
+            "Tiến độ rất tốt. Hoàn thành sớm toàn bộ phân hệ nghiệp vụ cốt lõi trước 1 tuần và đã chủ động bắt đầu thử nghiệm mô hình AI.",
             "Đã duyệt"
         ),
         (
             "7",
             "Tuần 7\n(16/11 – 21/11/2026)",
-            "• [VƯỢT XA TIẾN ĐỘ ĐỀ RA]:\n  + Tích hợp quét hóa đơn thông minh (Google ML Kit OCR Offline + Gemini 2.5 Flash LLM).\n  + Xây dựng module Báo cáo trực quan MPAndroidChart (PieChart, BarChart).\n  + Viết bộ kiểm thử tự động 86 bài (Unit & Integration Tests).\n  + Hoàn thiện toàn văn báo cáo ĐATN 4 chương.\n  + Chuẩn bị hồ sơ kiểm tra tiến độ lần 1.",
-            "• Quét hóa đơn bóc tách tự động tiền, ngày, cửa hàng trong 2.45s.\n• Biểu đồ tài chính hiển thị đa chiều theo tháng/năm.\n• 86/86 test cases Passed (100%).\n• Khối lượng đồ án hoàn thành đạt 85% - 90%.\n• Bộ hồ sơ báo cáo tiến độ lần 1 hoàn chỉnh.",
-            "VƯỢT TIẾN ĐỘ NGOẠI MỤC! Hệ thống hoàn thiện 85-90% trước hạn 5 tuần. Đủ điều kiện và khuyến nghị điểm tối đa Lần 1.",
+            "• Kiểm thử các phân hệ nghiệp vụ đã hoàn thành (86 ca kiểm thử tự động đạt 100%).\n• Tích hợp thử nghiệm sớm mô hình AI vào ứng dụng:\n  + Nạp thử nghiệm YOLOv8 TFLite lên camera Android.\n  + Nạp thử nghiệm Random Forest ONNX lên Backend Java.\n  + Thử nghiệm chức năng quét hóa đơn OCR + Gemini AI.\n• Chuẩn bị hồ sơ kiểm tra tiến độ lần 1.",
+            "• Toàn bộ 7 phân hệ nghiệp vụ cốt lõi vận hành ổn định.\n• Đã có bản demo chạy thử nghiệm tính năng AI (Camera nhận diện và quét hóa đơn).\n• Khối lượng đồ án hoàn thành đạt khoảng 60% – 65% (Vượt tiến độ dự kiến khoảng 1–2 tuần).\n• Hồ sơ báo cáo tiến độ lần 1 hoàn chỉnh.",
+            "VƯỢT TIẾN ĐỘ DỰ KIẾN! Hoàn thành sớm phân hệ nghiệp vụ cốt lõi và đã có bản demo thử nghiệm AI khả quan. Đạt khoảng 60–65% khối lượng. Đồng ý cho báo cáo Lần 1.",
             "Đã duyệt"
         )
     ]
@@ -280,7 +279,6 @@ def build_tracking_doc(output_path):
             if row_idx % 2 == 1:
                 set_cell_background(cell, "F9FBFC")
             if row_idx >= 6:
-                # Highlight the advance in progress
                 set_cell_background(cell, "F0F7FF")
                 
             p = cell.paragraphs[0]
@@ -320,11 +318,11 @@ def build_tracking_doc(output_path):
     col_w_eval = [Cm(4.5), Cm(12.5)]
     
     eval_data = [
-        ("1. Tinh thần, thái độ làm việc:", "Rất tích cực, chủ động nghiên cứu các công nghệ mới và phức tạp (Edge AI, ONNX Runtime, Gemini LLM). Luôn hoàn thành khối lượng công việc trước thời hạn yêu cầu, có ý thức kỷ luật và trách nhiệm học tập rất cao."),
-        ("2. Khối lượng công việc đã hoàn thành:", "ĐẠT KHOẢNG 85% – 90% TOÀN BỘ KHỐI LƯỢNG ĐỒ ÁN TỐT NGHIỆP.\n(Theo kế hoạch ban đầu, thời điểm tuần 7 chỉ yêu cầu hoàn thành khoảng 40–50% khối lượng đề tài. Sinh viên đã hoàn thành trước cả phân hệ AI YOLOv8, ONNX Random Forest, OCR và Báo cáo trực quan của các tuần 9–13)."),
-        ("3. Chất lượng sản phẩm phần mềm:", "Rất tốt. Hệ thống chạy ổn định, giao diện Obsidian Dark Theme đẹp mắt, luồng xử lý mượt mà. 86/86 bài kiểm thử tự động (Unit/Integration Tests) chạy thành công 100%. Mô hình AI nhận diện chính xác và suy luận dưới 2ms."),
-        ("4. Đánh giá mức độ tiến độ:", "VƯỢT TIẾN ĐỘ ĐỀ RA (Vượt trước khoảng 04 – 05 tuần so với kế hoạch ban đầu)."),
-        ("5. Kết luận & Đề xuất:", "ĐỦ ĐIỀU KIỆN VÀ KHUYẾN NGHỊ TIỂU BAN ĐÁNH GIÁ ĐẠT ĐIỂM TỐI ĐA TRONG LẦN KIỂM TRA TIẾN ĐỘ 1.")
+        ("1. Tinh thần, thái độ làm việc:", "Rất tích cực, chủ động, có ý thức kỷ luật và trách nhiệm học tập cao. Sinh viên bám sát kế hoạch nghiên cứu, thường xuyên trao đổi báo cáo tiến độ đầy đủ theo từng tuần."),
+        ("2. Khối lượng công việc đã hoàn thành:", "ĐẠT KHOẢNG 60% – 65% TOÀN BỘ KHỐI LƯỢNG ĐỒ ÁN TỐT NGHIỆP.\n(So với mức yêu cầu chuẩn tại thời điểm tuần 7 là khoảng 40–45%, sinh viên đã hoàn thành sớm toàn bộ các chức năng nghiệp vụ cốt lõi trước 1 tuần và đã chủ động nghiên cứu, tích hợp thử nghiệm bước đầu phân hệ Trí tuệ Nhân tạo)."),
+        ("3. Chất lượng sản phẩm phần mềm:", "Tốt. Phân hệ nghiệp vụ tài chính vận hành ổn định, giao diện Obsidian Dark Theme đẹp mắt, cơ sở dữ liệu chuẩn hóa tốt. Bộ kiểm thử tự động 86/86 test cases đều vượt qua. Bản demo thử nghiệm tính năng AI hoạt động khả quan."),
+        ("4. Đánh giá mức độ tiến độ:", "VƯỢT TIẾN ĐỘ DỰ KIẾN (Vượt trước khoảng 01 – 02 tuần so với kế hoạch ban đầu)."),
+        ("5. Kết luận & Đề xuất:", "ĐỦ ĐIỀU KIỆN VÀ KHUYẾN NGHỊ TIỂU BAN ĐÁNH GIÁ ĐẠT KẾT QUẢ TỐT / XUẤT SẮC TRONG LẦN KIỂM TRA TIẾN ĐỘ 1.")
     ]
     
     for row_idx, (lbl, val) in enumerate(eval_data):

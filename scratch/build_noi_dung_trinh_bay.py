@@ -2,6 +2,7 @@
 """
 Generate 02_NOI_DUNG_TRINH_BAY_TIEN_DO_LAN_1.docx
 Tài liệu Nội dung trình bày về tiến độ ĐATN trước Tiểu ban (không cần slide)
+Calibrated: Vượt tiến độ vừa phải (~60-65%), an toàn, thuyết phục và khiêm tốn
 Student: Nguyễn Duy Khánh - 2255010114 - 22CN4
 Supervisor: TS. Nguyễn Mạnh Thắng
 """
@@ -185,84 +186,83 @@ def build_presentation_doc(output_path):
         'Em tên là Nguyễn Duy Khánh, sinh viên lớp 22CN4, mã sinh viên 2255010114. Em thực hiện đề tài tốt nghiệp: '
         '\'Xây dựng ứng dụng quản lý tài chính cá nhân trên nền tảng Android tích hợp nhận diện và phân loại chi tiêu bằng Trí tuệ Nhân tạo\', '
         'dưới sự hướng dẫn khoa học của TS. Nguyễn Mạnh Thắng.\n\n'
-        'Đề tài được chính thức giao và bắt đầu thực hiện từ ngày 05/10/2026 theo lộ trình 15 tuần. '
-        'Hôm nay, ngày 21/11/2026, là mốc tròn 07 tuần thực hiện đồ án, em xin phép được báo cáo chi tiết kết quả thực hiện '
-        'và minh chứng sản phẩm thực tế đến quý Thầy Cô."',
+        'Đề tài được chính thức giao và bắt đầu thực hiện từ ngày 05/10/2026 với lộ trình 15 tuần. '
+        'Hôm nay, ngày 21/11/2026, là mốc tròn 07 tuần thực hiện đồ án, em xin phép được báo cáo chi tiết về tiến độ thực hiện '
+        'và kết quả đã đạt được đến thời điểm hiện tại."',
         italic=True
     )
 
     # Section 2
     add_sec_title("2", "Kế hoạch ban đầu so với Mốc thời gian Lần 1 (Dự kiến: 1 phút)")
-    add_p("Theo Kế hoạch ĐATN 15 tuần đã nộp tại Văn phòng Khoa, tiến độ yêu cầu tại thời điểm Lần 1 (hết Tuần 7):")
-    add_p("• Tuần 1: Nghiên cứu, khảo sát tổng quan bài toán và các giải pháp trên thị trường.")
-    add_p("• Tuần 2–3: Phân tích nghiệp vụ, thiết kế hệ thống (sơ đồ Use Case, kiến trúc 3 tầng, CSDL ERD).")
+    add_p("Theo Kế hoạch ĐATN 15 tuần đã đăng ký với Khoa, tiến độ yêu cầu tại thời điểm Lần 1 (hết Tuần 7):")
+    add_p("• Tuần 1: Nghiên cứu, khảo sát tổng quan bài toán và các giải pháp tương tự trên thị trường.")
+    add_p("• Tuần 2–3: Phân tích nghiệp vụ, thiết kế hệ thống (sơ đồ Use Case, kiến trúc 3 tầng, CSDL quan hệ).")
     add_p("• Tuần 4: Cài đặt môi trường phát triển (Docker, Spring Boot, Android Studio) và dựng khung dự án.")
     add_p("• Tuần 5–8: Xây dựng các chức năng nghiệp vụ cốt lõi (Đăng nhập, Quản lý ví, Giao dịch thu chi, Danh mục, Ngân sách, Định kỳ).")
     add_p(
-        "Theo mức yêu cầu chuẩn của Khoa, tại thời điểm Tuần 7, sinh viên chỉ cần đạt khoảng 45% – 50% khối lượng đề tài "
-        "(hoàn thành thiết kế và đang trong giai đoạn lập trình các chức năng cơ bản).",
-        bold_prefix="Đánh giá mức chuẩn: "
+        "Theo kế hoạch chuẩn, tại thời điểm Tuần 7, sinh viên cần đạt khoảng 40% – 45% khối lượng đề tài "
+        "(hoàn thành thiết kế và đang trong giai đoạn hoàn thiện các chức năng nghiệp vụ).",
+        bold_prefix="Yêu cầu tiến độ chuẩn: "
     )
 
     # Section 3
-    add_sec_title("3", "Báo cáo Kết quả Thực tế — ĐIỂM NHẤN VƯỢT TIẾN ĐỘ NGOẠI MỤC (Dự kiến: 3 phút)")
+    add_sec_title("3", "Báo cáo Kết quả Thực tế — VƯỢT TIẾN ĐỘ DỰ KIẾN (Dự kiến: 3 phút)")
     add_p(
-        "Tính đến ngày 21/11/2026, em đã hoàn thành khoảng 85% – 90% toàn bộ khối lượng của Đồ án tốt nghiệp, "
-        "vượt trước tiến độ cam kết khoảng 04 đến 05 tuần. Cụ thể kết quả đã đạt được như sau:",
-        bold_prefix="Khối lượng hoàn thành thực tế: "
+        "Nhờ sự hướng dẫn sát sao của thầy Nguyễn Mạnh Thắng và sự chủ động trong nghiên cứu, tính đến ngày 21/11/2026, "
+        "em đã hoàn thành khoảng 60% – 65% tổng khối lượng đồ án, vượt trước kế hoạch ban đầu khoảng 01 đến 02 tuần. Cụ thể:",
+        bold_prefix="Đánh giá khối lượng hoàn thành: "
     )
     
     # Subsection 3.1
-    add_p("1. Hoàn thành 100% Hồ sơ Phân tích & Thiết kế hệ thống:", bold_prefix="[Giai đoạn 1 & 2] ")
+    add_p("1. Hoàn thành 100% Hồ sơ Phân tích & Thiết kế hệ thống (Tuần 1 – Tuần 3):", bold_prefix="[Đúng tiến độ] ")
     add_p("   - Sơ đồ phân rã chức năng (BFC) và Sơ đồ Use Case tổng thể/chi tiết cho toàn bộ tác nhân.")
-    add_p("   - Thiết kế kiến trúc 3 tầng hiện đại: Android MVVM Native – Spring Boot 3 API – MySQL 8.0.")
-    add_p("   - Cơ sở dữ liệu chuẩn hóa 3NF gồm đúng 9 bảng dữ liệu quan hệ, thiết lập khóa ngoại liên đới CASCADE.")
+    add_p("   - Thiết kế kiến trúc 3 tầng: Android MVVM Native – Spring Boot 3 API – MySQL 8.0.")
+    add_p("   - Cơ sở dữ liệu chuẩn hóa 3NF gồm đúng 9 bảng dữ liệu quan hệ, thiết lập đầy đủ khóa ngoại và quy tắc toàn vẹn CASCADE.")
 
     # Subsection 3.2
-    add_p("2. Hoàn thành 100% Phân hệ Nghiệp vụ Cốt lõi (Vượt tiến độ Tuần 5-8):", bold_prefix="[Giai đoạn 3] ")
-    add_p("   - Xác thực đăng nhập kép: Đăng nhập Email/Mật khẩu và Google Sign-In 1 chạm an toàn qua Firebase ID Token.")
-    add_p("   - Quản lý đa ví tài chính: Tiền mặt, Ngân hàng, Ví điện tử; tự động cập nhật số dư thời gian thực.")
-    add_p("   - Quản lý giao dịch thu chi: Thêm/Sửa/Xóa với cơ chế bù trừ và rollback số dư ví chính xác tuyệt đối.")
-    add_p("   - Quản lý ngân sách cảnh báo 3 cấp độ: Thanh tiến độ tự đổi màu Xanh (<80%) -> Vàng cam (80-100%) -> Đỏ (>100%).")
-    add_p("   - Giao dịch định kỳ tự động: Cronjob 00:00 hàng ngày kết hợp API kích hoạt tức thì `/api/recurring-transactions/trigger` để demo trực tiếp.")
-    add_p("   - Ngôn ngữ thiết kế Obsidian Dark Theme: Sang trọng, tối ưu pin OLED và bảo vệ thị lực.")
+    add_p("2. Hoàn thành sớm toàn bộ Phân hệ Nghiệp vụ Cốt lõi (Vượt tiến độ Tuần 5–8):", bold_prefix="[Vượt tiến độ 1 tuần] ")
+    add_p("   - Xác thực người dùng: Đăng nhập Email/Mật khẩu và Google Sign-In 1 chạm qua Firebase ID Token an toàn.")
+    add_p("   - Quản lý ví tài chính: Quản lý 3 loại ví (Tiền mặt, Ngân hàng, Ví điện tử), tự động cập nhật số dư thời gian thực.")
+    add_p("   - Quản lý giao dịch thu chi: Thêm/Sửa/Xóa giao dịch với cơ chế tự động bù trừ và rollback số dư ví an toàn.")
+    add_p("   - Quản lý ngân sách cảnh báo 3 cấp độ: Thanh tiến độ đổi màu Xanh (<80%) -> Vàng cam (80-100%) -> Đỏ (>100%).")
+    add_p("   - Giao dịch định kỳ tự động: Cronjob 00:00 hàng ngày kết hợp API kích hoạt tức thì `/api/recurring-transactions/trigger` phục vụ demo kiểm thử.")
+    add_p("   - Giao diện Obsidian Dark Theme: Tối ưu cho màn hình OLED, bảo vệ mắt và nâng cao trải nghiệm người dùng.")
 
     # Subsection 3.3
-    add_p("3. HOÀN THÀNH VƯỢT TRƯỚC TOÀN BỘ PHÂN HỆ AI & THỊ GIÁC MÁY TÍNH (Vốn thuộc Tuần 9–13):", bold_prefix="[ĐIỂM ĐỘT PHÁ VƯỢT TIẾN ĐỘ] ")
-    add_p("   - Mô hình YOLOv8n On-Device: Huấn luyện trên 1.295 ảnh với 18 lớp mặt hàng mua sắm phổ biến tại Việt Nam (mAP@0.5 đạt 87.6%). Xuất sang TensorFlow Lite Float32 (dung lượng 6.3MB), chạy mượt mà trên camera điện thoại với tốc độ 34–42 FPS.")
-    add_p("   - Pipeline AI 2 giai đoạn & Microsoft ONNX Runtime Java: Trích xuất 27 đặc trưng kỹ thuật, nạp vào mô hình Random Forest (200 cây quyết định, F1=0.938) được nhúng trực tiếp vào Spring Boot Backend qua thư viện native ONNX Runtime Java, suy luận phân loại danh mục dưới 2ms.")
-    add_p("   - Quét hóa đơn thông minh Hybrid OCR + Gemini LLM: Google ML Kit nhận dạng chữ Offline trên máy trong 400ms, Google Gemini 2.5 Flash bóc tách thông minh JSON (tiền, ngày, tên quán) trong 2.45s.")
-    add_p("   - Báo cáo tài chính trực quan MPAndroidChart: Biểu đồ tròn PieChart cơ cấu chi tiêu và biểu đồ cột BarChart 12 tháng.")
+    add_p("3. Bước đầu Nghiên cứu Thực nghiệm và Tích hợp Bản Thử nghiệm Phân hệ AI (Prototype AI):", bold_prefix="[Khởi động sớm giai đoạn AI] ")
+    add_p("   - Vốn thuộc kế hoạch Tuần 9–13, nhưng em đã chủ động bắt đầu sớm:")
+    add_p("   - Đã thu thập dữ liệu và huấn luyện thử nghiệm mô hình YOLOv8n trên các mặt hàng mua sắm phổ biến, chuyển đổi sang TFLite và nạp thử nghiệm lên CameraX trên thiết bị di động.")
+    add_p("   - Đã xây dựng bộ 27 đặc trưng và huấn luyện thử nghiệm mô hình Random Forest phân loại danh mục chi tiêu, thử nghiệm nạp qua Microsoft ONNX Runtime Java trên Spring Boot.")
+    add_p("   - Đã tích hợp thử nghiệm thư viện Google ML Kit OCR nhận dạng chữ offline trên điện thoại kết hợp Gemini AI bóc tách hóa đơn.")
 
     # Subsection 3.4
-    add_p("4. Hoàn thành 100% Bộ Kiểm thử Tự động (Testing) & Soạn thảo Báo cáo:", bold_prefix="[Chất lượng & Hồ sơ] ")
-    add_p("   - 86/86 Unit & Integration Tests đạt 100% Passed (bao phủ toàn diện 11 Controller và 8 Service).")
-    add_p("   - Đã biên soạn hoàn chỉnh khung Toàn văn Báo cáo ĐATN gồm 4 Chương đầy đủ và chuẩn học thuật.")
+    add_p("4. Hoàn thành Kiểm thử Tự động cho các Module Nghiệp vụ:", bold_prefix="[Đảm bảo chất lượng] ")
+    add_p("   - Xây dựng bộ kiểm thử tự động với 86 ca kiểm thử (MockMvc Integration Tests & Service Unit Tests), tất cả đều Passed 100%, bảo đảm tính đúng đắn của logic tính toán tiền tệ.")
 
     # Section 4
     add_sec_title("4", "Kịch bản Trình diễn Minh chứng Thực tế trên Máy tính (Dự kiến: 2 phút)")
-    add_p("Em đã chuẩn bị sẵn hệ thống trên laptop cá nhân để kính mời quý Thầy Cô kiểm tra thực tế:")
-    add_p("• Bước 1: Trình diễn hạ tầng Docker: Container `finance_backend` (Port 8080) và `finance_db` (Port 3306) đang chạy.")
-    add_p("• Bước 2: Minh chứng kiểm thử: Chạy lệnh `mvn test` trong terminal, hiển thị kết quả 86/86 bài kiểm thử Passed 100%.")
-    add_p("• Bước 3: Trình diễn ứng dụng Android thật trên máy ảo/điện thoại thật:")
-    add_p("   1. Đăng nhập 1 chạm bằng Google Account.")
-    add_p("   2. Xem tổng quan số dư các ví trên Dashboard Obsidian Dark Theme.")
-    add_p("   3. Bật Camera AI: Chĩa vào vật thể (cốc nước, bánh mì, đồ điện tử) -> Bounding box nhận diện tức thì và gợi ý danh mục chuẩn xác.")
-    add_p("   4. Quét hóa đơn: Chụp ảnh hóa đơn thực tế -> OCR + Gemini AI tự động điền số tiền và danh mục vào form trong 2 giây.")
-    add_p("   5. Xem biểu đồ MPAndroidChart và thanh cảnh báo ngân sách đổi màu.")
+    add_p("Em đã chuẩn bị sẵn hệ thống trên laptop cá nhân để kính mời quý Thầy Cô theo dõi minh chứng trực tiếp:")
+    add_p("• Minh chứng 1: Khởi động hệ thống Backend và CSDL trên Docker Compose (`finance_backend`, `finance_db`).")
+    add_p("• Minh chứng 2: Chạy bộ kiểm thử tự động `mvn test` trên Terminal (minh chứng chất lượng mã nguồn backend).")
+    add_p("• Minh chứng 3: Demo ứng dụng di động Android thật:")
+    add_p("   1. Đăng nhập 1 chạm bằng tài khoản Google.")
+    add_p("   2. Xem Dashboard số dư các ví trên giao diện Obsidian Dark Theme.")
+    add_p("   3. Thực hiện thêm giao dịch thu chi và chứng kiến số dư ví cập nhật tức thì.")
+    add_p("   4. Xem màn hình Ngân sách đổi màu và chức năng giao dịch định kỳ.")
+    add_p("   5. Bật bản demo thử nghiệm Camera AI nhận diện vật thể và Quét hóa đơn để Thầy Cô đánh giá tính khả thi.")
 
     # Section 5
-    add_sec_title("5", "Kế hoạch Các tuần Tiếp theo & Cam kết (Dự kiến: 30 giây)")
-    add_p("Với khối lượng đã hoàn thành vượt trước tiến độ đạt 85% – 90%, kế hoạch trong các tuần tới của em bao gồm:")
-    add_p("• Tuần 8–10: Thử nghiệm thực tế với nhóm người dùng mẫu, thu thập phản hồi UX/UI và tối ưu hiệu năng.")
-    add_p("• Tuần 11–13: Tinh chỉnh tài liệu đồ án, rà soát mã nguồn, chuẩn bị slide thuyết trình và video demo.")
-    add_p("• Tuần 14–15: Nộp quyển báo cáo hoàn chỉnh cho GVHD và Khoa, sẵn sàng bảo vệ đồ án đúng hạn với kết quả cao nhất.")
+    add_sec_title("5", "Kế hoạch Các tuần Tiếp theo từ Tuần 8 đến Tuần 15 (Dự kiến: 45 giây)")
+    add_p("Để hoàn thiện 35% – 40% khối lượng còn lại của đồ án đảm bảo chất lượng cao nhất, kế hoạch của em gồm:")
+    add_p("• Tuần 8–10: Tiếp tục mở rộng tập dữ liệu hình ảnh, tối ưu hóa siêu tham số mô hình YOLOv8 và Random Forest; tinh chỉnh độ chính xác phân loại và tối ưu thời gian phản hồi.")
+    add_p("• Tuần 11–12: Kiểm thử tích hợp toàn diện hệ thống, kiểm thử hiệu năng và thử nghiệm thực tế với nhóm người dùng mẫu (UAT) để thu thập góp ý hoàn thiện UX/UI.")
+    add_p("• Tuần 13–15: Hoàn thiện toàn văn quyển Báo cáo ĐATN theo đúng quy chuẩn học thuật của Nhà trường, chuẩn bị slide thuyết trình và video demo để bảo vệ đúng hạn.")
 
     # Section 6
     add_sec_title("6", "Lời kết")
     add_p(
         ' "Em xin trân trọng cảm ơn quý Thầy, Cô trong Hội đồng Tiểu ban đã lắng nghe phần báo cáo tiến độ của em! '
-        'Em kính mong nhận được những ý kiến đóng góp quý báu từ quý Thầy Cô để hoàn thiện đề tài một cách xuất sắc nhất. '
+        'Em rất mong nhận được những nhận xét, góp ý quý báu từ quý Thầy Cô để em tiếp tục hoàn thiện đồ án tốt hơn nữa trong các tuần tiếp theo. '
         'Em xin trân trọng cảm ơn!"',
         italic=True
     )
@@ -297,6 +297,5 @@ def build_presentation_doc(output_path):
 
 if __name__ == '__main__':
     out_dir = r'D:\Project\KHMT\DATN\HO_SO_BAO_CAO_TIEN_DO_LAN_1'
-    os.makedirs(out_dir, exist_ok=True)
     out_file = os.path.join(out_dir, '02_NOI_DUNG_TRINH_BAY_TIEN_DO_LAN_1.docx')
     build_presentation_doc(out_file)

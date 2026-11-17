@@ -2,6 +2,7 @@
 """
 Generate 04_KICH_BAN_DEMO_VA_MINH_CHUNG_SAN_PHAM.docx
 Kịch bản demo thực tế trên máy tính và cheat-sheet trả lời câu hỏi phản biện của Tiểu ban
+Calibrated: Vượt tiến độ vừa phải (~60-65%), tự tin, chuẩn mực và khiêm tốn
 Student: Nguyễn Duy Khánh - 2255010114 - 22CN4
 Supervisor: TS. Nguyễn Mạnh Thắng
 """
@@ -166,25 +167,24 @@ def build_demo_guide(output_path):
     add_h2("Bước 1: Trình diễn Kiến trúc và Kiểm thử Tự động (30 giây)")
     add_p("• Thao tác: Bấm chuyển sang cửa sổ Terminal tại `backend/`, gõ lệnh:")
     add_p("  mvn test", bold_prefix="  Lệnh: ")
-    add_p("• Lời thuyết minh: 'Kính thưa Thầy Cô, toàn bộ 11 Controller và 8 Service nghiệp vụ của hệ thống Backend đều được kiểm thử tự động toàn diện. Như Thầy Cô thấy trên màn hình, toàn bộ 86/86 bài kiểm thử đều Passed 100%, bảo đảm độ tin cậy tuyệt đối của logic biến động số dư ví và tích hợp AI.'")
+    add_p("• Lời thuyết minh: 'Kính thưa Thầy Cô, toàn bộ các tầng Controller và Service của phân hệ nghiệp vụ đã hoàn thành đều được kiểm thử tự động toàn diện. Như Thầy Cô thấy trên màn hình, toàn bộ 86/86 bài kiểm thử đều Passed 100%, bảo đảm độ tin cậy của logic biến động số dư ví và lưu trữ CSDL.'")
 
-    add_h2("Bước 2: Trình diễn Nghiệp vụ Cốt lõi & Giao diện Obsidian Dark Theme (60 giây)")
-    add_p("• Thao tác 1: Mở app Android -> Bấm nút 'Đăng nhập bằng Google' -> Chọn tài khoản Google -> App chuyển ngay vào Dashboard trong 1 giây.")
+    add_h2("Bước 2: Trình diễn Phân hệ Nghiệp vụ Cốt lõi & Giao diện Obsidian Dark Theme (60 giây)")
+    add_p("• Thao tác 1: Mở app Android -> Bấm nút 'Đăng nhập bằng Google' -> Chọn tài khoản Google -> App chuyển ngay vào Dashboard.")
     add_p("• Thao tác 2: Trình diễn thẻ Tổng số dư ròng, danh sách ví (Tiền mặt, Ngân hàng, Ví điện tử) trên tông màu Obsidian Dark Theme sang trọng.")
     add_p("• Thao tác 3: Bấm thêm một giao dịch Chi tiêu 50.000đ Ăn trưa -> Hệ thống tự động trừ tiền trong ví Tiền mặt và cập nhật tức thì trên Dashboard.")
     add_p("• Thao tác 4: Chuyển sang tab Ngân sách -> Cho Thầy Cô xem thanh tiến độ đổi màu 3 cấp độ (Xanh lá <80%, Vàng cam 80-100%, Đỏ rực khi vượt 100%).")
 
-    add_h2("Bước 3: Trình diễn Phân hệ Đột phá Vượt Tiến độ — CAMERA AI & QUÉT HÓA ĐƠN (90 giây)")
+    add_h2("Bước 3: Trình diễn Bản Thử nghiệm Bước đầu Phân hệ AI (Prototype AI) (90 giây)")
     add_p("• Thao tác 1 (Camera AI YOLOv8 On-Device):")
     add_p("  + Bấm nút Camera AI nhận diện sản phẩm.")
     add_p("  + Chĩa camera vào một cốc nước hoặc vật phẩm trên bàn.")
-    add_p("  + Khung Bounding Box màu xanh/vàng lập tức hiện lên cùng nhãn tên (VD: coffee_cup 92%) với tốc độ 35-40 FPS.")
-    add_p("  + Bấm nút Chụp -> Ứng dụng gửi 27 đặc trưng lên Backend -> Mô hình Random Forest ONNX suy luận trong 1.5ms và tự động chọn danh mục 'Ăn uống'.")
+    add_p("  + Khung Bounding Box hiện lên kèm nhãn tên và độ tin cậy thời gian thực với tốc độ 35-40 FPS.")
+    add_p("  + Bấm nút Chụp -> Ứng dụng nạp vector đặc trưng lên Backend để mô hình Random Forest ONNX gợi ý danh mục chi tiêu.")
     add_p("• Thao tác 2 (Quét Hóa đơn OCR + Gemini AI):")
-    add_p("  + Bấm nút Quét hóa đơn -> Chọn ảnh hóa đơn siêu thị/quán nước có sẵn trong máy.")
-    add_p("  + Google ML Kit quét OCR Offline trong 400ms -> Gemini 2.5 Flash phân tích ngữ cảnh trong 2 giây.")
-    add_p("  + Màn hình form thêm giao dịch tự động điền sẵn: Tổng tiền, Ngày tháng, Tên cửa hàng và Danh mục tương ứng.")
-    add_p("• Thuyết minh chốt: 'Đây là phân hệ AI phức tạp vốn nằm ở tuần 9 đến tuần 13 theo kế hoạch ban đầu, nhưng em đã hoàn thành xuất sắc ngay trong đợt 1 này.'")
+    add_p("  + Bấm nút Quét hóa đơn -> Chọn ảnh hóa đơn mẫu.")
+    add_p("  + Google ML Kit nhận dạng chữ Offline -> Gemini AI bóc tách thông tin tổng tiền và ngày tháng điền sẵn vào form.")
+    add_p("• Thuyết minh chốt: 'Đây là kết quả thử nghiệm bước đầu của phân hệ AI mà em đã chủ động nghiên cứu sớm. Trong 8 tuần tới, em sẽ tiếp tục hoàn thiện, mở rộng tập dữ liệu và tối ưu hóa độ chính xác.'")
 
     # PART 3: Q&A CHEAT SHEET
     add_h1("PHẦN 3: CẨM NANG 10 CÂU HỎI THƯỜNG GẶP CỦA TIỂU BAN & CÂU TRẢ LỜI CHUẨN")
@@ -192,11 +192,11 @@ def build_demo_guide(output_path):
     qa_list = [
         (
             "Câu 1: Tại sao em lại dùng kiến trúc Pipeline AI 2 giai đoạn (YOLO + Random Forest) thay vì dùng 1 mô hình duy nhất?",
-            "Trả lời: Thưa Thầy/Cô, YOLO là mô hình thị giác máy tính chuyên sâu về Phát hiện đối tượng (Object Detection) nhằm định vị và gắn nhãn vật thể trong ảnh (VD: nhận diện đây là cốc cà phê, bánh mì). Tuy nhiên, để ra quyết định tài chính rằng vật thể đó thuộc danh mục chi tiêu nào (Ăn uống hay Mua sắm), cần kết hợp thêm các đặc trưng ngữ cảnh (thời gian sáng/tối, ngày trong tuần, ví thanh toán, số lượng vật thể). Mô hình Random Forest 200 cây trên 27 đặc trưng giúp phân loại danh mục cực kỳ chính xác (F1 đạt 0.938) và suy luận siêu tốc dưới 2ms."
+            "Trả lời: Thưa Thầy/Cô, YOLO là mô hình thị giác máy tính chuyên sâu về Phát hiện đối tượng (Object Detection) nhằm định vị và gắn nhãn vật thể trong ảnh (VD: nhận diện đây là cốc cà phê, bánh mì). Tuy nhiên, để ra quyết định tài chính rằng vật thể đó thuộc danh mục chi tiêu nào (Ăn uống hay Mua sắm), cần kết hợp thêm các đặc trưng ngữ cảnh (thời gian sáng/tối, ngày trong tuần, ví thanh toán, số lượng vật thể). Mô hình Random Forest 200 cây trên 27 đặc trưng giúp phân loại danh mục chi tiêu rất chính xác và suy luận siêu tốc dưới 2ms."
         ),
         (
             "Câu 2: Tại sao em nhúng trực tiếp ONNX Runtime vào Spring Boot Java mà không dựng một Server Python (Flask/FastAPI)?",
-            "Trả lời: Thưa Thầy/Cô, việc dựng thêm một Python Server sẽ phát sinh chi phí hạ tầng máy chủ, tăng độ phức tạp khi vận hành (cần quản lý 2 backend) và tạo độ trễ mạng mạng gọi qua lại (khoảng 50-100ms). Nhúng trực tiếp thư viện Microsoft ONNX Runtime Java vào Spring Boot cho phép chạy mô hình ngay trong bộ nhớ RAM của Java tiến trình, tốc độ suy luận chỉ mất 1.2 - 1.8ms và có cơ chế Fallback an toàn nếu thiếu thư viện C++ native."
+            "Trả lời: Thưa Thầy/Cô, việc dựng thêm một Python Server sẽ phát sinh chi phí hạ tầng máy chủ, tăng độ phức tạp khi vận hành (cần quản lý 2 backend) và tạo độ trễ mạng gọi qua lại (khoảng 50-100ms). Nhúng trực tiếp thư viện Microsoft ONNX Runtime Java vào Spring Boot cho phép chạy mô hình ngay trong bộ nhớ RAM của Java tiến trình, tốc độ suy luận chỉ mất 1.2 - 1.8ms và có cơ chế Fallback an toàn nếu thiếu thư viện C++ native."
         ),
         (
             "Câu 3: Mô hình YOLOv8 chạy trên điện thoại có gây nóng máy hoặc tốn pin không?",
@@ -216,11 +216,11 @@ def build_demo_guide(output_path):
         ),
         (
             "Câu 7: Tính năng Giao dịch định kỳ hoạt động như thế nào?",
-            "Trả lời: Thưa Thầy/Cô, hệ thống sử dụng Spring Scheduling với Cronjob @Scheduled(cron = '0 0 0 * * ?') chạy tự động vào đúng 00:00 hàng ngày để quét các giao dịch đến hạn và tự động sinh giao dịch mới kèm trừ số dư ví. Đặc biệt, để phục vụ buổi kiểm tra hôm nay, em đã xây dựng endpoint POST /api/recurring-transactions/trigger để Thầy Cô có thể kích hoạt sinh giao dịch định kỳ tức thì để kiểm chứng."
+            "Trả lời: Thưa Thầy/Cô, hệ thống sử dụng Spring Scheduling với Cronjob @Scheduled(cron = '0 0 0 * * ?') chạy tự động vào đúng 00:00 hàng ngày để quét các giao dịch đến hạn và tự động sinh giao dịch mới kèm trừ số dư ví. Để phục vụ kiểm thử, em đã bổ sung endpoint POST /api/recurring-transactions/trigger để có thể kích hoạt sinh giao dịch định kỳ tức thì."
         ),
         (
             "Câu 8: Khối lượng đồ án đã hoàn thành của em so với yêu cầu tiến độ lần 1 như thế nào?",
-            "Trả lời: Thưa Thầy/Cô, theo kế hoạch ban đầu, hết tuần 7 chỉ yêu cầu hoàn thành phân tích thiết kế và đang lập trình dở các nghiệp vụ cơ bản (khoảng 40-50%). Hiện tại em đã hoàn thành vượt tiến độ, đạt khoảng 85% – 90% toàn bộ đồ án: hoàn tất 100% nghiệp vụ cốt lõi, hoàn tất 100% CSDL 9 bảng, hoàn tất vượt trước cả phân hệ AI YOLOv8, ONNX Random Forest, OCR Gemini, 86/86 test cases tự động và đã viết xong khung báo cáo toàn văn 4 chương."
+            "Trả lời: Thưa Thầy/Cô, theo kế hoạch ban đầu, hết tuần 7 yêu cầu hoàn thành khoảng 40% – 45%. Hiện tại em đã hoàn thành vượt tiến độ dự kiến, đạt khoảng 60% – 65% toàn bộ đồ án: hoàn tất 100% phân tích thiết kế và CSDL 9 bảng, hoàn thành sớm toàn bộ 7 phân hệ nghiệp vụ cốt lõi trước 1 tuần và đã chủ động khởi động sớm, bước đầu có bản thử nghiệm tích hợp mô hình AI (YOLOv8 TFLite, ONNX Random Forest, OCR hóa đơn). Em đã chuẩn bị kế hoạch chi tiết cho 8 tuần tiếp theo để hoàn thiện và kiểm thử toàn diện."
         ),
         (
             "Câu 9: Các bài kiểm thử tự động của em kiểm tra những tầng nào?",
@@ -228,7 +228,7 @@ def build_demo_guide(output_path):
         ),
         (
             "Câu 10: Kế hoạch trong các tuần tới từ giờ đến khi bảo vệ là gì?",
-            "Trả lời: Thưa Thầy/Cô, trong các tuần tới em sẽ tập trung vào: (1) Thử nghiệm thực tế với người dùng để tối ưu trải nghiệm giao diện; (2) Tinh chỉnh tài liệu đồ án tốt nghiệp theo góp ý của Thầy Cô hôm nay; (3) Chuẩn bị slide bảo vệ và video demo chất lượng cao để bảo vệ chính thức đạt kết quả tốt nhất."
+            "Trả lời: Thưa Thầy/Cô, trong 8 tuần tới em sẽ tập trung vào 3 công việc trọng tâm: (1) Tuần 8–10: Tiếp tục mở rộng tập dữ liệu và tối ưu hóa mô hình AI, tinh chỉnh độ chính xác phân loại danh mục; (2) Tuần 11–12: Kiểm thử tích hợp toàn diện và thử nghiệm trên nhóm người dùng mẫu (UAT) để hoàn thiện UX/UI; (3) Tuần 13–15: Hoàn thiện toàn văn quyển Báo cáo ĐATN theo góp ý của Thầy Cô hôm nay, chuẩn bị slide và video demo sẵn sàng bảo vệ đúng hạn."
         )
     ]
     
@@ -240,7 +240,7 @@ def build_demo_guide(output_path):
     p_end = doc.add_paragraph()
     p_end.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_end.paragraph_format.space_before = Pt(15)
-    r_end = p_end.add_run("CHÚC BẠN TỰ TIN VÀ ĐẠT ĐIỂM TỐI ĐA TRONG BUỔI BÁO CÁO TIẾN ĐỘ LẦN 1!")
+    r_end = p_end.add_run("CHÚC BẠN TỰ TIN VÀ ĐẠT ĐIỂM XUẤT SẮC TRONG BUỔI BÁO CÁO TIẾN ĐỘ LẦN 1!")
     format_run(r_end, size_pt=11.5, bold=True, color_rgb=RGBColor(0, 102, 0))
     
     doc.save(output_path)

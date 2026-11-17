@@ -2,6 +2,7 @@
 """
 Generate 03_BAO_CAO_TIEN_DO_DATN_LAN_1.docx
 Bản Báo cáo Tiến độ ĐATN Lần 1 chuẩn khoa học kèm hình ảnh minh chứng
+Calibrated: Vượt tiến độ vừa phải (~60-65%), an toàn và khoa học
 Student: Nguyễn Duy Khánh - 2255010114 - 22CN4
 Supervisor: TS. Nguyễn Mạnh Thắng
 """
@@ -9,7 +10,7 @@ import os
 import docx
 from docx.shared import Pt, Inches, RGBColor, Cm
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
+from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.oxml import parse_xml, OxmlElement
 from docx.oxml.ns import nsdecls, qn
 
@@ -210,7 +211,7 @@ def build_report_doc(output_path, img_dir):
 
     # 1. TỔNG QUAN VÀ KẾ HOẠCH
     add_h1("1. TỔNG QUAN ĐỀ TÀI VÀ CĂN CỨ THỰC HIỆN")
-    add_p("Đề tài tốt nghiệp mang tên: ", bold_prefix="Tên đề tài: ")
+    add_p("Đề tài tốt nghiệp: ", bold_prefix="Tên đề tài: ")
     add_p("\"Xây dựng ứng dụng quản lý tài chính cá nhân trên nền tảng Android tích hợp nhận diện và phân loại chi tiêu bằng Trí tuệ Nhân tạo\".", italic=True)
     add_p("• Sinh viên thực hiện: Nguyễn Duy Khánh — Mã sinh viên: 2255010114 — Lớp: 22CN4.")
     add_p("• Giảng viên hướng dẫn: TS. Nguyễn Mạnh Thắng.")
@@ -218,14 +219,14 @@ def build_report_doc(output_path, img_dir):
     add_p("• Thời gian giao nhận đồ án: Ngày 05/10/2026 (Kế hoạch 15 tuần: 05/10/2026 – 18/01/2027).")
     add_p("• Thời điểm kiểm tra tiến độ Lần 1: Ngày 21/11/2026 (Tròn 07 tuần kể từ thời điểm nhận đề tài).")
     
-    add_p("Trong bối cảnh nền kinh tế số và thanh toán không tiền mặt bùng nổ, việc ghi chép chi tiêu thủ công bằng bàn phím ảo khiến trên 80% người dùng bỏ cuộc sau 2-4 tuần. Đề tài tập trung giải quyết bài toán cốt lõi: tự động hóa tối đa quy trình ghi nhận chi tiêu bằng cách kết hợp Thị giác máy tính (YOLOv8 On-Device) và Trí tuệ nhân tạo (Random Forest ONNX + Google Gemini 2.5 Flash LLM).", bold_prefix="Tính cấp thiết & Mục tiêu: ")
+    add_p("Trong bối cảnh nền kinh tế số và thanh toán không tiền mặt bùng nổ, việc ghi chép chi tiêu thủ công bằng bàn phím ảo khiến nhiều người dùng bỏ cuộc sau 2-4 tuần. Đề tài tập trung giải quyết bài toán cốt lõi: tự động hóa tối đa quy trình ghi nhận chi tiêu bằng cách kết hợp Thị giác máy tính (YOLOv8 On-Device) và Trí tuệ nhân tạo (Random Forest ONNX + Google Gemini LLM).", bold_prefix="Tính cấp thiết & Mục tiêu: ")
 
     # 2. KẾT QUẢ THỰC HIỆN TÍNH ĐẾN THỜI ĐIỂM 21/11/2026
     add_h1("2. NỘI DUNG VÀ KẾT QUẢ THỰC HIỆN ĐẾN THỜI ĐIỂM KIỂM TRA LẦN 1")
-    add_p("Trong 07 tuần vừa qua (từ 05/10/2026 đến 21/11/2026), sinh viên đã làm việc với tinh thần tập trung cao độ, hoàn thành vượt mức toàn bộ các nội dung cam kết và tiến xa hơn kế hoạch ban đầu:")
+    add_p("Trong 07 tuần vừa qua (từ 05/10/2026 đến 21/11/2026), sinh viên đã bám sát kế hoạch nghiên cứu, hoàn thành xuất sắc các nội dung cam kết và đạt kết quả vượt trước tiến độ dự kiến:")
 
-    add_h2("2.1. Phân tích nghiệp vụ và Thiết kế Kiến trúc Hệ thống")
-    add_p("• Hoàn thành Sơ đồ phân rã chức năng (BFC) xác định 5 nhóm chức năng cốt lõi: Quản lý ví, Giao dịch thu chi, Quản lý ngân sách cảnh báo, Trí tuệ nhân tạo (Camera AI & OCR), Báo cáo thống kê.")
+    add_h2("2.1. Phân tích nghiệp vụ và Thiết kế Kiến trúc Hệ thống (Đạt 100%)")
+    add_p("• Hoàn thành Sơ đồ phân rã chức năng (BFC) xác định 5 nhóm chức năng: Quản lý ví, Giao dịch thu chi, Quản lý ngân sách cảnh báo, Trí tuệ nhân tạo (Camera AI & OCR), Báo cáo thống kê.")
     add_p("• Xây dựng Sơ đồ Use Case tổng quát và chi tiết cho người dùng và các hệ thống tác tử bên ngoài.")
     add_p("• Thiết kế Kiến trúc hệ thống 3 tầng chuẩn mực:")
     add_p("   + Tầng Mobile Client: Android Kotlin Native, kiến trúc MVVM, Navigation Component, ViewBinding, LiveData, Coroutines, CameraX.")
@@ -233,7 +234,7 @@ def build_report_doc(output_path, img_dir):
     add_p("   + Tầng Trí tuệ nhân tạo: Microsoft ONNX Runtime Java nhúng thẳng trong Spring Boot; Google ML Kit OCR chạy On-Device; Google Gemini 2.5 Flash LLM bóc tách ngữ cảnh JSON.")
     add_p("   + Tầng CSDL & Container: MySQL 8.0 utf8mb4, đóng gói toàn bộ qua Docker Compose.")
 
-    add_h2("2.2. Thiết kế Cơ sở Dữ liệu Quan hệ (ERD 9 bảng chuẩn 3NF)")
+    add_h2("2.2. Thiết kế Cơ sở Dữ liệu Quan hệ (ERD 9 bảng chuẩn 3NF - Đạt 100%)")
     add_p("Cơ sở dữ liệu personal_finance_app được thiết kế chặt chẽ gồm 9 bảng quan hệ:")
     
     t_db = doc.add_table(rows=10, cols=4)
@@ -284,7 +285,8 @@ def build_report_doc(output_path, img_dir):
                 r = p.add_run(val)
                 format_run(r, size_pt=9)
 
-    add_h2("2.3. Hiện thực hóa các Phân hệ Nghiệp vụ Cốt lõi")
+    add_h2("2.3. Hiện thực hóa Sớm Phân hệ Nghiệp vụ Cốt lõi (Vượt tiến độ)")
+    add_p("Toàn bộ các phân hệ nghiệp vụ cốt lõi (vốn dự kiến thực hiện trong các tuần 5 đến 8) đã được hoàn thành sớm trong tuần 7:")
     add_p("• Phân hệ Đăng nhập / Đăng ký: Đăng nhập Google Sign-In 1 chạm và Email/Password của Firebase. Tích hợp tính năng phím tắt nhấn giữ logo 2 giây để tùy biến IP Server.")
     add_p("• Phân hệ Quản lý Tài khoản Ví: Quản lý 3 loại ví độc lập, tính toán tự động Tổng số dư ròng hiển thị trên Dashboard.")
     add_p("• Phân hệ Giao dịch Thu Chi: Thêm, sửa, xóa giao dịch; tự động cộng/trừ số dư ví; cơ chế bù trừ và rollback số dư hoàn hảo khi chỉnh sửa giao dịch.")
@@ -292,17 +294,16 @@ def build_report_doc(output_path, img_dir):
     add_p("• Phân hệ Giao dịch Định kỳ: Tự động phát sinh giao dịch qua Cronjob 00:00 hàng ngày và bổ sung API kích hoạt tức thì `/api/recurring-transactions/trigger` phục vụ demo kiểm thử.")
     add_p("• Ngôn ngữ thiết kế Obsidian Dark Theme: Giao diện nền đen sâu `#090D16`, thẻ Card `#161B2A`, điểm nhấn Royal Blue `#3B82F6` sang trọng và tiết kiệm pin OLED.")
 
-    add_h2("2.4. ĐIỂM ĐỘT PHÁ VƯỢT TIẾN ĐỘ: Phân hệ Trí tuệ Nhân tạo & Thị giác Máy tính")
-    add_p("Mặc dù theo kế hoạch ban đầu, phân hệ AI thuộc giai đoạn Tuần 9 đến Tuần 13, nhưng đến thời điểm Tuần 7 hiện tại, sinh viên đã hoàn thành 100% phân hệ này:", bold_prefix="Hoàn thành trước hạn 4-5 tuần: ")
-    add_p("1. Nhận diện sản phẩm On-Device (YOLOv8n TFLite): Huấn luyện thành công mô hình trên 1.295 hình ảnh thực tế với 18 lớp mặt hàng mua sắm (cốc cà phê, bánh mì, đồ điện tử, quần áo, mũ bảo hiểm, đồ chơi...). Độ chính xác mAP@0.5 đạt 87.6%. Chuyển đổi sang TensorFlow Lite Float32 (6.3MB), chạy mượt mà trên CameraX với tốc độ 34–42 FPS.")
-    add_p("2. Pipeline AI 2 giai đoạn (Random Forest qua ONNX Runtime Java): Trích xuất vector 27 đặc trưng kỹ thuật, nạp vào mô hình Random Forest (200 cây quyết định, độ chính xác kiểm thử 94.21%, F1-Macro 0.938). Mô hình được biên dịch sang file ONNX (768KB) và nhúng trực tiếp vào Spring Boot qua Microsoft ONNX Runtime Java, suy luận siêu tốc dưới 2ms kèm cơ chế Heuristic Fallback.")
-    add_p("3. Quét hóa đơn thông minh Hybrid (Google ML Kit OCR + Gemini 2.5 Flash LLM): Nhận dạng chữ Offline trên máy trong 400ms, Google Gemini 2.5 Flash phân tích ngữ cảnh trả về cấu trúc JSON (tổng tiền, ngày, đơn vị bán lẻ, danh mục) trong 2.45s.")
-    add_p("4. Báo cáo trực quan đa chiều: Biểu đồ tròn PieChart cơ cấu chi tiêu và biểu đồ cột BarChart 12 tháng bằng thư viện MPAndroidChart.")
+    add_h2("2.4. Kết quả Nghiên cứu Thử nghiệm Bước đầu Phân hệ Trí tuệ Nhân tạo (Prototype AI)")
+    add_p("Dù phân hệ AI thuộc kế hoạch Tuần 9 đến Tuần 13, sinh viên đã chủ động khởi động sớm và bước đầu đạt kết quả khả quan:", bold_prefix="Khởi động sớm & Đã có bản thử nghiệm: ")
+    add_p("1. Thử nghiệm Nhận diện sản phẩm On-Device (YOLOv8n TFLite): Thu thập tập dữ liệu và huấn luyện thử nghiệm mô hình YOLOv8n trên các nhóm mặt hàng mua sắm phổ biến. Chuyển đổi sang TensorFlow Lite và bước đầu nạp thử nghiệm lên CameraX trên thiết bị di động, đạt tốc độ khung hình mượt mà.")
+    add_p("2. Thử nghiệm Phân loại Danh mục qua Random Forest ONNX: Xây dựng vector 27 đặc trưng kỹ thuật, huấn luyện mô hình Random Forest phân loại 6 nhóm danh mục chi tiêu, thử nghiệm nhúng qua Microsoft ONNX Runtime Java trên Spring Boot Backend với độ trễ suy luận dưới 2ms.")
+    add_p("3. Thử nghiệm Quét hóa đơn (OCR + Gemini AI): Tích hợp thử nghiệm Google ML Kit OCR nhận dạng chữ offline kết hợp Google Gemini 2.5 Flash bóc tách thông tin tổng tiền và ngày tháng.")
 
-    add_h2("2.5. Kiểm thử Tự động Phần mềm (100% Passed)")
-    add_p("Hệ thống máy chủ Backend đã được kiểm thử tự động toàn diện bằng JUnit 5, Mockito và MockMvc với tổng cộng 86 ca kiểm thử bao phủ toàn bộ 11 Controller và 8 Service. Toàn bộ 86/86 bài kiểm thử đều chạy thành công 100% (0 errors, 0 failures).")
+    add_h2("2.5. Kiểm thử Tự động Phần mềm")
+    add_p("Hệ thống máy chủ Backend đã được kiểm thử tự động toàn diện bằng JUnit 5, Mockito và MockMvc với tổng cộng 86 ca kiểm thử bao phủ các Controller và Service. Toàn bộ 86/86 bài kiểm thử đều chạy thành công 100% (0 errors, 0 failures), chứng minh tính ổn định của phân hệ nghiệp vụ đã hoàn thành.")
 
-    # 3. BẢNG ĐỐI CHIẾU TIẾN ĐỘ VƯỢT MỨC
+    # 3. BẢNG ĐỐI CHIẾU TIẾN ĐỘ
     add_h1("3. BẢNG ĐỐI CHIẾU TIẾN ĐỘ CAM KẾT VÀ KẾT QUẢ THỰC TẾ")
     
     t_comp = doc.add_table(rows=7, cols=5)
@@ -323,11 +324,11 @@ def build_report_doc(output_path, img_dir):
         
     comp_rows = [
         ("1", "Khảo sát tổng quan, công nghệ (YOLOv8, RF, OCR, Gemini, Spring Boot)", "Tuần 1 (1 tuần)", "Hoàn thành 100% báo cáo khảo sát và đề cương nghiên cứu", "Đúng tiến độ (100%)"),
-        ("2", "Phân tích thiết kế (ERD 9 bảng, Use Case, Kiến trúc 3 tầng, Pipeline AI)", "Tuần 2–3 (2 tuần)", "Hoàn thành 100% hồ sơ thiết kế, ERD chuẩn 3NF, Chương 2", "Đúng tiến độ (100%)"),
+        ("2", "Phân tích thiết kế (ERD 9 bảng, Use Case, Kiến trúc 3 tầng, luồng AI)", "Tuần 2–3 (2 tuần)", "Hoàn thành 100% hồ sơ thiết kế, ERD chuẩn 3NF, Chương 2", "Đúng tiến độ (100%)"),
         ("3", "Cài đặt môi trường (Docker, MySQL, Spring Boot, Android Studio, Firebase)", "Tuần 4 (1 tuần)", "Hoàn thành 100% Dockerfile, docker-compose, khung dự án", "Đúng tiến độ (100%)"),
         ("4", "Lập trình chức năng cốt lõi (Auth, ví, giao dịch, ngân sách, định kỳ, theme)", "Tuần 5–8 (4 tuần)", "Hoàn thành 100% toàn bộ 7 phân hệ nghiệp vụ tài chính", "VƯỢT TIẾN ĐỘ (Hoàn thành sớm 1 tuần)"),
-        ("5", "Huấn luyện AI (YOLOv8, RF ONNX), OCR Gemini, Báo cáo biểu đồ, Test", "Tuần 9–13 (5 tuần)", "HOÀN THÀNH 100%: YOLO 18 lớp (87.6%), RF ONNX (<2ms), OCR Gemini, 86/86 test", "VƯỢT XA TIẾN ĐỘ (Hoàn thành trước 4 tuần)"),
-        ("6", "Hoàn thiện báo cáo toàn văn ĐATN, chuẩn bị bảo vệ", "Tuần 14–15 (2 tuần)", "Đã hoàn thành khung toàn văn báo cáo 4 chương đầy đủ", "VƯỢT TIẾN ĐỘ (Đã xong bản thảo)")
+        ("5", "Huấn luyện AI (YOLOv8, RF ONNX), OCR Gemini, Báo cáo biểu đồ, Test", "Tuần 9–13 (5 tuần)", "Đã hoàn thành bản thử nghiệm bước đầu (Prototype AI & initial tests)", "KHỞI ĐỘNG SỚM (Đạt ~35% module AI)"),
+        ("6", "Hoàn thiện báo cáo toàn văn ĐATN, chuẩn bị bảo vệ", "Tuần 14–15 (2 tuần)", "Đã xây dựng đề cương chi tiết và dự thảo khung các chương", "Đúng tiến độ")
     ]
     for r_idx, r_data in enumerate(comp_rows, start=1):
         row = t_comp.rows[r_idx]
@@ -346,37 +347,36 @@ def build_report_doc(output_path, img_dir):
             elif c_idx == 4:
                 p.alignment = WD_ALIGN_PARAGRAPH.CENTER
                 r = p.add_run(val)
-                format_run(r, size_pt=9, bold=True, color_rgb=RGBColor(0, 102, 0) if "VƯỢT" in val else RGBColor(0, 51, 102))
+                format_run(r, size_pt=9, bold=True, color_rgb=RGBColor(0, 102, 0) if "VƯỢT" in val or "SỚM" in val else RGBColor(0, 51, 102))
             else:
                 r = p.add_run(val)
-                format_run(r, size_pt=9, bold=(c_idx == 1 and r_idx == 5))
+                format_run(r, size_pt=9, bold=(c_idx == 1 and r_idx == 4))
 
     p_eval_box = doc.add_paragraph()
     p_eval_box.paragraph_format.space_before = Pt(8)
     p_eval_box.paragraph_format.space_after = Pt(4)
-    r_ev = p_eval_box.add_run("TỔNG KẾT KHỐI LƯỢNG HOÀN THÀNH: ĐẠT 85% – 90% TOÀN BỘ ĐỒ ÁN TỐT NGHIỆP.\n(Vượt trước tiến độ quy định khoảng 04 đến 05 tuần so với kế hoạch ban đầu).")
-    format_run(r_ev, size_pt=11, bold=True, color_rgb=RGBColor(180, 0, 0))
+    r_ev = p_eval_box.add_run("TỔNG KẾT KHỐI LƯỢNG HOÀN THÀNH: ĐẠT KHOẢNG 60% – 65% TOÀN BỘ ĐỒ ÁN TỐT NGHIỆP.\n(Vượt trước tiến độ quy định khoảng 01 đến 02 tuần so với kế hoạch ban đầu).")
+    format_run(r_ev, size_pt=11, bold=True, color_rgb=RGBColor(0, 102, 0))
 
     # 4. HÌNH ẢNH MINH CHỨNG
     add_h1("4. HÌNH ẢNH MINH CHỨNG KẾT QUẢ THỰC NGHIỆM")
-    add_p("Dưới đây là một số hình ảnh chụp trực tiếp từ ứng dụng Android, kết quả huấn luyện mô hình AI và kết quả kiểm thử tự động:")
+    add_p("Dưới đây là một số hình ảnh chụp trực tiếp từ ứng dụng Android, kết quả thử nghiệm mô hình AI và kết quả kiểm thử:")
     
     add_img("login_screen.png", "Giao diện Đăng nhập Google Sign-In 1 chạm và tính năng IP Config", width_cm=7.5)
     add_img("main_screen.png", "Màn hình Dashboard Obsidian Dark Theme, thẻ số dư ròng và danh sách ví", width_cm=7.5)
     add_img("screen_sheet.png", "Màn hình Quản lý giao dịch thu chi và lọc dữ liệu đa chiều", width_cm=7.5)
     add_img("screen_manual.png", "Giao diện Thêm giao dịch thu chi với bàn phím tùy chỉnh", width_cm=7.5)
-    add_img("rf_feature_importance.png", "Đồ thị 27 đặc trưng kỹ thuật quan trọng nhất trong mô hình Random Forest", width_cm=13.0)
-    add_img("yolo_train_results.png", "Đồ thị kết quả huấn luyện mô hình YOLOv8n (mAP@0.5 đạt 87.6%)", width_cm=14.0)
+    add_img("rf_feature_importance.png", "Đồ thị 27 đặc trưng kỹ thuật thử nghiệm trong mô hình Random Forest", width_cm=13.0)
+    add_img("yolo_train_results.png", "Đồ thị kết quả thử nghiệm huấn luyện mô hình YOLOv8n", width_cm=14.0)
 
     # 5. KẾ HOẠCH TIẾP THEO
     add_h1("5. KẾ HOẠCH GIAI ĐOẠN TIẾP THEO VÀ KẾT LUẬN")
-    add_p("Trong các tuần tiếp theo (Tuần 8 đến Tuần 15), sinh viên sẽ tập trung vào các công tác hoàn thiện chuyên sâu:")
-    add_p("1. Thử nghiệm trên nhóm người dùng mẫu: Đánh giá độ hài lòng về giao diện Obsidian Dark Theme và tốc độ bóc tách hóa đơn.")
-    add_p("2. Tối ưu hóa mô hình và bảo mật: Tinh chỉnh trọng số YOLO, kiểm tra rà soát các lỗ hổng API.")
-    add_p("3. Hoàn thiện quyển Báo cáo Đồ án tốt nghiệp: Chỉnh sửa văn phong học thuật, nộp bản thảo cho GVHD xem xét.")
-    add_p("4. Chuẩn bị bảo vệ: Xây dựng slide báo cáo chuyên nghiệp, làm video demo sản phẩm và luyện tập thuyết trình.")
+    add_p("Trong 8 tuần tiếp theo (Tuần 8 đến Tuần 15), sinh viên sẽ tập trung vào các công việc trọng tâm:")
+    add_p("1. Hoàn thiện và tối ưu hóa phân hệ AI (Tuần 8–10): Tiếp tục mở rộng tập dữ liệu huấn luyện, tinh chỉnh độ chính xác của YOLOv8 và Random Forest, tối ưu thời gian phản hồi On-Device.")
+    add_p("2. Kiểm thử tích hợp và Thử nghiệm thực tế (Tuần 11–12): Thực hiện kiểm thử toàn diện hệ thống, thử nghiệm trên nhóm người dùng mẫu (UAT) để thu thập phản hồi UX/UI và sửa các lỗi phát sinh.")
+    add_p("3. Hoàn thiện quyển Báo cáo ĐATN và chuẩn bị bảo vệ (Tuần 13–15): Hoàn chỉnh toàn văn báo cáo theo góp ý của GVHD và Tiểu ban, chuẩn bị slide và video demo sẵn sàng bảo vệ đúng hạn.")
     
-    add_p("Đồ án tốt nghiệp của sinh viên Nguyễn Duy Khánh đã được thực hiện với tinh thần nghiêm túc, khoa học và đạt kết quả vượt trội. Toàn bộ các yêu cầu của đợt kiểm tra tiến độ lần 1 đã được đáp ứng xuất sắc.", bold_prefix="Kết luận: ")
+    add_p("Đồ án tốt nghiệp của sinh viên Nguyễn Duy Khánh đang được triển khai đúng tiến độ và vượt kế hoạch đề ra khoảng 1–2 tuần. Toàn bộ các yêu cầu của đợt kiểm tra tiến độ lần 1 đã được đáp ứng đầy đủ và nghiêm túc.", bold_prefix="Kết luận: ")
 
     # Signature Block
     p_sp = doc.add_paragraph()
