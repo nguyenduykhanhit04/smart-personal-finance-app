@@ -139,6 +139,7 @@ erDiagram
 | :---: | :--- | :---: | :--- |
 | **BR-08.1** | Tệp ảnh tải lên không được rỗng | BE Service | `TransactionImageService.java:33-35` |
 | **BR-08.2** | Mỗi giao dịch khi cập nhật lại ảnh thì tự động ghi đè ảnh cũ và dọn dẹp file cũ trên đĩa | BE Service | `TransactionImageService.java:66-72` |
+| **BR-08.3** | Khi xóa một giao dịch, toàn bộ file ảnh vật lý trên đĩa liên quan đến giao dịch đó được dọn dẹp tự động | BE Service | `TransactionService.java:155-167` |
 
 ## 9. Phân quyền
 - Yêu cầu xác thực Bearer Token hợp lệ.
@@ -151,10 +152,10 @@ erDiagram
 
 ## 11. Phụ thuộc và tích hợp
 - Lưu trữ file tĩnh tại thư mục `uploads/` trên máy chủ.
-- Khi người dùng gọi API `GET /api/transactions`, trường `imageUrl` tự động được nạp từ bảng `transaction_images` (`TransactionService.java:172-174`).
+- Khi người dùng gọi API `GET /api/transactions`, trường `imageUrl` tự động được nạp từ bảng `transaction_images` (`TransactionService.java:189-191`).
 
 ## 12. Edge case, giới hạn, điểm chưa rõ
-- Khi giao dịch bị xóa trong bảng `transactions`, ràng buộc MySQL `ON DELETE CASCADE` tự động xóa bản ghi trong `transaction_images`, nhưng tệp ảnh vật lý trong `uploads/` chưa có cron job dọn dẹp (có thể bổ sung task dọn file mồ côi).
+- **Dọn dẹp ảnh vật lý khi xóa giao dịch:** Đã bổ sung cơ chế dọn dẹp chủ động tại `TransactionService.deleteTransaction` (`TransactionService.java:155-167`). Khi xóa một giao dịch, hệ thống tự động tìm tất cả ảnh đính kèm có tiền tố `/uploads/` và xóa file vật lý tương ứng trên đĩa bằng `Files.deleteIfExists`, ngăn ngừa triệt để tình trạng file rác (orphan files).
 
 ## 13. Gợi ý test case
 | Mã TC | Kịch bản kiểm thử | Dữ liệu đầu vào | Kết quả mong đợi |

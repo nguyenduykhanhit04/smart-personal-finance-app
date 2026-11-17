@@ -29,9 +29,9 @@
 | 8 | F03 - Quản lý Hồ sơ cá nhân | `02-features/F03-quan-ly-ho-so-ca-nhan.md` | ✅ Đã xong | Đủ 13 mục chuẩn |
 | 9 | F04 - Cập nhật Avatar người dùng | `02-features/F04-cap-nhat-avatar-nguoi-dung.md` | ✅ Đã xong | Đủ 13 mục chuẩn |
 | 10 | F05 - Quản lý Ví tài chính | `02-features/F05-quan-ly-vi-tai-chinh.md` | ✅ Đã xong | Đủ 13 mục chuẩn |
-| 11 | F06 - Quản lý Danh mục thu chi | `02-features/F06-quan-ly-danh-muc-thu-chi.md` | ✅ Đã xong | Đủ 13 mục chuẩn |
-| 12 | F07 - Ghi chép & Quản lý giao dịch | `02-features/F07-ghi-chep-quan-ly-giao-dich.md` | ✅ Đã xong | Đủ 13 mục chuẩn |
-| 13 | F08 - Đính kèm ảnh hóa đơn giao dịch | `02-features/F08-dinh-kem-anh-hoa-don-giao-dich.md` | ✅ Đã xong | Đủ 13 mục chuẩn |
+| 11 | F06 - Quản lý Danh mục thu chi | `02-features/F06-quan-ly-danh-muc-thu-chi.md` | ✅ Đã xong | Đã cập nhật chặn trùng tên danh mục |
+| 12 | F07 - Ghi chép & Quản lý giao dịch | `02-features/F07-ghi-chep-quan-ly-giao-dich.md` | ✅ Đã xong | Đã cập nhật dọn dẹp ảnh đĩa khi xóa GD |
+| 13 | F08 - Đính kèm ảnh hóa đơn giao dịch | `02-features/F08-dinh-kem-anh-hoa-don-giao-dich.md` | ✅ Đã xong | Đã cập nhật dọn dẹp file orphan |
 | 14 | F09 - Thiết lập & Giám sát ngân sách | `02-features/F09-thiet-lap-giam-sat-ngan-sach.md` | ✅ Đã xong | Đủ 13 mục chuẩn |
 | 15 | F10 - Quản lý Giao dịch định kỳ | `02-features/F10-quan-ly-giao-dich-dinh-ky.md` | ✅ Đã xong | Đủ 13 mục chuẩn |
 | 16 | F11 - Tự động thực thi GD định kỳ | `02-features/F11-tu-dong-thuc-thi-giao-dich-dinh-ky.md` | ✅ Đã xong | Đủ 13 mục chuẩn |
@@ -42,6 +42,6 @@
 | 21 | F16 - Phản hồi nhận diện đồ vật AI | `02-features/F16-phan-hoi-nhan-dien-do-vat-ai.md` | ✅ Đã xong | Đủ 13 mục chuẩn |
 | 22 | Cross-cutting: Xác thực & Phân quyền | `03-cross-cutting/auth-authorization.md` | ✅ Đã xong | Hoàn chỉnh |
 | 23 | Cross-cutting: Xử lý lỗi hệ thống | `03-cross-cutting/error-handling.md` | ✅ Đã xong | Hoàn chỉnh |
-| 24 | Cross-cutting: Lưu trữ & Upload file | `03-cross-cutting/file-upload.md` | ✅ Đã xong | Hoàn chỉnh |
+| 24 | Cross-cutting: Lưu trữ & Upload file | `03-cross-cutting/file-upload.md` | ✅ Đã xong | Đã cập nhật cleanup ảnh khi xóa GD |
 | 25 | Cross-cutting: Tác vụ định kỳ Scheduler | `03-cross-cutting/scheduler.md` | ✅ Đã xong | Hoàn chỉnh |
 | 26 | Ma trận truy vết Traceability Matrix | `traceability-matrix.md` | ✅ Đã xong | 16 CN × 9 Bảng × 36 APIs |

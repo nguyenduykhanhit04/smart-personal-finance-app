@@ -4,6 +4,7 @@
 **Truy vết mã nguồn:**  
 - `backend/src/main/java/com/example/financebackend/controller/UserController.java:40-84` (Avatar Upload)  
 - `backend/src/main/java/com/example/financebackend/service/TransactionImageService.java:32-65` (Bill Image Upload)  
+- `backend/src/main/java/com/example/financebackend/service/TransactionService.java:155-167` (Transaction Deletion Image Cleanup)  
 - `backend/src/main/java/com/example/financebackend/config/SecurityConfig.java:27`  
 - `backend/src/main/java/com/example/financebackend/config/WebConfig.java`  
 
@@ -32,6 +33,7 @@ backend/
 2. **Cơ chế tự động dọn dẹp ảnh cũ (Garbage Cleanup):**
    - Khi người dùng tải lên ảnh đại diện mới, hệ thống kiểm tra `oldAvatarUrl`. Nếu là đường dẫn cục bộ `/uploads/...`, hệ thống gọi `Files.deleteIfExists` để xóa tệp cũ trên đĩa (`UserController.java:74-78`).
    - Khi cập nhật lại ảnh hóa đơn cho một giao dịch, tệp ảnh cũ cũng được xóa tương tự trước khi lưu ảnh mới (`TransactionImageService.java:66-71`).
+   - Khi người dùng xóa một giao dịch, `TransactionService.deleteTransaction` (`TransactionService.java:155-167`) tự động tìm kiếm danh sách ảnh gắn với giao dịch trong `transaction_images` và gọi `Files.deleteIfExists` để dọn sạch toàn bộ file ảnh vật lý trên đĩa trước khi xóa bản ghi trong CSDL, ngăn ngừa triệt để tình trạng tệp rác mồ côi (orphan files).
 3. **Phục vụ tệp tĩnh (Static Resource Serving):**
    - Đường dẫn URL trả về có dạng: `/uploads/<filename>`.
    - `SecurityConfig.java:27` mở quyền truy cập tĩnh `requestMatchers("/uploads/**").permitAll()` cho phép Mobile Client nạp ảnh trực tiếp qua Glide/Coil mà không bị chặn token.

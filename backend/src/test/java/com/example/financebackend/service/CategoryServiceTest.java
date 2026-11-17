@@ -1,6 +1,7 @@
 package com.example.financebackend.service;
 
 import com.example.financebackend.dto.CategoryDTO;
+import com.example.financebackend.exception.BadRequestException;
 import com.example.financebackend.exception.ResourceNotFoundException;
 import com.example.financebackend.model.Category;
 import com.example.financebackend.model.User;
@@ -137,6 +138,36 @@ public class CategoryServiceTest {
         when(userRepository.findById(999)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> categoryService.createCategory(createDTO));
+        verify(categoryRepository, never()).save(any(Category.class));
+    }
+
+    @Test
+    void testCreateCategory_DuplicateName_ThrowsBadRequestException() {
+        CategoryDTO createDTO = CategoryDTO.builder()
+                .userId(1)
+                .categoryName("ăn uống")
+                .build();
+
+        when(categoryRepository.findByUserUserIdOrIsDefaultTrue(1))
+                .thenReturn(Arrays.asList(foodCategory));
+
+        BadRequestException ex = assertThrows(BadRequestException.class, () -> categoryService.createCategory(createDTO));
+        assertTrue(ex.getMessage().contains("đã tồn tại trong hệ thống"));
+        verify(categoryRepository, never()).save(any(Category.class));
+    }
+
+    @Test
+    void testUpdateCategory_DuplicateName_ThrowsBadRequestException() {
+        when(categoryRepository.findById(1)).thenReturn(Optional.of(foodCategory));
+        when(categoryRepository.findByUserUserIdOrIsDefaultTrue(null))
+                .thenReturn(Arrays.asList(foodCategory, salaryCategory));
+
+        CategoryDTO updateDTO = CategoryDTO.builder()
+                .categoryName("Tiền lương")
+                .build();
+
+        BadRequestException ex = assertThrows(BadRequestException.class, () -> categoryService.updateCategory(1, updateDTO));
+        assertTrue(ex.getMessage().contains("đã tồn tại trong hệ thống"));
         verify(categoryRepository, never()).save(any(Category.class));
     }
 

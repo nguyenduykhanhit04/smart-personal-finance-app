@@ -9,6 +9,9 @@ import com.example.financebackend.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -148,6 +151,20 @@ public class TransactionService {
     public void deleteTransaction(Integer transactionId) {
         Transaction transaction = transactionRepository.findById(transactionId)
                 .orElseThrow(() -> new ResourceNotFoundException("Transaction not found with id: " + transactionId));
+
+        // Delete physical image files from disk if any
+        List<TransactionImage> images = transactionImageRepository.findByTransactionTransactionId(transactionId);
+        if (images != null) {
+            for (TransactionImage img : images) {
+                String imgUrl = img.getImageUrl();
+                if (imgUrl != null && imgUrl.startsWith("/uploads/")) {
+                    String filename = imgUrl.substring("/uploads/".length());
+                    try {
+                        Files.deleteIfExists(Paths.get("uploads", filename));
+                    } catch (IOException ignored) {}
+                }
+            }
+        }
 
         // Reverse balance effect
         accountService.updateBalance(

@@ -70,10 +70,11 @@
    - Hoàn tác số dư cũ: `accountService.updateBalance(oldAccountId, oldAmount, reverseType)` (`TransactionService.java:112-116`).
    - Cập nhật thông tin mới vào entity và lưu vào DB.
    - Áp dụng số dư mới: `accountService.updateBalance(newAccountId, newAmount, newType)` (`TransactionService.java:139-143`).
-3. **Xóa giao dịch (`TransactionService.deleteTransaction` - `TransactionService.java:148-157`):**
-   - Tìm giao dịch.
-   - Hoàn tác số dư: `accountService.updateBalance(accountId, amount, reverseType)`.
-   - Xóa: `transactionRepository.delete(transaction)`.
+3. **Xóa giao dịch (`TransactionService.deleteTransaction` - `TransactionService.java:151-177`):**
+   - Tìm giao dịch trong CSDL.
+   - **Dọn dẹp ảnh đĩa vật lý:** Gọi `transactionImageRepository.findByTransactionTransactionId(transactionId)`. Nếu giao dịch có ảnh lưu trữ cục bộ dạng `/uploads/{filename}`, tiến hành gọi `Files.deleteIfExists(Paths.get("uploads", filename))` để giải phóng bộ nhớ đĩa, tránh để lại file rác (orphan files).
+   - **Hoàn tác số dư ví:** Gọi `accountService.updateBalance(accountId, amount, reverseType)`.
+   - **Xóa giao dịch:** Gọi `transactionRepository.delete(transaction)` (CSDL tự động cascade xóa các bản ghi metadata trong bảng `transaction_images`).
 
 ## 5. Biểu đồ
 
@@ -143,7 +144,7 @@ stateDiagram-v2
 | Controller | `TransactionController.getTransactions` | `ResponseEntity<ApiResponse<List<TransactionDTO>>> getTransactions(...)` | `userId`, `startDate`, `endDate` | `ApiResponse<List<TransactionDTO>>` | Lọc danh sách GD | Không có | `TransactionController.java:24-33` |
 | Service | `TransactionService.createTransaction` | `TransactionDTO createTransaction(TransactionDTO)` | `dto` | `TransactionDTO` | Xử lý tạo và trừ tiền ví | `BadRequestException`, `ResourceNotFoundException` | `TransactionService.java:61-101` |
 | Service | `TransactionService.updateTransaction` | `TransactionDTO updateTransaction(Integer, TransactionDTO)` | `id`, `dto` | `TransactionDTO` | Hoàn tác ví cũ, trừ ví mới | `BadRequestException`, `ResourceNotFoundException` | `TransactionService.java:103-146` |
-| Service | `TransactionService.deleteTransaction` | `void deleteTransaction(Integer)` | `id` | `void` | Hoàn tác ví và xóa bản ghi | `ResourceNotFoundException` | `TransactionService.java:148-157` |
+| Service | `TransactionService.deleteTransaction` | `void deleteTransaction(Integer)` | `id` | `void` | Dọn dẹp ảnh đĩa vật lý, hoàn tác ví và xóa bản ghi | `ResourceNotFoundException` | `TransactionService.java:151-177` |
 
 ## 7. Cơ sở dữ liệu
 - **Bảng liên quan:**

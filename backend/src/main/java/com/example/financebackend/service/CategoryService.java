@@ -1,6 +1,7 @@
 package com.example.financebackend.service;
 
 import com.example.financebackend.dto.CategoryDTO;
+import com.example.financebackend.exception.BadRequestException;
 import com.example.financebackend.exception.ResourceNotFoundException;
 import com.example.financebackend.model.Category;
 import com.example.financebackend.model.User;
@@ -80,6 +81,20 @@ public class CategoryService {
 
     @Transactional
     public CategoryDTO createCategory(CategoryDTO dto) {
+        if (dto.getCategoryName() == null || dto.getCategoryName().trim().isEmpty()) {
+            throw new BadRequestException("Tên danh mục không được để trống");
+        }
+
+        String trimmedName = dto.getCategoryName().trim();
+        List<Category> existing = categoryRepository.findByUserUserIdOrIsDefaultTrue(dto.getUserId());
+        if (existing != null) {
+            boolean exists = existing.stream()
+                    .anyMatch(c -> c.getCategoryName() != null && c.getCategoryName().trim().equalsIgnoreCase(trimmedName));
+            if (exists) {
+                throw new BadRequestException("Danh mục '" + trimmedName + "' đã tồn tại trong hệ thống");
+            }
+        }
+
         User user = null;
         if (dto.getUserId() != null) {
             user = userRepository.findById(dto.getUserId())
@@ -88,7 +103,7 @@ public class CategoryService {
 
         Category category = Category.builder()
                 .user(user)
-                .categoryName(dto.getCategoryName())
+                .categoryName(trimmedName)
                 .categoryType(dto.getCategoryType())
                 .icon(dto.getIcon())
                 .color(dto.getColor())
@@ -104,7 +119,24 @@ public class CategoryService {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + categoryId));
 
-        if (dto.getCategoryName() != null) category.setCategoryName(dto.getCategoryName());
+        if (dto.getCategoryName() != null) {
+            String trimmedName = dto.getCategoryName().trim();
+            if (trimmedName.isEmpty()) {
+                throw new BadRequestException("Tên danh mục không được để trống");
+            }
+            Integer userId = category.getUser() != null ? category.getUser().getUserId() : null;
+            List<Category> existing = categoryRepository.findByUserUserIdOrIsDefaultTrue(userId);
+            if (existing != null) {
+                boolean exists = existing.stream()
+                        .anyMatch(c -> !c.getCategoryId().equals(categoryId)
+                                && c.getCategoryName() != null
+                                && c.getCategoryName().trim().equalsIgnoreCase(trimmedName));
+                if (exists) {
+                    throw new BadRequestException("Danh mục '" + trimmedName + "' đã tồn tại trong hệ thống");
+                }
+            }
+            category.setCategoryName(trimmedName);
+        }
         if (dto.getCategoryType() != null) category.setCategoryType(dto.getCategoryType());
         if (dto.getIcon() != null) category.setIcon(dto.getIcon());
         if (dto.getColor() != null) category.setColor(dto.getColor());
