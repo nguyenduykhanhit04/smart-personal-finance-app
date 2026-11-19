@@ -197,32 +197,48 @@ Gemini AI đóng vai trò như một trợ lý thông minh: đọc hiểu ngữ 
 3. Ở góc trên bên trái, nhấp vào nút **"Get API key"**.
 4. Nhấp vào nút **"Create API key"** (Tạo khóa API).
 5. Chọn dự án Google Cloud có sẵn (hoặc bấm *"Create API key in new project"* để Google tự tạo dự án mới miễn phí).
-6. Một chuỗi ký tự dài bắt đầu bằng `AIzaSy...` sẽ xuất hiện trên màn hình.
+6. Một chuỗi ký tự API Key cá nhân sẽ xuất hiện trên màn hình (định dạng `AIzaSy...`).
 7. Nhấp biểu tượng **Copy** để lưu lại chuỗi khóa này.
 > [!NOTE]
 > Gói miễn phí của Google AI Studio cho phép gọi tới **15 yêu cầu / phút** và **1.500 yêu cầu / ngày**, hoàn toàn miễn phí và không yêu cầu thẻ ngân hàng.
+> [!WARNING]
+> Tuyệt đối **không đưa API Key thật** vào các tệp mã nguồn hoặc tài liệu công khai (GitHub/GitLab) để tránh bị lộ hoặc thu hồi hạn ngạch.
 
 ---
 
 ### 3.2 Cấu hình API Key vào dự án Backend Spring Boot
-Bạn có thể cấu hình API Key theo 1 trong 2 cách:
+Hệ thống hỗ trợ 2 phương án cấu hình (khuyến nghị **Cách 1** để bảo mật tuyệt đối):
 
-#### Cách 1: Điền trực tiếp vào file cấu hình (Đơn giản nhất)
+#### Cách 1: Thiết lập qua biến môi trường hệ thống (Khuyên dùng - Chuẩn bảo mật)
+Backend Spring Boot được cấu hình ưu tiên tự động đọc từ biến môi trường `GEMINI_API_KEY`:
+
+- **Trên Windows (PowerShell):**
+```powershell
+$env:GEMINI_API_KEY="YOUR_GEMINI_API_KEY_HERE"
+```
+
+- **Trên Linux / macOS (Bash):**
+```bash
+export GEMINI_API_KEY="YOUR_GEMINI_API_KEY_HERE"
+```
+
+- **Trong Docker Compose (`docker-compose.yml`):**
+```yaml
+services:
+  backend:
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+```
+
+#### Cách 2: Điền vào file cấu hình cục bộ khi chạy thử nghiệm
 Mở file [backend/src/main/resources/ai-settings.properties](file:///d:/Project/KHMT/DATN/backend/src/main/resources/ai-settings.properties):
 ```properties
-# Điền API Key của bạn thay vào chỗ YOUR_GEMINI_API_KEY_HERE:
-gemini.api.key=AIzaSyDqx71FnNq89ZntB6JzV6F0hSuwA3-UCps
+# Điền API Key của bạn thay thế cho placeholder (hoặc giữ nguyên nếu đã đặt biến môi trường):
+gemini.api.key=${GEMINI_API_KEY:YOUR_GEMINI_API_KEY_HERE}
 
 # Endpoint model gemini-2.5-flash (tốc độ cao, tối ưu chi phí):
 gemini.api.url=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent
 ```
-
-#### Cách 2: Thiết lập qua biến môi trường hệ thống (Chuẩn bảo mật khi deploy Docker)
-Đặt biến môi trường:
-```bash
-GEMINI_API_KEY=AIzaSy...
-```
-Backend Spring Boot sẽ tự động ưu tiên đọc từ biến môi trường `GEMINI_API_KEY`.
 
 ---
 

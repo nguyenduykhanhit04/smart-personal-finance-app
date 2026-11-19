@@ -297,7 +297,7 @@ steps_gemini = [
     "Ở thanh điều hướng góc trái, nhấp vào nút 'Get API key'.",
     "Nhấp vào nút 'Create API key' (Tạo khóa API).",
     "Chọn dự án Google Cloud có sẵn hoặc chọn 'Create API key in new project' để hệ thống tự tạo dự án mới.",
-    "Chuỗi khóa dài bắt đầu bằng 'AIzaSy...' sẽ hiện ra -> Nhấp nút Copy để lưu khóa.",
+    "Chuỗi khóa API Key cá nhân sẽ hiện ra -> Nhấp nút Copy để lưu khóa an toàn (không chia sẻ công khai).",
     "Gói Free tier của Google cho phép gọi 15 lượt/phút và 1.500 lượt/ngày hoàn toàn miễn phí, không yêu cầu thẻ tín dụng."
 ]
 for i, s in enumerate(steps_gemini, 1):
@@ -308,8 +308,8 @@ for i, s in enumerate(steps_gemini, 1):
     p.add_run(s)
 
 add_header("3.2 Cấu hình API Key vào dự án Backend Spring Boot", 2)
-p = doc.add_paragraph("Mở file backend/src/main/resources/ai-settings.properties và điền khóa vừa lấy vào:")
-add_code_block("# Cấu hình Gemini API Key:\ngemini.api.key=AIzaSyDqx71FnNq89ZntB6JzV6F0hSuwA3-UCps\n\n# URL Endpoint model gemini-2.5-flash (tốc độ cao, tối ưu):\ngemini.api.url=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent")
+p = doc.add_paragraph("Khuyến nghị cấu hình qua biến môi trường hệ thống GEMINI_API_KEY để bảo mật tuyệt đối khi deploy:")
+add_code_block("# 1. Cách 1: Thiết lập biến môi trường (Khuyên dùng - Chuẩn bảo mật)\n# Trên PowerShell:\n$env:GEMINI_API_KEY=\"YOUR_GEMINI_API_KEY_HERE\"\n# Trên Linux/macOS:\nexport GEMINI_API_KEY=\"YOUR_GEMINI_API_KEY_HERE\"\n\n# 2. Cách 2: Điền trong ai-settings.properties khi chạy cục bộ\ngemini.api.key=${GEMINI_API_KEY:YOUR_GEMINI_API_KEY_HERE}\ngemini.api.url=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent")
 
 add_header("3.3 Kỹ thuật Prompt Engineering bóc tách 4 trường thông tin", 2)
 p = doc.add_paragraph("Trong file GeminiService.java, hệ thống truyền đoạn chỉ dẫn nghiêm ngặt yêu cầu Gemini trả về đúng 4 trường thông tin:")
